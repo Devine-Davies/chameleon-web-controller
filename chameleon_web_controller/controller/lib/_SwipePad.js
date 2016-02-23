@@ -10,7 +10,6 @@
  • Start D-pad
 */
 
-
 !function( cwc, Hammer ){
   'use strict';
 
