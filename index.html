@@ -12,7 +12,13 @@ slug: chameleon-web-controller
     <div class="page-content">
       <div class="wrapper">
 
-        {{ content }}
+		{% highlight ruby %}
+		def print_hi(name)
+		  puts "Hi, #{name}"
+		end
+		print_hi('Tom')
+		#=> prints 'Hi, Tom' to STDOUT.
+		{% endhighlight %}
 
       </div>
     </div>
@@ -20,3 +26,5 @@ slug: chameleon-web-controller
   </body>
 
 </html>
+
+<!--         {{ content }} -->

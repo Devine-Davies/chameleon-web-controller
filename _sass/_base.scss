@@ -23,6 +23,16 @@ body {
     -o-font-feature-settings: "kern" 1;
     font-feature-settings: "kern" 1;
     font-kerning: normal;
+
+    display: flex;
+    min-height: 100%;
+    font-family: "Source Sans Pro", "Calibri", "Helvetica", sans-serif;
+    font-weight: 300;
+    font-size: 1.4em;
+    font-size: calc(.6vw + .8em);
+    flex-direction: column;
+    line-height: 1.6;
+    margin: 0;
 }
 
 
@@ -129,10 +139,9 @@ blockquote {
  */
 pre,
 code {
-    font-size: 15px;
-    border: 1px solid $grey-color-light;
-    border-radius: 3px;
-    background-color: #eef;
+    overflow: auto;
+    padding: 1em;
+    font-size: .8em;
 }
 
 code {
