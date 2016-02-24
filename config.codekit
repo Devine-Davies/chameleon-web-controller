@@ -147,6 +147,7 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
+<<<<<<< Updated upstream
 	"\/_site\/documentation\/index.html": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -186,6 +187,16 @@
 	"\/css\/main.css": {
 		"fileType": 16,
 		"ignore": 1,
+=======
+	"\/about.md": {
+		"criticStyle": 0,
+		"enableFootnotes": 1,
+		"enableLabels": 1,
+		"enableSmartQuotes": 1,
+		"escapeLineBreaks": 0,
+		"fileType": 4096,
+		"ignore": 0,
+>>>>>>> Stashed changes
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/css\/main.css",
 		"outputAbbreviatedPath": "No Output Path",
