@@ -1,4 +1,48 @@
 
-* {
-    outline: 1px solid red;
+.post {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+
+/* We tell all items to be 100% width */
+.docs-side-bar .post-content  {
+
+}
+
+.docs-side-bar {
+	background: rgb(54, 54, 54);
+	flex: .8 0px;
+
+	margin-right: 1em;
+
+	ul {
+		list-style: none;
+		margin: 0;
+	}
+
+	li {
+		background: rgb(54, 54, 54);
+	}
+
+	a {
+		color: white !important;
+		padding: 1em;
+	}
+
+}
+
+.post-content {
+	order: 3;
+	flex: 3 0px;
+}
+
+.post-header {
+
+}
+
+.post-body {
+	h2 {
+		margin-top: 1em;
+	}
 }
