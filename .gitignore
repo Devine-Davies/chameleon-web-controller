@@ -1,2 +1,18 @@
+<<<<<<< HEAD
 *.log
 *.codekit
+=======
+_site
+.sass-cache
+.jekyll-metadata
+>>>>>>> gh-pages
+
+_config.yml
+_includes/
+_layouts/
+_posts/
+_sass/
+css/
+documentation.html
+feed.xml
+index.html
