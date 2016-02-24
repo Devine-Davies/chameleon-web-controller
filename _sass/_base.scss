@@ -213,8 +213,8 @@ table tr th :last-child, table tr td :last-child {
     max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
     // margin-right: auto;
     // margin-left: auto;
-    padding-right: $spacing-unit;
-    padding-left: $spacing-unit;
+    // padding-right: $spacing-unit;
+    // padding-left: $spacing-unit;
     @extend %clearfix;
 
     @include media-query($on-laptop) {

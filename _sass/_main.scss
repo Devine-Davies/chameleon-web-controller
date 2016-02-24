@@ -1,7 +1,7 @@
 
 .post {
-	display: flex;
-	flex-flow: row wrap;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 
@@ -10,39 +10,89 @@
 
 }
 
-.docs-side-bar {
-	background: rgb(54, 54, 54);
-	flex: .8 0px;
 
-	margin-right: 1em;
+body.feature-doc {
+    background: #f3f5f6;
 
-	ul {
-		list-style: none;
-		margin: 0;
-	}
+    .wrapper {
+        display: flex;
+        flex-flow: row wrap;
+    }
 
-	li {
-		background: rgb(54, 54, 54);
-	}
+    .docs-side-bar {
+        background: #333333;
+        flex-basis: 15%;
 
-	a {
-		color: white !important;
-		padding: 1em;
-	}
+        h1 {
+            font-size: 0.8em;
+            border-bottom: 1px solid rgb(70, 70, 70);
+            color: white;
+            padding: 0.5em 0;
+            text-align: center;
 
-}
+            span {
+                font-size: 0.8em;
+            }
 
-.post-content {
-	order: 3;
-	flex: 3 0px;
-}
+        }
 
-.post-header {
+        h2 {
+            font-size: 0.8em;
+            margin: 0;
+            padding: 0;
 
-}
+            padding: 0 0.8em;
+            color: #717177;
+        }
 
-.post-body {
-	h2 {
-		margin-top: 1em;
-	}
+        ul {
+            list-style: none;
+            margin: 0 0 1em 0;
+            padding: 0 0 1em 0;
+            border-bottom: 1px solid rgb(70, 70, 70);
+
+            li {
+                a {
+                    font-size: 0.8em;
+                    color: white;
+                    text-decoration: none;
+                    padding: 0 0.8em;
+                }
+            }
+
+        }
+    }
+
+    .post-content {
+        flex-basis: 80%;
+        padding-left: 1em;
+        overflow: hidden;
+
+        .post-header {
+            position: fixed;
+            padding: 10px 0;
+            height: 55px;
+            background: #f3f5f6;
+            width: 100%;
+
+            h1 {
+                font-size: 1.5em;
+                text-transform: capitalize;
+                margin: 0;
+                padding: 0;
+            }
+
+        }
+
+        .post-body {
+            background: white;
+            margin-top: 75px;
+            padding: 1em;
+
+            h2 {
+                margin-top: 1em;
+            }
+        }
+    }
+
 }

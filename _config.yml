@@ -21,7 +21,8 @@ github_username:  jekyll
 markdown: kramdown
 
 # Permalinks
-permalink:        pretty
+permalink: /:categories/:title.
+# permalink:        pretty
 
 # Server
 # destination:      _gh_pages
