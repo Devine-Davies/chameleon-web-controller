@@ -8,12 +8,10 @@
 # Site settings
 title: Chameleon Web Controller
 email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+description: > # A node framework for setting up second screen experience.
+
+baseurl: "http://devine-davies.github.io/Chameleon-Web-Controller/" # the subpath of your site, e.g. /blog
+url: "http://devine-davies.github.io/Chameleon-Web-Controller/" # the base hostname & protocol for your site
 twitter_username: jekyllrb
 github_username:  jekyll
 
