@@ -98,7 +98,7 @@ body.feature-doc {
             background: white;
             margin: 1.3em;
             margin-top: 75px;
-            padding: 1em;
+            padding: 1em 2em;
             border-top: 3px solid #07C7B5;
             border-radius: 2px;
 
@@ -110,6 +110,12 @@ body.feature-doc {
                     padding-bottom: 0;
                     margin-bottom: 0;
                 }
+
+            }
+
+            h4 {
+                margin-bottom: 0;
+                font-weight: 600;
             }
 
             code {
@@ -117,6 +123,7 @@ body.feature-doc {
                 background-color: #e6e6e6;
                 border: 1px solid #cacaca;
                 padding: 0.125rem 0.3125rem 0.0625rem;
+
             }
 
             blockquote {
@@ -136,6 +143,7 @@ body.feature-doc {
                 p {
                     margin-bottom: 0px;
                 }
+
             }
 
         }
