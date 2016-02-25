@@ -36,6 +36,15 @@
                   </li>
                 {% endfor %}
               </ul>
+
+              <h2>General</h2>
+              <ul>
+                {% for post in site.categories['general'] %}
+                  <li>
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
             </aside>
 
             <artical class="post-content" itemprop="articleBody">
@@ -45,6 +54,10 @@
                   <time datetime="{{ page.date_updated | date_to_xmlschema }}" itemprop="datePublished">last updated: {{ page.date_updated | date: "%b %-d, %Y" }}</time>
                   {% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}
                 </p>
+
+<!--                 <span>
+                  <a>Download</a>
+                </span> -->
               </header>
               <section class="post-body">
                 {{ content }}

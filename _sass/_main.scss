@@ -17,11 +17,12 @@ body.feature-doc {
     .wrapper {
         display: flex;
         flex-flow: row wrap;
+
     }
 
     .docs-side-bar {
         background: #333333;
-        flex-basis: 15%;
+        flex-basis: 20%;
 
         h1 {
             font-size: 0.8em;
@@ -40,9 +41,9 @@ body.feature-doc {
             font-size: 0.8em;
             margin: 0;
             padding: 0;
-
             padding: 0 0.8em;
             color: #717177;
+            text-transform: uppercase;
         }
 
         ul {
@@ -52,20 +53,28 @@ body.feature-doc {
             border-bottom: 1px solid rgb(70, 70, 70);
 
             li {
+
+                &:hover {
+                    background: rgb(70, 70, 70);
+                }
+
                 a {
                     font-size: 0.8em;
                     color: white;
                     text-decoration: none;
-                    padding: 0 0.8em;
+                    padding: 0.2em 0.8em;
+                    display: block;
+                    font-family: 'Oxygen', sans-serif;
+                    text-transform: capitalize;
                 }
             }
 
         }
+
     }
 
     .post-content {
         flex-basis: 80%;
-        padding-left: 1em;
         overflow: hidden;
 
         .post-header {
@@ -74,9 +83,10 @@ body.feature-doc {
             height: 55px;
             background: #f3f5f6;
             width: 100%;
+            margin: 0 1.3em;
 
             h1 {
-                font-size: 1.5em;
+                font-size: 1.7em;
                 text-transform: capitalize;
                 margin: 0;
                 padding: 0;
@@ -86,12 +96,48 @@ body.feature-doc {
 
         .post-body {
             background: white;
+            margin: 1.3em;
             margin-top: 75px;
             padding: 1em;
+            border-top: 3px solid #07C7B5;
+            border-radius: 2px;
 
             h2 {
-                margin-top: 1em;
+                &:not(:first-child) {
+                    margin-top: 1.5em;
+                    padding-top: 1em;
+                    border-top: 6px solid rgba(0, 0, 0, 0.03);
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                }
             }
+
+            code {
+                font-weight: normal;
+                background-color: #e6e6e6;
+                border: 1px solid #cacaca;
+                padding: 0.125rem 0.3125rem 0.0625rem;
+            }
+
+            blockquote {
+                outline: 1px solid #CACACA;
+                padding: 1em;
+                margin-bottom: 15px;
+                background: rgb(242, 249, 255);
+
+                &.alert {
+                    background: rgb(244, 255, 242);
+                }
+
+                &.warn {
+                    outline: 1px solid #CACACA;
+                }
+
+                p {
+                    margin-bottom: 0px;
+                }
+            }
+
         }
     }
 

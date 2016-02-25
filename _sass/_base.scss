@@ -26,7 +26,7 @@ body {
 
     display: flex;
     min-height: 100%;
-    font-family: "Source Sans Pro", "Calibri", "Helvetica", sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
     font-size: 1.4em;
     font-size: calc(.6vw + .8em);
@@ -93,6 +93,7 @@ li {
  */
 h1, h2, h3, h4, h5, h6 {
     font-weight: $base-font-weight;
+    font-family: 'Oxygen', sans-serif;
 }
 
 
@@ -119,18 +120,18 @@ a {
 /**
  * Blockquotes
  */
-blockquote {
-    color: $grey-color;
-    border-left: 4px solid $grey-color-light;
-    padding-left: $spacing-unit / 2;
-    font-size: 18px;
-    letter-spacing: -1px;
-    font-style: italic;
+// blockquote {
+//     color: $grey-color;
+//     border-left: 4px solid $grey-color-light;
+//     padding-left: $spacing-unit / 2;
+//     font-size: 18px;
+//     letter-spacing: -1px;
+//     font-style: italic;
 
-    > :last-child {
-        margin-bottom: 0;
-    }
-}
+//     > :last-child {
+//         margin-bottom: 0;
+//     }
+// }
 
 
 
@@ -209,8 +210,8 @@ table tr th :last-child, table tr td :last-child {
  * Wrapper
  */
 .wrapper {
-    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-    max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+    // max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+    // max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
     // margin-right: auto;
     // margin-left: auto;
     // padding-right: $spacing-unit;
