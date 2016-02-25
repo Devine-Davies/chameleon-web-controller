@@ -10,11 +10,11 @@ title: Chameleon Web Controller
 email: your-email@domain.com
 description: > # A node framework for setting up second screen experience.
 
-baseurl: "http://devine-davies.github.io/Chameleon-Web-Controller/" # the subpath of your site, e.g. /blog
-url: "http://devine-davies.github.io/Chameleon-Web-Controller/" # the base hostname & protocol for your site
+baseurl: "http://devine-davies.github.io/Chameleon-Web-Controller" # the subpath of your site, e.g. /blog
+url: "http://devine-davies.github.io/Chameleon-Web-Controller" # the base hostname & protocol for your site
 
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site
+# baseurl: "" # the subpath of your site, e.g. /blog
+# url: "" # the base hostname & protocol for your site
 
 twitter_username: jekyllrb
 github_username:  jekyll

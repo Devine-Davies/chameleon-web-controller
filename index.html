@@ -9,16 +9,48 @@ slug: chameleon-web-controller
 
   <body>
 
+    <aside class="docs-side-bar">
+      <h1>v1.1.0 <span>(Changelog)</span></h1>
+
+      <h2>Server</h2>
+      <ul>
+        {% for post in site.categories['server'] %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h2>Display</h2>
+      <ul>
+        {% for post in site.categories['display'] %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h2>Controller</h2>
+      <ul>
+        {% for post in site.categories['controller'] %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h2>General</h2>
+      <ul>
+        {% for post in site.categories['general'] %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </aside>
+
     <div class="page-content">
       <div class="wrapper">
-
-		{% highlight ruby %}
-		def print_hi(name)
-		  puts "Hi, #{name}"
-		end
-		print_hi('Tom')
-		#=> prints 'Hi, Tom' to STDOUT.
-		{% endhighlight %}
 
       </div>
     </div>
