@@ -6,6 +6,11 @@ date_updated : 2016-01-24 00:31:02 +0000
 categories: display
 ---
 
+[//]: # (/*--------------------------)
+[//]: # (Page Links)
+[//]: # (--------------------------*/)
+[Custom methods]: {% post_url /documentation/general/2016-02-24-custom-methods %}
+
 ## Introduction
 The navigation structure allows your to set defined areas within your application that can be controlled via the controller. This is achieved is by adding a `data-cwc-navgroup='*'` data attribute to your HTML markup allowing the **cwc** object to register the group. The `*` should represented the index of the navigation group starting from zero.
 
@@ -34,7 +39,7 @@ All triggers must be supported by one of the following:
 | ng-*             | Replace the `*` with the **index** of the navigation you wish to target |
 | ni-next          | Move to the **next** item inside the given navigation                   |
 | ni-prev          | Move to the **previous** item inside the given navigation               |
-| cm-*             | cm- allows you to link to predefinded `cwc.CustomMethod()` [custom methods] |
+| cm-*             | [Custom methods] allows you to link to predefinded `cwc.CustomMethod()` |
 
 >Indvidual navigation items can also used these methords in order to override the main instuctiuons given to a navigation group; To achivce this, add a `data-cwc-item-overide="{}"` data attrabite to the item you with to perfrom overides on.
 
@@ -118,8 +123,3 @@ navigation.invoke_dir('enter', function( tracking ){
     /* -- Logic here -- */
 });
 {% endhighlight %}
-
-[//]: # (/*--------------------------)
-[//]: # (Page Links)
-[//]: # (--------------------------*/)
-[custom methods]: http://slashdot.org

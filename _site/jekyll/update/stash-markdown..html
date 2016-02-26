@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <title>Installation</title>
-  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site">
+  <meta name="description" content="Markdown tests">
 
   <link rel="stylesheet" href="http://devine-davies.github.io/chameleon-web-controller/css/main.css">
   <link rel="alternate" type="application/rss+xml" title="Chameleon Web Controller" href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml">
@@ -105,48 +105,467 @@
 	  </header>
 
 	  <section class="post-body">
-	    <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site</p>
+	    <p>Markdown tests</p>
 
-<p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+<h1 id="h1">h1</h1>
 
-<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<h2 id="h2">h2</h2>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<h3 id="h3">h3</h3>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<h4 id="h4">h4</h4>
+
+<h5 id="h5">h5</h5>
+
+<h2 id="uppercase-underlinehyphen-spaces--othersend">012 UPPERCASE underline_hyphen-spaces  others%%%end</h2>
+
+<h1 id="h">h</h1>
+
+<p><a href="">””</a></p>
+
+<p><a href="#h">#h</a></p>
+
+<p><a href="/#h">/#h</a></p>
+
+<p><a href="README.md#h">README.md#h</a></p>
+
+<p><a href="d/README.md#h">d/README.md#h</a></p>
+
+<p><a href="#"><code class="highlighter-rouge">code</code> inside link</a></p>
+
+<h2 id="list">List</h2>
+
+<p>No newlines:</p>
+
+<ul>
+  <li>a</li>
+  <li>b</li>
+  <li>c</li>
+</ul>
+
+<p>Newlines:</p>
+
+<ul>
+  <li>
+    <p>a</p>
+  </li>
+  <li>
+    <p>b</p>
+  </li>
+  <li>
+    <p>c</p>
+  </li>
+</ul>
+
+<p>Some newlines:</p>
+
+<ul>
+  <li>
+    <p>first</p>
+  </li>
+  <li>after newline</li>
+  <li>not after newline</li>
+</ul>
+
+<p>Ordered:</p>
+
+<ol>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+</ol>
+
+<p>Only 1:</p>
+
+<ol>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+</ol>
+
+<p>Start 2:</p>
+
+<ol>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+</ol>
+
+<p>Inner list:</p>
+
+<ol>
+  <li>1</li>
+  <li>2
+    <ul>
+      <li>list</li>
+    </ul>
+  </li>
+  <li>3</li>
+</ol>
+
+<p>Inner list:</p>
+
+<ol>
+  <li>1</li>
+  <li>1
+    <ul>
+      <li>list</li>
+    </ul>
+  </li>
+  <li>1</li>
+</ol>
+
+<p>Inner list 1:</p>
+
+<ol>
+  <li>
+    <p>1</p>
+  </li>
+  <li>
+    <p>1</p>
+
+    <ul>
+      <li>list</li>
+      <li>list</li>
+    </ul>
+  </li>
+  <li>
+    <p>1</p>
+  </li>
+</ol>
+
+<p>Inner par list:</p>
+
+<ol>
+  <li>
+    <p>1</p>
+  </li>
+  <li>
+    <p>1</p>
+
+    <ul>
+      <li>list</li>
+      <li>list</li>
+    </ul>
+  </li>
+  <li>
+    <p>1</p>
+  </li>
+</ol>
+
+<p>Inner par ordered list:</p>
+
+<ol>
+  <li>
+    <p>1</p>
+  </li>
+  <li>
+    <p>1</p>
+
+    <ol>
+      <li>list</li>
+      <li>list</li>
+    </ol>
+  </li>
+  <li>
+    <p>1</p>
+  </li>
+</ol>
+
+<p>Inner par:</p>
+
+<ol>
+  <li>1</li>
+  <li>
+    <p>1</p>
+
+    <p>par</p>
+  </li>
+  <li>1</li>
+</ol>
+
+<p>Nested:</p>
+
+<ul>
+  <li>par
+    <ul>
+      <li>nopar</li>
+      <li>nopar</li>
+      <li>
+        <p>nopar</p>
+
+        <ul>
+          <li>
+            <p>par</p>
+          </li>
+          <li>
+            <p>par</p>
+          </li>
+          <li>
+            <p>par</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>par</p>
+  </li>
+  <li>par</li>
+</ul>
+
+<p>Code in list with one indent:</p>
+
+<ul>
+  <li>
+    <p>a</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>  b
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<h2 id="table">Table</h2>
+
+<p>Very picky about table format. There must be the right amount of pipes, 3 consecutive hyphens per column of the separator line:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Tables</th>
-      <th style="text-align: center">Are</th>
-      <th style="text-align: right">Cool</th>
+      <th>a</th>
+      <th>b</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>col 3 is</td>
-      <td style="text-align: center">right-aligned</td>
-      <td style="text-align: right">$1600</td>
-    </tr>
-    <tr>
-      <td>col 2 is</td>
-      <td style="text-align: center">centered</td>
-      <td style="text-align: right">$12</td>
-    </tr>
-    <tr>
-      <td>zebra stripes</td>
-      <td style="text-align: center">are neat</td>
-      <td style="text-align: right">$1</td>
+      <td>c</td>
+      <td>d</td>
     </tr>
   </tbody>
 </table>
 
-<p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+<p>No outer pipes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>d</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>4 hyphens:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>d</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Space 3 hyphens:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>d</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>3 hyphens space:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>d</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>hyphen space 2 hyphens:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>d</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>2 hyphens:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>d</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>no pipes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>d</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Open source</th>
+      <th>Open source</th>
+      <th>Open source</th>
+      <th>Open source</th>
+      <th>Open source</th>
+      <th>Open source</th>
+      <th>Open source</th>
+      <th>Open source</th>
+      <th>Open source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Open source</td>
+      <td>Open source</td>
+      <td>Open source</td>
+      <td>Open source</td>
+      <td>Open source</td>
+      <td>Open source</td>
+      <td>Open source</td>
+      <td>Open source</td>
+      <td>Open source</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+      <th>asdfqwerasdfqwerasdqwerasdfqwer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+      <td>asdfqwerasdfqwerasdqwerasdfqwer</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="link">Link</h2>
+
+<p>Relative link: <a href="a.md">a.md</a>.</p>
+
+<p>Relative link to tree: <a href="d/">d/</a>. 14-11: GitHub renders links to <code class="highlighter-rouge">blob</code>, even if pointing to tree, and redirects <code class="highlighter-rouge">blob</code> to <code class="highlighter-rouge">tree</code>. GitLab also redirects, but renders trees as <code class="highlighter-rouge">tree</code> links directly.</p>
+
+<p>Relative link: <a href="..">..</a>.</p>
+
+<p>Relative link no another repo: <a href="/../test-empty-commit">/../test-empty-commit</a>.</p>
+
+<p>Relative automatic link: <a.md>.</a.md></p>
+
+<p>Automatic link: <a href="http://example.com">http://example.com</a>.</p>
+
+<h2 id="image">Image</h2>
+
+<ul>
+  <li>
+    <p>png.png <img src="png.png" alt="" /></p>
+  </li>
+  <li>
+    <p>./png.png <img src="./png.png" alt="" /></p>
+  </li>
+  <li>
+    <p>d/png.png <img src="d/png.png" alt="" /></p>
+  </li>
+  <li>
+    <p>./d/png.png <img src="./d/png.png" alt="" /></p>
+  </li>
+</ul>
+
+<h3 id="markup-inside-link">Markup inside link</h3>
+
+<ul>
+  <li><a href="d"><code class="highlighter-rouge">d</code></a></li>
+  <li><a href="d"><em>d</em></a></li>
+  <li><a href="d"><img src="png.png" alt="" /></a></li>
+</ul>
+
+<h1 id="github-specifics">GitHub specifics</h1>
+
+<p>User: @cirosantilli</p>
+
+<p>Commit: cirosantilli/test-github@master</p>
 
 
 	  </section>

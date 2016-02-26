@@ -3,10 +3,9 @@
 
   {% include head.html %}
 
-  <body class="feature-doc" >
+  <body id="feature-doc" >
 
       <div class="wrapper">
-
             <aside class="docs-side-bar">
               <h1>v1.1.0 <span>(Changelog)</span></h1>
 
@@ -49,16 +48,22 @@
 
             <artical class="post-content" itemprop="articleBody">
               <header class="post-header">
-                <h1 class="post-title" itemprop="name headline">{{ page.categories }} - {{ page.title }}</h1>
-                <p class="post-meta">
-                  <time datetime="{{ page.date_updated | date_to_xmlschema }}" itemprop="datePublished">last updated: {{ page.date_updated | date: "%b %-d, %Y" }}</time>
-                  {% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}
-                </p>
 
-<!--                 <span>
-                  <a>Download</a>
-                </span> -->
+                <div id="mobile-nav-button" class="mobile-nav-button" >
+                  <div class="border-menu">
+                    <p>Documentation</p>
+                  </div>
+                </div>
+
+                <div class="info">
+                  <h1 class="post-title" itemprop="name headline">{{ page.categories }} - {{ page.title }}</h1>
+                  <p class="post-meta">
+                  <time datetime="{{ page.date_updated | date_to_xmlschema }}" itemprop="datePublished">
+                    last updated: {{ page.date_updated | date: "%b %-d, %Y" }}
+                  </time>
+                </div>
               </header>
+
               <section class="post-body">
                 {{ content }}
               </section>
@@ -68,4 +73,17 @@
       </div>
 
   </body>
+
+  <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("mobile-nav-button").onclick = function(){
+          toggle();
+        }
+    }
+
+    function toggle() {
+        document.getElementById("feature-doc").classList.toggle("nav-active");
+    }
+  </script>
+
 </html>

@@ -23,10 +23,9 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-  <body class="feature-doc" >
+  <body id="feature-doc" >
 
       <div class="wrapper">
-
             <aside class="docs-side-bar">
               <h1>v1.1.0 <span>(Changelog)</span></h1>
 
@@ -77,16 +76,22 @@
 
             <artical class="post-content" itemprop="articleBody">
               <header class="post-header">
-                <h1 class="post-title" itemprop="name headline">general - Custom methods</h1>
-                <p class="post-meta">
-                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">last updated: Jan 24, 2016</time>
-                  
-                </p>
 
-<!--                 <span>
-                  <a>Download</a>
-                </span> -->
+                <div id="mobile-nav-button" class="mobile-nav-button" >
+                  <div class="border-menu">
+                    <p>Documentation</p>
+                  </div>
+                </div>
+
+                <div class="info">
+                  <h1 class="post-title" itemprop="name headline">general - Custom methods</h1>
+                  <p class="post-meta">
+                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">
+                    last updated: Jan 24, 2016
+                  </time>
+                </div>
               </header>
+
               <section class="post-body">
                 <p>Adding nvaigation into your pages ou’ll find this post in your</p>
 
@@ -139,4 +144,17 @@
       </div>
 
   </body>
+
+  <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("mobile-nav-button").onclick = function(){
+          toggle();
+        }
+    }
+
+    function toggle() {
+        document.getElementById("feature-doc").classList.toggle("nav-active");
+    }
+  </script>
+
 </html>

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <title>Directional pad</title>
-  <meta name="description" content="IntroductionThe navigation structure allows your to set defined areas within your application that can be controlled via the controller. This is achieved is ...">
+  <meta name="description" content="Introduction">
 
   <link rel="stylesheet" href="http://devine-davies.github.io/chameleon-web-controller/css/main.css">
   <link rel="alternate" type="application/rss+xml" title="Chameleon Web Controller" href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml">
@@ -23,10 +23,9 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-  <body class="feature-doc" >
+  <body id="feature-doc" >
 
       <div class="wrapper">
-
             <aside class="docs-side-bar">
               <h1>v1.1.0 <span>(Changelog)</span></h1>
 
@@ -77,21 +76,32 @@
 
             <artical class="post-content" itemprop="articleBody">
               <header class="post-header">
-                <h1 class="post-title" itemprop="name headline">controller - Directional pad</h1>
-                <p class="post-meta">
-                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">last updated: Jan 24, 2016</time>
-                  
-                </p>
 
-<!--                 <span>
-                  <a>Download</a>
-                </span> -->
+                <div id="mobile-nav-button" class="mobile-nav-button" >
+                  <div class="border-menu">
+                    <p>Documentation</p>
+                  </div>
+                </div>
+
+                <div class="info">
+                  <h1 class="post-title" itemprop="name headline">controller - Directional pad</h1>
+                  <p class="post-meta">
+                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">
+                    last updated: Jan 24, 2016
+                  </time>
+                </div>
               </header>
+
               <section class="post-body">
                 <h2 id="introduction">Introduction</h2>
+
 <p>The navigation structure allows your to set defined areas within your application that can be controlled via the controller. This is achieved is by adding a <code class="highlighter-rouge">data-cwc-navgroup='*'</code> data attribute to your HTML markup allowing the <strong>cwc</strong> object to register the group. The <code class="highlighter-rouge">*</code> should represented the index of the navigation group starting from zero.</p>
 
-<p><code class="highlighter-rouge">data-cwc-navitem</code> are used to define an item within the navigation group. Adding the value of <code class="highlighter-rouge">starting-point</code> will allow you to set the main focus on where you wish to start the user when your aplliaction is loaded. Only one ‘starting-point’ can be set within your appliaction.</p>
+<h2 id="building-the-d-pad">Building the D-pad</h2>
+
+<p>A basic D-pad can be created with minimal markup, Add the attribute <code class="highlighter-rouge">data-cwc-controller="d-pad"</code> to your HTML elements followed by <code class="highlighter-rouge">data-cwc-cbtn="up"</code> to represent a trigger button.</p>
+
+<p>Out of the box, the D-pad is designed to work simultaneously with the navigation interface [link] when installed on the display.</p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -99,7 +109,7 @@
 4
 5
 6
-7</pre></td><td class="code"><pre>  <span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"cwcd-pad-style"</span> <span class="na">data-cwc-controller=</span><span class="s">"d-pad"</span>  <span class="nt">&gt;</span>
+7</pre></td><td class="code"><pre>  <span class="nt">&lt;section</span> <span class="na">data-cwc-controller=</span><span class="s">"d-pad"</span>  <span class="nt">&gt;</span>
       <span class="nt">&lt;span</span> <span class="na">data-cwc-cbtn=</span><span class="s">"up"</span> <span class="nt">&gt;&lt;/span&gt;</span>
       <span class="nt">&lt;span</span> <span class="na">data-cwc-cbtn=</span><span class="s">"right"</span> <span class="nt">&gt;&lt;/span&gt;</span>
       <span class="nt">&lt;span</span> <span class="na">data-cwc-cbtn=</span><span class="s">"down"</span> <span class="nt">&gt;&lt;/span&gt;</span>
@@ -108,16 +118,55 @@
   <span class="nt">&lt;/section&gt;</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
+<blockquote>
+  <p>Out of the box, the D-pad is designed to work simultaneously with the navigation interface [link] when installed on the display.</p>
+</blockquote>
+
+<h2 id="styling">Styling</h2>
+<p>Out of the box, the D-pad is designed to work simultaneously with the navigation interface [link] when installed on the display.</p>
+
+<h2 id="undestanding-the-javascript">Undestanding the Javascript</h2>
+
+<p>In order to register a D-Pad you must call the D-pad initiator object within the <strong>cwc</strong> framework. As the D-pad is designed to work with the navigation interface this will try to work alongside that, unless given call back methods for each of the button.</p>
+
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
-5</pre></td><td class="code"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td class="code"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">SwipePad</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">SwipePad</span><span class="p">({</span>
-      <span class="cm">/* -- Options -- */</span>
   <span class="p">});</span>
+
+  <span class="nx">navigation</span><span class="p">.</span><span class="nx">invoke_dir</span><span class="p">(</span><span class="s1">'up'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">tracking</span> <span class="p">){</span>
+    <span class="cm">/* -- Logic here -- */</span>
+  <span class="p">});</span>
+
+  <span class="nx">navigation</span><span class="p">.</span><span class="nx">invoke_dir</span><span class="p">(</span><span class="s1">'down'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">tracking</span> <span class="p">){</span>
+    <span class="cm">/* -- Logic here -- */</span>
+  <span class="p">});</span>
+
+  <span class="nx">navigation</span><span class="p">.</span><span class="nx">invoke_dir</span><span class="p">(</span><span class="s1">'enter'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">tracking</span> <span class="p">){</span>
+    <span class="cm">/* -- Logic here -- */</span>
+  <span class="p">});</span>
+
 <span class="p">};</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
+
+<blockquote>
+  <p>If no callback methord are provided then the D-pad will try to work with the main screne.</p>
+</blockquote>
 
               </section>
             </artical>
@@ -168,4 +217,17 @@
       </div>
 
   </body>
+
+  <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("mobile-nav-button").onclick = function(){
+          toggle();
+        }
+    }
+
+    function toggle() {
+        document.getElementById("feature-doc").classList.toggle("nav-active");
+    }
+  </script>
+
 </html>

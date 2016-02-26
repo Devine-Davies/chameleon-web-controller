@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <title>Installation</title>
-  <meta name="description" content="Adding nvaigation into your pages ou’ll find this post in your">
+  <meta name="description" content="IntroductionThere are many ways to install Foundation, but if you’re just getting started, we have a few suggestions.">
 
   <link rel="stylesheet" href="http://devine-davies.github.io/chameleon-web-controller/css/main.css">
   <link rel="alternate" type="application/rss+xml" title="Chameleon Web Controller" href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml">
@@ -23,10 +23,9 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-  <body class="feature-doc" >
+  <body id="feature-doc" >
 
       <div class="wrapper">
-
             <aside class="docs-side-bar">
               <h1>v1.1.0 <span>(Changelog)</span></h1>
 
@@ -77,97 +76,54 @@
 
             <artical class="post-content" itemprop="articleBody">
               <header class="post-header">
-                <h1 class="post-title" itemprop="name headline">server - Installation</h1>
-                <p class="post-meta">
-                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">last updated: Jan 24, 2016</time>
-                  
-                </p>
 
-<!--                 <span>
-                  <a>Download</a>
-                </span> -->
+                <div id="mobile-nav-button" class="mobile-nav-button" >
+                  <div class="border-menu">
+                    <p>Documentation</p>
+                  </div>
+                </div>
+
+                <div class="info">
+                  <h1 class="post-title" itemprop="name headline">server - Installation</h1>
+                  <p class="post-meta">
+                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">
+                    last updated: Jan 24, 2016
+                  </time>
+                </div>
               </header>
+
               <section class="post-body">
-                <p>Adding nvaigation into your pages ou’ll find this post in your</p>
+                <h2 id="introduction">Introduction</h2>
+<p>There are many ways to install Foundation, but if you’re just getting started, we have a few suggestions.</p>
 
-<p>Adding nvaigation into your pages ou’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+<h2 id="package-managers">Package Managers</h2>
+<p>There are many ways to install Foundation, but if you’re just getting started, we have a few suggestions.</p>
 
-<h2 id="data-actions">Data Actions</h2>
-<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<ul>
+  <li>Node:</li>
+</ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>Actions</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ni-next</td>
-      <td>next nav item</td>
-    </tr>
-    <tr>
-      <td>ni-prev</td>
-      <td>previous nav item</td>
-    </tr>
-    <tr>
-      <td>ng-next</td>
-      <td>next nav group</td>
-    </tr>
-    <tr>
-      <td>ng-prev</td>
-      <td>previous nav group</td>
-    </tr>
-    <tr>
-      <td>ng-*</td>
-      <td>index number of the group you wish to navigation too</td>
-    </tr>
-    <tr>
-      <td>cm-*</td>
-      <td>add custom methord to end of arg, must be set up in custom methords</td>
-    </tr>
-  </tbody>
-</table>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  npm install foundation-sites<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="putting-it-all-together">Putting it all together</h2>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s</p>
+<ul>
+  <li>Bower:</li>
+</ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>Events</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>up</td>
-      <td>pass one of the following n* items as an argument</td>
-    </tr>
-    <tr>
-      <td>right</td>
-      <td>pass one of the following n* items as an argument</td>
-    </tr>
-    <tr>
-      <td>down</td>
-      <td>pass one of the following n* items as an argument</td>
-    </tr>
-    <tr>
-      <td>left</td>
-      <td>pass one of the following n* items as an argument</td>
-    </tr>
-    <tr>
-      <td>enter</td>
-      <td>pass one of the following n* items as an argument</td>
-    </tr>
-  </tbody>
-</table>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  bower install foundation-sites<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="putting-it-all-together-1">Putting it all together</h2>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s</p>
+<ul>
+  <li>Github:</li>
+</ul>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  git add zurb:foundation-sites<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="package-contents">Package Contents</h2>
+<p>Here’s what comes in the package.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
@@ -183,51 +139,54 @@
 14
 15
 16
-17</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"side-nav"</span> <span class="na">data-cwc-navgroup=</span><span class="s">"0"</span> <span class="na">data-cwc-nav-key-instructions=</span><span class="s">'{ "up" : "ni-prev" , "down" : "ni-next", "right" : "ng-next" }'</span> <span class="nt">&gt;</span>
-      <span class="nt">&lt;section</span> <span class="na">data-cwc-navitem</span> <span class="nt">&gt;</span>Item One<span class="nt">&lt;/section&gt;</span>
-      <span class="nt">&lt;section</span> <span class="na">data-cwc-navitem</span> <span class="nt">&gt;</span>Item Two<span class="nt">&lt;/section&gt;</span>
-      <span class="nt">&lt;section</span> <span class="na">data-cwc-navitem</span> <span class="nt">&gt;</span>Item Three<span class="nt">&lt;/section&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main-window"</span> <span class="na">data-cwc-navgroup=</span><span class="s">"1"</span> <span class="na">data-cwc-onnaventrance=</span><span class="s">"history-item"</span>
-  <span class="na">data-cwc-nav-key-instructions=</span><span class="s">'{ "down" : "ng-2", "right" : "ni-next" , "left" : "ni-prev" }'</span> <span class="nt">&gt;</span>
-    <span class="nt">&lt;ul&gt;</span>
-      <span class="nt">&lt;li</span> <span class="na">data-cwc-navitem=</span><span class="s">"starting-point"</span> <span class="na">data-cwc-item-overide=</span><span class="s">'{ "left" : "ng-0", "enter" : "cm-on-item-enter"  }'</span> <span class="nt">&gt;&lt;span&gt;</span>1<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
-      <span class="nt">&lt;li</span> <span class="na">data-cwc-navitem</span> <span class="na">data-cwc-item-overide=</span><span class="s">'{ "left" : "ng-0", "enter" : "cm-on-item-enter"  }'</span>  <span class="nt">&gt;&lt;span&gt;</span>2<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
-      <span class="nt">&lt;li</span> <span class="na">data-cwc-navitem</span> <span class="nt">&gt;&lt;span&gt;</span>3<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
-      <span class="nt">&lt;li</span> <span class="na">data-cwc-navitem</span> <span class="nt">&gt;&lt;span&gt;</span>4<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
-      <span class="nt">&lt;li</span> <span class="na">data-cwc-navitem</span> <span class="nt">&gt;&lt;span&gt;</span>5<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
-      <span class="nt">&lt;li</span> <span class="na">data-cwc-navitem</span> <span class="nt">&gt;&lt;span&gt;</span>6<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
-    <span class="nt">&lt;/ul&gt;</span>
-<span class="nt">&lt;/div&gt;</span><span class="w">
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></td><td class="code"><pre><span class="nx">master</span>
+<span class="o">|--</span> <span class="nx">chameleon_web_controller</span>
+<span class="o">|</span>    <span class="o">|--</span> <span class="nx">display</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">+--</span> <span class="nx">controller</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">+--</span> <span class="nx">server</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">+--</span> <span class="nx">server</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">+--</span> <span class="kr">public</span>
+  <span class="o">|--</span> <span class="nx">css</span>
+  <span class="o">|--</span> <span class="nx">images</span>
+  <span class="o">+--</span> <span class="nx">scripts</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="putting-it-all-together-2">Putting it all together</h2>
-<p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
-
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11</pre></td><td class="code"><pre><span class="kd">var</span> <span class="nx">navigation</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">Navigation</span><span class="p">({</span>
-    <span class="na">classes</span> <span class="p">:</span> <span class="p">{</span>
-        <span class="na">group</span> <span class="p">:</span> <span class="s1">'custom_class_name'</span><span class="p">,</span>
-        <span class="na">item</span>  <span class="p">:</span> <span class="s1">'custom_class_name'</span><span class="p">,</span>
-    <span class="p">},</span>
-
-    <span class="na">callbacks</span> <span class="p">:</span> <span class="p">{</span>
-        <span class="na">onnav_changed</span>  <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">info</span> <span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">info</span> <span class="p">)</span> <span class="p">},</span>
-        <span class="na">onitem_changed</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">info</span> <span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">info</span> <span class="p">)</span> <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">});</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
+<ol>
+  <li>
+    <p><strong>chameleon_web_controller</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
+  </li>
+  <li>
+    <p><strong>display</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
+  </li>
+  <li>
+    <p><strong>controller</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
+  </li>
+</ol>
 
               </section>
             </artical>
@@ -278,4 +237,17 @@
       </div>
 
   </body>
+
+  <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("mobile-nav-button").onclick = function(){
+          toggle();
+        }
+    }
+
+    function toggle() {
+        document.getElementById("feature-doc").classList.toggle("nav-active");
+    }
+  </script>
+
 </html>

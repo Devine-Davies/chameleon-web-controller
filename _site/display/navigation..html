@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <title>Navigation Groups and Items</title>
-  <meta name="description" content="IntroductionThe navigation structure allows your to set defined areas within your application that can be controlled via the controller. This is achieved is ...">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="http://devine-davies.github.io/chameleon-web-controller/css/main.css">
   <link rel="alternate" type="application/rss+xml" title="Chameleon Web Controller" href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml">
@@ -23,10 +23,9 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-  <body class="feature-doc" >
+  <body id="feature-doc" >
 
       <div class="wrapper">
-
             <aside class="docs-side-bar">
               <h1>v1.1.0 <span>(Changelog)</span></h1>
 
@@ -77,18 +76,25 @@
 
             <artical class="post-content" itemprop="articleBody">
               <header class="post-header">
-                <h1 class="post-title" itemprop="name headline">display - Navigation Groups and Items</h1>
-                <p class="post-meta">
-                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">last updated: Jan 24, 2016</time>
-                  
-                </p>
 
-<!--                 <span>
-                  <a>Download</a>
-                </span> -->
+                <div id="mobile-nav-button" class="mobile-nav-button" >
+                  <div class="border-menu">
+                    <p>Documentation</p>
+                  </div>
+                </div>
+
+                <div class="info">
+                  <h1 class="post-title" itemprop="name headline">display - Navigation Groups and Items</h1>
+                  <p class="post-meta">
+                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">
+                    last updated: Jan 24, 2016
+                  </time>
+                </div>
               </header>
+
               <section class="post-body">
-                <h2 id="introduction">Introduction</h2>
+                
+<h2 id="introduction">Introduction</h2>
 <p>The navigation structure allows your to set defined areas within your application that can be controlled via the controller. This is achieved is by adding a <code class="highlighter-rouge">data-cwc-navgroup='*'</code> data attribute to your HTML markup allowing the <strong>cwc</strong> object to register the group. The <code class="highlighter-rouge">*</code> should represented the index of the navigation group starting from zero.</p>
 
 <p><code class="highlighter-rouge">data-cwc-navitem</code> are used to define an item within the navigation group. Adding the value of <code class="highlighter-rouge">starting-point</code> will allow you to set the main focus on where you wish to start the user when your aplliaction is loaded. Only one ‘starting-point’ can be set within your appliaction.</p>
@@ -164,7 +170,7 @@ Then introduce the controller functionality when you have your UI in-place.</p>
     </tr>
     <tr>
       <td>cm-*</td>
-      <td>cm- allows you to link to predefinded <code class="highlighter-rouge">cwc.CustomMethod()</code> <a href="http://slashdot.org">custom methods</a></td>
+      <td><a href="/general/custom-methods.">Custom methods</a> allows you to link to predefinded <code class="highlighter-rouge">cwc.CustomMethod()</code></td>
     </tr>
   </tbody>
 </table>
@@ -319,7 +325,6 @@ You can then specify a <strong>Trigger</strong> as the first parameter along wit
 <span class="p">});</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-
               </section>
             </artical>
 
@@ -369,4 +374,17 @@ You can then specify a <strong>Trigger</strong> as the first parameter along wit
       </div>
 
   </body>
+
+  <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("mobile-nav-button").onclick = function(){
+          toggle();
+        }
+    }
+
+    function toggle() {
+        document.getElementById("feature-doc").classList.toggle("nav-active");
+    }
+  </script>
+
 </html>

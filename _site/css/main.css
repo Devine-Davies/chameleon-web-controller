@@ -1,3 +1,4 @@
+/*  -- Really large -- */
 /**
  * Reset some basic elements
  */
@@ -144,19 +145,9 @@ table tr th :last-child, table tr td :last-child {
   margin-bottom: 0; }
 
 /**
- * Wrapper
- */
-@media screen and (max-width: 800px) {
-  .wrapper {
-    max-width: -webkit-calc(100% - (30px));
-    max-width: calc(100% - (30px));
-    padding-right: 15px;
-    padding-left: 15px; } }
-
-/**
  * Clearfix
  */
-.wrapper:after, .footer-col-wrapper:after {
+.footer-col-wrapper:after {
   content: "";
   display: table;
   clear: both; }
@@ -475,42 +466,46 @@ article {
 .highlight table td.gutter {
   border-right: 1px solid rgba(255, 0, 0, 0.15); }
 
-.post {
-  display: flex;
-  flex-flow: row wrap; }
-
-/* We tell all items to be 100% width */
-body.feature-doc {
+body#feature-doc {
   background: #f3f5f6; }
-  body.feature-doc .wrapper {
+  body#feature-doc .wrapper {
     display: flex;
     flex-flow: row wrap; }
-  body.feature-doc .docs-side-bar {
+  body#feature-doc.nav-active .docs-side-bar {
+    transform: translate(0%, 0); }
+  body#feature-doc .docs-side-bar {
     background: #333333;
-    flex-basis: 20%; }
-    body.feature-doc .docs-side-bar h1 {
+    flex-basis: 20%;
+    transform: translate(-100%, 0);
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    transition: all 1s ease-in-out;
+    height: 100vh;
+    top: 40px; }
+    body#feature-doc .docs-side-bar h1 {
       font-size: 0.8em;
       border-bottom: 1px solid #464646;
       color: white;
       padding: 0.5em 0;
       text-align: center; }
-      body.feature-doc .docs-side-bar h1 span {
+      body#feature-doc .docs-side-bar h1 span {
         font-size: 0.8em; }
-    body.feature-doc .docs-side-bar h2 {
+    body#feature-doc .docs-side-bar h2 {
       font-size: 0.8em;
       margin: 0;
       padding: 0;
       padding: 0 0.8em;
       color: #717177;
       text-transform: uppercase; }
-    body.feature-doc .docs-side-bar ul {
+    body#feature-doc .docs-side-bar ul {
       list-style: none;
       margin: 0 0 1em 0;
       padding: 0 0 1em 0;
       border-bottom: 1px solid #464646; }
-      body.feature-doc .docs-side-bar ul li:hover {
+      body#feature-doc .docs-side-bar ul li:hover {
         background: #464646; }
-      body.feature-doc .docs-side-bar ul li a {
+      body#feature-doc .docs-side-bar ul li a {
         font-size: 0.8em;
         color: white;
         text-decoration: none;
@@ -518,50 +513,95 @@ body.feature-doc {
         display: block;
         font-family: 'Oxygen', sans-serif;
         text-transform: capitalize; }
-  body.feature-doc .post-content {
-    flex-basis: 80%;
+  body#feature-doc .post-content {
+    flex-basis: 100%;
     overflow: hidden; }
-    body.feature-doc .post-content .post-header {
+    body#feature-doc .post-content .post-header {
       position: fixed;
-      padding: 10px 0;
-      height: 55px;
       background: #f3f5f6;
-      width: 100%;
-      margin: 0 1.3em; }
-      body.feature-doc .post-content .post-header h1 {
-        font-size: 1.7em;
-        text-transform: capitalize;
-        margin: 0;
-        padding: 0; }
-    body.feature-doc .post-content .post-body {
+      width: 100%; }
+      body#feature-doc .post-content .post-header .mobile-nav-button {
+        height: 40px;
+        width: 100%;
+        background: #333333;
+        color: white; }
+        body#feature-doc .post-content .post-header .mobile-nav-button .border-menu {
+          position: relative;
+          padding-left: 1.25em; }
+          body#feature-doc .post-content .post-header .mobile-nav-button .border-menu p {
+            padding-left: 1.8em;
+            line-height: 2.2em; }
+          body#feature-doc .post-content .post-header .mobile-nav-button .border-menu:before {
+            font-size: 2em;
+            content: "";
+            position: absolute;
+            top: 0.25em;
+            left: 0.25em;
+            width: 1em;
+            height: 0.125em;
+            border-top: 0.375em double white;
+            border-bottom: 0.125em solid white; }
+      body#feature-doc .post-content .post-header .info {
+        padding: 10px;
+        height: 55px; }
+        body#feature-doc .post-content .post-header .info h1 {
+          font-size: 1.7em;
+          text-transform: capitalize;
+          margin: 0; }
+    body#feature-doc .post-content .post-body {
       background: white;
       margin: 1.3em;
-      margin-top: 75px;
+      margin-top: 115px;
       padding: 1em 2em;
       border-top: 3px solid #07C7B5;
-      border-radius: 2px; }
-      body.feature-doc .post-content .post-body h2:not(:first-child) {
+      border-radius: 2px;
+      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.23); }
+      body#feature-doc .post-content .post-body h2:not(:first-child) {
         margin-top: 1.5em;
         padding-top: 1em;
         border-top: 6px solid rgba(0, 0, 0, 0.03);
-        padding-bottom: 0;
-        margin-bottom: 0; }
-      body.feature-doc .post-content .post-body h4 {
+        margin-bottom: 0;
+        padding-bottom: 15px; }
+      body#feature-doc .post-content .post-body h4 {
         margin-bottom: 0;
         font-weight: 600; }
-      body.feature-doc .post-content .post-body code {
+      body#feature-doc .post-content .post-body code {
         font-weight: normal;
         background-color: #e6e6e6;
         border: 1px solid #cacaca;
         padding: 0.125rem 0.3125rem 0.0625rem; }
-      body.feature-doc .post-content .post-body blockquote {
+      body#feature-doc .post-content .post-body blockquote {
         outline: 1px solid #CACACA;
         padding: 1em;
         margin-bottom: 15px;
         background: #f2f9ff; }
-        body.feature-doc .post-content .post-body blockquote.alert {
+        body#feature-doc .post-content .post-body blockquote.alert {
           background: #f4fff2; }
-        body.feature-doc .post-content .post-body blockquote.warn {
+        body#feature-doc .post-content .post-body blockquote.warn {
           outline: 1px solid #CACACA; }
-        body.feature-doc .post-content .post-body blockquote p {
+        body#feature-doc .post-content .post-body blockquote p {
           margin-bottom: 0px; }
+      body#feature-doc .post-content .post-body a {
+        color: black;
+        text-decoration: underline; }
+
+/* -- iPad Land --  */
+/* -- iPad Landscapre -- */
+@media all and (min-width: 60em) {
+  body#feature-doc .docs-side-bar {
+    transform: translate(0%, 0);
+    position: fixed;
+    overflow-y: scroll;
+    width: 20%;
+    height: 100%; }
+  body#feature-doc .post-content {
+    flex-basis: 80%;
+    margin-left: 20%; }
+    body#feature-doc .post-content .post-header .mobile-nav-button {
+      display: none; }
+    body#feature-doc .post-content .post-header .info {
+      margin: 0 1em;
+      padding: 10px 0;
+      height: 55px; }
+    body#feature-doc .post-content .post-body {
+      margin-top: 75px; } }
