@@ -1,4 +1,31 @@
 
+body#home {
+    .page-header {
+      color: #fff;
+      text-align: center;
+      background-color: #159957;
+      background-image: linear-gradient(120deg, #155799, #159957);
+      padding: 10rem 6rem;
+    }
+
+    .btn {
+        display: inline-block;
+        margin: 1rem 0.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        border-style: solid;
+        border-width: 1px;
+        transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+        padding: 0.75rem;
+        font-size: 0.9rem;
+
+        @media screen and (max-width: 42em) {
+            display: block;
+        }
+    }
+
+}
 
 body#feature-doc {
     background: #f3f5f6;
@@ -8,22 +35,21 @@ body#feature-doc {
         flex-flow: row wrap;
     }
 
-
     &.nav-active {
         .docs-side-bar {
             transform: translate(0%, 0);
+            transition: all 0.3s ease-in-out;
         }
+
     }
 
-
     .docs-side-bar {
-        background: #333333;
+        background: #282929;
         flex-basis: 20%;
         transform: translate(-100%, 0);
         position: fixed;
         left: 0;
         z-index: 1;
-        transition: all 1s ease-in-out;
         height: 100vh;
         top: 40px;
 
@@ -76,7 +102,6 @@ body#feature-doc {
 
     }
 
-
     .post-content {
         flex-basis: 100%;
         overflow: hidden;
@@ -85,11 +110,12 @@ body#feature-doc {
             position: fixed;
             background: #f3f5f6;
             width: 100%;
+            top: 0;
 
             .mobile-nav-button {
                 height: 40px;
                 width: 100%;
-                background: #333333;
+                background: #282929;
                 color: white;
 
                 .border-menu {
@@ -187,14 +213,11 @@ body#feature-doc {
             }
 
         }
+
     }
 
-}
-
-/* -- iPad Land --  */
-@include bp(x-large) {
-
-    body#feature-doc {
+    /* -- iPad Land --  */
+    @include bp(x-large) {
 
         .docs-side-bar {
             transform: translate(0%, 0);
@@ -202,6 +225,7 @@ body#feature-doc {
             overflow-y: scroll;
             width: 20%;
             height: 100%;
+            top: 0;
         }
 
         .post-content {
@@ -226,5 +250,7 @@ body#feature-doc {
             }
 
         }
+
     }
+
 }

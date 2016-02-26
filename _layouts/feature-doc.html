@@ -4,51 +4,14 @@
   {% include head.html %}
 
   <body id="feature-doc" >
-
       <div class="wrapper">
-            <aside class="docs-side-bar">
-              <h1>v1.1.0 <span>(Changelog)</span></h1>
 
-              <h2>Server</h2>
-              <ul>
-                {% for post in site.categories['server'] %}
-                  <li>
-                    <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                  </li>
-                {% endfor %}
-              </ul>
-
-              <h2>Display</h2>
-              <ul>
-                {% for post in site.categories['display'] %}
-                  <li>
-                    <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                  </li>
-                {% endfor %}
-              </ul>
-
-              <h2>Controller</h2>
-              <ul>
-                {% for post in site.categories['controller'] %}
-                  <li>
-                    <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                  </li>
-                {% endfor %}
-              </ul>
-
-              <h2>General</h2>
-              <ul>
-                {% for post in site.categories['general'] %}
-                  <li>
-                    <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                  </li>
-                {% endfor %}
-              </ul>
+            <aside>
+              {% include docs-navigation-list.html %}
             </aside>
 
             <artical class="post-content" itemprop="articleBody">
               <header class="post-header">
-
                 <div id="mobile-nav-button" class="mobile-nav-button" >
                   <div class="border-menu">
                     <p>Documentation</p>
@@ -71,19 +34,14 @@
 
             {% include footer.html %}
       </div>
-
   </body>
 
   <script type="text/javascript">
-    window.onload = function() {
-        document.getElementById("mobile-nav-button").onclick = function(){
-          toggle();
-        }
-    }
-
-    function toggle() {
-        document.getElementById("feature-doc").classList.toggle("nav-active");
-    }
-  </script>
+    $( document ).ready( function(){
+        $("#mobile-nav-button").on('click', function(){
+          $("body#feature-doc").toggleClass("nav-active");
+        });
+    });
+  </script>>
 
 </html>

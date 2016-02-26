@@ -14,69 +14,78 @@
   <link rel="alternate" type="application/rss+xml" title="Chameleon Web Controller" href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml">
 
   <link href='https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro:400,300italic|Roboto' rel='stylesheet' type='text/css'>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
 </head>
-
-
-
-
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
   <body id="feature-doc" >
-
       <div class="wrapper">
-            <aside class="docs-side-bar">
-              <h1>v1.1.0 <span>(Changelog)</span></h1>
 
-              <h2>Server</h2>
-              <ul>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/server/installation.">Installation</a>
-                  </li>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/server/multi-user-setup.">Multi user setup</a>
-                  </li>
-                
-              </ul>
+            <aside>
+              <div class="docs-side-bar">
+    <h1 class="vershion" >v1.1.0 <span>(Changelog)</span></h1>
 
-              <h2>Display</h2>
-              <ul>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/display/navigation.">Navigation Groups and Items</a>
-                  </li>
-                
-              </ul>
+    <div class="server docs">
+        <h2>Server</h2>
+        <ul>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/server/installation.">Installation</a>
+            </li>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/server/multi-user-setup.">Multi user setup</a>
+            </li>
+          
+        </ul>
+    </div>
 
-              <h2>Controller</h2>
-              <ul>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/controller/swipe-pad.">Swipe pad</a>
-                  </li>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/controller/directional-pad.">Directional pad</a>
-                  </li>
-                
-              </ul>
+    <div class="display docs">
+        <h2>Display</h2>
+        <ul>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/display/navigation.">Navigation Groups and Items</a>
+            </li>
+          
+        </ul>
+    </div>
 
-              <h2>General</h2>
-              <ul>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/general/custom-methods.">Custom methods</a>
-                  </li>
-                
-              </ul>
+    <div class="controller docs">
+        <h2>Controller</h2>
+        <ul>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/controller/swipe-pad.">Swipe pad</a>
+            </li>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/controller/directional-pad.">Directional pad</a>
+            </li>
+          
+        </ul>
+    </div>
+
+    <div class="general docs">
+        <h2>General</h2>
+        <ul>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/general/custom-methods.">Custom methods</a>
+            </li>
+          
+        </ul>
+    </div>
+</div>
+
             </aside>
 
             <artical class="post-content" itemprop="articleBody">
               <header class="post-header">
-
                 <div id="mobile-nav-button" class="mobile-nav-button" >
                   <div class="border-menu">
                     <p>Documentation</p>
@@ -142,19 +151,14 @@
 </footer>
 
       </div>
-
   </body>
 
   <script type="text/javascript">
-    window.onload = function() {
-        document.getElementById("mobile-nav-button").onclick = function(){
-          toggle();
-        }
-    }
-
-    function toggle() {
-        document.getElementById("feature-doc").classList.toggle("nav-active");
-    }
-  </script>
+    $( document ).ready( function(){
+        $("#mobile-nav-button").on('click', function(){
+          $("body#feature-doc").toggleClass("nav-active");
+        });
+    });
+  </script>>
 
 </html>

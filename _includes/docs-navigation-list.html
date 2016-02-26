@@ -1,0 +1,47 @@
+<div class="docs-side-bar">
+    <h1 class="vershion" >v1.1.0 <span>(Changelog)</span></h1>
+
+    <div class="server docs">
+        <h2>Server</h2>
+        <ul>
+          {% for post in site.categories['server'] %}
+            <li>
+              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+
+    <div class="display docs">
+        <h2>Display</h2>
+        <ul>
+          {% for post in site.categories['display'] %}
+            <li>
+              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+
+    <div class="controller docs">
+        <h2>Controller</h2>
+        <ul>
+          {% for post in site.categories['controller'] %}
+            <li>
+              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+
+    <div class="general docs">
+        <h2>General</h2>
+        <ul>
+          {% for post in site.categories['general'] %}
+            <li>
+              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+</div>

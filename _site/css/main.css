@@ -164,70 +164,6 @@ table tr th :last-child, table tr td :last-child {
     fill: #828282; }
 
 /**
- * Site header
- */
-.site-header {
-  border-top: 5px solid #424242;
-  border-bottom: 1px solid #e8e8e8;
-  min-height: 56px;
-  position: relative; }
-
-.site-title {
-  font-size: 26px;
-  font-weight: 300;
-  line-height: 56px;
-  letter-spacing: -1px;
-  margin-bottom: 0;
-  float: left; }
-  .site-title, .site-title:visited {
-    color: #424242; }
-
-.site-nav {
-  float: right;
-  line-height: 56px; }
-  .site-nav .menu-icon {
-    display: none; }
-  .site-nav .page-link {
-    color: #111;
-    line-height: 1.5; }
-    .site-nav .page-link:not(:last-child) {
-      margin-right: 20px; }
-  @media screen and (max-width: 600px) {
-    .site-nav {
-      position: absolute;
-      top: 9px;
-      right: 15px;
-      background-color: #fdfdfd;
-      border: 1px solid #e8e8e8;
-      border-radius: 5px;
-      text-align: right; }
-      .site-nav .menu-icon {
-        display: block;
-        float: right;
-        width: 36px;
-        height: 26px;
-        line-height: 0;
-        padding-top: 10px;
-        text-align: center; }
-        .site-nav .menu-icon > svg {
-          width: 18px;
-          height: 15px; }
-          .site-nav .menu-icon > svg path {
-            fill: #424242; }
-      .site-nav .trigger {
-        clear: both;
-        display: none; }
-      .site-nav:hover .trigger {
-        display: block;
-        padding-bottom: 5px; }
-      .site-nav .page-link {
-        display: block;
-        padding: 5px 10px;
-        margin-left: 20px; }
-        .site-nav .page-link:not(:last-child) {
-          margin-right: 0; } }
-
-/**
  * Site footer
  */
 .site-footer {
@@ -282,9 +218,6 @@ table tr th :last-child, table tr td :last-child {
 /**
  * Page content
  */
-.page-content {
-  padding: 30px 0; }
-
 .page-heading {
   font-size: 20px; }
 
@@ -296,7 +229,8 @@ table tr th :last-child, table tr td :last-child {
 
 .post-meta {
   font-size: 14px;
-  color: #828282; }
+  color: #828282;
+  padding-left: 6px; }
 
 .post-link {
   display: block;
@@ -346,7 +280,7 @@ table tr th :last-child, table tr td :last-child {
 
 .highlight {
   color: white;
-  background-color: #333333; }
+  background-color: #282929; }
   .highlight * {
     font-size: 0.94em; }
   .highlight .c {
@@ -464,23 +398,46 @@ article {
   background: none;
   border: none; }
 .highlight table td.gutter {
-  border-right: 1px solid rgba(255, 0, 0, 0.15); }
+  border-right: 1px solid white; }
+
+body#home .page-header {
+  color: #fff;
+  text-align: center;
+  background-color: #159957;
+  background-image: linear-gradient(120deg, #155799, #159957);
+  padding: 10rem 6rem; }
+body#home .btn {
+  display: inline-block;
+  margin: 1rem 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  padding: 0.75rem;
+  font-size: 0.9rem; }
+  @media screen and (max-width: 42em) {
+    body#home .btn {
+      display: block; } }
 
 body#feature-doc {
-  background: #f3f5f6; }
+  background: #f3f5f6;
+  /* -- iPad Land --  */
+  /* -- iPad Landscapre -- */ }
   body#feature-doc .wrapper {
     display: flex;
     flex-flow: row wrap; }
   body#feature-doc.nav-active .docs-side-bar {
-    transform: translate(0%, 0); }
+    transform: translate(0%, 0);
+    transition: all 0.3s ease-in-out; }
   body#feature-doc .docs-side-bar {
-    background: #333333;
+    background: #282929;
     flex-basis: 20%;
     transform: translate(-100%, 0);
     position: fixed;
     left: 0;
     z-index: 1;
-    transition: all 1s ease-in-out;
     height: 100vh;
     top: 40px; }
     body#feature-doc .docs-side-bar h1 {
@@ -519,11 +476,12 @@ body#feature-doc {
     body#feature-doc .post-content .post-header {
       position: fixed;
       background: #f3f5f6;
-      width: 100%; }
+      width: 100%;
+      top: 0; }
       body#feature-doc .post-content .post-header .mobile-nav-button {
         height: 40px;
         width: 100%;
-        background: #333333;
+        background: #282929;
         color: white; }
         body#feature-doc .post-content .post-header .mobile-nav-button .border-menu {
           position: relative;
@@ -584,24 +542,22 @@ body#feature-doc {
       body#feature-doc .post-content .post-body a {
         color: black;
         text-decoration: underline; }
-
-/* -- iPad Land --  */
-/* -- iPad Landscapre -- */
-@media all and (min-width: 60em) {
-  body#feature-doc .docs-side-bar {
-    transform: translate(0%, 0);
-    position: fixed;
-    overflow-y: scroll;
-    width: 20%;
-    height: 100%; }
-  body#feature-doc .post-content {
-    flex-basis: 80%;
-    margin-left: 20%; }
-    body#feature-doc .post-content .post-header .mobile-nav-button {
-      display: none; }
-    body#feature-doc .post-content .post-header .info {
-      margin: 0 1em;
-      padding: 10px 0;
-      height: 55px; }
-    body#feature-doc .post-content .post-body {
-      margin-top: 75px; } }
+  @media all and (min-width: 60em) {
+    body#feature-doc .docs-side-bar {
+      transform: translate(0%, 0);
+      position: fixed;
+      overflow-y: scroll;
+      width: 20%;
+      height: 100%;
+      top: 0; }
+    body#feature-doc .post-content {
+      flex-basis: 80%;
+      margin-left: 20%; }
+      body#feature-doc .post-content .post-header .mobile-nav-button {
+        display: none; }
+      body#feature-doc .post-content .post-header .info {
+        margin: 0 1em;
+        padding: 10px 0;
+        height: 55px; }
+      body#feature-doc .post-content .post-body {
+        margin-top: 75px; } }

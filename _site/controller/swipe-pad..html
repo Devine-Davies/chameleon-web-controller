@@ -8,75 +8,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <title>Swipe pad</title>
-  <meta name="description" content="">
+  <meta name="description" content="Introduction">
 
   <link rel="stylesheet" href="http://devine-davies.github.io/chameleon-web-controller/css/main.css">
   <link rel="alternate" type="application/rss+xml" title="Chameleon Web Controller" href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml">
 
   <link href='https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro:400,300italic|Roboto' rel='stylesheet' type='text/css'>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
 </head>
-
-
-
-
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
   <body id="feature-doc" >
-
       <div class="wrapper">
-            <aside class="docs-side-bar">
-              <h1>v1.1.0 <span>(Changelog)</span></h1>
 
-              <h2>Server</h2>
-              <ul>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/server/installation.">Installation</a>
-                  </li>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/server/multi-user-setup.">Multi user setup</a>
-                  </li>
-                
-              </ul>
+            <aside>
+              <div class="docs-side-bar">
+    <h1 class="vershion" >v1.1.0 <span>(Changelog)</span></h1>
 
-              <h2>Display</h2>
-              <ul>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/display/navigation.">Navigation Groups and Items</a>
-                  </li>
-                
-              </ul>
+    <div class="server docs">
+        <h2>Server</h2>
+        <ul>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/server/installation.">Installation</a>
+            </li>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/server/multi-user-setup.">Multi user setup</a>
+            </li>
+          
+        </ul>
+    </div>
 
-              <h2>Controller</h2>
-              <ul>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/controller/swipe-pad.">Swipe pad</a>
-                  </li>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/controller/directional-pad.">Directional pad</a>
-                  </li>
-                
-              </ul>
+    <div class="display docs">
+        <h2>Display</h2>
+        <ul>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/display/navigation.">Navigation Groups and Items</a>
+            </li>
+          
+        </ul>
+    </div>
 
-              <h2>General</h2>
-              <ul>
-                
-                  <li>
-                    <a href="http://devine-davies.github.io/chameleon-web-controller/general/custom-methods.">Custom methods</a>
-                  </li>
-                
-              </ul>
+    <div class="controller docs">
+        <h2>Controller</h2>
+        <ul>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/controller/swipe-pad.">Swipe pad</a>
+            </li>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/controller/directional-pad.">Directional pad</a>
+            </li>
+          
+        </ul>
+    </div>
+
+    <div class="general docs">
+        <h2>General</h2>
+        <ul>
+          
+            <li>
+              <a href="http://devine-davies.github.io/chameleon-web-controller/general/custom-methods.">Custom methods</a>
+            </li>
+          
+        </ul>
+    </div>
+</div>
+
             </aside>
 
             <artical class="post-content" itemprop="articleBody">
               <header class="post-header">
-
                 <div id="mobile-nav-button" class="mobile-nav-button" >
                   <div class="border-menu">
                     <p>Documentation</p>
@@ -93,7 +102,80 @@
               </header>
 
               <section class="post-body">
-                
+                <h2 id="introduction">Introduction</h2>
+
+<p>The navigation structure allows your to set defined areas within your application that can be controlled via the controller. This is achieved is by adding a <code class="highlighter-rouge">data-cwc-navgroup='*'</code> data attribute to your HTML markup allowing the <strong>cwc</strong> object to register the group. The <code class="highlighter-rouge">*</code> should represented the index of the navigation group starting from zero.</p>
+
+<h2 id="building-the-d-pad">Building the D-pad</h2>
+
+<p>A basic D-pad can be created with minimal markup, Add the attribute <code class="highlighter-rouge">data-cwc-controller="d-pad"</code> to your HTML elements followed by <code class="highlighter-rouge">data-cwc-cbtn="up"</code> to represent a trigger button.</p>
+
+<p>Out of the box, the D-pad is designed to work simultaneously with the navigation interface [link] when installed on the display.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre>  <span class="nt">&lt;section</span> <span class="na">data-cwc-controller=</span><span class="s">"d-pad"</span>  <span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">data-cwc-cbtn=</span><span class="s">"up"</span> <span class="nt">&gt;&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">data-cwc-cbtn=</span><span class="s">"right"</span> <span class="nt">&gt;&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">data-cwc-cbtn=</span><span class="s">"down"</span> <span class="nt">&gt;&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">data-cwc-cbtn=</span><span class="s">"left"</span> <span class="nt">&gt;&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">data-cwc-cbtn=</span><span class="s">"enter"</span> <span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/section&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<blockquote>
+  <p>Out of the box, the D-pad is designed to work simultaneously with the navigation interface [link] when installed on the display.</p>
+</blockquote>
+
+<h2 id="styling">Styling</h2>
+<p>Out of the box, the D-pad is designed to work simultaneously with the navigation interface [link] when installed on the display.</p>
+
+<h2 id="undestanding-the-javascript">Undestanding the Javascript</h2>
+
+<p>In order to register a D-Pad you must call the D-pad initiator object within the <strong>cwc</strong> framework. As the D-pad is designed to work with the navigation interface this will try to work alongside that, unless given call back methods for each of the button.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td class="code"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">SwipePad</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">SwipePad</span><span class="p">({</span>
+  <span class="p">});</span>
+
+  <span class="nx">navigation</span><span class="p">.</span><span class="nx">invoke_dir</span><span class="p">(</span><span class="s1">'up'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">tracking</span> <span class="p">){</span>
+    <span class="cm">/* -- Logic here -- */</span>
+  <span class="p">});</span>
+
+  <span class="nx">navigation</span><span class="p">.</span><span class="nx">invoke_dir</span><span class="p">(</span><span class="s1">'down'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">tracking</span> <span class="p">){</span>
+    <span class="cm">/* -- Logic here -- */</span>
+  <span class="p">});</span>
+
+  <span class="nx">navigation</span><span class="p">.</span><span class="nx">invoke_dir</span><span class="p">(</span><span class="s1">'enter'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">tracking</span> <span class="p">){</span>
+    <span class="cm">/* -- Logic here -- */</span>
+  <span class="p">});</span>
+
+<span class="p">};</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<blockquote>
+  <p>If no callback methord are provided then the D-pad will try to work with the main screne.</p>
+</blockquote>
 
               </section>
             </artical>
@@ -142,19 +224,14 @@
 </footer>
 
       </div>
-
   </body>
 
   <script type="text/javascript">
-    window.onload = function() {
-        document.getElementById("mobile-nav-button").onclick = function(){
-          toggle();
-        }
-    }
-
-    function toggle() {
-        document.getElementById("feature-doc").classList.toggle("nav-active");
-    }
-  </script>
+    $( document ).ready( function(){
+        $("#mobile-nav-button").on('click', function(){
+          $("body#feature-doc").toggleClass("nav-active");
+        });
+    });
+  </script>>
 
 </html>
