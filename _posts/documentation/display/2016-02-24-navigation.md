@@ -66,6 +66,7 @@ Here is an example of the typ of HTML markup is required in order to build a nav
 {% endhighlight %}
 
 ## Initializing with JavaScript
+
 In order to link the navigation groups with the **cwc** objetct, call the `cwc.Navigation()` after the dom has loaded.
 
 {% highlight javascript linenos %}
