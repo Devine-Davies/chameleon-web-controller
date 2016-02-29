@@ -12,23 +12,28 @@ var all_clients = [];
 app.use(express.static(__dirname + '/public'));
 
 var server = http.createServer(app)
-server.listen(port)
+    server.listen(port)
 
 /* -- Me testing global vars -- */
-console.log( "---------------------------------")
-console.log("http server listening on %d", port)
-console.log( "---------------------------------")
-
+console.log( "----------------------------------");
+console.log( "http server listening on %d", port);
+console.log( "----------------------------------");
+console.log( " - Tap top left to kill on tap pad ");
+console.log( "----------------------------------");
 
 /* ----------------------------------
  * Web Chameleon Controller Server
  * ----------------------------------
-*/
+ */
 var cwc = require("cwc_server");
 var server = new cwc.cwc.Server({
  	type : 'ws',
  	server : new WebSocketServer({server: server})
 });
+
+
+
+
 
 
 
