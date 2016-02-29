@@ -1,156 +1,32 @@
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src &apos;self&apos; &apos;unsafe-inline&apos;; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos;">
-    <title>Display</title>
 
-    <script type="text/javascript" src="assets/js/cwc_display-min.js"></script>
-    <script type="text/javascript" src="/assets/js/first_screen.js"></script>
-    <link href='assets/style/css/cwc_controller_style-min.css' rel='stylesheet' type='text/css'>
+<style>
+	body {
+		padding: 0;
+		margin: 0;
+	}
 
-    <script type="text/javascript">
-    /*------------------------------------------------------
-    * @function in array
-    * System messages should be declared here
-    * We will have a list or predefined functions
-    */
-    var server = new cwc.Server({
-        host : '100.76.4.72',
-        port : 5000,
-        type : 'ws'
-    });
+	iframe {
+		float: left;
+		margin: 0;
+		padding: 0;
+		height: 100vh;
+		border: none;
+	}
+</style>
 
+<script  >
+	var custom_seed = 'localhost';
+	var url 		= 'http://' + custom_seed + ':5000/';
 
-    /*------------------------------------------------------
-    * @function in array
-    * System messages should be declared here
-    * We will have a list or predefined functions
-    */
-    // var server_method = new cwc.ServerMethod({ });
-    // server_method.create_method('first_screen_connected', function( prams ){
-    //         console.log('first screen is connected!');
-    // });
+	window.onload = function() {
+		document.getElementById('display').src    = url + "display.html?seed="    + custom_seed;
+		setTimeout(function(){
+			document.getElementById('controller').src = url + "controller.html?seed=" + custom_seed;
+		}, 400);
+	}
+</script>
 
 
-
-    window.onload = function() {
-
-        /*------------------------------------------------------
-        * @function in array
-        * System messages should be declared here
-        * We will have a list or predefined functions
-        */
-        var navigation = new cwc.Navigation({
-          classes : {
-              group : 'custom_class_name',
-              item  : 'custom_class_name',
-          },
-
-          callbacks : {
-              /* -- System -- */
-              onnav_changed  : function( info ){  },
-              onitem_changed : function( info ){  }
-          }
-       });
-
-        /*------------------------------------------------------
-        * @function in array
-        * System messages should be declared here
-        * We will have a list or predefined functions
-        */
-        var custom_method = new cwc.CustomMethod({ });
-        custom_method.create_method( {
-            name   : 'on-item-enter',
-            method : function( info ) {
-              console.log(info );
-            }
-        });
-
-    };
-    </script>
-
-  </head>
-
-  <body class="display"  >
-    <div data-firstscreen-app="true"  >
-
-      <div class="side-nav" data-cwc-navgroup="0" data-cwc-nav-key-instructions='{ "up" : "ni-prev" , "down" : "ni-next", "right" : "ng-next" }' >
-        <nav>
-          <section data-cwc-navitem >
-            <span class="icon"></span>
-            <span class="text">Item one</span>
-          </section>
-          <section data-cwc-navitem >
-            <span class="icon"></span>
-            <span class="text">Item one</span>
-          </section>
-          <section data-cwc-navitem >
-            <span class="icon"></span>
-            <span class="text">Item one</span>
-          </section>
-          <section data-cwc-navitem >
-            <span class="icon"></span>
-            <span class="text">Item one</span>
-          </section>
-          <section data-cwc-navitem data-cwc-item-overide='{ "down" : "null"  }'  >
-            <span class="icon"></span>
-            <span class="text">Item one</span>
-          </section>
-        </nav>
-      </div>
-
-      <div class="main-window" data-cwc-navgroup="1" data-cwc-onnaventrance="history-item"
-      data-cwc-nav-key-instructions='{ "down" : "ng-2", "right" : "ni-next" , "left" : "ni-prev" }' >
-        <ul>
-          <li data-cwc-navitem="starting-point" data-cwc-item-overide='{ "left" : "ng-0", "enter" : "cm-on-item-enter"  }' ><span>1</span></li>
-          <li data-cwc-navitem ><span>2</span></li>
-          <li data-cwc-navitem ><span>3</span></li>
-          <li data-cwc-navitem ><span>4</span></li>
-        </ul>
-      </div>
-
-      <div class="main-window" data-cwc-navgroup="2"
-      data-cwc-nav-key-instructions='{ "up" : "ng-1" , "down" : "ng-3", "right" : "ni-next" , "left" : "ni-prev" }' >
-        <ul>
-          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
-          <li data-cwc-navitem ><span>2</span></li>
-          <li data-cwc-navitem ><span>3</span></li>
-          <li data-cwc-navitem ><span>4</span></li>
-        </ul>
-      </div>
-
-      <div class="main-window" data-cwc-navgroup="3"
-      data-cwc-nav-key-instructions='{ "up" : "ng-2" , "down" : "ng-4", "right" : "ni-next" , "left" : "ni-prev" }' >
-        <ul>
-          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
-          <li data-cwc-navitem ><span>2</span></li>
-          <li data-cwc-navitem ><span>3</span></li>
-          <li data-cwc-navitem ><span>4</span></li>
-        </ul>
-      </div>
-
-      <div class="main-window" data-cwc-navgroup="4"
-      data-cwc-nav-key-instructions='{ "up" : "ng-3" , "down" : "ng-5", "right" : "ni-next" , "left" : "ni-prev" }' >
-        <ul>
-          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
-          <li data-cwc-navitem ><span>2</span></li>
-          <li data-cwc-navitem ><span>3</span></li>
-          <li data-cwc-navitem ><span>4</span></li>
-        </ul>
-      </div>
-
-      <div class="main-window" data-cwc-navgroup="5"
-      data-cwc-nav-key-instructions='{ "up" : "ng-prev", "right" : "ni-next" , "left" : "ni-prev" }' >
-        <ul>
-          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
-          <li data-cwc-navitem ><span>2</span></li>
-          <li data-cwc-navitem ><span>3</span></li>
-          <li data-cwc-navitem ><span>4</span></li>
-        </ul>
-      </div>
-    </div>
-  </body>
-</html>
+<iframe width="80%" id='display'     ></iframe>
+<iframe  width="20%" id='controller' ></iframe>

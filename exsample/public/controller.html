@@ -9,22 +9,36 @@
 
     <script type="text/javascript" src="http://hammerjs.github.io/dist/hammer.min.js"></script>
 
-    <script type="text/javascript" src="/assets/js/cwc_controller-min.js"></script>
-    <link href='assets/style/css/cwc_controller_style-min.css' rel='stylesheet' type='text/css'>
-
-
     <script type="text/javascript" src="/assets/js/controller.js"></script>
+    <script type="text/javascript" src="/assets/js/cwc_controller-min.js"></script>
 
+    <link href='/assets/style/cwc/cwc_controller_style.css' rel='stylesheet' type='text/css'>
 
     <style>
-
-        .cwcd-pad-style {
-          margin: 1.5%;
-        }
-
+      .cwcd-pad-style {
+        margin: 1.5%;
+      }
     </style>
 
     <script type="text/javascript">
+
+    /* -- Adress sent from index.html -- */
+    var seed = window.location.search.substring(window.location.search.indexOf('seed=') + 5);
+    if (seed.indexOf('&') >= 0) {
+        seed = seed.substring(0, seed.indexOf('&'));
+    }
+
+    /*------------------------------------------------------
+    * @function in array
+    * System messages should be declared here
+    * We will have a list or predefined functions
+    */
+    var server = new cwc.Server({
+        host : seed || 'http://localhost:5000/',
+        port : 5000,
+        type : 'ws'
+    });
+
     /*------------------------------------------------------
     * @function in array
     * System messages should be declared here
@@ -37,18 +51,6 @@
                 //console.log('You just created a custom methord');
             }
         });
-
-
-    /*------------------------------------------------------
-    * @function in array
-    * System messages should be declared here
-    * We will have a list or predefined functions
-    */
-    var server = new cwc.Server({
-        host : '100.76.4.72',
-        port : 5000,
-        type : 'ws'
-    });
 
     window.onload = function() {
 
