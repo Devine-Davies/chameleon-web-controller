@@ -10,3 +10,7 @@ _site
 _config.yml
 feed.xml
 index.html
+
+
+# -- Apple os --
+*.DS_Store
