@@ -12,7 +12,7 @@
     <script type="text/javascript" src="/assets/js/controller.js"></script>
     <script type="text/javascript" src="/assets/js/cwc_controller-min.js"></script>
 
-    <link href='/assets/style/cwc/cwc_controller_style-min.css' rel='stylesheet' type='text/css'>
+    <link href='/assets/style/cwc/cwc_controller_style.css' rel='stylesheet' type='text/css'>
 
     <style>
       .cwcd-pad-style {
@@ -62,6 +62,8 @@
         var EnableDpad = new cwc.D_Pad({
             //There will be options
         });
+
+
         /*------------------------------------------------------
         * @function in array
         * System messages should be declared here
@@ -70,15 +72,6 @@
         var SwipePad = new cwc.SwipePad({
             //There will be options
         });
-
-        /*------------------------------------------------------
-        * @function in array
-        * System messages should be declared here
-        * We will have a list or predefined functions
-        */
-        var viewportScroll = new cwc.ViewportScroll({
-
-        });
     };
 
     </script>
@@ -86,56 +79,29 @@
   </head>
   <body class="controller-body-wrapper"  >
 
-      <section class="cwcd-pad-style" data-cwc-controller="d-pad"  >
-          <span data-cwc-cbtn="up" ></span>
-          <span data-cwc-cbtn="right" ></span>
-          <span data-cwc-cbtn="down" ></span>
-          <span data-cwc-cbtn="left" ></span>
-          <span data-cwc-cbtn="enter" ></span>
-      </section>
+  <section class="cwcd-pad-style" data-cwc-controller="d-pad"  >
+      <span data-cwc-cbtn="up" ></span>
+      <span data-cwc-cbtn="right" ></span>
+      <span data-cwc-cbtn="down" ></span>
+      <span data-cwc-cbtn="left" ></span>
+      <span data-cwc-cbtn="enter" ></span>
+  </section>
 
-      <section class="cwcd-pad-style" data-cwc-controller="swipe-pad"  >
-      </section>
-
-      <div class="cwc-style-enable"
-      data-cwc-viewportscroll-pullbar='{ "type" : "vertical", "viewport_target" : "scroll-target" }'  >
-          <span></span>
-      </div>
+  <section class="cwcd-pad-style" data-cwc-controller="swipe-pad"  >
+  </section>
 
   </body>
 </html>
 
 
 <!--
-    /* - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     - First Screen Navigation Data Attrabutes
-     - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-     - Scroll to
-      - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       viewportScroll.scroll_to({
-           viewport_target : 'scroll-target', // Set as the #id on the display
-           direction       : 'down',          // up : down : left : right
-           ammout          : 100              // ammount
-       });
+  data-cwc-controller
 
-    - HTML EXSAMPLES
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     - data-cwc-nav-key-instructions='{ "up" : "ng-prev", "right" : "ni-next" , "left" : "ni-prev" }'
-     - data-cwc-item-overide='{ "left" : "ng-0" }'
-
-      <div class="cwc-style-enable"
-      data-cwc-viewportscroll-pullbar='{ "type" : "vertical", "viewport_target" : "scroll-target", "axis" : "inverted" }'  >
-          <span></span>
-      </div>
-
-     - html Attrabutes
-     - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     - data-cwc-viewportscroll-pullbar :
-
-     - Instuctions
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     - type            // vertical
-     - viewport_target // Set as the #id on the display
-     - axis            // inverted || leave empty for normal
+  data-cwc-cbtn
+    - top
+    - right
+    - bottom
+    - left
+    - enter
 -->

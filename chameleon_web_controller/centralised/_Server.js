@@ -154,7 +154,7 @@
         /* -- Message data -- */
         var data = JSON.parse( data.data );
 
-        console.log( data );
+        //console.log( data );
 
         /* -- Is a valid mesage : return true not valid -- */
         if( cwc.Server.prototype.validate_onmessage( data ) )
@@ -197,7 +197,7 @@
             ) );
         }
 
-        console.log( data );
+        // console.log( data );
 
     };
 

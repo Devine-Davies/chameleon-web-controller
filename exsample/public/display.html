@@ -9,7 +9,7 @@
 
     <script type="text/javascript" src="/assets/js/first_screen.js"></script>
     <script type="text/javascript" src="assets/js/cwc_display-min.js"></script>
-    <link href='assets/style/css/cwc_controller_style-min.css' rel='stylesheet' type='text/css'>
+    <link href='assets/style/css/display.css' rel='stylesheet' type='text/css'>
 
     <script type="text/javascript">
 
@@ -57,7 +57,7 @@
           callbacks : {
               /* -- System -- */
               onnav_changed  : function( info ){
-                console.log(info);
+                console.log( info );
               },
               onitem_changed : function( info ){  }
           }
@@ -76,12 +76,21 @@
             }
         });
 
+        /*------------------------------------------------------
+        * @function in array
+        * System messages should be declared here
+        * We will have a list or predefined functions
+        */
+        var viewportScroll = new cwc.ViewportScroll([
+          '#scroll-target'
+        ]);
+
     };
     </script>
 
   </head>
 
-  <body class="display"  >
+  <body id="scroll-target" class="display"  >
     <div data-firstscreen-app="true"  >
 
       <div class="side-nav" data-cwc-navgroup="0" data-cwc-nav-key-instructions='{ "up" : "ni-prev" , "down" : "ni-next", "right" : "ng-next" }' >
@@ -139,8 +148,8 @@
         </ul>
       </div>
 
-      <div class="main-window" data-cwc-navgroup="5"
-      data-cwc-nav-key-instructions='{ "up" : "ng-prev", "right" : "ni-next" , "left" : "ni-prev" }' >
+      <div class="main-window" data-cwc-navgroup="4"
+      data-cwc-nav-key-instructions='{ "up" : "ng-prev" , "down" : "ng-next", "right" : "ni-next" , "left" : "ni-prev" }' >
         <ul>
           <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
           <li data-cwc-navitem ><span>2</span></li>
@@ -150,6 +159,26 @@
       </div>
 
       <div class="main-window" data-cwc-navgroup="5"
+      data-cwc-nav-key-instructions='{ "up" : "ng-prev" , "down" : "ng-next", "right" : "ni-next" , "left" : "ni-prev" }' >
+        <ul>
+          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
+          <li data-cwc-navitem ><span>2</span></li>
+          <li data-cwc-navitem ><span>3</span></li>
+          <li data-cwc-navitem ><span>4</span></li>
+        </ul>
+      </div>
+
+      <div class="main-window" data-cwc-navgroup="6"
+      data-cwc-nav-key-instructions='{ "up" : "ng-prev" , "down" : "ng-next", "right" : "ni-next" , "left" : "ni-prev" }' >
+        <ul>
+          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
+          <li data-cwc-navitem ><span>2</span></li>
+          <li data-cwc-navitem ><span>3</span></li>
+          <li data-cwc-navitem ><span>4</span></li>
+        </ul>
+      </div>
+
+      <div class="main-window" data-cwc-navgroup="7"
       data-cwc-nav-key-instructions='{ "up" : "ng-prev", "right" : "ni-next" , "left" : "ni-prev" }' >
         <ul>
           <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
@@ -159,8 +188,28 @@
         </ul>
       </div>
 
-      <div class="main-window" data-cwc-navgroup="5"
-      data-cwc-nav-key-instructions='{ "up" : "ng-prev", "right" : "ni-next" , "left" : "ni-prev" }' >
+      <div class="main-window" data-cwc-navgroup="2"
+      data-cwc-nav-key-instructions='{ "up" : "ng-1" , "down" : "ng-3", "right" : "ni-next" , "left" : "ni-prev" }' >
+        <ul>
+          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
+          <li data-cwc-navitem ><span>2</span></li>
+          <li data-cwc-navitem ><span>3</span></li>
+          <li data-cwc-navitem ><span>4</span></li>
+        </ul>
+      </div>
+
+      <div class="main-window" data-cwc-navgroup="3"
+      data-cwc-nav-key-instructions='{ "up" : "ng-prev" , "down" : "ng-next", "right" : "ni-next" , "left" : "ni-prev" }' >
+        <ul>
+          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
+          <li data-cwc-navitem ><span>2</span></li>
+          <li data-cwc-navitem ><span>3</span></li>
+          <li data-cwc-navitem ><span>4</span></li>
+        </ul>
+      </div>
+
+      <div class="main-window" data-cwc-navgroup="4"
+      data-cwc-nav-key-instructions='{ "up" : "ng-prev" , "down" : "ng-next", "right" : "ni-next" , "left" : "ni-prev" }' >
         <ul>
           <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
           <li data-cwc-navitem ><span>2</span></li>
@@ -170,6 +219,26 @@
       </div>
 
       <div class="main-window" data-cwc-navgroup="5"
+      data-cwc-nav-key-instructions='{ "up" : "ng-prev" , "down" : "ng-next", "right" : "ni-next" , "left" : "ni-prev" }' >
+        <ul>
+          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
+          <li data-cwc-navitem ><span>2</span></li>
+          <li data-cwc-navitem ><span>3</span></li>
+          <li data-cwc-navitem ><span>4</span></li>
+        </ul>
+      </div>
+
+      <div class="main-window" data-cwc-navgroup="6"
+      data-cwc-nav-key-instructions='{ "up" : "ng-prev" , "down" : "ng-next", "right" : "ni-next" , "left" : "ni-prev" }' >
+        <ul>
+          <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
+          <li data-cwc-navitem ><span>2</span></li>
+          <li data-cwc-navitem ><span>3</span></li>
+          <li data-cwc-navitem ><span>4</span></li>
+        </ul>
+      </div>
+
+      <div class="main-window" data-cwc-navgroup="7"
       data-cwc-nav-key-instructions='{ "up" : "ng-prev", "right" : "ni-next" , "left" : "ni-prev" }' >
         <ul>
           <li data-cwc-navitem data-cwc-item-overide='{ "left" : "ng-0" }' ><span>1</span></li>
