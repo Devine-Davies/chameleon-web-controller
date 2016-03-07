@@ -105,4 +105,5 @@
 */
 //@codekit-append "_D_Pad.js"
 //@codekit-append "_SwipePad.js";
-// @codekit-append "_ViewportScroll.js";
+//@codekit-append "_AnalogPad.js";
+//@codekit-append "_ViewportScroll.js";

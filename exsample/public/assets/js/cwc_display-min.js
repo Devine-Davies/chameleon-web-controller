@@ -101,6 +101,7 @@
 //@codekit-append "_Navigation.js"
 //@codekit-append "_ViewportScroll.js"
 
+
 // Polyfill to get the name of a function in IE9
 function functionName(fn)
 {
@@ -819,7 +820,7 @@ function hyphenate(str) {
         cwc.ServerMethod.prototype.create_method({
             action   : 'move navigation',
             callback : function( action ) {
-                console.log( 'You got this far: (' +  action + ')');
+                //console.log( 'You got this far: (' +  action + ')');
                 cwc.Navigation.prototype.invoke_dir( action );
             }
         } );
@@ -1421,4 +1422,6 @@ function hyphenate(str) {
     cwc.plugin(ViewportScroll, 'ViewportScroll');
 
 }( window.cwc );
+
+
 

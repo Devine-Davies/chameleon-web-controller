@@ -351,7 +351,7 @@
         cwc.ServerMethod.prototype.create_method({
             action   : 'move navigation',
             callback : function( action ) {
-                console.log( 'You got this far: (' +  action + ')');
+                //console.log( 'You got this far: (' +  action + ')');
                 cwc.Navigation.prototype.invoke_dir( action );
             }
         } );

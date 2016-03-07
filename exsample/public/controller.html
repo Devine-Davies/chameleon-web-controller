@@ -178,15 +178,22 @@
         * We will have a list or predefined functions
         */
         var EnableDpad = new cwc.D_Pad({
-            //There will be options
         });
+
         /*------------------------------------------------------
         * @function in array
         * System messages should be declared here
         * We will have a list or predefined functions
         */
         var SwipePad = new cwc.SwipePad({
-            //There will be options
+        });
+
+        /*------------------------------------------------------
+        * @function in array
+        * System messages should be declared here
+        * We will have a list or predefined functions
+        */
+        var AnalogPad = new cwc.AnalogPad({
         });
 
         /*------------------------------------------------------
@@ -204,24 +211,66 @@
 
     <style>
 
+      body {
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+
       .siwp-pad  {
-        /*display: none;*/
+          display: none;
           position: absolute !important;
-          left: 0px;
-          top: 30px;
       }
 
       .d-pad {
-          position: absolute !important;
-          left: 0px;
-          bottom: 30px;
           display: none;
+          position: absolute !important;
+          margin: auto;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
       }
 
-      .scroll-button  {
+      .analog-pad-con {
+          width: 200px;
+          height: 200px;
+          position: absolute;
+      }
+
+      .scroll-pullbar  {
           position: absolute !important;
           right: 50px;
           bottom: 150px;
+      }
+
+      @media only screen
+      and (min-device-width : 768px)
+      and (max-device-width : 1024px)
+      and (orientation : landscape) {
+        .d-pad  {
+          display: block;
+          left: 5%;
+          top: 50px;
+        }
+
+        .siwp-pad  {
+          display: block;
+          left: 5%;
+          bottom: 50px;
+        }
+
+        .analog-pad-con {
+          display: block;
+          bottom: 50px;
+          left: 5%;
+        }
+
+        .scroll-pullbar  {
+            right: 50px;
+            bottom: 20px;
+        }
+
       }
 
     </style>
@@ -240,45 +289,16 @@
       <section class="siwp-pad cwcd-pad-style" data-cwc-controller="swipe-pad"  >
       </section>
 
-      <div class="scroll-button cwc-style-enable"
+      <section class="analog-pad-con">
+        <div class="analog-pad cwcd-pad-style" data-cwc-controller="analog-pad"  >
+          <span></span>
+        </div>
+      </section>
+
+      <div class="scroll-pullbar cwc-style-enable"
       data-cwc-viewportscroll-pullbar='{ "type" : "vertical", "viewport_target" : "scroll-target" }'  >
           <span></span>
       </div>
 
   </body>
 </html>
-
-
-<!--
-    /* - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     - First Screen Navigation Data Attrabutes
-     - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-     - Scroll to
-      - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       viewportScroll.scroll_to({
-           viewport_target : 'scroll-target', // Set as the #id on the display
-           direction       : 'down',          // up : down : left : right
-           ammout          : 100              // ammount
-       });
-
-    - HTML EXSAMPLES
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     - data-cwc-nav-key-instructions='{ "up" : "ng-prev", "right" : "ni-next" , "left" : "ni-prev" }'
-     - data-cwc-item-overide='{ "left" : "ng-0" }'
-
-      <div class="cwc-style-enable"
-      data-cwc-viewportscroll-pullbar='{ "type" : "vertical", "viewport_target" : "scroll-target", "axis" : "inverted" }'  >
-          <span></span>
-      </div>
-
-     - html Attrabutes
-     - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     - data-cwc-viewportscroll-pullbar :
-
-     - Instuctions
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     - type            // vertical
-     - viewport_target // Set as the #id on the display
-     - axis            // inverted || leave empty for normal
--->

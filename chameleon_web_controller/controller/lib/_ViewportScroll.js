@@ -72,7 +72,7 @@
         4  : 'right',
         8  : 'up',
         16 : 'down'
-    }
+    };
 
     /*------------------------------------------------------
     * @function - Lookup type pullbars
@@ -207,7 +207,7 @@
             pullbar.classList.remove("auto");
 
             /* -- Move the publlbar handle -- */
-            ViewportScroll.prototype.pullbar_trigger_translate({
+            this.pullbar_trigger_translate({
                 trigger : trigger,
                 delta_x : 0,
                 delta_y : delta.y
@@ -248,7 +248,7 @@
         this.clear_auto_scroll();
 
         /* -- Move the publlbar handle to start -- */
-        ViewportScroll.prototype.pullbar_trigger_translate({
+        this.pullbar_trigger_translate({
             trigger : trigger,
             delta_x : 0,
             delta_y : 0
@@ -267,9 +267,12 @@
     */
     ViewportScroll.prototype.pullbar_trigger_translate = function( prams )
      {
-        prams.trigger.style.transform = [
-            'translate3d(' + prams.delta_x + 'px,' + prams.delta_y + 'px, 0)'
-        ];
+        /* -- Move the publlbar handle -- */
+        window.requestAnimationFrame( function(){
+            prams.trigger.style.transform = [
+                'translate3d(' + prams.delta_x + 'px,' + prams.delta_y + 'px, 0)'
+            ]
+        });
 
     }
 

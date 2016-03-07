@@ -6,7 +6,9 @@ var express = require("express");
 var app     = express();
 var port    = 5000;
 
-var all_clients = [];
+var ip = require('ip');
+
+//ip.address() // my ip address
 
 // Routing
 app.use(express.static(__dirname + '/public'));
@@ -16,7 +18,7 @@ var server = http.createServer(app)
 
 /* -- Me testing global vars -- */
 console.log( "----------------------------------");
-console.log( "http server listening on %d", port);
+console.log( "http server listening on " + (ip.address()) + " : %d", port);
 console.log( "----------------------------------");
 console.log( " - Tap top left to kill on tap pad ");
 console.log( "----------------------------------");
@@ -30,6 +32,18 @@ var server = new cwc.cwc.Server({
  	type : 'ws',
  	server : new WebSocketServer({server: server})
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

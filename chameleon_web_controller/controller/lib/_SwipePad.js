@@ -55,18 +55,18 @@
 
             /* -- Tap -- */
             hammertime_h.on('tap', function(ev) {
-                SwipePad.prototype.validate_action( 500 );
+                cwc.SwipePad.prototype.validate_action( 500 );
             });
 
             /* -- Add horazontal -- */
             hammertime_h.on('swipe', function(ev) {
-                SwipePad.prototype.validate_action( ev.direction );
+                cwc.SwipePad.prototype.validate_action( ev.direction );
             });
 
             /* -- Add vertical -- */
             hammertime_v.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
             hammertime_v.on('swipe', function(ev) {
-                SwipePad.prototype.validate_action( ev.direction );
+                cwc.SwipePad.prototype.validate_action( ev.direction );
             });
         };
 
