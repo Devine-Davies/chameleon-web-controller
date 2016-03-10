@@ -1,15 +1,9 @@
 /*------------------------------------------------------
- * To-Do
+ Navigagtion
  ------------------------------------------------------
- • Add support for data attr nav dir - up, down, left, right
- • Add support for NO end last and first attr
- • Add support for Enter key for on select
- • Must show testing on Screen
- • Add commit
+ To-Do •
  ------------------------------------------------------
- • Start D-pad
 */
-
 
 !function( cwc ){
   'use strict';
@@ -351,7 +345,6 @@
         cwc.ServerMethod.prototype.create_method({
             action   : 'move navigation',
             callback : function( action ) {
-                //console.log( 'You got this far: (' +  action + ')');
                 cwc.Navigation.prototype.invoke_dir( action );
             }
         } );
@@ -393,16 +386,36 @@
     */
     Navigation.prototype.invoke_dir = function( dir, cb )
     {
-        var accepted_actions = [ 'up', 'down', 'left', 'right' ]
+        var a_enter  = ['enter', 'select'];
+        var a_up     = ['up',    'N', 'NE', 'NW'];
+        var a_right  = ['right', 'E', 'NE', 'SE'];
+        var a_down   = ['down',  'S', 'SE', 'SW'];
+        var a_left   = ['left',  'W', 'NW', 'SW'];
 
-        if( accepted_actions.indexOf( dir ) != -1 )
+        /* -- Select -- */
+        if( a_enter.indexOf( dir ) != -1 )
+            this.key_function( 'enter' );
+
+        /* -- up -- */
+        if( a_up.indexOf( dir ) != -1 )
+            this.key_function( 'up' );
+
+        /* -- right -- */
+        if( a_right.indexOf( dir ) != -1 )
+            this.key_function( 'right' );
+
+        /* -- down -- */
+        if( a_down.indexOf( dir ) != -1 )
+            this.key_function( 'down' );
+
+        /* -- left -- */
+        if( a_left.indexOf( dir ) != -1 )
+            this.key_function( 'left' );
+
+        /* -- If cb has been set then call the function -- */
+        if( cb )
         {
-            this.key_function( dir );
-
-            if(cb )
-            {
-                cb( this.tracking.current );
-            }
+            cb( this.tracking.current );
         }
 
     };

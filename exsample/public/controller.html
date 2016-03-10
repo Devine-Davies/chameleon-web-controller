@@ -138,77 +138,6 @@
 
     <link href='/assets/style/cwc/cwc_controller_style-min.css' rel='stylesheet' type='text/css'>
 
-    <script type="text/javascript">
-
-    /* -- Adress sent from index.html -- */
-    var seed = window.location.search.substring(window.location.search.indexOf('seed=') + 5);
-    if (seed.indexOf('&') >= 0) {
-        seed = seed.substring(0, seed.indexOf('&'));
-    }
-
-    /*------------------------------------------------------
-    * @function in array
-    * System messages should be declared here
-    * We will have a list or predefined functions
-    */
-    var server = new cwc.Server({
-        host : seed || 'http://localhost:5000/',
-        port : 5000,
-        type : 'ws'
-    });
-
-    /*------------------------------------------------------
-    * @function in array
-    * System messages should be declared here
-    * We will have a list or predefined functions
-    */
-    var custom_method = new cwc.CustomMethod({ });
-        custom_method.create_method( {
-            name   : 'custom_m_test',
-            method : function( prams ) {
-                //console.log('You just created a custom methord');
-            }
-        });
-
-    window.onload = function() {
-
-        /*------------------------------------------------------
-        * @function in array
-        * System messages should be declared here
-        * We will have a list or predefined functions
-        */
-        var EnableDpad = new cwc.D_Pad({
-        });
-
-        /*------------------------------------------------------
-        * @function in array
-        * System messages should be declared here
-        * We will have a list or predefined functions
-        */
-        var SwipePad = new cwc.SwipePad({
-        });
-
-        /*------------------------------------------------------
-        * @function in array
-        * System messages should be declared here
-        * We will have a list or predefined functions
-        */
-        var AnalogPad = new cwc.AnalogPad({
-        });
-
-        /*------------------------------------------------------
-        * @function in array
-        * System messages should be declared here
-        * We will have a list or predefined functions
-        */
-        var viewportScroll = new cwc.ViewportScroll({
-
-        });
-    };
-
-    </script>
-
-
     <style>
 
       body {
@@ -233,8 +162,8 @@
       }
 
       .analog-pad-con {
-          width: 200px;
-          height: 200px;
+          width: 300px;
+          height: 300px;
           position: absolute;
       }
 
@@ -290,7 +219,7 @@
       </section>
 
       <section class="analog-pad-con">
-        <div class="analog-pad cwcd-pad-style" data-cwc-controller="analog-pad"  >
+        <div class="analog-pad cwcd-pad-style" data-cwc-controller="analog-pad" data-cwc-controller-instructions='{ "movement-type" : "tick", "pan" : "on-analog-pan"  }'  >
           <span></span>
         </div>
       </section>
@@ -300,5 +229,104 @@
           <span></span>
       </div>
 
+<script type="text/javascript">
+/* -- Adress sent from index.html -- */
+var seed = window.location.search.substring(window.location.search.indexOf('seed=') + 5);
+if (seed.indexOf('&') >= 0) {
+    seed = seed.substring(0, seed.indexOf('&'));
+}
+</script>
+
+
+<script type="text/javascript">
+/*------------------------------------------------------
+* @function in array
+* System messages should be declared here
+* We will have a list or predefined functions
+*/
+var server = new cwc.Server({
+    host : seed || 'http://localhost:5000/',
+    port : 5000,
+    type : 'ws'
+});
+
+/*------------------------------------------------------
+* @function in array
+* System messages should be declared here
+* We will have a list or predefined functions
+*/
+var custom_method = new cwc.CustomMethod({ });
+
+window.onload = function() {
+    /*------------------------------------------------------
+    * @function in array
+    * System messages should be declared here
+    * We will have a list or predefined functions
+    */
+    var EnableDpad = new cwc.D_Pad({
+    });
+
+    /*------------------------------------------------------
+    * @function in array
+    * System messages should be declared here
+    * We will have a list or predefined functions
+    */
+    var SwipePad = new cwc.SwipePad({
+    });
+
+    /*------------------------------------------------------
+    * @function in array
+    * System messages should be declared here
+    * We will have a list or predefined functions
+    */
+    var AnalogPad = new cwc.AnalogPad({
+    });
+
+    /*------------------------------------------------------
+    * @function in array
+    * System messages should be declared here
+    * We will have a list or predefined functions
+    */
+    var viewportScroll = new cwc.ViewportScroll({
+    });
+};
+</script>
+
+
+<script>
+var is_sending = null;
+
+var custom_method = new cwc.CustomMethod({ });
+    custom_method.create_method( {
+      name   : 'on-analog-pan',
+      method : function( prams ) {
+        if( prams.in_out.x == 'out' || prams.in_out.y == 'out' )
+        {
+            slow_down( prams.cardinal_direction );
+        }
+      }
+    });
+
+function slow_down( dir )
+{
+    if ( ! this.is_sending )
+    {
+        is_sending = true;
+
+        setTimeout( function(){
+            server.send_message({
+                recipient : 'display',
+                action    : 'move navigation',
+                arguments : dir
+            });
+
+          is_sending = false;
+
+        } , ( 400 ) );
+    }
+}
+</script>
+
   </body>
+
 </html>

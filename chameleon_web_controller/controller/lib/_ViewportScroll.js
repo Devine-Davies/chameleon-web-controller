@@ -63,6 +63,12 @@
     ViewportScroll.prototype.pullbars_auto_scroll_timer = false;
 
     /*------------------------------------------------------
+    * @object - Groups & Items
+    * @info - Keep and drecord of all found nav elms
+    */
+    ViewportScroll.prototype.tracking = null;
+
+    /*------------------------------------------------------
     * @object - Hammer dirs
     * @info - Take from the hammer js spec
     */
@@ -101,7 +107,7 @@
 
             mc.on("panstart panup pandown panend", function( ev ) {
                 cwc.ViewportScroll.prototype.on_pullbars_trigger_pan(
-                    ev, event.target.g_id
+                    ev
                 );
             });
 
@@ -121,14 +127,16 @@
 
     };
 
-
     /*------------------------------------------------------
     * @function - On pullbars trigger pan
     * @info - Panning opctions an constraints
     * @return - true : false
     */
-    ViewportScroll.prototype.on_pullbars_trigger_pan = function( ev, g_id )
+    ViewportScroll.prototype.on_pullbars_trigger_pan = function( ev )
     {
+        /* -- Get the pullbar id from the elm attr -- */
+        var g_id = ( event.target.g_id == undefined )? this.tracking : event.target.g_id;
+
         var pullbar         = this.all_pullbars[ g_id ].pullbar;
         var trigger         = ev.target;
         var instructions    = this.all_pullbars[ g_id ].instructions;
@@ -139,6 +147,7 @@
         /* -- Add on start -- */
         if( ev.type === 'panstart' )
         {
+            this.tracking = g_id;
             pullbar.classList.add("active");
             return;
         }
@@ -200,13 +209,13 @@
         /* -- Check to see we are not on constratins -- */
         if( (! threshold.y.top) && (! threshold.y.btm) )
         {
-            /* -- clear the out scroll if needed -- */
+            /* -- clear out the scroll if needed -- */
             this.clear_auto_scroll();
 
-            /* -- Clear out the timer -- */
+            /* -- clear the timer -- */
             pullbar.classList.remove("auto");
 
-            /* -- Move the publlbar handle -- */
+            /* -- move the publlbar handle -- */
             this.pullbar_trigger_translate({
                 trigger : trigger,
                 delta_x : 0,
@@ -220,9 +229,13 @@
 
     };
 
-
-     ViewportScroll.prototype.pullbar_get_ammount = function( instructions, direction )
-     {
+    /*------------------------------------------------------
+    * @function - On pullbars trigger pan
+    * @info - Panning opctions an constraints
+    * @return - true : false
+    */
+    ViewportScroll.prototype.pullbar_get_ammount = function( instructions, direction )
+    {
         var ammount = instructions.ammount || 15;
         var axis    = instructions.axis    || false;
 
@@ -230,20 +243,26 @@
         {
             case 'right' :
             case 'up'    :
-            ammount = (axis !== 'inverted')? ammount : Math.abs(ammount) * -1;
+                ammount = (axis !== 'inverted')? ammount : Math.abs(ammount) * -1;
             break;
 
             case 'left' :
             case 'down' :
-            ammount = (axis !== 'inverted')? Math.abs(ammount) * -1 : ammount;
+                ammount = (axis !== 'inverted')? Math.abs(ammount) * -1 : ammount;
             break;
         }
 
         return ammount;
-    }
 
-     ViewportScroll.prototype.pullbar_trigger_reset = function( pullbar, trigger )
-     {
+    };
+
+    /*------------------------------------------------------
+    * @function - Pullbar Trigger Reset
+    * @info - Panning opctions an constraints
+    * @return - true : false
+    */
+    ViewportScroll.prototype.pullbar_trigger_reset = function( pullbar, trigger )
+    {
         /* -- Clear out the timer -- */
         this.clear_auto_scroll();
 
@@ -259,7 +278,8 @@
 
         /* -- Clear out the timer -- */
         pullbar.classList.remove("auto");
-     }
+
+    };
 
     /*------------------------------------------------------
     * @function - Clear auto scroll
@@ -274,8 +294,7 @@
             ]
         });
 
-    }
-
+    };
 
     /*------------------------------------------------------
     * @function - Set auto scroll
@@ -308,7 +327,7 @@
             clearInterval( this.pullbars_auto_scroll_timer );
         }
 
-     }
+     };
 
      ViewportScroll.prototype.scroll_to = function( prams )
      {
@@ -318,7 +337,8 @@
             ammount         : prams.ammout || false,
             type            : 'scroll to'
         });
-     }
+
+     };
 
      ViewportScroll.prototype.validate_action = function( args )
      {
@@ -334,20 +354,17 @@
 
         }
 
-     }
+     };
 
      ViewportScroll.prototype.send_actions_to_first_screen = function( args )
      {
-        console.log(
-            args
-        );
-
         cwc.Server.prototype.send_message({
             recipient : 'display',
             action    : 'scroll viewport',
             arguments : args
         });
-     }
+
+     };
 
 
     /*------------------------------------------------------

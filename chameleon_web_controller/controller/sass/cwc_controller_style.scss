@@ -107,8 +107,8 @@ body {
 [data-cwc-controller="analog-pad"], [data-cwc-controller="swipe-pad"] {
 
     &.cwcd-pad-style {
-        width: 200px;
-        height: 200px;
+        width: 120px;
+        height: 120px;
         background: white;
         border: 1px solid tomato;
         position: relative;
@@ -132,8 +132,8 @@ body {
     span {
         position: absolute;
         display: block;
-        height: 44px;
-        width: 44px;
+        height: 64px;
+        width: 64px;
 
         top : 0;
         right: 0;
