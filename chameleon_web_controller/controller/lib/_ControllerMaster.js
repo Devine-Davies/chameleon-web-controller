@@ -18,16 +18,28 @@
     /*------------------------------------------------------
     * @function
     */
-    function PadMaster( extend )
+    function ControllerMaster( extend )
     {
-        cwc.registerPlugin(this, 'PadMaster');
+        cwc.registerPlugin(this, 'ControllerMaster');
+    };
+
+    /*------------------------------------------------------
+    * @object - Hammer dirs
+    * @info - Take from the hammer js spec
+    */
+    ControllerMaster.prototype.hammer_dirs = {
+        1  : 'none',
+        2  : 'left',
+        4  : 'right',
+        8  : 'up',
+        16 : 'down'
     };
 
     /*------------------------------------------------------
     * @object - Last Posistion
     * @info - this will allow us to determan
     */
-    PadMaster.prototype.last_delta_pos = {
+    ControllerMaster.prototype.last_delta_pos = {
         x : 0,
         y : 0
     };
@@ -36,7 +48,7 @@
     * @function - Tag all with id
     * @info - Will update the tracking system for next items and groups
     */
-    PadMaster.prototype.tag_all_with_id = function ( elm, c_id )
+    ControllerMaster.prototype.tag_all_with_id = function ( elm, c_id )
     {
         elm.dataset.cid = c_id;
 
@@ -54,9 +66,9 @@
     * @function - Update nav tracking
     * @info - Will update the tracking system for next items and groups
     */
-    PadMaster.prototype.fetch_instructions = function( analog )
+    ControllerMaster.prototype.fetch_instructions = function( analog )
     {
-        var tax = 'data-cwc-pad-instructions';
+        var tax = 'data-cwc-instructions';
 
         /* -- Search for nav end inftructions-- */
         if( analog.hasAttribute( tax )  )
@@ -73,7 +85,7 @@
     * @info : angle 0 :  180 is converted 180-360
     * @info : angle 0 : -180 is converted 0-180
     */
-    PadMaster.prototype.calculate_axis_as_cardinal_direction = function( angle )
+    ControllerMaster.prototype.calculate_axis_as_cardinal_direction = function( angle )
     {
         /* -- Negative number -- */
         if( angle < 0 ) { angle = ( 180 - Math.abs( angle ) ); }
@@ -93,7 +105,7 @@
     * @function - Clear auto scroll
     * @info - @http://goo.gl/bQdzfN
     */
-    PadMaster.prototype.calculate_axis_as_coordinate = function( z )
+    ControllerMaster.prototype.calculate_axis_as_coordinate = function( z )
     {
         var int = Math.round( (z / 100) * 10 ) / 10;
         return Number( ( z < 0 )? (int - 1) : (int + 1) );
@@ -105,7 +117,7 @@
     * x : ( in || out )
     * y : ( in || out )
     */
-    PadMaster.prototype.get_moving_direction = function( delta )
+    ControllerMaster.prototype.get_moving_direction = function( delta )
     {
         /* -- Find out what direction we are moving in -- */
         function check( z, z1 ) {
@@ -132,7 +144,7 @@
     * @function
     * bind this object to the main object
     */
-    PadMaster.prototype.invoke_hook = function( hook, instructions, arg )
+    ControllerMaster.prototype.invoke_hook = function( hook, instructions, arg )
     {
         if( instructions.hasOwnProperty( hook ) )
         {
@@ -148,9 +160,6 @@
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(PadMaster, 'PadMaster');
+    cwc.plugin(ControllerMaster, 'ControllerMaster');
 
 }( window.cwc );
-
-
-

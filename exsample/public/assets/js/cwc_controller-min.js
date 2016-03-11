@@ -103,11 +103,11 @@
 /*------------------------------------------------------
 * -- Controller Assets --
 */
-//@codekit-append "_PadMaster.js";
-//@codekit-append "_D_Pad.js"
-//@codekit-append "_SwipePad.js";
-//@codekit-append "_AnalogPad.js";
-//@codekit-append "_ViewportScroll.js";
+//@codekit-append "_ControllerMaster.js";
+//@codekit-append "_DpadController.js";
+//@codekit-append "_TouchPadController.js";
+//@codekit-append "_AnalogController.js";
+//@codekit-append "_PullbarController.js";
 
 // Polyfill to get the name of a function in IE9
 function functionName(fn)
@@ -499,16 +499,28 @@ function hyphenate(str) {
     /*------------------------------------------------------
     * @function
     */
-    function PadMaster( extend )
+    function ControllerMaster( extend )
     {
-        cwc.registerPlugin(this, 'PadMaster');
+        cwc.registerPlugin(this, 'ControllerMaster');
+    };
+
+    /*------------------------------------------------------
+    * @object - Hammer dirs
+    * @info - Take from the hammer js spec
+    */
+    ControllerMaster.prototype.hammer_dirs = {
+        1  : 'none',
+        2  : 'left',
+        4  : 'right',
+        8  : 'up',
+        16 : 'down'
     };
 
     /*------------------------------------------------------
     * @object - Last Posistion
     * @info - this will allow us to determan
     */
-    PadMaster.prototype.last_delta_pos = {
+    ControllerMaster.prototype.last_delta_pos = {
         x : 0,
         y : 0
     };
@@ -517,7 +529,7 @@ function hyphenate(str) {
     * @function - Tag all with id
     * @info - Will update the tracking system for next items and groups
     */
-    PadMaster.prototype.tag_all_with_id = function ( elm, c_id )
+    ControllerMaster.prototype.tag_all_with_id = function ( elm, c_id )
     {
         elm.dataset.cid = c_id;
 
@@ -535,9 +547,9 @@ function hyphenate(str) {
     * @function - Update nav tracking
     * @info - Will update the tracking system for next items and groups
     */
-    PadMaster.prototype.fetch_instructions = function( analog )
+    ControllerMaster.prototype.fetch_instructions = function( analog )
     {
-        var tax = 'data-cwc-pad-instructions';
+        var tax = 'data-cwc-instructions';
 
         /* -- Search for nav end inftructions-- */
         if( analog.hasAttribute( tax )  )
@@ -554,7 +566,7 @@ function hyphenate(str) {
     * @info : angle 0 :  180 is converted 180-360
     * @info : angle 0 : -180 is converted 0-180
     */
-    PadMaster.prototype.calculate_axis_as_cardinal_direction = function( angle )
+    ControllerMaster.prototype.calculate_axis_as_cardinal_direction = function( angle )
     {
         /* -- Negative number -- */
         if( angle < 0 ) { angle = ( 180 - Math.abs( angle ) ); }
@@ -574,7 +586,7 @@ function hyphenate(str) {
     * @function - Clear auto scroll
     * @info - @http://goo.gl/bQdzfN
     */
-    PadMaster.prototype.calculate_axis_as_coordinate = function( z )
+    ControllerMaster.prototype.calculate_axis_as_coordinate = function( z )
     {
         var int = Math.round( (z / 100) * 10 ) / 10;
         return Number( ( z < 0 )? (int - 1) : (int + 1) );
@@ -586,7 +598,7 @@ function hyphenate(str) {
     * x : ( in || out )
     * y : ( in || out )
     */
-    PadMaster.prototype.get_moving_direction = function( delta )
+    ControllerMaster.prototype.get_moving_direction = function( delta )
     {
         /* -- Find out what direction we are moving in -- */
         function check( z, z1 ) {
@@ -613,7 +625,7 @@ function hyphenate(str) {
     * @function
     * bind this object to the main object
     */
-    PadMaster.prototype.invoke_hook = function( hook, instructions, arg )
+    ControllerMaster.prototype.invoke_hook = function( hook, instructions, arg )
     {
         if( instructions.hasOwnProperty( hook ) )
         {
@@ -629,13 +641,9 @@ function hyphenate(str) {
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(PadMaster, 'PadMaster');
+    cwc.plugin(ControllerMaster, 'ControllerMaster');
 
 }( window.cwc );
-
-
-
-
 
 /*------------------------------------------------------
  * To-Do
@@ -656,9 +664,9 @@ function hyphenate(str) {
     /*------------------------------------------------------
     * @function
     */
-    function DPad( extend )
+    function DPadController( extend )
     {
-        cwc.registerPlugin(this, 'DPad');
+        cwc.registerPlugin(this, 'DPadController');
 
         this.controller_lookup();
     };
@@ -667,7 +675,7 @@ function hyphenate(str) {
     * @obj
     * To store all data and class names
     */
-    DPad.prototype.taxonomy = {
+    DPadController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
             controller : 'data-cwc-controller=dpad',
@@ -677,23 +685,12 @@ function hyphenate(str) {
     };
 
     /*------------------------------------------------------
-    * @array
-    * Place to store all custom methord
-    */
-    DPad.prototype.events = {
-            /* -- D & right -- */
-            68 : function(){  },
-            39 : function(){  },
-
-    };
-
-    /*------------------------------------------------------
     * @object - Groups & Items
     * @info - Keep and drecord of all found nav elms
     */
-    DPad.prototype.all_dpads = [];
+    DPadController.prototype.all_DPadControllers = [];
 
-    DPad.prototype.controller_lookup = function()
+    DPadController.prototype.controller_lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -706,7 +703,7 @@ function hyphenate(str) {
                 controllers[ c_id ], c_id
             );
 
-            this.all_dpads[ c_id ] = {
+            this.all_DPadControllers[ c_id ] = {
                 container : controllers[ c_id ],
                 actions   : actions
             };
@@ -720,7 +717,7 @@ function hyphenate(str) {
     * @info - Find elms with data-(navitem) add the this to object
     * @return - true : false
     */
-    DPad.prototype.controller_actions_lookup = function( group, c_id )
+    DPadController.prototype.controller_actions_lookup = function( group, c_id )
     {
         var descendents     = group.querySelectorAll('['+ this.taxonomy.data.btn +']');
         var descendents_len = descendents.length;
@@ -734,16 +731,9 @@ function hyphenate(str) {
                 action.a_id = a_id;
                 action.c_id = c_id;
 
-            // action.onclick = function(  ){
-            //      cwc.DPad.prototype.button_invoked(
-            //         this.c_id,
-            //         this.a_id
-            //     )
-            // };
-
             var hammertime = new Hammer(action, {});
             hammertime.on('tap', function(ev) {
-                 cwc.DPad.prototype.button_invoked(
+                 cwc.DPadController.prototype.button_invoked(
                     ev.target.c_id,
                     ev.target.a_id
                 )
@@ -756,9 +746,9 @@ function hyphenate(str) {
 
     };
 
-     DPad.prototype.button_invoked = function( c_id, a_id )
+     DPadController.prototype.button_invoked = function( c_id, a_id )
      {
-        var action = this.all_dpads[ c_id ].actions[ a_id ];
+        var action = this.all_DPadControllers[ c_id ].actions[ a_id ];
 
         this.validate_action (
             action.getAttribute( this.taxonomy.data.btn )
@@ -766,7 +756,7 @@ function hyphenate(str) {
 
      }
 
-     DPad.prototype.validate_action = function( type )
+     DPadController.prototype.validate_action = function( type )
      {
         /* -- Validate action -- */
         switch( type )
@@ -782,10 +772,8 @@ function hyphenate(str) {
 
      }
 
-     DPad.prototype.send_actions_to_first_screen = function( action )
+     DPadController.prototype.send_actions_to_first_screen = function( action )
      {
-        console.log('sending ' + action);
-
         cwc.Server.prototype.send_message({
             recipient : 'display',
             action    : 'move navigation',
@@ -797,7 +785,7 @@ function hyphenate(str) {
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(DPad, 'DPad');
+    cwc.plugin(DPadController, 'DPadController');
 
 }( window.cwc, Hammer );
 
@@ -819,21 +807,21 @@ function hyphenate(str) {
     /*------------------------------------------------------
     * @function
     */
-    function TouchPad( extend )
+    function TouchPadController( extend )
     {
-        cwc.registerPlugin(this, 'TouchPad');
+        cwc.registerPlugin(this, 'TouchPadController');
 
-        this.touchpad_lookup();
+        this.lookup();
     };
 
     /*------------------------------------------------------
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.taxonomy = {
+    TouchPadController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
-            controller : 'data-cwc-controller=touchpad'
+            controller : 'data-cwc-controller="touchpad"'
         }
     };
 
@@ -841,19 +829,19 @@ function hyphenate(str) {
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.all_touchpads = [];
+    TouchPadController.prototype.all_TouchPadControllers = [];
 
     /*------------------------------------------------------
     * @object - Tracking
     * @info - Keep and drecord of all found nav elms
     */
-    TouchPad.prototype.tracking = null;
+    TouchPadController.prototype.tracking = null;
 
     /*------------------------------------------------------
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.touchpad_lookup = function()
+    TouchPadController.prototype.lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -864,9 +852,9 @@ function hyphenate(str) {
             var controller   = controllers[ c_id ];
 
             /* -- Add the id to all elements below -- */
-            cwc.PadMaster.prototype.tag_all_with_id( controller, c_id );
+            cwc.ControllerMaster.prototype.tag_all_with_id( controller, c_id );
 
-            var instructions = cwc.PadMaster.prototype.fetch_instructions( controller );
+            var instructions = cwc.ControllerMaster.prototype.fetch_instructions( controller );
 
             /* -- Build hammer events -- */
             var mc = new Hammer.Manager( controller , {
@@ -876,7 +864,7 @@ function hyphenate(str) {
             } );
 
             /* -- Add the touch pad -- */
-            this.all_touchpads.push({
+            this.all_TouchPadControllers.push({
                 pad          : controller,
                 instructions : instructions
             });
@@ -889,7 +877,7 @@ function hyphenate(str) {
                 }) );
 
                 mc.on("swipe", function( ev ) {
-                    cwc.TouchPad.prototype.on_move( ev );
+                    cwc.TouchPadController.prototype.on_move( ev );
                 });
             }
 
@@ -900,7 +888,7 @@ function hyphenate(str) {
                 } ) );
 
                 mc.on("panmove panstart panend", function( ev ){
-                    cwc.TouchPad.prototype.on_move( ev );
+                    cwc.TouchPadController.prototype.on_move( ev );
                 });
             }
         };
@@ -910,10 +898,10 @@ function hyphenate(str) {
     /*------------------------------------------------------
     * @function - Clear auto scroll
     */
-    TouchPad.prototype.get_movment_type = function( c_id )
+    TouchPadController.prototype.get_movment_type = function( c_id )
     {
         /* -- get the insrtuctions for the current analog -- */
-        var instructions = this.all_touchpads[ c_id ].instructions;
+        var instructions = this.all_TouchPadControllers[ c_id ].instructions;
 
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
@@ -938,12 +926,12 @@ function hyphenate(str) {
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.on_move = function( ev )
+    TouchPadController.prototype.on_move = function( ev )
     {
         var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
 
-        var analog       = this.all_touchpads[ c_id ].pad;
-        var instructions = this.all_touchpads[ c_id ].instructions;
+        var analog       = this.all_TouchPadControllers[ c_id ].pad;
+        var instructions = this.all_TouchPadControllers[ c_id ].instructions;
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -952,25 +940,25 @@ function hyphenate(str) {
         };
 
         /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.PadMaster.prototype.calculate_axis_as_cardinal_direction(
+        var cardinal_direction = cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
             ev.angle
         );
 
         /* -- coordinates of x and y -- */
         var coordinate = {
-            x : cwc.PadMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
-            y : cwc.PadMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
+            x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
+            y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
         };
 
         /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.PadMaster.prototype.get_moving_direction(
+        var in_out = cwc.ControllerMaster.prototype.get_moving_direction(
             delta
         );
 
-        cwc.PadMaster.prototype.invoke_hook
+        cwc.ControllerMaster.prototype.invoke_hook
 
         /* -- check if hook has been applied -- */
-        cwc.PadMaster.prototype.invoke_hook( 'on-touch', instructions, {
+        cwc.ControllerMaster.prototype.invoke_hook( 'on-touch', instructions, {
             cardinal_direction : cardinal_direction,
             coordinate         : coordinate,
             in_out             : in_out
@@ -984,7 +972,7 @@ function hyphenate(str) {
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.validate_action = function( type )
+    TouchPadController.prototype.validate_action = function( type )
     {
         var dirs = {
            8   : 'up',
@@ -1005,7 +993,7 @@ function hyphenate(str) {
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.send_actions_to_first_screen = function( action )
+    TouchPadController.prototype.send_actions_to_first_screen = function( action )
     {
         console.log( action );
 
@@ -1021,7 +1009,7 @@ function hyphenate(str) {
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(TouchPad, 'TouchPad');
+    cwc.plugin(TouchPadController, 'TouchPadController');
 
 }( window.cwc, Hammer );
 
@@ -1039,21 +1027,22 @@ function hyphenate(str) {
     /*------------------------------------------------------
     * @function
     */
-    function AnalogPad( extend )
+    function AnalogController( extend )
     {
-        cwc.registerPlugin(this, 'AnalogPad');
+        cwc.registerPlugin(this, 'AnalogController');
 
         this.pad_lookup();
+
     };
 
     /*------------------------------------------------------
     * @obj
     * To store all data and class names
     */
-    AnalogPad.prototype.taxonomy = {
+    AnalogController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
-            controller : 'data-cwc-controller=analog-pad'
+            controller : 'data-cwc-controller=analog'
         }
     };
 
@@ -1061,45 +1050,33 @@ function hyphenate(str) {
     * @object - Groups & Items
     * @info - Keep and drecord of all found nav elms
     */
-    AnalogPad.prototype.all_analogpads = [];
+    AnalogController.prototype.all_AnalogControllers = [];
 
     /*------------------------------------------------------
     * @object - Returned data
     * @info - All of the infromation gatherd during movement
     * @info -
     */
-    AnalogPad.prototype.returned_data = {};
-
-    /*------------------------------------------------------
-    * @object - Hammer dirs
-    * @info - Take from the hammer js spec
-    */
-    AnalogPad.prototype.hammer_dirs = {
-        1  : 'none',
-        2  : 'left',
-        4  : 'right',
-        8  : 'up',
-        16 : 'down'
-    };
+    AnalogController.prototype.returned_data = {};
 
     /*------------------------------------------------------
     * @object - Tracking
     * @info - Keep and drecord of all found nav elms
     */
-    AnalogPad.prototype.tracking = null;
+    AnalogController.prototype.tracking = null;
 
     /*------------------------------------------------------
     * @object - Request id
     * @info - animation request id
     */
-    AnalogPad.prototype.request_id = 0;
+    AnalogController.prototype.request_id = 0;
 
     /*------------------------------------------------------
     * @function - On pullbars trigger pan
     * @info - Panning opctions an constraints
     * @return - true : false
     */
-    AnalogPad.prototype.pad_lookup = function()
+    AnalogController.prototype.pad_lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -1111,7 +1088,7 @@ function hyphenate(str) {
             var trigger = analog.querySelector("span");
 
             /* -- Add the id to all elements below -- */
-            cwc.PadMaster.prototype.tag_all_with_id( analog, c_id );
+            cwc.ControllerMaster.prototype.tag_all_with_id( analog, c_id );
 
             /* -- Build hammer events -- */
             var mc = new Hammer.Manager( analog );
@@ -1120,14 +1097,14 @@ function hyphenate(str) {
                 } ) );
 
             mc.on("pan panstart panend", function( ev ) {
-                cwc.AnalogPad.prototype.on_analog_pan( ev );
+                cwc.AnalogController.prototype.on_analog_pan( ev );
             });
 
             /* -- Save the group -- */
-            this.all_analogpads[ c_id ] = {
+            this.all_AnalogControllers[ c_id ] = {
                 analog        : analog,
                 trigger       : trigger,
-                instructions  : cwc.PadMaster.prototype.fetch_instructions( analog )
+                instructions  : cwc.ControllerMaster.prototype.fetch_instructions( analog )
             };
 
         }
@@ -1139,13 +1116,13 @@ function hyphenate(str) {
     * @info - Panning opctions an constraints
     * @return - true : false
     */
-    AnalogPad.prototype.on_analog_pan = function( ev )
+    AnalogController.prototype.on_analog_pan = function( ev )
     {
         var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
 
-        var analog       = this.all_analogpads[ c_id ].analog;
-        var trigger      = this.all_analogpads[ c_id ].trigger;
-        var instructions = this.all_analogpads[ c_id ].instructions;
+        var analog       = this.all_AnalogControllers[ c_id ].analog;
+        var trigger      = this.all_AnalogControllers[ c_id ].trigger;
+        var instructions = this.all_AnalogControllers[ c_id ].instructions;
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -1155,24 +1132,24 @@ function hyphenate(str) {
 
         /* -- coordinates of x and y -- */
         var coordinate = {
-            x : cwc.PadMaster.prototype.calculate_axis_as_coordinate( delta.x ),
-            y : cwc.PadMaster.prototype.calculate_axis_as_coordinate( delta.y )
+            x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( delta.x ),
+            y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( delta.y )
         };
 
         /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.PadMaster.prototype.calculate_axis_as_cardinal_direction(
+        var cardinal_direction = cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
             ev.angle
         );
 
         /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.PadMaster.prototype.get_moving_direction(
+        var in_out = cwc.ControllerMaster.prototype.get_moving_direction(
             delta
         );
 
         /* -- Store all the infromation caculaed to return back -- */
         this.returned_data = {
             cardinal_direction : cardinal_direction,
-            direction          : this.hammer_dirs[ ev.direction ],
+            direction          : cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ],
             in_out             : in_out,
             coordinate         : coordinate,
             delta              : delta,
@@ -1259,7 +1236,7 @@ function hyphenate(str) {
         else if( this.get_movment_type() == 'pull' )
         {
             /* -- check if hook has been applied -- */
-            cwc.PadMaster.prototype.invoke_hook( 'pan', instructions, this.returned_data );
+            cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions, this.returned_data );
         }
 
     };
@@ -1267,13 +1244,13 @@ function hyphenate(str) {
     /*------------------------------------------------------
     * @function - On pan start
     */
-    AnalogPad.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
+    AnalogController.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
     {
         /* -- Track the onbject being used -- */
         this.tracking = c_id;
 
         /* -- check if hook has been applied -- */
-        cwc.PadMaster.prototype.invoke_hook( 'panstart', instructions, null);
+        cwc.ControllerMaster.prototype.invoke_hook( 'panstart', instructions, null);
 
         if( this.get_movment_type() == 'tick' )
         {
@@ -1287,10 +1264,10 @@ function hyphenate(str) {
     /*------------------------------------------------------
     * @function - On pan end
     */
-    AnalogPad.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
+    AnalogController.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
         /* -- check if hook has been applied -- */
-        cwc.PadMaster.prototype.invoke_hook( 'panend', instructions, null);
+        cwc.ControllerMaster.prototype.invoke_hook( 'panend', instructions, null);
 
         /* -- Remove any if nessary -- */
         analog.classList.remove("active");
@@ -1318,10 +1295,10 @@ function hyphenate(str) {
     * @function - Clear auto scroll
     * @info - @http://goo.gl/bQdzfN
     */
-    AnalogPad.prototype.get_movment_type = function(  )
+    AnalogController.prototype.get_movment_type = function(  )
     {
         /* -- get the insrtuctions for the current analog -- */
-        var instructions = this.all_analogpads[ this.tracking ].instructions;
+        var instructions = this.all_AnalogControllers[ this.tracking ].instructions;
 
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
@@ -1346,30 +1323,32 @@ function hyphenate(str) {
     * @function - Clear auto scroll
     * @info - @http://goo.gl/bQdzfN
     */
-    AnalogPad.prototype.on_tick = function( order )
+    AnalogController.prototype.on_tick = function( order )
     {
         /* -- destroy the tick  -- */
         if( order === 'destroy' )
         {
-            window.cancelAnimationFrame( this.request_id );
+            window.cancelAnimationFrame(
+                cwc.AnalogController.prototype.request_id
+            );
         }
 
         /* -- Start the tick process -- */
         else
         {
             /* -- get the insrtuctions for the current analog -- */
-            var instructions = cwc.AnalogPad.prototype.all_analogpads[
-                cwc.AnalogPad.prototype.tracking
+            var instructions = cwc.AnalogController.prototype.all_AnalogControllers[
+                cwc.AnalogController.prototype.tracking
             ].instructions;
 
             /* -- check if hook has been applied -- */
-            cwc.PadMaster.prototype.invoke_hook( 'pan', instructions,
-                cwc.AnalogPad.prototype.returned_data
+            cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions,
+                cwc.AnalogController.prototype.returned_data
             );
 
             /* -- Build the loop -- */
-            cwc.AnalogPad.prototype.request_id = window.requestAnimationFrame(
-                cwc.AnalogPad.prototype.on_tick
+            cwc.AnalogController.prototype.request_id = window.requestAnimationFrame(
+                cwc.AnalogController.prototype.on_tick
             );
         }
 
@@ -1379,7 +1358,7 @@ function hyphenate(str) {
     * @function - Clear auto scroll
     * @info - Clear out the fimer and reset collishion
     */
-    AnalogPad.prototype.trigger_translate = function( prams )
+    AnalogController.prototype.trigger_translate = function( prams )
     {
         /* -- Move the publlbar handle -- */
         window.requestAnimationFrame( function(){
@@ -1394,10 +1373,9 @@ function hyphenate(str) {
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(AnalogPad, 'AnalogPad');
+    cwc.plugin(AnalogController, 'AnalogController');
 
 }( window.cwc, Hammer );
-
 
 /*------------------------------------------------------
  * Viewport Scroll Controller
@@ -1405,13 +1383,8 @@ function hyphenate(str) {
  * To-Do
  -------------------------------------------------------
  • Add support for data attr nav dir - up, down, left, right
- • Add support for NO end last and first attr
- • Add support for Enter key for on select
- • Must show testing on Screen
- • Add commit
  -------------------------------------------------------
 */
-
 
 !function( cwc ){
   'use strict';
@@ -1419,74 +1392,58 @@ function hyphenate(str) {
     /*------------------------------------------------------
     * @function
     */
-    function ViewportScroll( extend )
+    function PullbarController( extend )
     {
-        cwc.registerPlugin(this, 'ViewportScroll');
+        cwc.registerPlugin(this, 'PullbarController');
 
         /* -- Search for pullbars -- */
-        this.lookup_type_pullbars();
+        this.pullbars_lookup();
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @object - Taxonomy
+    * @info   - all the data attr of pullbar info
     */
-    ViewportScroll.prototype.taxonomy = {
+    PullbarController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
-            vs     : 'data-cwc-viewportscroll-btn',
-            action : 'data-cwc-action',
-
-            pullbar        : 'data-cwc-viewportscroll-pullbar',
-            pullbar_action : 'data-cwc-action',
+            pullbar        : 'data-cwc-controller=pullbar',
         }
 
     };
 
     /*------------------------------------------------------
     * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @info   - Keep and record of all found pullbar elms
     */
-    ViewportScroll.prototype.all_pullbars = [
-
+    PullbarController.prototype.all_pullbars = [
     ];
 
     /*------------------------------------------------------
-    * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @object - Returned data
+    * @info - All of the infromation gatherd during movement
+    * @info -
     */
-    ViewportScroll.prototype.pullbars_colishion = false;
-
-    /*------------------------------------------------------
-    * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
-    */
-    ViewportScroll.prototype.pullbars_auto_scroll_timer = false;
-
-    /*------------------------------------------------------
-    * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
-    */
-    ViewportScroll.prototype.tracking = null;
-
-    /*------------------------------------------------------
-    * @object - Hammer dirs
-    * @info - Take from the hammer js spec
-    */
-    ViewportScroll.prototype.hammer_dirs = {
-        1  : 'none',
-        2  : 'left',
-        4  : 'right',
-        8  : 'up',
-        16 : 'down'
+    PullbarController.prototype.returned_data = {
     };
 
     /*------------------------------------------------------
-    * @function - Lookup type pullbars
-    * @info - panup pandown panleft panright panmove panend panstart
-    * @return - true : false
+    * @object - Request id
+    * @info   - reuest animation frame id
     */
-    ViewportScroll.prototype.lookup_type_pullbars = function( )
+    PullbarController.prototype.request_id = 0;
+
+    /*------------------------------------------------------
+    * @object - Tracking
+    * @info   - All us to track the current item in use
+    */
+    PullbarController.prototype.tracking = null;
+
+    /*------------------------------------------------------
+    * @function - Pullbar lookup
+    * @info     - Finds all pullbars within the dom
+    */
+    PullbarController.prototype.pullbars_lookup = function( )
     {
         var all_pullbars_in_dom      = document.querySelectorAll('['+ this.taxonomy.data.pullbar +']');
         var all_pullbars_in_dom_leng = all_pullbars_in_dom.length;
@@ -1498,7 +1455,7 @@ function hyphenate(str) {
             var trigger = pullbar.querySelector("span");
 
             /* -- Add the id to all elements below -- */
-            cwc.PadMaster.prototype.tag_all_with_id( pullbar, a_id );
+            cwc.ControllerMaster.prototype.tag_all_with_id( pullbar, a_id );
 
             /* -- Bind the group id to the trigger -- */
             trigger.g_id = a_id;
@@ -1510,21 +1467,16 @@ function hyphenate(str) {
                 }));
 
             mc.on("panstart panup pandown panend", function( ev ) {
-                cwc.ViewportScroll.prototype.on_pullbars_trigger_pan(
+                cwc.PullbarController.prototype.on_pullbars_trigger_pan(
                     ev
                 );
             });
-
-            /* -- Get instuctions -- */
-            var instructions = JSON.parse(
-                pullbar.getAttribute( this.taxonomy.data.pullbar )
-            );
 
             /* -- Save the group -- */
             this.all_pullbars[ a_id ] = {
                 pullbar          : pullbar,
                 trigger          : trigger,
-                instructions     : instructions
+                instructions     : cwc.ControllerMaster.prototype.fetch_instructions( pullbar )
             };
 
         }
@@ -1533,20 +1485,24 @@ function hyphenate(str) {
 
     /*------------------------------------------------------
     * @function - On pullbars trigger pan
-    * @info - Panning opctions an constraints
-    * @return - true : false
+    * @info     - Panning options an collishion
     */
-    ViewportScroll.prototype.on_pullbars_trigger_pan = function( ev )
+    PullbarController.prototype.on_pullbars_trigger_pan = function( ev )
     {
-        /* -- Get the pullbar id from the elm attr -- */
-        var g_id = ( event.target.g_id == undefined )? this.tracking : event.target.g_id;
-
+        /* -- Set the components and options -- */
+        var g_id            = ( event.target.g_id == undefined )? this.tracking : event.target.g_id;
         var pullbar         = this.all_pullbars[ g_id ].pullbar;
         var trigger         = this.all_pullbars[ g_id ].trigger;
         var instructions    = this.all_pullbars[ g_id ].instructions;
 
-        var pullbar_style = getComputedStyle(pullbar);
-        var trigger_style = getComputedStyle(trigger);
+        /* -- Get the style infromation about the componants -- */
+        var style = {
+            pbh : pullbar.clientHeight,
+            pbw : pullbar.clientWidth,
+
+            trh : trigger.clientHeight,
+            trw : trigger.clientWidth,
+        };
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -1554,71 +1510,27 @@ function hyphenate(str) {
             y : ev.deltaY
         };
 
-        /* -- Add on start -- */
-        if( ev.type === 'panstart' )
-        {
-            this.tracking = g_id;
-            pullbar.classList.add("active");
-            return;
-        }
-
-        /* -- Remove all -- */
-        else if( ev.type === 'panend' )
-        {
-            /* -- Clear out the timer -- */
-            this.pullbar_trigger_reset( pullbar, trigger )
-            return;
-        }
-
-        var pbh = parseInt(pullbar_style.height, 10),
-            pbw = parseInt(pullbar_style.width , 10),
-            trh = parseInt(trigger_style.height, 10),
-            trw = parseInt(trigger_style.width , 10);
-
-        /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.PadMaster.prototype.calculate_axis_as_cardinal_direction(
-            ev.angle
-        );
-
-        /* -- coordinates of x and y -- */
-        var coordinate = {
-            x : cwc.PadMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
-            y : cwc.PadMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
-        };
-
-        /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.PadMaster.prototype.get_moving_direction(
-            delta
-        );
-
         /* -- threshold -- */
         var threshold = {
             y : {
-                top :  (pbh / 2 ) - ( trh / 2 ) + delta.y  <= -( trh / 2 ),
-                btm :  ( ( trh / 2 ) + delta.y ) >= ( (pbh / 2 ) + ( trh / 2 ) ),
+                top :  (style.pbh / 2 ) - ( style.trh / 2 ) + delta.y  <= -( style.trh / 2 ),
+                btm :  (style.pbh / 2 ) + ( style.trh / 2 ) <=  delta.y + (style.trh / 2 ),
             }
         }
 
-        /* -- Get the ammount to be scrolled -- */
-        var ammount = this.pullbar_get_ammount(
-            instructions, this.hammer_dirs[ ev.direction ]
-        );
-
-        /* -- Scroll option to send to display -- */
-        var scroll_option = {
-            viewport_target : instructions.viewport_target,
-            direction       : this.hammer_dirs[ ev.direction ],
-            ammount         : ammount,
-            type            : ev.type
-        }
-
-        /* -- Check to see no timer has been set -- */
-        if( this.pullbars_colishion === null )
+        /* -- Collishion -- */
+        if( threshold.y.top || threshold.y.btm )
         {
-            if( threshold.y.top || threshold.y.btm )
+            /* -- Set the data to be returned -- */
+            this.returned_data = this.get_feedback_data(
+                ev
+            );
+
+            /* -- Check if we in enter frame -- */
+            if( this.request_id == 0 )
             {
-                /* -- Trigger auto scroll  -- */
-                this.set_auto_scroll(scroll_option, 20);
+                /* -- Start the tick process -- */
+                this.on_tick();
 
                 /* -- Clear out the timer -- */
                 pullbar.classList.add("auto");
@@ -1626,11 +1538,14 @@ function hyphenate(str) {
 
         }
 
-        /* -- Check to see we are not on constratins -- */
-        if( (! threshold.y.top) && (! threshold.y.btm) )
+        /* -- no collishion -- */
+        else if( (! threshold.y.top) && (! threshold.y.btm) )
         {
-            /* -- clear out the scroll if needed -- */
-            this.clear_auto_scroll();
+            /* -- Start the tick process -- */
+            if( this.request_id > 0 )
+            {
+                this.on_tick('destroy');
+            }
 
             /* -- clear the timer -- */
             pullbar.classList.remove("auto");
@@ -1642,77 +1557,85 @@ function hyphenate(str) {
                 delta_y : delta.y
             });
 
-            /* -- Validate the sction -- */
-            this.validate_action (scroll_option);
+            /* -- check if hook has been applied -- */
+            cwc.ControllerMaster.prototype.invoke_hook( 'on-pull', instructions,
+                this.get_feedback_data( ev )
+            );
 
         }
 
-        /* -- check if hook has been applied -- */
-        cwc.PadMaster.prototype.invoke_hook( 'on-touch', instructions, {
-            cardinal_direction : cardinal_direction,
-            coordinate         : coordinate,
-            in_out             : in_out
-        } );
+        this.start_and_end_toggle( ev.type, g_id, pullbar, trigger )
+
+    };
+
+
+    /*------------------------------------------------------
+    * @function - Get feedback data
+    * @info     - builds the return data object to feed back to user
+    */
+    PullbarController.prototype.get_feedback_data = function( ev )
+    {
+        return {
+            /* -- cardinal the users is moving in -- */
+            cardinal_direction : cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
+                ev.angle
+            ),
+
+            /* -- coordinates of x and y -- */
+            coordinate : {
+                x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
+                y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
+            },
+
+            /* -- check to see if we are moving to the center or to the endge (in : out) -- */
+            in_out : cwc.ControllerMaster.prototype.get_moving_direction({
+                x : ev.deltaX,
+                y : ev.deltaY,
+            } )
+        };
 
     };
 
     /*------------------------------------------------------
-    * @function - On pullbars trigger pan
-    * @info - Panning opctions an constraints
-    * @return - true : false
+    * @function - Start and end toggle
+    * @info     - Called to check if the pan process has started or ended
     */
-    ViewportScroll.prototype.pullbar_get_ammount = function( instructions, direction )
+    PullbarController.prototype.start_and_end_toggle = function( type, g_id, pullbar, trigger )
     {
-        var ammount = instructions.ammount || 15;
-        var axis    = instructions.axis    || false;
-
-        switch ( direction )
+        /* -- Add on start -- */
+        if( type === 'panstart' )
         {
-            case 'right' :
-            case 'up'    :
-                ammount = (axis !== 'inverted')? ammount : Math.abs(ammount) * -1;
-            break;
-
-            case 'left' :
-            case 'down' :
-                ammount = (axis !== 'inverted')? Math.abs(ammount) * -1 : ammount;
-            break;
+            this.tracking = g_id;
+            pullbar.classList.add("active");
         }
 
-        return ammount;
+        /* -- Remove all -- */
+        else if( type === 'panend' )
+        {
+            /* -- Start the tick process -- */
+            this.on_tick('destroy');
+
+            /* -- Move the publlbar handle to start -- */
+            this.pullbar_trigger_translate({
+                trigger : trigger,
+                delta_x : 0,
+                delta_y : 0
+            });
+
+            /* -- Clear out the timer -- */
+            pullbar.classList.remove("auto");
+
+            /* -- Clear out the timer -- */
+            pullbar.classList.remove("active");
+        }
 
     };
 
     /*------------------------------------------------------
-    * @function - Pullbar Trigger Reset
-    * @info - Panning opctions an constraints
-    * @return - true : false
+    * @function - Pullbar trigger translate
+    * @info     - Clear out the fimer and reset collishion
     */
-    ViewportScroll.prototype.pullbar_trigger_reset = function( pullbar, trigger )
-    {
-        /* -- Clear out the timer -- */
-        this.clear_auto_scroll();
-
-        /* -- Move the publlbar handle to start -- */
-        this.pullbar_trigger_translate({
-            trigger : trigger,
-            delta_x : 0,
-            delta_y : 0
-        });
-
-        /* -- Clear out the timer -- */
-        pullbar.classList.remove("active");
-
-        /* -- Clear out the timer -- */
-        pullbar.classList.remove("auto");
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - Clear out the fimer and reset collishion
-    */
-    ViewportScroll.prototype.pullbar_trigger_translate = function( prams )
+    PullbarController.prototype.pullbar_trigger_translate = function( prams )
      {
         /* -- Move the publlbar handle -- */
         window.requestAnimationFrame( function(){
@@ -1724,85 +1647,47 @@ function hyphenate(str) {
     };
 
     /*------------------------------------------------------
-    * @function - Set auto scroll
-    * @info - Clear out the fimer and reset collishion
-    * @prams - viewport_target
-    * @prams - direction
-    * @prams - type
+    * @function - On tick
+    * @info     - When pull bar has is pulsating
     */
-    ViewportScroll.prototype.set_auto_scroll = function( prams, time )
+    PullbarController.prototype.on_tick = function( order )
     {
-        this.pullbars_colishion = true;
-
-        this.pullbars_auto_scroll_timer = setInterval(function(){
-            cwc.ViewportScroll.prototype.validate_action (
-                prams
+        /* -- destroy the tick  -- */
+        if( order == 'destroy' )
+        {
+            window.cancelAnimationFrame(
+                cwc.PullbarController.prototype.request_id
             );
-        }, time);
+
+            cwc.PullbarController.prototype.request_id = 0;
+        }
+
+        /* -- Start the tick process -- */
+        else
+        {
+            /* -- get the insrtuctions for the current analog -- */
+            var instructions = cwc.PullbarController.prototype.all_pullbars[
+                cwc.PullbarController.prototype.tracking
+            ].instructions;
+
+            /* -- check if hook has been applied -- */
+            cwc.ControllerMaster.prototype.invoke_hook( 'on-pull', instructions,
+                cwc.PullbarController.prototype.returned_data
+            );
+
+            /* -- Build the loop -- */
+            cwc.PullbarController.prototype.request_id = requestAnimationFrame(
+                cwc.PullbarController.prototype.on_tick
+            );
+        }
 
     };
-
-    /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - Clear out the fimer and reset collishion
-    */
-     ViewportScroll.prototype.clear_auto_scroll = function()
-     {
-        if( this.pullbars_colishion !== null )
-        {
-            this.pullbars_colishion = null;
-            clearInterval( this.pullbars_auto_scroll_timer );
-        }
-
-     };
-
-     ViewportScroll.prototype.scroll_to = function( prams )
-     {
-        this.validate_action({
-            viewport_target : prams.viewport_target,
-            direction       : prams.direction,
-            ammount         : prams.ammout || false,
-            type            : 'scroll to'
-        });
-
-     };
-
-     ViewportScroll.prototype.validate_action = function( args )
-     {
-        /* -- Validate action -- */
-        switch( args.direction )
-        {
-            case 'up'     :
-            case 'right'  :
-            case 'down'   :
-            case 'left'   :
-            this.send_actions_to_first_screen( args );
-            break;
-
-        }
-
-     };
-
-     ViewportScroll.prototype.send_actions_to_first_screen = function( args )
-     {
-        cwc.Server.prototype.send_message({
-            recipient : 'display',
-            action    : 'scroll viewport',
-            arguments : args
-        });
-
-     };
-
 
     /*------------------------------------------------------
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(ViewportScroll, 'ViewportScroll');
+    cwc.plugin(PullbarController, 'PullbarController');
 
 }( window.cwc );
-
-
-
-
 

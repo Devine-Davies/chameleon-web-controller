@@ -16,21 +16,21 @@
     /*------------------------------------------------------
     * @function
     */
-    function TouchPad( extend )
+    function TouchPadController( extend )
     {
-        cwc.registerPlugin(this, 'TouchPad');
+        cwc.registerPlugin(this, 'TouchPadController');
 
-        this.touchpad_lookup();
+        this.lookup();
     };
 
     /*------------------------------------------------------
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.taxonomy = {
+    TouchPadController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
-            controller : 'data-cwc-controller=touchpad'
+            controller : 'data-cwc-controller="touchpad"'
         }
     };
 
@@ -38,19 +38,19 @@
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.all_touchpads = [];
+    TouchPadController.prototype.all_TouchPadControllers = [];
 
     /*------------------------------------------------------
     * @object - Tracking
     * @info - Keep and drecord of all found nav elms
     */
-    TouchPad.prototype.tracking = null;
+    TouchPadController.prototype.tracking = null;
 
     /*------------------------------------------------------
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.touchpad_lookup = function()
+    TouchPadController.prototype.lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -61,9 +61,9 @@
             var controller   = controllers[ c_id ];
 
             /* -- Add the id to all elements below -- */
-            cwc.PadMaster.prototype.tag_all_with_id( controller, c_id );
+            cwc.ControllerMaster.prototype.tag_all_with_id( controller, c_id );
 
-            var instructions = cwc.PadMaster.prototype.fetch_instructions( controller );
+            var instructions = cwc.ControllerMaster.prototype.fetch_instructions( controller );
 
             /* -- Build hammer events -- */
             var mc = new Hammer.Manager( controller , {
@@ -73,7 +73,7 @@
             } );
 
             /* -- Add the touch pad -- */
-            this.all_touchpads.push({
+            this.all_TouchPadControllers.push({
                 pad          : controller,
                 instructions : instructions
             });
@@ -86,7 +86,7 @@
                 }) );
 
                 mc.on("swipe", function( ev ) {
-                    cwc.TouchPad.prototype.on_move( ev );
+                    cwc.TouchPadController.prototype.on_move( ev );
                 });
             }
 
@@ -97,7 +97,7 @@
                 } ) );
 
                 mc.on("panmove panstart panend", function( ev ){
-                    cwc.TouchPad.prototype.on_move( ev );
+                    cwc.TouchPadController.prototype.on_move( ev );
                 });
             }
         };
@@ -107,10 +107,10 @@
     /*------------------------------------------------------
     * @function - Clear auto scroll
     */
-    TouchPad.prototype.get_movment_type = function( c_id )
+    TouchPadController.prototype.get_movment_type = function( c_id )
     {
         /* -- get the insrtuctions for the current analog -- */
-        var instructions = this.all_touchpads[ c_id ].instructions;
+        var instructions = this.all_TouchPadControllers[ c_id ].instructions;
 
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
@@ -135,12 +135,12 @@
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.on_move = function( ev )
+    TouchPadController.prototype.on_move = function( ev )
     {
         var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
 
-        var analog       = this.all_touchpads[ c_id ].pad;
-        var instructions = this.all_touchpads[ c_id ].instructions;
+        var analog       = this.all_TouchPadControllers[ c_id ].pad;
+        var instructions = this.all_TouchPadControllers[ c_id ].instructions;
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -149,25 +149,25 @@
         };
 
         /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.PadMaster.prototype.calculate_axis_as_cardinal_direction(
+        var cardinal_direction = cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
             ev.angle
         );
 
         /* -- coordinates of x and y -- */
         var coordinate = {
-            x : cwc.PadMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
-            y : cwc.PadMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
+            x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
+            y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
         };
 
         /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.PadMaster.prototype.get_moving_direction(
+        var in_out = cwc.ControllerMaster.prototype.get_moving_direction(
             delta
         );
 
-        cwc.PadMaster.prototype.invoke_hook
+        cwc.ControllerMaster.prototype.invoke_hook
 
         /* -- check if hook has been applied -- */
-        cwc.PadMaster.prototype.invoke_hook( 'on-touch', instructions, {
+        cwc.ControllerMaster.prototype.invoke_hook( 'on-touch', instructions, {
             cardinal_direction : cardinal_direction,
             coordinate         : coordinate,
             in_out             : in_out
@@ -181,7 +181,7 @@
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.validate_action = function( type )
+    TouchPadController.prototype.validate_action = function( type )
     {
         var dirs = {
            8   : 'up',
@@ -202,7 +202,7 @@
     * @obj
     * To store all data and class names
     */
-    TouchPad.prototype.send_actions_to_first_screen = function( action )
+    TouchPadController.prototype.send_actions_to_first_screen = function( action )
     {
         console.log( action );
 
@@ -218,6 +218,6 @@
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(TouchPad, 'TouchPad');
+    cwc.plugin(TouchPadController, 'TouchPadController');
 
 }( window.cwc, Hammer );

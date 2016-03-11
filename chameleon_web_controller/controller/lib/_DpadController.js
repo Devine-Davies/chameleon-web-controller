@@ -17,9 +17,9 @@
     /*------------------------------------------------------
     * @function
     */
-    function DPad( extend )
+    function DPadController( extend )
     {
-        cwc.registerPlugin(this, 'DPad');
+        cwc.registerPlugin(this, 'DPadController');
 
         this.controller_lookup();
     };
@@ -28,7 +28,7 @@
     * @obj
     * To store all data and class names
     */
-    DPad.prototype.taxonomy = {
+    DPadController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
             controller : 'data-cwc-controller=dpad',
@@ -38,23 +38,12 @@
     };
 
     /*------------------------------------------------------
-    * @array
-    * Place to store all custom methord
-    */
-    DPad.prototype.events = {
-            /* -- D & right -- */
-            68 : function(){  },
-            39 : function(){  },
-
-    };
-
-    /*------------------------------------------------------
     * @object - Groups & Items
     * @info - Keep and drecord of all found nav elms
     */
-    DPad.prototype.all_dpads = [];
+    DPadController.prototype.all_DPadControllers = [];
 
-    DPad.prototype.controller_lookup = function()
+    DPadController.prototype.controller_lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -67,7 +56,7 @@
                 controllers[ c_id ], c_id
             );
 
-            this.all_dpads[ c_id ] = {
+            this.all_DPadControllers[ c_id ] = {
                 container : controllers[ c_id ],
                 actions   : actions
             };
@@ -81,7 +70,7 @@
     * @info - Find elms with data-(navitem) add the this to object
     * @return - true : false
     */
-    DPad.prototype.controller_actions_lookup = function( group, c_id )
+    DPadController.prototype.controller_actions_lookup = function( group, c_id )
     {
         var descendents     = group.querySelectorAll('['+ this.taxonomy.data.btn +']');
         var descendents_len = descendents.length;
@@ -95,16 +84,9 @@
                 action.a_id = a_id;
                 action.c_id = c_id;
 
-            // action.onclick = function(  ){
-            //      cwc.DPad.prototype.button_invoked(
-            //         this.c_id,
-            //         this.a_id
-            //     )
-            // };
-
             var hammertime = new Hammer(action, {});
             hammertime.on('tap', function(ev) {
-                 cwc.DPad.prototype.button_invoked(
+                 cwc.DPadController.prototype.button_invoked(
                     ev.target.c_id,
                     ev.target.a_id
                 )
@@ -117,9 +99,9 @@
 
     };
 
-     DPad.prototype.button_invoked = function( c_id, a_id )
+     DPadController.prototype.button_invoked = function( c_id, a_id )
      {
-        var action = this.all_dpads[ c_id ].actions[ a_id ];
+        var action = this.all_DPadControllers[ c_id ].actions[ a_id ];
 
         this.validate_action (
             action.getAttribute( this.taxonomy.data.btn )
@@ -127,7 +109,7 @@
 
      }
 
-     DPad.prototype.validate_action = function( type )
+     DPadController.prototype.validate_action = function( type )
      {
         /* -- Validate action -- */
         switch( type )
@@ -143,10 +125,8 @@
 
      }
 
-     DPad.prototype.send_actions_to_first_screen = function( action )
+     DPadController.prototype.send_actions_to_first_screen = function( action )
      {
-        console.log('sending ' + action);
-
         cwc.Server.prototype.send_message({
             recipient : 'display',
             action    : 'move navigation',
@@ -158,6 +138,6 @@
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(DPad, 'DPad');
+    cwc.plugin(DPadController, 'DPadController');
 
 }( window.cwc, Hammer );

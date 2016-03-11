@@ -12,21 +12,22 @@
     /*------------------------------------------------------
     * @function
     */
-    function AnalogPad( extend )
+    function AnalogController( extend )
     {
-        cwc.registerPlugin(this, 'AnalogPad');
+        cwc.registerPlugin(this, 'AnalogController');
 
         this.pad_lookup();
+
     };
 
     /*------------------------------------------------------
     * @obj
     * To store all data and class names
     */
-    AnalogPad.prototype.taxonomy = {
+    AnalogController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
-            controller : 'data-cwc-controller=analog-pad'
+            controller : 'data-cwc-controller=analog'
         }
     };
 
@@ -34,45 +35,33 @@
     * @object - Groups & Items
     * @info - Keep and drecord of all found nav elms
     */
-    AnalogPad.prototype.all_analogpads = [];
+    AnalogController.prototype.all_AnalogControllers = [];
 
     /*------------------------------------------------------
     * @object - Returned data
     * @info - All of the infromation gatherd during movement
     * @info -
     */
-    AnalogPad.prototype.returned_data = {};
-
-    /*------------------------------------------------------
-    * @object - Hammer dirs
-    * @info - Take from the hammer js spec
-    */
-    AnalogPad.prototype.hammer_dirs = {
-        1  : 'none',
-        2  : 'left',
-        4  : 'right',
-        8  : 'up',
-        16 : 'down'
-    };
+    AnalogController.prototype.returned_data = {};
 
     /*------------------------------------------------------
     * @object - Tracking
     * @info - Keep and drecord of all found nav elms
     */
-    AnalogPad.prototype.tracking = null;
+    AnalogController.prototype.tracking = null;
 
     /*------------------------------------------------------
     * @object - Request id
     * @info - animation request id
     */
-    AnalogPad.prototype.request_id = 0;
+    AnalogController.prototype.request_id = 0;
 
     /*------------------------------------------------------
     * @function - On pullbars trigger pan
     * @info - Panning opctions an constraints
     * @return - true : false
     */
-    AnalogPad.prototype.pad_lookup = function()
+    AnalogController.prototype.pad_lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -84,7 +73,7 @@
             var trigger = analog.querySelector("span");
 
             /* -- Add the id to all elements below -- */
-            cwc.PadMaster.prototype.tag_all_with_id( analog, c_id );
+            cwc.ControllerMaster.prototype.tag_all_with_id( analog, c_id );
 
             /* -- Build hammer events -- */
             var mc = new Hammer.Manager( analog );
@@ -93,14 +82,14 @@
                 } ) );
 
             mc.on("pan panstart panend", function( ev ) {
-                cwc.AnalogPad.prototype.on_analog_pan( ev );
+                cwc.AnalogController.prototype.on_analog_pan( ev );
             });
 
             /* -- Save the group -- */
-            this.all_analogpads[ c_id ] = {
+            this.all_AnalogControllers[ c_id ] = {
                 analog        : analog,
                 trigger       : trigger,
-                instructions  : cwc.PadMaster.prototype.fetch_instructions( analog )
+                instructions  : cwc.ControllerMaster.prototype.fetch_instructions( analog )
             };
 
         }
@@ -112,13 +101,13 @@
     * @info - Panning opctions an constraints
     * @return - true : false
     */
-    AnalogPad.prototype.on_analog_pan = function( ev )
+    AnalogController.prototype.on_analog_pan = function( ev )
     {
         var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
 
-        var analog       = this.all_analogpads[ c_id ].analog;
-        var trigger      = this.all_analogpads[ c_id ].trigger;
-        var instructions = this.all_analogpads[ c_id ].instructions;
+        var analog       = this.all_AnalogControllers[ c_id ].analog;
+        var trigger      = this.all_AnalogControllers[ c_id ].trigger;
+        var instructions = this.all_AnalogControllers[ c_id ].instructions;
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -128,24 +117,24 @@
 
         /* -- coordinates of x and y -- */
         var coordinate = {
-            x : cwc.PadMaster.prototype.calculate_axis_as_coordinate( delta.x ),
-            y : cwc.PadMaster.prototype.calculate_axis_as_coordinate( delta.y )
+            x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( delta.x ),
+            y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( delta.y )
         };
 
         /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.PadMaster.prototype.calculate_axis_as_cardinal_direction(
+        var cardinal_direction = cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
             ev.angle
         );
 
         /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.PadMaster.prototype.get_moving_direction(
+        var in_out = cwc.ControllerMaster.prototype.get_moving_direction(
             delta
         );
 
         /* -- Store all the infromation caculaed to return back -- */
         this.returned_data = {
             cardinal_direction : cardinal_direction,
-            direction          : this.hammer_dirs[ ev.direction ],
+            direction          : cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ],
             in_out             : in_out,
             coordinate         : coordinate,
             delta              : delta,
@@ -232,7 +221,7 @@
         else if( this.get_movment_type() == 'pull' )
         {
             /* -- check if hook has been applied -- */
-            cwc.PadMaster.prototype.invoke_hook( 'pan', instructions, this.returned_data );
+            cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions, this.returned_data );
         }
 
     };
@@ -240,13 +229,13 @@
     /*------------------------------------------------------
     * @function - On pan start
     */
-    AnalogPad.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
+    AnalogController.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
     {
         /* -- Track the onbject being used -- */
         this.tracking = c_id;
 
         /* -- check if hook has been applied -- */
-        cwc.PadMaster.prototype.invoke_hook( 'panstart', instructions, null);
+        cwc.ControllerMaster.prototype.invoke_hook( 'panstart', instructions, null);
 
         if( this.get_movment_type() == 'tick' )
         {
@@ -260,10 +249,10 @@
     /*------------------------------------------------------
     * @function - On pan end
     */
-    AnalogPad.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
+    AnalogController.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
         /* -- check if hook has been applied -- */
-        cwc.PadMaster.prototype.invoke_hook( 'panend', instructions, null);
+        cwc.ControllerMaster.prototype.invoke_hook( 'panend', instructions, null);
 
         /* -- Remove any if nessary -- */
         analog.classList.remove("active");
@@ -291,10 +280,10 @@
     * @function - Clear auto scroll
     * @info - @http://goo.gl/bQdzfN
     */
-    AnalogPad.prototype.get_movment_type = function(  )
+    AnalogController.prototype.get_movment_type = function(  )
     {
         /* -- get the insrtuctions for the current analog -- */
-        var instructions = this.all_analogpads[ this.tracking ].instructions;
+        var instructions = this.all_AnalogControllers[ this.tracking ].instructions;
 
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
@@ -319,30 +308,32 @@
     * @function - Clear auto scroll
     * @info - @http://goo.gl/bQdzfN
     */
-    AnalogPad.prototype.on_tick = function( order )
+    AnalogController.prototype.on_tick = function( order )
     {
         /* -- destroy the tick  -- */
         if( order === 'destroy' )
         {
-            window.cancelAnimationFrame( this.request_id );
+            window.cancelAnimationFrame(
+                cwc.AnalogController.prototype.request_id
+            );
         }
 
         /* -- Start the tick process -- */
         else
         {
             /* -- get the insrtuctions for the current analog -- */
-            var instructions = cwc.AnalogPad.prototype.all_analogpads[
-                cwc.AnalogPad.prototype.tracking
+            var instructions = cwc.AnalogController.prototype.all_AnalogControllers[
+                cwc.AnalogController.prototype.tracking
             ].instructions;
 
             /* -- check if hook has been applied -- */
-            cwc.PadMaster.prototype.invoke_hook( 'pan', instructions,
-                cwc.AnalogPad.prototype.returned_data
+            cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions,
+                cwc.AnalogController.prototype.returned_data
             );
 
             /* -- Build the loop -- */
-            cwc.AnalogPad.prototype.request_id = window.requestAnimationFrame(
-                cwc.AnalogPad.prototype.on_tick
+            cwc.AnalogController.prototype.request_id = window.requestAnimationFrame(
+                cwc.AnalogController.prototype.on_tick
             );
         }
 
@@ -352,7 +343,7 @@
     * @function - Clear auto scroll
     * @info - Clear out the fimer and reset collishion
     */
-    AnalogPad.prototype.trigger_translate = function( prams )
+    AnalogController.prototype.trigger_translate = function( prams )
     {
         /* -- Move the publlbar handle -- */
         window.requestAnimationFrame( function(){
@@ -367,6 +358,6 @@
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(AnalogPad, 'AnalogPad');
+    cwc.plugin(AnalogController, 'AnalogController');
 
 }( window.cwc, Hammer );

@@ -1277,7 +1277,6 @@ function hyphenate(str) {
  ------------------------------------------------------
 */
 
-
 !function( cwc ){
   'use strict';
 
@@ -1387,9 +1386,20 @@ function hyphenate(str) {
     */
     ViewportScroll.prototype.check_action = function( elm, args )
     {
-        //console.log( args );
+        var ammount = 0;
 
-        var ammount  = elm.scrollTop + (args.ammount || 10)
+        if( args.direction == 'down'  )
+        {
+            elm.scrollTop = elm.scrollTop + args.ammount;
+        }
+
+        else if( args.direction == 'up'  )
+        {
+            elm.scrollTop = elm.scrollTop - args.ammount;
+        }
+
+        return;
+
         var duration = (args.type === 'scroll to' )? 600 : 10;
 
         this.scroll_to(
@@ -1430,8 +1440,8 @@ function hyphenate(str) {
         }
 
         animateScroll(0);
-    }
 
+    };
 
     /*------------------------------------------------------
     * @function
