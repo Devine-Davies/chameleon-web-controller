@@ -147,8 +147,12 @@
       }
 
       .siwp-pad  {
-          display: none;
+          /*display: none;*/
           position: absolute !important;
+          margin: auto;
+          top: 0;
+          right: 0;
+          left: 0;
       }
 
       .d-pad {
@@ -162,8 +166,7 @@
       }
 
       .analog-pad-con {
-          width: 300px;
-          height: 300px;
+          display: none;
           position: absolute;
       }
 
@@ -207,7 +210,7 @@
   </head>
   <body class="controller-body-wrapper"  >
 
-      <section class="d-pad cwcd-pad-style" data-cwc-controller="d-pad"  >
+      <section class="d-pad cwcd-pad-style" data-cwc-controller="dpad"  >
           <span data-cwc-cbtn="up" ></span>
           <span data-cwc-cbtn="right" ></span>
           <span data-cwc-cbtn="down" ></span>
@@ -215,17 +218,19 @@
           <span data-cwc-cbtn="enter" ></span>
       </section>
 
-      <section class="siwp-pad cwcd-pad-style" data-cwc-controller="swipe-pad"  >
+      <section class="siwp-pad cwcd-pad-style" data-cwc-controller="touchpad"
+       data-cwc-pad-instructions='{ "movement-type" : "pan", "on-touch" : "on-analog-pan"  }' >
+        <span></span>
       </section>
 
       <section class="analog-pad-con">
-        <div class="analog-pad cwcd-pad-style" data-cwc-controller="analog-pad" data-cwc-controller-instructions='{ "movement-type" : "tick", "pan" : "on-analog-pan"  }'  >
+        <div class="analog-pad cwcd-pad-style" data-cwc-controller="analog-pad" data-cwc-pad-instructions='{ "movement-type" : "tick", "pan" : "on-analog-pan"  }'  >
           <span></span>
         </div>
       </section>
 
       <div class="scroll-pullbar cwc-style-enable"
-      data-cwc-viewportscroll-pullbar='{ "type" : "vertical", "viewport_target" : "scroll-target" }'  >
+      data-cwc-viewportscroll-pullbar='{ "type" : "vertical", "viewport_target" : "scroll-target", "on-touch" : "on-analog-pan" }'  >
           <span></span>
       </div>
 
@@ -263,7 +268,7 @@ window.onload = function() {
     * System messages should be declared here
     * We will have a list or predefined functions
     */
-    var EnableDpad = new cwc.D_Pad({
+    var PadMaster = new cwc.PadMaster({
     });
 
     /*------------------------------------------------------
@@ -271,7 +276,15 @@ window.onload = function() {
     * System messages should be declared here
     * We will have a list or predefined functions
     */
-    var SwipePad = new cwc.SwipePad({
+    var DPad = new cwc.DPad({
+    });
+
+    /*------------------------------------------------------
+    * @function in array
+    * System messages should be declared here
+    * We will have a list or predefined functions
+    */
+    var TouchPad = new cwc.TouchPad({
     });
 
     /*------------------------------------------------------
@@ -297,6 +310,7 @@ window.onload = function() {
 var is_sending = null;
 
 var custom_method = new cwc.CustomMethod({ });
+
     custom_method.create_method( {
       name   : 'on-analog-pan',
       method : function( prams ) {
@@ -304,6 +318,13 @@ var custom_method = new cwc.CustomMethod({ });
         {
             slow_down( prams.cardinal_direction );
         }
+      }
+    });
+
+    custom_method.create_method( {
+      name   : 'on-touchpad-swipe',
+      method : function( prams ) {
+        console.log( prams );
       }
     });
 

@@ -68,15 +68,6 @@
     AnalogPad.prototype.request_id = 0;
 
     /*------------------------------------------------------
-    * @object - Last Posistion
-    * @info - this will allow us to determan
-    */
-    AnalogPad.prototype.last_delta_pos = {
-        x : 0,
-        y : 0
-    };
-
-    /*------------------------------------------------------
     * @function - On pullbars trigger pan
     * @info - Panning opctions an constraints
     * @return - true : false
@@ -89,17 +80,16 @@
 
         for( var c_id = 0; c_id < controllers_count; c_id++ )
         {
-            var analog = controllers[ c_id ];
-                analog.dataset.cid = c_id;
-
+            var analog  = controllers[ c_id ];
             var trigger = analog.querySelector("span");
-                trigger.dataset.cid = c_id;
+
+            /* -- Add the id to all elements below -- */
+            cwc.PadMaster.prototype.tag_all_with_id( analog, c_id );
 
             /* -- Build hammer events -- */
             var mc = new Hammer.Manager( analog );
                 mc.add(new Hammer.Pan({
-                    domEvents: false,
-                    threshold: 4, pointers: 0
+                    domEvents: false, threshold: 4, pointers: 0
                 } ) );
 
             mc.on("pan panstart panend", function( ev ) {
@@ -110,27 +100,9 @@
             this.all_analogpads[ c_id ] = {
                 analog        : analog,
                 trigger       : trigger,
-                instructions  : this.fetch_instructions( analog )
+                instructions  : cwc.PadMaster.prototype.fetch_instructions( analog )
             };
 
-        }
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Update nav tracking
-    * @info - Will update the tracking system for next items and groups
-    */
-    AnalogPad.prototype.fetch_instructions = function( analog )
-    {
-        var tax = 'data-cwc-controller-instructions'
-
-        /* -- Search for nav end inftructions-- */
-        if( analog.hasAttribute( tax )  )
-        {
-            return JSON.parse(
-                analog.getAttribute( tax )
-            );
         }
 
     };
@@ -156,17 +128,17 @@
 
         /* -- coordinates of x and y -- */
         var coordinate = {
-            x : this.axis_as_coordinate( delta.x ),
-            y : this.axis_as_coordinate( delta.y )
+            x : cwc.PadMaster.prototype.calculate_axis_as_coordinate( delta.x ),
+            y : cwc.PadMaster.prototype.calculate_axis_as_coordinate( delta.y )
         };
 
         /* -- cardinal the users is moving in -- */
-        var cardinal_direction = this.axis_as_cardinal_direction(
-            coordinate, ev.angle
+        var cardinal_direction = cwc.PadMaster.prototype.calculate_axis_as_cardinal_direction(
+            ev.angle
         );
 
         /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = this.get_moving_direction(
+        var in_out = cwc.PadMaster.prototype.get_moving_direction(
             delta
         );
 
@@ -260,7 +232,7 @@
         else if( this.get_movment_type() == 'pull' )
         {
             /* -- check if hook has been applied -- */
-            this.invoke_hook( 'pan', instructions, this.returned_data );
+            cwc.PadMaster.prototype.invoke_hook( 'pan', instructions, this.returned_data );
         }
 
     };
@@ -274,7 +246,7 @@
         this.tracking = c_id;
 
         /* -- check if hook has been applied -- */
-        this.invoke_hook( 'panstart', instructions, null);
+        cwc.PadMaster.prototype.invoke_hook( 'panstart', instructions, null);
 
         if( this.get_movment_type() == 'tick' )
         {
@@ -291,7 +263,7 @@
     AnalogPad.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
         /* -- check if hook has been applied -- */
-        this.invoke_hook( 'panend', instructions, null);
+        cwc.PadMaster.prototype.invoke_hook( 'panend', instructions, null);
 
         /* -- Remove any if nessary -- */
         analog.classList.remove("active");
@@ -364,7 +336,7 @@
             ].instructions;
 
             /* -- check if hook has been applied -- */
-            cwc.AnalogPad.prototype.invoke_hook( 'pan', instructions,
+            cwc.PadMaster.prototype.invoke_hook( 'pan', instructions,
                 cwc.AnalogPad.prototype.returned_data
             );
 
@@ -373,66 +345,6 @@
                 cwc.AnalogPad.prototype.on_tick
             );
         }
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - @http://goo.gl/bQdzfN
-    */
-    AnalogPad.prototype.axis_as_coordinate = function( z )
-    {
-        var int = Math.round( (z / 100) * 10 ) / 10;
-        return Number( ( z < 0 )? (int - 1) : (int + 1) );
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info : angle 0 :  180 is converted 180-360
-    * @info : angle 0 : -180 is converted 0-180
-    */
-    AnalogPad.prototype.axis_as_cardinal_direction = function( cords, angle )
-    {
-        /* -- Negative number -- */
-        if( angle < 0 ) { angle = ( 180 - Math.abs( angle ) ); }
-
-        /* -- Posative number -- */
-        else { angle = (180 + angle); }
-
-        var directions = ["W", "NW", "N", "NE", "E", "SE", "S", "SW", "W"];
-        var d_count    = 360 / (directions.length - 1);
-
-        var index      = Math.floor( ((angle -22.5 ) % 360) / d_count );
-        return directions[ index + 1 ];
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Get moving direction
-    * x : ( in || out )
-    * y : ( in || out )
-    */
-    AnalogPad.prototype.get_moving_direction = function( delta )
-    {
-        /* -- Find out what direction we are moving in -- */
-        function check( z, z1 ) {
-            if( ( Math.abs( z ) > Math.abs( z1 ) ) )       { return 'in';     }
-            else if( ( Math.abs( z ) == Math.abs( z1 ) ) ) { return 'static'; }
-            else                                           { return 'out';    }
-        }
-
-        /* -- Get our direction -- */
-        var dir = {
-            x : check(  Math.abs( this.last_delta_pos.x ), Math.abs( delta.x ) ),
-            y : check(  Math.abs( this.last_delta_pos.y ), Math.abs( delta.y ) )
-        }
-
-        /* -- Record the movment -- */
-        this.last_delta_pos = delta;
-
-        /* -- Return the values -- */
-        return dir;
 
     };
 
@@ -448,22 +360,6 @@
                 'translate3d(' + prams.delta_x + 'px,' + prams.delta_y + 'px, 0)'
             ]
         });
-
-    };
-
-    /*------------------------------------------------------
-    * @function
-    * bind this object to the main object
-    */
-    AnalogPad.prototype.invoke_hook = function( hook, instructions, arg )
-    {
-        if( instructions.hasOwnProperty( hook ) )
-        {
-            cwc.CustomMethod.prototype.call_method(  {
-                method    : instructions[ hook ],
-                arguments : arg
-            } );
-        }
 
     };
 

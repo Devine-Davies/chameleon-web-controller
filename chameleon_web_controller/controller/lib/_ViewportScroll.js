@@ -96,6 +96,9 @@
             var pullbar = all_pullbars_in_dom[ a_id ];
             var trigger = pullbar.querySelector("span");
 
+            /* -- Add the id to all elements below -- */
+            cwc.PadMaster.prototype.tag_all_with_id( pullbar, a_id );
+
             /* -- Bind the group id to the trigger -- */
             trigger.g_id = a_id;
 
@@ -138,11 +141,17 @@
         var g_id = ( event.target.g_id == undefined )? this.tracking : event.target.g_id;
 
         var pullbar         = this.all_pullbars[ g_id ].pullbar;
-        var trigger         = ev.target;
+        var trigger         = this.all_pullbars[ g_id ].trigger;
         var instructions    = this.all_pullbars[ g_id ].instructions;
 
         var pullbar_style = getComputedStyle(pullbar);
         var trigger_style = getComputedStyle(trigger);
+
+        /* -- deltas of pointer pos -- */
+        var delta = {
+            x : ev.deltaX,
+            y : ev.deltaY
+        };
 
         /* -- Add on start -- */
         if( ev.type === 'panstart' )
@@ -165,11 +174,21 @@
             trh = parseInt(trigger_style.height, 10),
             trw = parseInt(trigger_style.width , 10);
 
-        /* -- deltas of pointer pos -- */
-        var delta = {
-            x : ev.deltaX,
-            y : ev.deltaY
-        }
+        /* -- cardinal the users is moving in -- */
+        var cardinal_direction = cwc.PadMaster.prototype.calculate_axis_as_cardinal_direction(
+            ev.angle
+        );
+
+        /* -- coordinates of x and y -- */
+        var coordinate = {
+            x : cwc.PadMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
+            y : cwc.PadMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
+        };
+
+        /* -- check to see if we are moving to the center or to the endge (in : out) -- */
+        var in_out = cwc.PadMaster.prototype.get_moving_direction(
+            delta
+        );
 
         /* -- threshold -- */
         var threshold = {
@@ -226,6 +245,13 @@
             this.validate_action (scroll_option);
 
         }
+
+        /* -- check if hook has been applied -- */
+        cwc.PadMaster.prototype.invoke_hook( 'on-touch', instructions, {
+            cardinal_direction : cardinal_direction,
+            coordinate         : coordinate,
+            in_out             : in_out
+        } );
 
     };
 

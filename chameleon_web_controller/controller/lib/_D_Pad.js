@@ -17,9 +17,9 @@
     /*------------------------------------------------------
     * @function
     */
-    function D_Pad( extend )
+    function DPad( extend )
     {
-        cwc.registerPlugin(this, 'D_Pad');
+        cwc.registerPlugin(this, 'DPad');
 
         this.controller_lookup();
     };
@@ -28,10 +28,10 @@
     * @obj
     * To store all data and class names
     */
-    D_Pad.prototype.taxonomy = {
+    DPad.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
-            controller : 'data-cwc-controller=d-pad',
+            controller : 'data-cwc-controller=dpad',
             btn        : 'data-cwc-cbtn',
         }
 
@@ -41,7 +41,7 @@
     * @array
     * Place to store all custom methord
     */
-    D_Pad.prototype.events = {
+    DPad.prototype.events = {
             /* -- D & right -- */
             68 : function(){  },
             39 : function(){  },
@@ -52,9 +52,9 @@
     * @object - Groups & Items
     * @info - Keep and drecord of all found nav elms
     */
-    D_Pad.prototype.all_dpads = [];
+    DPad.prototype.all_dpads = [];
 
-    D_Pad.prototype.controller_lookup = function()
+    DPad.prototype.controller_lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -81,7 +81,7 @@
     * @info - Find elms with data-(navitem) add the this to object
     * @return - true : false
     */
-    D_Pad.prototype.controller_actions_lookup = function( group, c_id )
+    DPad.prototype.controller_actions_lookup = function( group, c_id )
     {
         var descendents     = group.querySelectorAll('['+ this.taxonomy.data.btn +']');
         var descendents_len = descendents.length;
@@ -96,7 +96,7 @@
                 action.c_id = c_id;
 
             // action.onclick = function(  ){
-            //      cwc.D_Pad.prototype.button_invoked(
+            //      cwc.DPad.prototype.button_invoked(
             //         this.c_id,
             //         this.a_id
             //     )
@@ -104,7 +104,7 @@
 
             var hammertime = new Hammer(action, {});
             hammertime.on('tap', function(ev) {
-                 cwc.D_Pad.prototype.button_invoked(
+                 cwc.DPad.prototype.button_invoked(
                     ev.target.c_id,
                     ev.target.a_id
                 )
@@ -117,7 +117,7 @@
 
     };
 
-     D_Pad.prototype.button_invoked = function( c_id, a_id )
+     DPad.prototype.button_invoked = function( c_id, a_id )
      {
         var action = this.all_dpads[ c_id ].actions[ a_id ];
 
@@ -127,7 +127,7 @@
 
      }
 
-     D_Pad.prototype.validate_action = function( type )
+     DPad.prototype.validate_action = function( type )
      {
         /* -- Validate action -- */
         switch( type )
@@ -143,7 +143,7 @@
 
      }
 
-     D_Pad.prototype.send_actions_to_first_screen = function( action )
+     DPad.prototype.send_actions_to_first_screen = function( action )
      {
         console.log('sending ' + action);
 
@@ -158,6 +158,6 @@
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(D_Pad, 'D_Pad');
+    cwc.plugin(DPad, 'DPad');
 
 }( window.cwc, Hammer );

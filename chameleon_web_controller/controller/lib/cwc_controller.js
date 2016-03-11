@@ -103,6 +103,7 @@
 /*------------------------------------------------------
 * -- Controller Assets --
 */
+//@codekit-append "_PadMaster.js";
 //@codekit-append "_D_Pad.js"
 //@codekit-append "_SwipePad.js";
 //@codekit-append "_AnalogPad.js";

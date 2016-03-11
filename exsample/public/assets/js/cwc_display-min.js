@@ -427,8 +427,7 @@ function hyphenate(str) {
     * @array
     * Place to store all custom methord
     */
-    CustomMethod.prototype.custom_methods = [
-    ];
+    CustomMethod.prototype.custom_methods = [];
 
     /*------------------------------------------------------
     * @function
@@ -436,9 +435,10 @@ function hyphenate(str) {
     */
     CustomMethod.prototype.create_method = function( prams )
     {
-        this.custom_methods[ prams.name ] = {
-            'method' : prams.method
-        };
+        this.custom_methods.push({
+            'name'     : prams.name,
+            'method'   : prams.method
+        });
 
     };
 
@@ -448,18 +448,23 @@ function hyphenate(str) {
     */
     CustomMethod.prototype.call_method = function( prams )
     {
-        if( "arguments" in prams )
+        var cm_count = this.custom_methods.length;
+
+        for( var i = 0; i < cm_count; i++ )
         {
-            this.custom_methods[ prams.method ].method(
-                prams.arguments
-            );
-        }
-        else
-        {
-            this.custom_methods[ prams.method ].method(
-            );
+            var cm = this.custom_methods[ i ];
+
+            if( cm.name === prams.method )
+            {
+                cm.method(
+                    prams.arguments
+                );
+
+                return;
+            }
         }
 
+        console.log('Methord has not been created : CM');
     };
 
     /* -- Add this new object to the main object -- */
@@ -1382,7 +1387,7 @@ function hyphenate(str) {
     */
     ViewportScroll.prototype.check_action = function( elm, args )
     {
-        console.log( args );
+        //console.log( args );
 
         var ammount  = elm.scrollTop + (args.ammount || 10)
         var duration = (args.type === 'scroll to' )? 600 : 10;

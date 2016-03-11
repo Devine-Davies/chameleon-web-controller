@@ -1,58 +1,58 @@
 
 
 <style>
-	body {
-		padding: 0;
-		margin: 0;
-		font-family: sans-serif;
-	}
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: sans-serif;
+    }
 
-	iframe {
-		float: left;
-		margin: 0;
-		padding: 0;
-		height: 100vh;
-		border: none;
-	}
+    iframe {
+        float: left;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        border: none;
+    }
 
-	.to-devices {
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		line-height: 100px;
-    	text-align: center;
-	    box-shadow: 0px -1px 9px rgba(0, 0, 0, 0.58);
-	    background: rgba(49, 49, 49, 0.55);
-	}
+    .to-devices {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        line-height: 100px;
+        text-align: center;
+        box-shadow: 0px -1px 9px rgba(0, 0, 0, 0.58);
+        background: rgba(49, 49, 49, 0.55);
+    }
 
-	.to-devices a {
-		display: inline;
-		padding: 10px;
-		margin: 20px;
-		color: white;
-		background: #ff0000;
-		border-radius: 5px;
-		text-decoration: none;
-	}
+    .to-devices a {
+        display: inline;
+        padding: 10px;
+        margin: 20px;
+        color: white;
+        background: #ff0000;
+        border-radius: 5px;
+        text-decoration: none;
+    }
 
 </style>
 
 <script  >
 
-	var custom_seed = '10.72.245.113';
-	var url 		= 'http://' + custom_seed + ':5000/';
+    var custom_seed = '192.168.0.13';
+    var url         = 'http://' + custom_seed + ':5000/';
 
-	var display_url 	= url + "display.html?seed="    + custom_seed;
-	var controller_url	= url + "controller.html?seed=" + custom_seed;
+    var display_url     = url + "display.html?seed="    + custom_seed;
+    var controller_url  = url + "controller.html?seed=" + custom_seed;
 
-	window.onload = function() {
-		document.querySelector('#display').src = display_url;
-		document.querySelector(".link-to-display").href = display_url;
-		setTimeout(function(){
-			document.querySelector('#controller').src = controller_url;
-			document.querySelector(".link-to-controller").href = controller_url;
-		}, 400);
-	}
+    window.onload = function() {
+        document.querySelector('#display').src = display_url;
+        document.querySelector(".link-to-display").href = display_url;
+        setTimeout(function(){
+            document.querySelector('#controller').src = controller_url;
+            document.querySelector(".link-to-controller").href = controller_url;
+        }, 400);
+    }
 </script>
 
 
@@ -60,6 +60,6 @@
 <iframe  width="25%" id='controller' ></iframe>
 
 <div class="to-devices">
-	<a class="link-to-display"    href="" >Display</a>
-	<a class="link-to-controller" href="" >Controller</a>
+    <a class="link-to-display"    href="" >Display</a>
+    <a class="link-to-controller" href="" >Controller</a>
 </div>

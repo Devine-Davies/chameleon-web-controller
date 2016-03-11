@@ -117,7 +117,7 @@
     */
     ViewportScroll.prototype.check_action = function( elm, args )
     {
-        console.log( args );
+        //console.log( args );
 
         var ammount  = elm.scrollTop + (args.ammount || 10)
         var duration = (args.type === 'scroll to' )? 600 : 10;
