@@ -3,10 +3,10 @@
   <channel>
     <title>Chameleon Web Controller</title>
     <description></description>
-    <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 14 Mar 2016 12:17:15 +0000</pubDate>
-    <lastBuildDate>Mon, 14 Mar 2016 12:17:15 +0000</lastBuildDate>
+    <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/</link>
+    <atom:link href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 14 Mar 2016 12:48:50 +0000</pubDate>
+    <lastBuildDate>Mon, 14 Mar 2016 12:48:50 +0000</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -107,8 +107,8 @@
 &lt;/ol&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:02 +0000</pubDate>
-        <link>/server/installation.</link>
-        <guid isPermaLink="true">/server/installation.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/server/installation.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/server/installation.</guid>
         
         
         <category>server</category>
@@ -140,8 +140,8 @@
 
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:02 +0000</pubDate>
-        <link>/general/custom-methods.</link>
-        <guid isPermaLink="true">/general/custom-methods.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/custom-methods.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/custom-methods.</guid>
         
         
         <category>general</category>
@@ -153,8 +153,8 @@
         <description>
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/server/multi-user-setup.</link>
-        <guid isPermaLink="true">/server/multi-user-setup.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/server/multi-user-setup.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/server/multi-user-setup.</guid>
         
         
         <category>server</category>
@@ -171,8 +171,8 @@
 &lt;p&gt;— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/display/viewport-scroll.</link>
-        <guid isPermaLink="true">/display/viewport-scroll.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/display/viewport-scroll.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/display/viewport-scroll.</guid>
         
         
         <category>display</category>
@@ -415,8 +415,8 @@ You can then specify a &lt;strong&gt;Trigger&lt;/strong&gt; as the first paramet
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/display/navigation.</link>
-        <guid isPermaLink="true">/display/navigation.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/display/navigation.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/display/navigation.</guid>
         
         
         <category>display</category>
@@ -544,8 +544,8 @@ You can then specify a &lt;strong&gt;Trigger&lt;/strong&gt; as the first paramet
 &lt;p&gt;— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/controller/swipe-pad.</link>
-        <guid isPermaLink="true">/controller/swipe-pad.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/controller/swipe-pad.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/controller/swipe-pad.</guid>
         
         
         <category>controller</category>
@@ -643,8 +643,8 @@ You can then specify a &lt;strong&gt;Trigger&lt;/strong&gt; as the first paramet
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/controller/pullbar.</link>
-        <guid isPermaLink="true">/controller/pullbar.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/controller/pullbar.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/controller/pullbar.</guid>
         
         
         <category>controller</category>
@@ -779,8 +779,8 @@ You can then specify a &lt;strong&gt;Trigger&lt;/strong&gt; as the first paramet
 &lt;p&gt;— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/controller/directional-pad.</link>
-        <guid isPermaLink="true">/controller/directional-pad.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/controller/directional-pad.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/controller/directional-pad.</guid>
         
         
         <category>controller</category>
@@ -895,8 +895,8 @@ You can then specify a &lt;strong&gt;Trigger&lt;/strong&gt; as the first paramet
 &lt;p&gt;— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/controller/analogo_stick.</link>
-        <guid isPermaLink="true">/controller/analogo_stick.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/controller/analogo_stick.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/controller/analogo_stick.</guid>
         
         
         <category>controller</category>
@@ -1369,8 +1369,8 @@ You can then specify a &lt;strong&gt;Trigger&lt;/strong&gt; as the first paramet
 
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/jekyll/update/stash-markdown.</link>
-        <guid isPermaLink="true">/jekyll/update/stash-markdown.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/jekyll/update/stash-markdown.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/jekyll/update/stash-markdown.</guid>
         
         
         <category>jekyll</category>
