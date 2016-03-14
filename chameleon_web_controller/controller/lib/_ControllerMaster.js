@@ -66,15 +66,15 @@
     * @function - Update nav tracking
     * @info - Will update the tracking system for next items and groups
     */
-    ControllerMaster.prototype.fetch_instructions = function( analog )
+    ControllerMaster.prototype.fetch_instructions = function( elm )
     {
         var tax = 'data-cwc-instructions';
 
         /* -- Search for nav end inftructions-- */
-        if( analog.hasAttribute( tax )  )
+        if( elm.hasAttribute( tax )  )
         {
             return JSON.parse(
-                analog.getAttribute( tax )
+                elm.getAttribute( tax )
             );
         }
 

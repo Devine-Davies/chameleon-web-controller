@@ -154,7 +154,7 @@
         position: relative;
       }
 
-      .touchpad-pad  {
+      .touchpad  {
           /*display: none;*/
           position: absolute !important;
           margin: auto;
@@ -163,7 +163,7 @@
           left: 0;
       }
 
-      .d-pad {
+      .dpad {
           /* display: none; */
           position: absolute !important;
           margin: auto;
@@ -176,9 +176,11 @@
       .analog-pad-con {
           /*display: none;*/
           position: absolute;
+          top: 5%;
+          left: 5%;
       }
 
-      .scroll-pullbar  {
+      .pullbar  {
           position: absolute !important;
           right: 50px;
           bottom: 150px;
@@ -194,7 +196,7 @@
           top: 50px;
         }
 
-        .touchpad-pad  {
+        .touchpad  {
           display: block;
           left: 5%;
           bottom: 50px;
@@ -206,7 +208,7 @@
           left: 5%;
         }
 
-        .scroll-pullbar  {
+        .pullbar  {
             right: 50px;
             bottom: 20px;
         }
@@ -218,7 +220,7 @@
   </head>
   <body class="controller-body-wrapper"  >
 
-      <section class="d-pad cwc-style" data-cwc-controller="dpad"  >
+      <section class="dpad cwc-style" data-cwc-controller="dpad" data-cwc-instructions='{ "on-tap" : "on-move-navigation"  }'  >
           <span data-cwc-cbtn="up" ></span>
           <span data-cwc-cbtn="right" ></span>
           <span data-cwc-cbtn="down" ></span>
@@ -226,19 +228,20 @@
           <span data-cwc-cbtn="enter" ></span>
       </section>
 
-      <section class="touchpad-pad cwc-style"  data-cwc-controller="touchpad" data-cwc-instructions='{ "movement-type" : "pan", "on-touch" : "on-move-navigation"  }' >
+      <section class="touchpad cwc-style"  data-cwc-controller="touchpad" data-cwc-instructions='{ "movement-type" : "pan", "on-touch" : "on-move-navigation"  }' >
         <span></span>
       </section>
 
       <section class="analog-pad-con">
-        <div class="analog-pad cwc-style"      data-cwc-controller="analog"   data-cwc-instructions='{ "movement-type" : "tick", "pan" : "on-move-navigation"  }'  >
+        <div class="analog-pad cwc-style" data-cwc-controller="analog"   data-cwc-instructions='{ "movement-type" : "tick", "pan" : "on-move-navigation"  }'  >
           <span></span>
         </div>
       </section>
 
-      <div class="scroll-pullbar cwc-style"    data-cwc-controller="pullbar"  data-cwc-instructions='{ "type" : "vertical", "on-pull" : "scroll-view" }' >
+      <div class="pullbar cwc-style"    data-cwc-controller="pullbar"  data-cwc-instructions='{ "type" : "vertical", "on-pull" : "scroll-view" }' >
           <span></span>
       </div>
+
 
 <script type="text/javascript">
   /* -- Adress sent from index.html -- */
@@ -320,6 +323,7 @@
       custom_method.create_method( {
         name   : 'on-move-navigation',
         method : function( prams ) {
+          console.log( prams );
           if( prams.in_out.x == 'out' || prams.in_out.y == 'out' )
           {
               slow_down( prams.cardinal_direction );

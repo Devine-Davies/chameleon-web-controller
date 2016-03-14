@@ -140,7 +140,7 @@ function hyphenate(str) {
         /* -- register the plugin -- */
         cwc.registerPlugin(this, 'Server');
 
-        /* -- Get ready to accept hi message from server -- */
+        /* -- get ready to accept hi message from server -- */
         cwc.ServerMethod.prototype.create_method({
             action   : 'hi',
             callback : function( client_id ) {
@@ -148,14 +148,14 @@ function hyphenate(str) {
             }
         } );
 
-        /* -- Connect to the host via web sockets -- */
+        /* -- connect to the host via web sockets -- */
         cwc._server_connection = this.connect(
             options.host,
             options.port,
             options.type
         );
 
-        /* -- Set message evetns -- */
+        /* -- set message evetns -- */
         if( cwc._server_connection )
         {
             this.set_connection_events();
@@ -165,12 +165,12 @@ function hyphenate(str) {
 
     /*------------------------------------------------------
     * @object - Connection
-    * @info - The connection object to main server
+    * @info   - The connection object to main server
     */
     Server.prototype.connection = null;
 
     /*------------------------------------------------------
-    * @int - Client id
+    * @int  - Client id
     * @info - Store the given clients id from the server
     */
     Server.prototype.client_id = null;
@@ -355,6 +355,7 @@ function hyphenate(str) {
             /* -- If property was not found : return true -- */
             if ( ! data.hasOwnProperty( checks[i] ) )
             {
+                console.log('Server message is not properly fromatted.');
                 return true;
             }
         }

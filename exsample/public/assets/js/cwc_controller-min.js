@@ -147,7 +147,7 @@ function hyphenate(str) {
         /* -- register the plugin -- */
         cwc.registerPlugin(this, 'Server');
 
-        /* -- Get ready to accept hi message from server -- */
+        /* -- get ready to accept hi message from server -- */
         cwc.ServerMethod.prototype.create_method({
             action   : 'hi',
             callback : function( client_id ) {
@@ -155,14 +155,14 @@ function hyphenate(str) {
             }
         } );
 
-        /* -- Connect to the host via web sockets -- */
+        /* -- connect to the host via web sockets -- */
         cwc._server_connection = this.connect(
             options.host,
             options.port,
             options.type
         );
 
-        /* -- Set message evetns -- */
+        /* -- set message evetns -- */
         if( cwc._server_connection )
         {
             this.set_connection_events();
@@ -172,12 +172,12 @@ function hyphenate(str) {
 
     /*------------------------------------------------------
     * @object - Connection
-    * @info - The connection object to main server
+    * @info   - The connection object to main server
     */
     Server.prototype.connection = null;
 
     /*------------------------------------------------------
-    * @int - Client id
+    * @int  - Client id
     * @info - Store the given clients id from the server
     */
     Server.prototype.client_id = null;
@@ -362,6 +362,7 @@ function hyphenate(str) {
             /* -- If property was not found : return true -- */
             if ( ! data.hasOwnProperty( checks[i] ) )
             {
+                console.log('Server message is not properly fromatted.');
                 return true;
             }
         }
@@ -547,15 +548,15 @@ function hyphenate(str) {
     * @function - Update nav tracking
     * @info - Will update the tracking system for next items and groups
     */
-    ControllerMaster.prototype.fetch_instructions = function( analog )
+    ControllerMaster.prototype.fetch_instructions = function( elm )
     {
         var tax = 'data-cwc-instructions';
 
         /* -- Search for nav end inftructions-- */
-        if( analog.hasAttribute( tax )  )
+        if( elm.hasAttribute( tax )  )
         {
             return JSON.parse(
-                analog.getAttribute( tax )
+                elm.getAttribute( tax )
             );
         }
 
@@ -698,14 +699,17 @@ function hyphenate(str) {
 
         for( var c_id = 0; c_id < controllers_count; c_id++ )
         {
+            var controller = controllers[ c_id ];
+
             /* -- Find all item in group -- */
             var actions = this.controller_actions_lookup(
                 controllers[ c_id ], c_id
             );
 
             this.all_DPadControllers[ c_id ] = {
-                container : controllers[ c_id ],
-                actions   : actions
+                container     : controller,
+                actions       : actions,
+                instructions  : cwc.ControllerMaster.prototype.fetch_instructions( controller )
             };
 
         };
@@ -731,13 +735,18 @@ function hyphenate(str) {
                 action.a_id = a_id;
                 action.c_id = c_id;
 
-            var hammertime = new Hammer(action, {});
-            hammertime.on('tap', function(ev) {
-                 cwc.DPadController.prototype.button_invoked(
-                    ev.target.c_id,
-                    ev.target.a_id
-                )
-            });
+            var mc = new Hammer.Manager( action );
+                mc.add(new Hammer.Tap({ event: 'doubletap', taps: 2 }));
+                mc.add(new Hammer.Tap());
+
+                mc.on("tap", function( ev ){
+                     cwc.DPadController.prototype.button_invoked(
+                        ev.target.c_id,
+                        ev.target.a_id
+                    );
+                }).on("doubletap", function(){
+
+                });
 
             actions.push( action )
         }
@@ -746,40 +755,64 @@ function hyphenate(str) {
 
     };
 
-     DPadController.prototype.button_invoked = function( c_id, a_id )
-     {
-        var action = this.all_DPadControllers[ c_id ].actions[ a_id ];
+    DPadController.prototype.button_invoked = function( c_id, a_id )
+    {
+        var action       = this.all_DPadControllers[ c_id ].actions[ a_id ];
+        var instructions = this.all_DPadControllers[ c_id ].instructions;
 
-        this.validate_action (
-            action.getAttribute( this.taxonomy.data.btn )
-        );
+        /* -- Check to see if action can be indertfyed -- */
+        if(! action.hasAttribute( 'data-cwc-cbtn' ) )
+            return;
 
-     }
-
-     DPadController.prototype.validate_action = function( type )
-     {
         /* -- Validate action -- */
-        switch( type )
+        switch( action.getAttribute( 'data-cwc-cbtn' ) )
         {
             case 'up'     :
+            var info = {
+                direction          : 'UP',
+                cardinal_direction : 'N',
+                angle              : 0,
+                in_out             : { x : 'out', y : 'out' }
+            }
+            break;
+
             case 'right'  :
+            var info = {
+                direction          : 'RIGHT',
+                cardinal_direction : 'E',
+                angle              : 90,
+                in_out             : { x : 'out', y : 'out' }
+            }
+            break;
+
             case 'down'   :
+            var info = {
+                direction          : 'DOWN',
+                cardinal_direction : 'S',
+                angle              : 180,
+                in_out             : { x : 'out', y : 'out' }
+            }
+            break;
+
             case 'left'   :
+            var info = {
+                direction          : 'LEFT',
+                cardinal_direction : 'W',
+                angle              : 270,
+                in_out             : { x : 'out', y : 'out' }
+            }
+            break;
+
             case 'enter'  :
-            this.send_actions_to_first_screen( type );
+            info = {
+                direction : 'ENTER',
+            }
             break;
         }
 
-     }
-
-     DPadController.prototype.send_actions_to_first_screen = function( action )
-     {
-        cwc.Server.prototype.send_message({
-            recipient : 'display',
-            action    : 'move navigation',
-            arguments : action
-        });
-     }
+        /* -- check if hook has been applied -- */
+        cwc.ControllerMaster.prototype.invoke_hook( 'on-tap', instructions, info );
+    }
 
     /*------------------------------------------------------
     * @function
