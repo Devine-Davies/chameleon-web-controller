@@ -16,7 +16,7 @@ var custom_method = new cwc.CustomMethod({ });
     custom_method.create_method( {
         name   : 'custom_m_test',
         method : function( prams ) {
-            //console.log('You just created a custom methord');
+            /* -- Your logic here -- */
         }
     });
 {% endhighlight %}

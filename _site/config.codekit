@@ -113,6 +113,27 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
+	"\/_posts\/documentation\/controller\/2016-02-24-analogo_stick.md": {
+		"criticStyle": 0,
+		"enableFootnotes": 1,
+		"enableLabels": 1,
+		"enableSmartQuotes": 1,
+		"escapeLineBreaks": 0,
+		"fileType": 4096,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_posts\/documentation\/controller\/2016-02-24-analogo_stick.md",
+		"maskEmailAddresses": 1,
+		"outputAbbreviatedPath": "\/_posts\/documentation\/controller\/2016-02-24-analogo_stick.html",
+		"outputFormat": 0,
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"parseMetadata": 1,
+		"processHTML": 0,
+		"randomFootnoteNumbers": 0,
+		"useCompatibilityMode": 0
+		},
 	"\/_posts\/documentation\/controller\/2016-02-24-directional-pad.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
@@ -134,7 +155,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/controller\/2016-02-24-pullbar-scroll.md": {
+	"\/_posts\/documentation\/controller\/2016-02-24-pullbar.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -143,9 +164,9 @@
 		"fileType": 4096,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/controller\/2016-02-24-pullbar-scroll.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/controller\/2016-02-24-pullbar.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/controller\/2016-02-24-pullbar-scroll.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/controller\/2016-02-24-pullbar.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -154,6 +175,15 @@
 		"processHTML": 0,
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
+		},
+	"\/_posts\/documentation\/controller\/2016-02-24-swipe-pad.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_posts\/documentation\/controller\/2016-02-24-swipe-pad.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/_posts\/documentation\/controller\/2016-02-24-swipe-pad.md": {
 		"criticStyle": 0,
@@ -324,6 +354,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
+	"\/_site\/controller\/analogo_stick..html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_site\/controller\/analogo_stick..html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/_site\/controller\/directional-pad..html": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -333,11 +372,11 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/controller\/pullbar-scroll..html": {
+	"\/_site\/controller\/pullbar..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/controller\/pullbar-scroll..html",
+		"inputAbbreviatedPath": "\/_site\/controller\/pullbar..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -419,6 +458,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/_site\/server\/multi-user-setup..html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/_site\/swipe-pad..html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_site\/swipe-pad..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
