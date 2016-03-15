@@ -1,15 +1,18 @@
 /*------------------------------------------------------
- * To-Do
+ Directional pad
  ------------------------------------------------------
- • Add support for data attr nav dir - up, down, left, right
- • Add support for NO end last and first attr
- • Add support for Enter key for on select
- • Must show testing on Screen
- • Add commit
+ * What to talk about
  ------------------------------------------------------
- • Start D-pad
+ • Diffrent directions
+ • About return types (angle, dir, coords, CD)
+ • Talk about design
+ ------------------------------------------------------
+ * Testing
+ ------------------------------------------------------
+ • Browser testing
+ • Adding multi controllers to a single page
+ • Unit testing on function
 */
-
 
 !function( cwc, Hammer ){
   'use strict';

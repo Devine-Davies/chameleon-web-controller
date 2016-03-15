@@ -1,10 +1,19 @@
 /*------------------------------------------------------
- * Viewport Scroll Controller
- *------------------------------------------------------
- * To-Do
- -------------------------------------------------------
- • Add support for data attr nav dir - up, down, left, right
- -------------------------------------------------------
+ Pull bar Controller
+ ------------------------------------------------------
+ * What to talk about
+ ------------------------------------------------------
+ • Talk about on tick and pan movments
+ • About return types (angle, dir, coords, CD)
+ • The two dirrent type of collusion
+ • Involvment when moving and how circal reacts to colloshion
+ • Talk about design
+ ------------------------------------------------------
+ * Testing
+ ------------------------------------------------------
+ • Browser testing
+ • Adding multi controllers to a single page
+ • Unit testing on function
 */
 
 !function( cwc ){
@@ -189,7 +198,6 @@
 
     };
 
-
     /*------------------------------------------------------
     * @function - Get feedback data
     * @info     - builds the return data object to feed back to user
@@ -257,7 +265,7 @@
     * @info     - Clear out the fimer and reset collishion
     */
     PullbarController.prototype.pullbar_trigger_translate = function( prams )
-     {
+    {
         /* -- Move the publlbar handle -- */
         window.requestAnimationFrame( function(){
             prams.trigger.style.transform = [

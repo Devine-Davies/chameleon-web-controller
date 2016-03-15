@@ -39,8 +39,9 @@
     //         console.log('first screen is connected!');
     // });
 
-    window.onload = function() {
+    var audio = new Audio('assets/sounds/pop_drip.wav');
 
+    window.onload = function() {
         /*------------------------------------------------------
         * @function in array
         * System messages should be declared here
@@ -57,7 +58,9 @@
               onnav_changed  : function( info ){
                 console.log( info );
               },
-              onitem_changed : function( info ){  }
+              onitem_changed : function( info ){
+                  audio.play();
+              }
           }
        });
 

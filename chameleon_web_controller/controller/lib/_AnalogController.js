@@ -1,9 +1,19 @@
 /*------------------------------------------------------
- Analog Pad
+ Analog Controller
  ------------------------------------------------------
- To-Do •
+ * What to talk about
  ------------------------------------------------------
- •
+ • Talk about on tick and pan movments
+ • About return types (angle, dir, coords, CD)
+ • The two dirrent type of collusion
+ • Involvment when moving and how circal reacts to colloshion
+ • Talk about design
+ ------------------------------------------------------
+ * Testing
+ ------------------------------------------------------
+ • Browser testing
+ • Adding multi controllers to a single page
+ • Unit testing on function
 */
 
 !function( cwc, Hammer ){

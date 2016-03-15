@@ -1,13 +1,11 @@
 /*------------------------------------------------------
- * Viewport Scroll Controller
+ * Controller Master
  *------------------------------------------------------
- * To-Do
+ * Talk About
  -------------------------------------------------------
- • Add support for data attr nav dir - up, down, left, right
- • Add support for NO end last and first attr
- • Add support for Enter key for on select
- • Must show testing on Screen
- • Add commit
+ • Centralising functions to allow shared code to reduce
+   development time from the lack of writing repetitive
+   code and file size
  -------------------------------------------------------
 */
 
