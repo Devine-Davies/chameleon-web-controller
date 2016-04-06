@@ -23,8 +23,8 @@
     * @Array - Connected clients
     * @info - Save all the connected clients here
     */
-    Server.prototype.connected_clients = [
-    ];
+    Server.prototype.client_clusters = {
+    };
 
     /*------------------------------------------------------
     * @function - Start connection
@@ -49,28 +49,30 @@
     */
     Server.prototype.websocket_server_handler = function( )
     {
-        this.server_info.server.on("connection", function( ws )
+        this.server_info.server.on("connection", function( clinet )
         {
-            var client_pos = Server.prototype.connected_clients.length;
+            var metadata     = cwc.Server.prototype.get_query_params( clinet.upgradeReq.url );
+                metadata.key = clinet.upgradeReq.headers['sec-websocket-key'];
+
+            /* -- Append our own cwc propaties onto the clinet object -- */
+            clinet.cwc_metadata = metadata;
 
             /* -- Client has connected -- */
-            cwc.Server.prototype.save_client(
-                ws
-            );
+            cwc.Server.prototype.save_client( clinet );
 
             /* -- Client has disconnected -- */
-            ws.close = function ( evt )
+            clinet.close = function ( evt )
             {
                 cwc.Server.prototype.drop_client(
-                    client_pos
+                    clinet
                 );
             };
 
             /* -- Server message -- */
-            ws.onmessage = function ( evt )
+            clinet.onmessage = function ( evt )
             {
                 cwc.Server.prototype.process_request(
-                    JSON.parse( evt.data )
+                    JSON.parse( evt.data ), metadata
                 );
             };
 
@@ -79,15 +81,35 @@
     };
 
     /*------------------------------------------------------
-    * @function - Drop clinet
+    * @function - Drop client
     * @info - Send clinet pos to know witch one to drop
     */
-    Server.prototype.drop_client = function( client_pos )
+    Server.prototype.drop_client = function( client )
     {
-        var array = this.connected_clients;
+        var metadata    = client.cwc_metadata;
 
-        /* -- Enpy the value : but keep the pos for use of id -- */
-        delete array[ client_pos ];
+        /* -- Check to see if cluster exsists -- */
+        if( this.client_clusters.hasOwnProperty( metadata.cluster_code ) )
+        {
+            if( metadata.clinet_type == 'display'  )
+            {
+                delete this.client_clusters[ metadata.cluster_code ];
+                //console.log( 'Dropping display with key: ' + metadata.key );
+            }
+
+            /* -- Deleting client -- */
+            else if ( metadata.clinet_type == 'controller' )
+            {
+                var controllers = this.client_clusters[ metadata.cluster_code ].controllers;
+
+                /* -- Check to see if the cotroller exsistis -- */
+                if( controllers.hasOwnProperty( metadata.key ) )
+                {
+                    delete this.client_clusters[ metadata.cluster_code ].controllers[ metadata.key ];
+                    //console.log( 'Dropping conetoller with key: ' + metadata.key );
+                }
+            }
+        }
 
     };
 
@@ -96,41 +118,63 @@
     * @info - Store the clinet in the (connected_clients) array,
     * also send a message to the clinet asking for it's type ( Display/Controller )
     */
-    Server.prototype.save_client = function ( connection )
+    Server.prototype.save_client = function ( client )
     {
-        var clinet_id = this.connected_clients.length;
+        var connected      = false;
+        var clinet_type    = client.cwc_metadata.clinet_type;
 
-        this.connected_clients.push({
-            'id'         : clinet_id,
-            'type'       : null,
-            'connection' : connection
-        });
+        if( clinet_type == 'display' )
+        {
+            connected = this.process_new_cluster(
+                client
+            );
+        }
 
-        /* -- Check to see if all have screen types -- */
-        connection.send( this.format_msg({
-            recipient    : 'all',
-            sender       : 'server',
-            action       : 'hi',
-            arguments    : clinet_id,
-        } ) );
+        else if( clinet_type == 'controller' )
+        {
+            connected = this.assign_controller_to_cluster(
+                client
+            );
+        }
+
+        if( ! connected )
+        {
+            /* -- Close clinet if no cluster to join onto -- */
+            client.close();
+        }
+        else
+        {
+            /* -- Send a connection sucsessfull message back to clinet -- */
+            client.send( this.format_msg( {
+                recipient    : clinet_type,
+                sender       : 'server',
+                action       : 'greetings',
+                arguments    : 'Bidirectional connection established',
+                cwc_metadata : client.cwc_metadata
+            } ) );
+        }
 
     };
 
     /*------------------------------------------------------
     * @function - Set client type
-    * @info - When the client say hi back with there type
+    * @info     - When the client say hi back with there type
     */
-    Server.prototype.set_client_type = function( args )
+    Server.prototype.get_query_params = function( qs )
     {
-        this.connected_clients[ args.client_id ].type = args.sender;
+        qs = qs.substr( qs.indexOf("?") + 1);
+        qs = qs.split('+').join(' ');
 
-        // -- Send message back stating that they have connected --
-        this.process_request({
-            recipient : args.sender, // display || controller
-            sender    : 'server',
-            action    : 'display_set',
-            arguments : '',
-        });
+        var params = {},
+            tokens,
+            re = /[?&]?([^=]+)=([^&]*)/g;
+
+        while (tokens = re.exec(qs))
+        {
+            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        }
+
+        return params;
 
     };
 
@@ -138,25 +182,75 @@
     * @function - Process request
     * @info - Send the message to the right clinet
     */
-    Server.prototype.process_request = function( message )
+    Server.prototype.process_new_cluster = function( client )
     {
-        console.log('----------------');
-        console.log( message );
-        console.log('----------------');
+        var cluster_code   = client['cwc_metadata'].cluster_code;
+
+        console.log('Cluster code: ' + cluster_code);
+
+        /* -- Check to see if cluster is not occupied -- */
+        if(! this.client_clusters.hasOwnProperty( cluster_code ) )
+        {
+            this.client_clusters[ cluster_code ] = {
+                'display'     : client,
+                'controllers' : {}
+            }
+        }
+
+        /* -- If so overide the old display with the new incomming one -- */
+        else
+        {
+            this.client_clusters[ cluster_code ]['display'] = client;
+        }
+
+        return true;
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Assign new client to cluster
+    * @info     - Will add the clinet to a required cluster id
+    */
+    Server.prototype.assign_controller_to_cluster = function( client )
+    {
+        var cluster_code   = client['cwc_metadata'].cluster_code;
+        var controller_key = client['cwc_metadata'].key;
+
+        /* -- Check to see if cluster exsists -- */
+        if( this.client_clusters.hasOwnProperty( cluster_code ) )
+        {
+            this.client_clusters[ cluster_code ].controllers[ controller_key ] = client;
+            return true;
+        }
+
+        return false;
+    };
+
+    /*------------------------------------------------------
+    * @function - Process request
+    * @info - Send the message to the right clinet
+    */
+    Server.prototype.process_request = function( sent_package, metadata )
+    {
+        sent_package.cwc_metadata = metadata;
+
+        //console.log('----------------');
+        //console.log( sent_package     );
+        //console.log('----------------');
 
         /* -- Whom the message shall be sent to -- */
-        switch( message.recipient )
+        switch( sent_package.recipient )
         {
             case  'server' :
-                this.server_message( message );
+                this.server_message( sent_package );
             break;
 
             case 'display' :
-                this.send_message_to_display( message );
+                this.send_message_to_display( sent_package );
             break;
 
             case 'controller' :
-                this.send_message_controllers( message );
+                this.send_message_controllers( sent_package );
             break;
         }
 
@@ -178,16 +272,15 @@
     * @function - Send message to display
     * @info - Sending message to all displays
     */
-    Server.prototype.send_message_to_display = function( message )
+    Server.prototype.send_message_to_display = function( sent_package )
     {
-        /* -- Will return an array -- */
-        var display_client = this.get_client('display')
-
-        if( display_client != null )
-        {
-            display_client[0].connection.send( this.format_msg(
-                 message
-            ));
+        try {
+            this.client_clusters[ sent_package.cwc_metadata.cluster_code ]['display'].send( this.format_msg(
+                 sent_package
+            ) );
+        }
+        catch (e) {
+            //console.log('Could not send message...');
         }
 
     };
@@ -196,49 +289,20 @@
     * @function - Send message controllers
     * @info - Sending message to all controllers
     */
-    Server.prototype.send_message_controllers = function( message )
+    Server.prototype.send_message_controllers = function( sent_package )
     {
-        /* -- Will return an array -- */
-        var controllers_client = this.get_client('controller')
+        var c_client = this.client_clusters[ sent_package.cluster_code ].clients;
+        var format_package = this.format_msg( message );
 
-        var message = this.format_msg( message );
-
-        if( controllers_client != null )
+        if( c_client != null )
         {
-            for( var i = 0; i < controllers_client.length; i++)
+            for( var i = 0; i < c_client.length; i++)
             {
-                controllers_client[ i ].connection.send(
-                    message
-                );
+                c_client[ i ].send( this.format_msg(
+                     format_package
+                ));
             }
         }
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Get client
-    * @info     - Give a client_type
-    * @return   - All found clients
-    */
-    Server.prototype.get_client = function( client_type )
-    {
-        var c_clients     = this.connected_clients;
-        var c_leng        = c_clients.length;
-        var found_clients = [];
-
-        for( var i = 0; i < c_leng; i++ )
-        {
-            if ( i in c_clients )
-            {
-                var client = c_clients[ i ];
-
-                if( client.type == client_type )
-                {
-                    found_clients.push( client );
-                }
-            }
-        }
-        return ( found_clients.length > 0 )? found_clients : null;
 
     };
 

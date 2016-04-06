@@ -1,6 +1,10 @@
 {
-  "name": "node-ws-test",
+  "name": "chameleon-web-controller",
   "version": "0.0.2",
+
+  "config" : {
+    "port" : "5000"
+  },
 
   "dependencies": {
     "express": "^4.4.5",
@@ -13,6 +17,13 @@
 
   "scripts": {
     "start": "node app.js"
-  }
+  },
+
+   "main": "_index.js",
+
+  "repository" : {
+      "type" : "git",
+      "url" : "https://github.com/Devine-Davies/chameleon-web-controller/"
+    }
 
 }

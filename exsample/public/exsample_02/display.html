@@ -7,9 +7,9 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src &apos;self&apos; &apos;unsafe-inline&apos;; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos;">
     <title>Display</title>
 
-    <script type="text/javascript" src="/assets/js/first_screen.js"></script>
-    <script type="text/javascript" src="assets/js/cwc_display-min.js"></script>
-    <link href='assets/style/css/display.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="../assets/cwc_objects/cwc_display-min.js"></script>
+    <script type="text/javascript" src="../assets/exsample_02/display.js"></script>
+    <link   rel='stylesheet'      href='../assets/exsample_02/display.css'  type='text/css'>
 
     <script type="text/javascript">
 
@@ -28,6 +28,9 @@
         port : 5000,
         type : 'ws'
     });
+
+    /* -- connect to the host via web sockets -- */
+    server.connect( );
 
     /*------------------------------------------------------
     * @function in array

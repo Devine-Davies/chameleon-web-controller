@@ -138,8 +138,6 @@ function hyphenate(str)
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
-alert('here');
-
 !function( cwc ){
   'use strict';
 
@@ -153,43 +151,8 @@ alert('here');
         /* -- register the plugin -- */
         cwc.registerPlugin(this, 'Server');
 
-
-        /* -- We are running on a display clinet -- */
-        if( cwc._cwc_type  == 'display' )
-        {
-            /* -- Create a random connection code -- */
-            cwc._cluster_code = cwc._cwc_connection_code(6, 'cwc'); //  'pdc262-cwc'; //
-
-        }
-
-        /* -- We are running on a controller clinet -- */
-        else if( cwc._cwc_type  == 'controller' )
-        {
-            /* -- Cluster code will need to be supplied by user -- */
-            cwc._cluster_code = options.cluster_code;
-
-        }
-
-        /* -- get ready to accept greetings message from server -- */
-        cwc.ServerMethod.prototype.create_method({
-            action   : 'greetings',
-            callback : function ( message ) {
-                cwc.Server.prototype.on_greeting_message( message );
-            }
-        } );
-
-        this.connection_options = options;
-
-        console.log( this.connection_options );
-
         /* -- connect to the host via web sockets -- */
-         this.connect(
-            options.host,
-            options.port,
-            options.type
-        );
-
-
+        this.connection_options = options;
 
     };
 
@@ -217,9 +180,26 @@ alert('here');
     * @function - Connect
     * @info - Connect to the server
     */
-    Server.prototype.connect = function( host, port, type )
+    Server.prototype.connect = function( cluster_code )
     {
-        var socket = null;
+        var socket = null,
+        host = this.connection_options.host,
+        port = this.connection_options.port,
+        type = this.connection_options.type;
+
+        /* -- We are running on a display clinet -- */
+        if( cwc._cwc_type  == 'display' )
+        {
+            /* -- Create a random connection code -- */
+            cwc._cluster_code = cwc._cwc_connection_code(6, 'cwc'); //  'pdc262-cwc'; //
+        }
+
+        /* -- We are running on a controller clinet -- */
+        else if( cwc._cwc_type  == 'controller' )
+        {
+            /* -- Cluster code will need to be supplied by user -- */
+            cwc._cluster_code = cluster_code;
+        }
 
         /* -- Check the type of connection -- */
         switch ( type )
@@ -229,14 +209,21 @@ alert('here');
             break;
         }
 
-        /* -- set message evetns -- */
-        if( socket && ( type == 'ws' ) )
+        /* -- Allow our cwc object to be reatch at the _global scope -- */
+        if( socket )
+        {
+            /* -- Get ready to acsept message back -- */
+            this.on_greetings();
+
+            /* -- Set global connection  -- */
+            cwc._server_connection = socket;
+        }
+
+        /* -- Set appropiat socket evetn's -- */
+        if( socket && type == 'ws' )
         {
             this.set_connection_events();
         }
-
-        /* -- Allow our cwc object to be reatch at the _global scope -- */
-        cwc._server_connection = socket;
 
     };
 
@@ -255,6 +242,21 @@ alert('here');
         '&clinet_type='  + clinet_type;
 
     };
+
+    /*------------------------------------------------------
+    * @object - On greetings
+    * @info   - Get ready to accept greetings message from server
+    */
+    Server.prototype.on_greetings = function()
+    {
+        cwc.ServerMethod.prototype.create_method({
+            action   : 'greetings',
+            callback : function ( message ) {
+                cwc.Server.prototype.on_greeting_message( message );
+            }
+        } );
+
+    }
 
     /*------------------------------------------------------
     * @function - On greeting message
@@ -371,11 +373,14 @@ alert('here');
         /* -- Is this a valid mesage : return true not valid -- */
         if( ! this.validate_onmessage( data ) )
         {
-            if( cwc._server_connection.readyState == 1 )
+            if( cwc._server_connection )
             {
-                cwc._server_connection.send( JSON.stringify(
-                    data
-                ) );
+                if( cwc._server_connection.readyState == 1 )
+                {
+                    cwc._server_connection.send( JSON.stringify(
+                        data
+                    ) );
+                }
             }
         }
 

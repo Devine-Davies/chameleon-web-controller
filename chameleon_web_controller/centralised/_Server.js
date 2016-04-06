@@ -11,28 +11,12 @@
         /* -- register the plugin -- */
         cwc.registerPlugin(this, 'Server');
 
-        /* -- get ready to accept hi message from server -- */
-        cwc.ServerMethod.prototype.create_method({
-            action   : 'hi',
-            callback : function( client_id ) {
-                cwc.Server.prototype.say_hi_back( client_id );
-            }
-        } );
-
         /* -- connect to the host via web sockets -- */
-        cwc._server_connection = this.connect(
-            options.host,
-            options.port,
-            options.type
-        );
-
-        /* -- set message evetns -- */
-        if( cwc._server_connection )
-        {
-            this.set_connection_events();
-        }
+        this.connection_options = options;
 
     };
+
+    Server.prototype.connection_options = {};
 
     /*------------------------------------------------------
     * @object - Connection
@@ -47,19 +31,104 @@
     Server.prototype.client_id = null;
 
     /*------------------------------------------------------
+    * @int  - Cluster code
+    * @info - For the group we want to connect to or on.
+    */
+    Server.prototype.cluster_code = null;
+
+    /*------------------------------------------------------
     * @function - Connect
     * @info - Connect to the server
     */
-    Server.prototype.connect = function( host, port, type )
+    Server.prototype.connect = function( cluster_code )
     {
+        var socket = null,
+        host = this.connection_options.host,
+        port = this.connection_options.port,
+        type = this.connection_options.type;
+
+        /* -- We are running on a display clinet -- */
+        if( cwc._cwc_type  == 'display' )
+        {
+            /* -- Create a random connection code -- */
+            cwc._cluster_code = cwc._cwc_connection_code(6, 'cwc'); //  'pdc262-cwc'; //
+        }
+
+        /* -- We are running on a controller clinet -- */
+        else if( cwc._cwc_type  == 'controller' )
+        {
+            /* -- Cluster code will need to be supplied by user -- */
+            cwc._cluster_code = cluster_code;
+        }
+
         /* -- Check the type of connection -- */
         switch ( type )
         {
             case 'ws':
-                return new WebSocket (
-                    'ws:' + host + ':'+ port
-                );
+                socket = new WebSocket ( this.build_ws_connection (host, port, type) );
             break;
+        }
+
+        /* -- Allow our cwc object to be reatch at the _global scope -- */
+        if( socket )
+        {
+            /* -- Get ready to acsept message back -- */
+            this.on_greetings();
+
+            /* -- Set global connection  -- */
+            cwc._server_connection = socket;
+        }
+
+        /* -- Set appropiat socket evetn's -- */
+        if( socket && type == 'ws' )
+        {
+            this.set_connection_events();
+        }
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Connect
+    * @info - Connect to the server
+    */
+    Server.prototype.build_ws_connection = function( host, port )
+    {
+        var cluster_code  = cwc._cluster_code;
+        var clinet_type   = cwc._cwc_type;
+        var clinet_id     = cwc._cwc_connection_code(6, 'cwc-clinet' );
+
+        return 'ws:' + host + ':'+ port +
+        '?cluster_code=' + cluster_code +
+        '&clinet_type='  + clinet_type;
+
+    };
+
+    /*------------------------------------------------------
+    * @object - On greetings
+    * @info   - Get ready to accept greetings message from server
+    */
+    Server.prototype.on_greetings = function()
+    {
+        cwc.ServerMethod.prototype.create_method({
+            action   : 'greetings',
+            callback : function ( message ) {
+                cwc.Server.prototype.on_greeting_message( message );
+            }
+        } );
+
+    }
+
+    /*------------------------------------------------------
+    * @function - On greeting message
+    * @info     - how to react when connection sucsessfull
+    */
+    Server.prototype.on_greeting_message = function()
+    {
+        if( cwc._cwc_type  == 'controller' )
+        {
+            cwc.ClusterCodeCache.prototype.save_cluster_code(
+                cwc._cluster_code, cwc._cwc_type
+            );
         }
 
     };
@@ -92,27 +161,6 @@
                 data
             );
         };
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Say hi back
-    * @info - We will send our cleint type back to there server,
-    * when recived an on hi message
-    */
-    Server.prototype.say_hi_back = function( client_id )
-    {
-
-        cwc.Server.prototype.client_id = client_id;
-
-        cwc.Server.prototype.send_message({
-            recipient : 'server',
-            action    : 'client says hello',
-            arguments : {
-                client_id : client_id,
-                sender    : cwc._cwc_type
-            }
-        });
 
     };
 
@@ -182,22 +230,19 @@
     */
     Server.prototype.send_message = function( data )
     {
-        /* -- Set where they come from -- */
-        data.sender = cwc._cwc_type;
-
         /* -- Is this a valid mesage : return true not valid -- */
-        if( this.validate_onmessage( data ) )
+        if( ! this.validate_onmessage( data ) )
         {
-            console.log( 'Message not properly formatted' );
+            if( cwc._server_connection )
+            {
+                if( cwc._server_connection.readyState == 1 )
+                {
+                    cwc._server_connection.send( JSON.stringify(
+                        data
+                    ) );
+                }
+            }
         }
-        else
-        {
-            cwc._server_connection.send( JSON.stringify(
-                data
-            ) );
-        }
-
-        // console.log( data );
 
     };
 
@@ -216,9 +261,6 @@
 
             /* -- Arguments to be passed to method -- */
             'arguments',
-
-            /* -- Who sent the message -- */
-            'sender',
         ];
 
         for( var i = 0; i < checks.length; i++ )

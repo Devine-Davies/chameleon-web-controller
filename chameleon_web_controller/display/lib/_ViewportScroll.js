@@ -71,7 +71,7 @@
     {
         /* -- Server message -- */
         cwc.ServerMethod.prototype.create_method( {
-            action   : 'scroll viewport',
+            action   : 'scroll-viewport',
             callback : function( args ) {
                 cwc.ViewportScroll.prototype.start_scroll_process(
                     args

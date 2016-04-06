@@ -8,11 +8,15 @@
 "use strict";
 
     var cwc = {
-
         /* ------------------------------------------------------
         * Global connection to server
         */
         _server_connection : null,
+
+        /* ------------------------------------------------------
+        * Set type of plugin
+        */
+        _cluster_code : null,
 
         /* ------------------------------------------------------
         * Set type of plugin
@@ -33,6 +37,13 @@
         * Stores currently active plugins.
         */
         _activePlugins: {},
+
+        /* ------------------------------------------------------
+        * Server code
+        */
+        _cwc_connection_code : function( length, namespace ) {
+            return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1) + (namespace ? '-' + namespace : '');
+        },
 
         /* ------------------------------------------------------
         * Defines a Foundation plugin, adding it to the `Foundation` namespace and the list of plugins to initialize when reflowing.

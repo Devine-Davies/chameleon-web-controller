@@ -19,6 +19,7 @@ function functionName(fn)
 
 // Convert PascalCase to kebab-case
 // Thank you: http://stackoverflow.com/a/8955580
-function hyphenate(str) {
+function hyphenate(str)
+{
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
