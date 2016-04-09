@@ -51,8 +51,9 @@
     {
         this.server_info.server.on("connection", function( clinet )
         {
-            var metadata     = cwc.Server.prototype.get_query_params( clinet.upgradeReq.url );
-                metadata.key = clinet.upgradeReq.headers['sec-websocket-key'];
+            var metadata           = cwc.Server.prototype.get_query_params( clinet.upgradeReq.url );
+                metadata.key       = clinet.upgradeReq.headers['sec-websocket-key'];
+                metadata.timestamp = Date.now();
 
             /* -- Append our own cwc propaties onto the clinet object -- */
             clinet.cwc_metadata = metadata;
@@ -61,7 +62,7 @@
             cwc.Server.prototype.save_client( clinet );
 
             /* -- Client has disconnected -- */
-            clinet.close = function ( evt )
+            clinet.onclose = function ( evt )
             {
                 cwc.Server.prototype.drop_client(
                     clinet
@@ -105,8 +106,17 @@
                 /* -- Check to see if the cotroller exsistis -- */
                 if( controllers.hasOwnProperty( metadata.key ) )
                 {
+                    /* -- Delete clinet -- */
                     delete this.client_clusters[ metadata.cluster_code ].controllers[ metadata.key ];
                     //console.log( 'Dropping conetoller with key: ' + metadata.key );
+
+                    /* -- Send a message to the display stating that a clinet has disconnected -- */
+                    this.client_clusters[ metadata.cluster_code ].display.send( this.format_msg( {
+                        sender       : 'server',
+                        recipient    : 'display',
+                        action       : 'controller-disconnected',
+                        arguments    : this.get_all_controller_keys_in_cluster( metadata.cluster_code ),
+                    } ) );
                 }
             }
         }
@@ -139,6 +149,15 @@
 
         if( ! connected )
         {
+            /* -- Send a connection failed message back to clinet -- */
+            client.send( this.format_msg( {
+                recipient    : clinet_type,
+                sender       : 'server',
+                action       : 'connection-failed',
+                arguments    : 'There was a problem trying to connent...',
+                cwc_metadata : client.cwc_metadata
+            } ) );
+
             /* -- Close clinet if no cluster to join onto -- */
             client.close();
         }
@@ -148,8 +167,11 @@
             client.send( this.format_msg( {
                 recipient    : clinet_type,
                 sender       : 'server',
-                action       : 'greetings',
-                arguments    : 'Bidirectional connection established',
+                action       : 'connection-sucsess',
+                arguments    : {
+                    metadata  : client.cwc_metadata,
+                    apollo_13 : 'Bidirectional connection established...',
+                },
                 cwc_metadata : client.cwc_metadata
             } ) );
         }
@@ -219,12 +241,46 @@
         /* -- Check to see if cluster exsists -- */
         if( this.client_clusters.hasOwnProperty( cluster_code ) )
         {
+            /* -- Save the clinet -- */
             this.client_clusters[ cluster_code ].controllers[ controller_key ] = client;
+            console.log('Controler connected to : ' + cluster_code );
+
+            /* -- Send a message to the display stating that a clinet has connected -- */
+            this.client_clusters[ cluster_code ].display.send( this.format_msg( {
+                sender       : 'server',
+                recipient    : 'display',
+                action       : 'controller-connected',
+                arguments    : this.get_all_controller_keys_in_cluster( cluster_code ),
+            } ) );
+
             return true;
         }
 
         return false;
+
     };
+
+    Server.prototype.get_all_controller_keys_in_cluster = function( cluster_code )
+    {
+        /* -- Check to see if cluster exsists -- */
+        if( this.client_clusters.hasOwnProperty( cluster_code ) )
+        {
+            var c_clients         = this.client_clusters[ cluster_code ].controllers;
+            var clinets_metadata  = [];
+
+            for (var controller_key in c_clients)
+            {
+                var metadata = this.client_clusters[ cluster_code ].controllers[ controller_key ].cwc_metadata;
+
+                clinets_metadata.push( {
+                    'connected-timestamp'  : metadata.timestamp,
+                    'key'                  : controller_key
+                } );
+            }
+
+            return clinets_metadata;
+        }
+    }
 
     /*------------------------------------------------------
     * @function - Process request
@@ -232,11 +288,8 @@
     */
     Server.prototype.process_request = function( sent_package, metadata )
     {
-        sent_package.cwc_metadata = metadata;
-
-        //console.log('----------------');
-        //console.log( sent_package     );
-        //console.log('----------------');
+        /* -- Add the clients metadata to the code -- */
+        sent_package['cwc_metadata'] = metadata;
 
         /* -- Whom the message shall be sent to -- */
         switch( sent_package.recipient )
@@ -287,11 +340,11 @@
 
     /*------------------------------------------------------
     * @function - Send message controllers
-    * @info - Sending message to all controllers
+    * @info     - Sending message to all controllers
     */
     Server.prototype.send_message_controllers = function( sent_package )
     {
-        var c_client = this.client_clusters[ sent_package.cluster_code ].clients;
+        var c_client       = this.client_clusters[ sent_package.cluster_code ].clients;
         var format_package = this.format_msg( message );
 
         if( c_client != null )

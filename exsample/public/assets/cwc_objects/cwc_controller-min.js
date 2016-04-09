@@ -17,16 +17,6 @@
         /* ------------------------------------------------------
         * Set type of plugin
         */
-        _cluster_code : null,
-
-        /* ------------------------------------------------------
-        * Not USed yet might want to stoe client this send ci here
-        */
-        _cwc_client_id : null,
-
-        /* ------------------------------------------------------
-        * Set type of plugin
-        */
         _cwc_type : 'controller',
 
         /* ------------------------------------------------------
@@ -43,13 +33,6 @@
         * Stores currently active plugins.
         */
         _activePlugins: {},
-
-        /* ------------------------------------------------------
-        * Server code
-        */
-        _cwc_connection_code : function( length, namespace ) {
-            return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1) + (namespace ? '-' + namespace : '');
-        },
 
         /* ------------------------------------------------------
         * Defines a Foundation plugin, adding it to the `Foundation` namespace and the list of plugins to initialize when reflowing.
@@ -109,8 +92,7 @@
 */
 //@codekit-append "../../centralised/_functions.js";
 //@codekit-append "../../centralised/_Server.js";
-//@codekit-append "../../centralised/_ServerMethod.js";
-//@codekit-append "../../centralised/_CustomMethod.js";
+//@codekit-append "../../centralised/_Hooks.js";
 
 /*------------------------------------------------------
 * -- Controller Assets --
@@ -148,6 +130,16 @@ function hyphenate(str)
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
+function isFunctionA(object)
+{
+ 	return object && getClass.call(object) == '[object Function]';
+}
+
+/*------------------------------------------------------
+* @object - TODO
+* @OnFail - Would like to pass message down on why it faild
+*/
+
 !function( cwc ){
   'use strict';
 
@@ -166,7 +158,25 @@ function hyphenate(str)
 
     };
 
-    Server.prototype.connection_options = {};
+    /*------------------------------------------------------
+    * @object - Clinet key
+    * @info   - Key given to clinet by server
+    */
+    Server.prototype.clinet_key = '';
+
+    /*------------------------------------------------------
+    * @object - Cluster code
+    * @info   - Code used to connect displays
+    */
+    Server.prototype.cluster_code = '';
+
+    /*------------------------------------------------------
+    * @object - Connection options
+    * @info   - Options passed by the client
+    */
+    Server.prototype.connection_options = {
+
+    };
 
     /*------------------------------------------------------
     * @object - Connection
@@ -174,11 +184,6 @@ function hyphenate(str)
     */
     Server.prototype.connection = null;
 
-    /*------------------------------------------------------
-    * @int  - Client id
-    * @info - Store the given clients id from the server
-    */
-    Server.prototype.client_id = null;
 
     /*------------------------------------------------------
     * @int  - Cluster code
@@ -190,8 +195,29 @@ function hyphenate(str)
     * @function - Connect
     * @info - Connect to the server
     */
-    Server.prototype.connect = function( cluster_code )
+    Server.prototype.connect = function( prams )
     {
+        /* -- Flush any old connections -- */
+        ( cwc._server_connection )? this.onclose() : null;
+
+        /* -- Cluster code setting -- */
+        this.cluster_code = ( cwc._cwc_type  == 'controller' )?
+        prams['connect-code'] : this.gen_cluster_code( );
+
+        /* -- Crete connection sucsess | Hook -- */
+        cwc.Hooks.prototype.set_hook( {
+          name      : 'connection-sucsess',
+          method    : function( feedback ) {
+            ( prams.hasOwnProperty('connection-sucsess') )? prams['connection-sucsess']( feedback ) : null;
+        } } );
+
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_hook( {
+          name      : 'connection-failed',
+          method    : function( feedback ) {
+            ( prams.hasOwnProperty('connection-failed') )? prams['connection-failed']( feedback ) : null;
+        } } );
+
         var socket = null,
         host = this.connection_options.host,
         port = this.connection_options.port,
@@ -200,15 +226,19 @@ function hyphenate(str)
         /* -- We are running on a display clinet -- */
         if( cwc._cwc_type  == 'display' )
         {
-            /* -- Create a random connection code -- */
-            cwc._cluster_code = cwc._cwc_connection_code(6, 'cwc'); //  'pdc262-cwc'; //
-        }
+            /* -- Create hook | for controller connected CB-Func -- */
+            cwc.Hooks.prototype.set_hook( {
+              name      : 'controller-connected',
+              method    : function( controllers ) {
+                ( prams.hasOwnProperty('controller-connected') )? prams['controller-connected']( controllers ) : null;
+            } } );
 
-        /* -- We are running on a controller clinet -- */
-        else if( cwc._cwc_type  == 'controller' )
-        {
-            /* -- Cluster code will need to be supplied by user -- */
-            cwc._cluster_code = cluster_code;
+            /* -- Create hook | for controller disconnected CB-Func -- */
+            cwc.Hooks.prototype.set_hook( {
+              name      : 'controller-disconnected',
+              method    : function( controllers ) {
+                ( prams.hasOwnProperty('controller-disconnected') )? prams['controller-disconnected']( controllers ) : null;
+            } } );
         }
 
         /* -- Check the type of connection -- */
@@ -217,13 +247,14 @@ function hyphenate(str)
             case 'ws':
                 socket = new WebSocket ( this.build_ws_connection (host, port, type) );
             break;
+
         }
 
         /* -- Allow our cwc object to be reatch at the _global scope -- */
         if( socket )
         {
-            /* -- Get ready to acsept message back -- */
-            this.on_greetings();
+            /* -- Creat callback for class -- */
+            this.create_reserved_connection_status_hooks();
 
             /* -- Set global connection  -- */
             cwc._server_connection = socket;
@@ -238,14 +269,46 @@ function hyphenate(str)
     };
 
     /*------------------------------------------------------
+    * @function - Create hooks
+    * @info - Connect to the server
+    */
+    Server.prototype.create_reserved_connection_status_hooks = function( length )
+    {
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_reserved_hook( {
+          name      : 'connection-sucsess',
+          method    : function( feedback ) {
+            cwc.Server.prototype.on_connection_sucsess( feedback );
+        } } );
+
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_reserved_hook( {
+          name      : 'connection-failed',
+          method    : function( feedback ) {
+            cwc.Server.prototype.on_connection_faild( feedback );
+        } } );
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Connect
+    * @info - Connect to the server
+    */
+    Server.prototype.gen_cluster_code = function( length  )
+    {
+        var min = 10000;
+        var max = 99999;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    /*------------------------------------------------------
     * @function - Connect
     * @info - Connect to the server
     */
     Server.prototype.build_ws_connection = function( host, port )
     {
-        var cluster_code  = cwc._cluster_code;
+        var cluster_code  = this.cluster_code;
         var clinet_type   = cwc._cwc_type;
-        var clinet_id     = cwc._cwc_connection_code(6, 'cwc-clinet' );
 
         return 'ws:' + host + ':'+ port +
         '?cluster_code=' + cluster_code +
@@ -254,32 +317,35 @@ function hyphenate(str)
     };
 
     /*------------------------------------------------------
-    * @object - On greetings
-    * @info   - Get ready to accept greetings message from server
+    * @function - On connection sucsess
+    * @info     - how to react when connection sucsessfull
     */
-    Server.prototype.on_greetings = function()
+    Server.prototype.on_connection_sucsess = function( server_feedback )
     {
-        cwc.ServerMethod.prototype.create_method({
-            action   : 'greetings',
-            callback : function ( message ) {
-                cwc.Server.prototype.on_greeting_message( message );
+        if( cwc._cwc_type  == 'controller' )
+        {
+            try {
+                cwc.ClusterCodeCache.prototype.save_cluster_code(
+                    server_feedback.metadata
+                );
+            } catch ( e ) {
+                console.log('saved faild');
             }
-        } );
+        }
 
-    }
+    };
 
     /*------------------------------------------------------
     * @function - On greeting message
     * @info     - how to react when connection sucsessfull
     */
-    Server.prototype.on_greeting_message = function()
+    Server.prototype.on_connection_faild = function()
     {
-        if( cwc._cwc_type  == 'controller' )
-        {
-            cwc.ClusterCodeCache.prototype.save_cluster_code(
-                cwc._cluster_code, cwc._cwc_type
-            );
-        }
+        /* -- Invoke the connection sucsess message -- */
+        cwc.Hooks.prototype.invoke({
+            name      : 'connection-failed',
+            arguments : this.connection_options,
+        });
 
     };
 
@@ -339,8 +405,7 @@ function hyphenate(str)
     */
     Server.prototype.onclose = function()
     {
-        console.log('closed ');
-
+        cwc._server_connection = null;
     };
 
     /*------------------------------------------------------
@@ -352,8 +417,6 @@ function hyphenate(str)
         /* -- Message data -- */
         var data = JSON.parse( data.data );
 
-        //console.log( data );
-
         /* -- Is a valid mesage : return true not valid -- */
         if( cwc.Server.prototype.validate_onmessage( data ) )
         {
@@ -363,7 +426,19 @@ function hyphenate(str)
         /* -- Message for Display || Controller-- */
         else if( cwc._cwc_type  == data.recipient )
         {
-            cwc.ServerMethod.prototype.call_method( data );
+            /* -- Look at reserved -- */
+            cwc.Hooks.prototype.invoke({
+                name         : data.action,
+                arguments    : data.arguments,
+                cwc_metadata : data.cwc_metadata,
+            }, true );
+
+            /* -- Look for users -- */
+            cwc.Hooks.prototype.invoke({
+                name         : data.action,
+                arguments    : data.arguments,
+                cwc_metadata : data.cwc_metadata,
+            } );
         }
 
         /* -- Message for display & controller -- */
@@ -376,7 +451,7 @@ function hyphenate(str)
 
     /*------------------------------------------------------
     * @function - Send message
-    * @info - Send a message to the server from dlient
+    * @info     - Send a message to the server from client
     */
     Server.prototype.send_message = function( data )
     {
@@ -416,7 +491,7 @@ function hyphenate(str)
         for( var i = 0; i < checks.length; i++ )
         {
             /* -- If property was not found : return true -- */
-            if ( ! data.hasOwnProperty( checks[i] ) )
+            if ( ! data.hasOwnProperty( checks[ i ] ) )
             {
                 console.log('Server message is not properly fromatted.');
                 return true;
@@ -434,75 +509,46 @@ function hyphenate(str)
 !function( cwc ){
   'use strict';
 
-    function ServerMethod( )
+    function Hooks( )
     {
-        cwc.registerPlugin(this, 'CustomMethod');
+        cwc.registerPlugin(this, 'Hooks');
     }
 
     /*------------------------------------------------------
     * @array
     * Place to store all custom methord
     */
-    ServerMethod.prototype.custom_methods = [
-    ];
+    Hooks.prototype.all_reserved_hooks = {};
+
+    /*------------------------------------------------------
+    * @array
+    * Place to store all custom methord
+    */
+    Hooks.prototype.all_hooks = {};
 
     /*------------------------------------------------------
     * @function
     * Create custom methods
     */
-    ServerMethod.prototype.create_method = function( prams )
+    Hooks.prototype.set_reserved_hook = function( prams )
     {
-        this.custom_methods[ prams.action ] = {
-            'callback' : prams.callback
+        this.all_reserved_hooks[ prams.name ] = {
+            'name'     : prams.name,
+            'method'   : prams.method
         };
 
     };
 
     /*------------------------------------------------------
-    * @function - Call method
-    * @info     - Use to invoke created methord
-    */
-    ServerMethod.prototype.call_method = function( prams )
-    {
-        /* -- Check methord exsists -- */
-        if( this.custom_methods[ prams.action ] )
-        {
-            this.custom_methods[ prams.action ].callback(
-                prams.arguments
-            );
-        }
-
-    };
-
-    /* -- Add this new object to the main object -- */
-    cwc.plugin(ServerMethod, 'ServerMethod');
-
-}( window.cwc );
-
-!function( cwc ){
-  'use strict';
-
-    function CustomMethod( )
-    {
-        cwc.registerPlugin(this, 'CustomMethod');
-    }
-
-    /*------------------------------------------------------
-    * @array
-    * Place to store all custom methord
-    */
-    CustomMethod.prototype.custom_methods = [];
-
-    /*------------------------------------------------------
     * @function
     * Create custom methods
     */
-    CustomMethod.prototype.create_method = function( prams )
+    Hooks.prototype.set_hook = function( prams )
     {
-        this.custom_methods.push({
+        this.all_hooks[ prams.name ] = {
             'name'     : prams.name,
             'method'   : prams.method
-        });
+        };
 
     };
 
@@ -510,29 +556,20 @@ function hyphenate(str)
     * @function
     * where we invoke custom methods
     */
-    CustomMethod.prototype.call_method = function( prams )
+    Hooks.prototype.invoke = function( prams, reserved )
     {
-        var cm_count = this.custom_methods.length;
+        var hooks = ( reserved )? this.all_reserved_hooks : this.all_hooks;
 
-        for( var i = 0; i < cm_count; i++ )
-        {
-            var cm = this.custom_methods[ i ];
-
-            if( cm.name === prams.method )
-            {
-                cm.method(
-                    prams.arguments
-                );
-
-                return;
-            }
+        try {
+            hooks[ prams.name ].method( prams.arguments, prams.cwc_metadata )
+        } catch( e ) {
+            console.log( e );
         }
 
-        console.log('Methord has not been created : CM');
     };
 
     /* -- Add this new object to the main object -- */
-    cwc.plugin(CustomMethod, 'CustomMethod');
+    cwc.plugin(Hooks, 'Hooks');
 
 }( window.cwc );
 
@@ -610,19 +647,16 @@ function hyphenate(str)
     * @function - Process request
     * @info - Send the message to the right clinet
     */
-    ClusterCodeCache.prototype.save_cluster_code = function( cluster_code, cwc_type )
+    ClusterCodeCache.prototype.save_cluster_code = function( client_data )
     {
         /* -- remove old code from local data -- */
         this.delete_old_codes();
 
         /* -- Check to see if the code has been saved -- */
-        if( ! this.dose_cose_exists( cluster_code ) )
+        if( ! this.dose_code_exists( client_data ) )
         {
             /* -- Formate the cluster code -- */
-            this.storage_data[ Date.now() ] = {
-                cluster_code : cluster_code,
-                cwc_type     : cwc_type,
-            };
+            this.storage_data[ client_data.key ] = client_data;
 
             /* -- Store -- */
             localStorage.setItem( this.storage_name , JSON.stringify(
@@ -644,15 +678,13 @@ function hyphenate(str)
 
         for (var key in object )
         {
-            if ( object.hasOwnProperty( key ) )
-            {
-                var diff = ( ( Date.now() - key ) /1000/60) << 0;
+            var data = object[key];
+            var diff = ( ( Date.now() - data.timestamp ) / 1000 / 60 ) << 0;
 
-                /* -- Add if underd : Time Threshold option -- */
-                if( diff < this.time_threshold )
-                {
-                    new_object[ key ] = object[ key ];
-                }
+            /* -- Add if underd : Time Threshold option -- */
+            if( diff < this.time_threshold )
+            {
+                new_object[ key ] = object[ key ];
             }
         }
 
@@ -664,11 +696,11 @@ function hyphenate(str)
     * @function - Process request
     * @info - Send the message to the right clinet
     */
-    ClusterCodeCache.prototype.dose_cose_exists = function( cluster_code )
+    ClusterCodeCache.prototype.dose_code_exists = function( client_data )
     {
         var object = this.storage_data;
 
-        for (var key in object )
+        for ( var key in object )
         {
             if( object[ key ].cluster_code == cluster_code )
             {
@@ -796,9 +828,14 @@ function hyphenate(str)
     ControllerMaster.prototype.calculate_axis_as_coordinate = function( z )
     {
         var int = Math.round( (z / 100) * 10 ) / 10;
-        return Number( ( z < 0 )? (int - 1) : (int + 1) );
+        return this.clamp( (int * 2), -1, 1 );
+        //return Number( ( z < 0 )? (int - 1) : (int + 1) );
 
     };
+
+    ControllerMaster.prototype.clamp = function(num, min, max) {
+      return num < min ? min : num > max ? max : num;
+    }
 
     /*------------------------------------------------------
     * @function - Get moving direction
@@ -836,8 +873,8 @@ function hyphenate(str)
     {
         if( instructions.hasOwnProperty( hook ) )
         {
-            cwc.CustomMethod.prototype.call_method(  {
-                method    : instructions[ hook ],
+            cwc.Hooks.prototype.invoke(  {
+                name      : instructions[ hook ],
                 arguments : arg
             } );
         }
@@ -1406,6 +1443,7 @@ function hyphenate(str)
             coordinate         : coordinate,
             delta              : delta,
             angle              : ev.angle,
+            event_type         : ev.type,
         };
 
         /* -- analog container circal -- */

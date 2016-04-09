@@ -4,6 +4,10 @@ if (seed.indexOf('&') >= 0) {
   seed = seed.substring(0, seed.indexOf('&'));
 }
 
+document.ontouchmove = function(event){
+    event.preventDefault();
+}
+
 
 /*------------------------------------------------------
 * @function in array
@@ -13,7 +17,7 @@ if (seed.indexOf('&') >= 0) {
 window.onload = function()
 {
     cwc_object_declaration();
-    controller_code();
+    cwc_Hooks();
     start_conection_process();
 
 };
@@ -44,7 +48,7 @@ function cwc_object_declaration()
     * System messages should be declared here
     * We will have a list or predefined functions
     */
-    CustomMethod = new cwc.CustomMethod({
+    Hooks = new cwc.Hooks({
     });
 
     /*------------------------------------------------------
@@ -89,11 +93,11 @@ function cwc_object_declaration()
 
 };
 
-function controller_code()
-{
-    var is_sending = null;
+var is_sending = null;
 
-    CustomMethod.create_method( {
+function cwc_Hooks()
+{
+    Hooks.set_hook( {
       name   : 'on-move-navigation',
       method : function( prams ) {
         //console.log( prams );
@@ -104,7 +108,7 @@ function controller_code()
       }
     });
 
-    CustomMethod.create_method( {
+    Hooks.set_hook( {
       name   : 'scroll-view',
       method : function( prams ) {
         Server.send_message({
@@ -136,23 +140,37 @@ function start_conection_process()
 
         $('#connect-code-list').html( html );
 
-        $('#connect-code-list li').on('click', function(){
-            /* -- Run cwc server object to connect to server with code -- */
-            Server.connect(
-                $(this).text()
-            );
-        });
+        /* -- Run cwc server object to connect to server with code -- */
+        $('#connect-code-list li').on('click', function() {
+            Server.connect({
+               'connect-code'       : $(this).text(),
+               'connection-sucsess' : function(){ on_connection_sucsess() },
+               'connection-failed'  : function(){ on_connection_faild()   }
+            } );
+        } );
 
     }
 
-    $('#connect-button').on('click', function(){
+    $('#connect-code').on('focusout', function(){
         /* -- Run cwc server object to connect to server with code -- */
-        Server.connect(
-            $('#cluster-code').val()
-        );
+        Server.connect({
+           'connect-code'       : $('#connect-code').val(),
+           'connection-sucsess' : function(){ on_connection_sucsess() },
+           'connection-failed'  : function(){ on_connection_faild()   }
+        } );
+    } );
+}
 
-    });
+function on_connection_sucsess()
+{
+    console.log('on_connection_sucsess');
+    $('.connect-code-process').removeClass('open');
+}
 
+function on_connection_faild()
+{
+    console.log('on_connection_faild');
+    $('.connect-code-process').addClass('open');
 }
 
 function slow_down( dir )
@@ -173,5 +191,3 @@ function slow_down( dir )
     }
 
 };
-
-

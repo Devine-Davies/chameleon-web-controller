@@ -69,15 +69,12 @@
     */
     ViewportScroll.prototype.add_server_events = function()
     {
-        /* -- Server message -- */
-        cwc.ServerMethod.prototype.create_method( {
-            action   : 'scroll-viewport',
-            callback : function( args ) {
-                cwc.ViewportScroll.prototype.start_scroll_process(
-                    args
-                );
-            }
-        } );
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_reserved_hook( {
+          name      : 'scroll-viewport',
+          method    : function( feedback ) {
+            cwc.ViewportScroll.prototype.start_scroll_process( feedback );
+        } } );
 
     };
 

@@ -72,19 +72,16 @@
     * @function - Process request
     * @info - Send the message to the right clinet
     */
-    ClusterCodeCache.prototype.save_cluster_code = function( cluster_code, cwc_type )
+    ClusterCodeCache.prototype.save_cluster_code = function( client_data )
     {
         /* -- remove old code from local data -- */
         this.delete_old_codes();
 
         /* -- Check to see if the code has been saved -- */
-        if( ! this.dose_cose_exists( cluster_code ) )
+        if( ! this.dose_code_exists( client_data ) )
         {
             /* -- Formate the cluster code -- */
-            this.storage_data[ Date.now() ] = {
-                cluster_code : cluster_code,
-                cwc_type     : cwc_type,
-            };
+            this.storage_data[ client_data.key ] = client_data;
 
             /* -- Store -- */
             localStorage.setItem( this.storage_name , JSON.stringify(
@@ -106,15 +103,13 @@
 
         for (var key in object )
         {
-            if ( object.hasOwnProperty( key ) )
-            {
-                var diff = ( ( Date.now() - key ) /1000/60) << 0;
+            var data = object[key];
+            var diff = ( ( Date.now() - data.timestamp ) / 1000 / 60 ) << 0;
 
-                /* -- Add if underd : Time Threshold option -- */
-                if( diff < this.time_threshold )
-                {
-                    new_object[ key ] = object[ key ];
-                }
+            /* -- Add if underd : Time Threshold option -- */
+            if( diff < this.time_threshold )
+            {
+                new_object[ key ] = object[ key ];
             }
         }
 
@@ -126,11 +121,11 @@
     * @function - Process request
     * @info - Send the message to the right clinet
     */
-    ClusterCodeCache.prototype.dose_cose_exists = function( cluster_code )
+    ClusterCodeCache.prototype.dose_code_exists = function( client_data )
     {
         var object = this.storage_data;
 
-        for (var key in object )
+        for ( var key in object )
         {
             if( object[ key ].cluster_code == cluster_code )
             {

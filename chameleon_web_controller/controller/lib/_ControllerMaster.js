@@ -106,9 +106,14 @@
     ControllerMaster.prototype.calculate_axis_as_coordinate = function( z )
     {
         var int = Math.round( (z / 100) * 10 ) / 10;
-        return Number( ( z < 0 )? (int - 1) : (int + 1) );
+        return this.clamp( (int * 2), -1, 1 );
+        //return Number( ( z < 0 )? (int - 1) : (int + 1) );
 
     };
+
+    ControllerMaster.prototype.clamp = function(num, min, max) {
+      return num < min ? min : num > max ? max : num;
+    }
 
     /*------------------------------------------------------
     * @function - Get moving direction
@@ -146,8 +151,8 @@
     {
         if( instructions.hasOwnProperty( hook ) )
         {
-            cwc.CustomMethod.prototype.call_method(  {
-                method    : instructions[ hook ],
+            cwc.Hooks.prototype.invoke(  {
+                name      : instructions[ hook ],
                 arguments : arg
             } );
         }

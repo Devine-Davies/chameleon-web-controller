@@ -341,13 +341,12 @@
     */
     Navigation.prototype.add_server_events = function()
     {
-        /* -- Server message -- */
-        cwc.ServerMethod.prototype.create_method({
-            action   : 'move navigation',
-            callback : function( action ) {
-                cwc.Navigation.prototype.invoke_dir( action );
-            }
-        } );
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_reserved_hook( {
+          name      : 'move navigation',
+          method    : function( feedback ) {
+            cwc.Navigation.prototype.invoke_dir( feedback );
+        } } );
 
     }
 

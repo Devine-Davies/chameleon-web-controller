@@ -1,3 +1,8 @@
+/*------------------------------------------------------
+* @object - TODO
+* @OnFail - Would like to pass message down on why it faild
+*/
+
 !function( cwc ){
   'use strict';
 
@@ -16,7 +21,25 @@
 
     };
 
-    Server.prototype.connection_options = {};
+    /*------------------------------------------------------
+    * @object - Clinet key
+    * @info   - Key given to clinet by server
+    */
+    Server.prototype.clinet_key = '';
+
+    /*------------------------------------------------------
+    * @object - Cluster code
+    * @info   - Code used to connect displays
+    */
+    Server.prototype.cluster_code = '';
+
+    /*------------------------------------------------------
+    * @object - Connection options
+    * @info   - Options passed by the client
+    */
+    Server.prototype.connection_options = {
+
+    };
 
     /*------------------------------------------------------
     * @object - Connection
@@ -24,11 +47,6 @@
     */
     Server.prototype.connection = null;
 
-    /*------------------------------------------------------
-    * @int  - Client id
-    * @info - Store the given clients id from the server
-    */
-    Server.prototype.client_id = null;
 
     /*------------------------------------------------------
     * @int  - Cluster code
@@ -40,8 +58,29 @@
     * @function - Connect
     * @info - Connect to the server
     */
-    Server.prototype.connect = function( cluster_code )
+    Server.prototype.connect = function( prams )
     {
+        /* -- Flush any old connections -- */
+        ( cwc._server_connection )? this.onclose() : null;
+
+        /* -- Cluster code setting -- */
+        this.cluster_code = ( cwc._cwc_type  == 'controller' )?
+        prams['connect-code'] : this.gen_cluster_code( );
+
+        /* -- Crete connection sucsess | Hook -- */
+        cwc.Hooks.prototype.set_hook( {
+          name      : 'connection-sucsess',
+          method    : function( feedback ) {
+            ( prams.hasOwnProperty('connection-sucsess') )? prams['connection-sucsess']( feedback ) : null;
+        } } );
+
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_hook( {
+          name      : 'connection-failed',
+          method    : function( feedback ) {
+            ( prams.hasOwnProperty('connection-failed') )? prams['connection-failed']( feedback ) : null;
+        } } );
+
         var socket = null,
         host = this.connection_options.host,
         port = this.connection_options.port,
@@ -50,15 +89,19 @@
         /* -- We are running on a display clinet -- */
         if( cwc._cwc_type  == 'display' )
         {
-            /* -- Create a random connection code -- */
-            cwc._cluster_code = cwc._cwc_connection_code(6, 'cwc'); //  'pdc262-cwc'; //
-        }
+            /* -- Create hook | for controller connected CB-Func -- */
+            cwc.Hooks.prototype.set_hook( {
+              name      : 'controller-connected',
+              method    : function( controllers ) {
+                ( prams.hasOwnProperty('controller-connected') )? prams['controller-connected']( controllers ) : null;
+            } } );
 
-        /* -- We are running on a controller clinet -- */
-        else if( cwc._cwc_type  == 'controller' )
-        {
-            /* -- Cluster code will need to be supplied by user -- */
-            cwc._cluster_code = cluster_code;
+            /* -- Create hook | for controller disconnected CB-Func -- */
+            cwc.Hooks.prototype.set_hook( {
+              name      : 'controller-disconnected',
+              method    : function( controllers ) {
+                ( prams.hasOwnProperty('controller-disconnected') )? prams['controller-disconnected']( controllers ) : null;
+            } } );
         }
 
         /* -- Check the type of connection -- */
@@ -67,13 +110,14 @@
             case 'ws':
                 socket = new WebSocket ( this.build_ws_connection (host, port, type) );
             break;
+
         }
 
         /* -- Allow our cwc object to be reatch at the _global scope -- */
         if( socket )
         {
-            /* -- Get ready to acsept message back -- */
-            this.on_greetings();
+            /* -- Creat callback for class -- */
+            this.create_reserved_connection_status_hooks();
 
             /* -- Set global connection  -- */
             cwc._server_connection = socket;
@@ -88,14 +132,46 @@
     };
 
     /*------------------------------------------------------
+    * @function - Create hooks
+    * @info - Connect to the server
+    */
+    Server.prototype.create_reserved_connection_status_hooks = function( length )
+    {
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_reserved_hook( {
+          name      : 'connection-sucsess',
+          method    : function( feedback ) {
+            cwc.Server.prototype.on_connection_sucsess( feedback );
+        } } );
+
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_reserved_hook( {
+          name      : 'connection-failed',
+          method    : function( feedback ) {
+            cwc.Server.prototype.on_connection_faild( feedback );
+        } } );
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Connect
+    * @info - Connect to the server
+    */
+    Server.prototype.gen_cluster_code = function( length  )
+    {
+        var min = 10000;
+        var max = 99999;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    /*------------------------------------------------------
     * @function - Connect
     * @info - Connect to the server
     */
     Server.prototype.build_ws_connection = function( host, port )
     {
-        var cluster_code  = cwc._cluster_code;
+        var cluster_code  = this.cluster_code;
         var clinet_type   = cwc._cwc_type;
-        var clinet_id     = cwc._cwc_connection_code(6, 'cwc-clinet' );
 
         return 'ws:' + host + ':'+ port +
         '?cluster_code=' + cluster_code +
@@ -104,32 +180,35 @@
     };
 
     /*------------------------------------------------------
-    * @object - On greetings
-    * @info   - Get ready to accept greetings message from server
+    * @function - On connection sucsess
+    * @info     - how to react when connection sucsessfull
     */
-    Server.prototype.on_greetings = function()
+    Server.prototype.on_connection_sucsess = function( server_feedback )
     {
-        cwc.ServerMethod.prototype.create_method({
-            action   : 'greetings',
-            callback : function ( message ) {
-                cwc.Server.prototype.on_greeting_message( message );
+        if( cwc._cwc_type  == 'controller' )
+        {
+            try {
+                cwc.ClusterCodeCache.prototype.save_cluster_code(
+                    server_feedback.metadata
+                );
+            } catch ( e ) {
+                console.log('saved faild');
             }
-        } );
+        }
 
-    }
+    };
 
     /*------------------------------------------------------
     * @function - On greeting message
     * @info     - how to react when connection sucsessfull
     */
-    Server.prototype.on_greeting_message = function()
+    Server.prototype.on_connection_faild = function()
     {
-        if( cwc._cwc_type  == 'controller' )
-        {
-            cwc.ClusterCodeCache.prototype.save_cluster_code(
-                cwc._cluster_code, cwc._cwc_type
-            );
-        }
+        /* -- Invoke the connection sucsess message -- */
+        cwc.Hooks.prototype.invoke({
+            name      : 'connection-failed',
+            arguments : this.connection_options,
+        });
 
     };
 
@@ -189,8 +268,7 @@
     */
     Server.prototype.onclose = function()
     {
-        console.log('closed ');
-
+        cwc._server_connection = null;
     };
 
     /*------------------------------------------------------
@@ -202,8 +280,6 @@
         /* -- Message data -- */
         var data = JSON.parse( data.data );
 
-        //console.log( data );
-
         /* -- Is a valid mesage : return true not valid -- */
         if( cwc.Server.prototype.validate_onmessage( data ) )
         {
@@ -213,7 +289,19 @@
         /* -- Message for Display || Controller-- */
         else if( cwc._cwc_type  == data.recipient )
         {
-            cwc.ServerMethod.prototype.call_method( data );
+            /* -- Look at reserved -- */
+            cwc.Hooks.prototype.invoke({
+                name         : data.action,
+                arguments    : data.arguments,
+                cwc_metadata : data.cwc_metadata,
+            }, true );
+
+            /* -- Look for users -- */
+            cwc.Hooks.prototype.invoke({
+                name         : data.action,
+                arguments    : data.arguments,
+                cwc_metadata : data.cwc_metadata,
+            } );
         }
 
         /* -- Message for display & controller -- */
@@ -226,7 +314,7 @@
 
     /*------------------------------------------------------
     * @function - Send message
-    * @info - Send a message to the server from dlient
+    * @info     - Send a message to the server from client
     */
     Server.prototype.send_message = function( data )
     {
@@ -266,7 +354,7 @@
         for( var i = 0; i < checks.length; i++ )
         {
             /* -- If property was not found : return true -- */
-            if ( ! data.hasOwnProperty( checks[i] ) )
+            if ( ! data.hasOwnProperty( checks[ i ] ) )
             {
                 console.log('Server message is not properly fromatted.');
                 return true;

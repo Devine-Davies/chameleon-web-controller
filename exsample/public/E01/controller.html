@@ -10,7 +10,7 @@
 
     <!-- Make the app title different than the page title. -->
     <meta name="apple-mobile-web-app-title"
-          content="cwc exsample">
+          content="cwc exsample two">
 
     <!-- Configure the status bar. -->
     <meta name="apple-mobile-web-app-status-bar-style"
@@ -131,6 +131,10 @@
 
     <title>Remote</title>
 
+    <!--  Google fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700,500' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery js -->
     <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
 
     <!-- Hammer js -->
@@ -141,18 +145,18 @@
     <link   rel='stylesheet'      href='../assets/cwc_objects/cwc_controller_style-min.css'  type='text/css'>
 
     <!-- This exsample code -->
-    <script type="text/javascript" src="../assets/exsample_02/controller.js"></script>
-
+    <script type="text/javascript" src="../assets/E01/controller.js"></script>
+    <link   rel='stylesheet'      href='../assets/E01/controller.css'  type='text/css'>
   </head>
   <body class="controller-body-wrapper"  >
 
-    <div class="previous-cluster-code">
-      <h1>Enter connetion code</h1>
-      <input type="text" id="cluster-code" />
-      <button id="connect-button" >Connect</button>
-      <h1>Recent connections</h1>
-      <ul id="connect-code-list" >
-      </ul>
+    <div class="connect-code-process open">
+      <div class="wrapper" >
+        <h2>Enter connetion code</h1>
+        <input type="tel" id="connect-code" />
+        <h2>Recent connections</h1>
+        <ul id="connect-code-list" ></ul>
+      </div>
     </div>
 
     <!--  CWC Assets  -->

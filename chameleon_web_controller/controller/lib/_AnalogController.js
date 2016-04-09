@@ -149,6 +149,7 @@
             coordinate         : coordinate,
             delta              : delta,
             angle              : ev.angle,
+            event_type         : ev.type,
         };
 
         /* -- analog container circal -- */

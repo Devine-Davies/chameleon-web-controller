@@ -17,16 +17,6 @@
         /* ------------------------------------------------------
         * Set type of plugin
         */
-        _cluster_code : null,
-
-        /* ------------------------------------------------------
-        * Not USed yet might want to stoe client this send ci here
-        */
-        _cwc_client_id : null,
-
-        /* ------------------------------------------------------
-        * Set type of plugin
-        */
         _cwc_type : 'controller',
 
         /* ------------------------------------------------------
@@ -43,13 +33,6 @@
         * Stores currently active plugins.
         */
         _activePlugins: {},
-
-        /* ------------------------------------------------------
-        * Server code
-        */
-        _cwc_connection_code : function( length, namespace ) {
-            return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1) + (namespace ? '-' + namespace : '');
-        },
 
         /* ------------------------------------------------------
         * Defines a Foundation plugin, adding it to the `Foundation` namespace and the list of plugins to initialize when reflowing.
@@ -109,8 +92,7 @@
 */
 //@codekit-append "../../centralised/_functions.js";
 //@codekit-append "../../centralised/_Server.js";
-//@codekit-append "../../centralised/_ServerMethod.js";
-//@codekit-append "../../centralised/_CustomMethod.js";
+//@codekit-append "../../centralised/_Hooks.js";
 
 /*------------------------------------------------------
 * -- Controller Assets --

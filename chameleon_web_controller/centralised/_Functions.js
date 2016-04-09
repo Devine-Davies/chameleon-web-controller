@@ -23,3 +23,8 @@ function hyphenate(str)
 {
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
+
+function isFunctionA(object)
+{
+ 	return object && getClass.call(object) == '[object Function]';
+}
