@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Display</title>
+
+    <!--  Google fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Jaldi:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery js -->
+    <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+
+    <!-- Vimeo -->
+    <!-- <script src="https://f.vimeocdn.com/js/froogaloop2.min.js"></script> -->
+
+    <!-- Font awsome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Youtube video api -->
+    <script type="text/javascript" src="../assets/E01/vimeo.js"></script>
+
+    <!-- Exsample feed -->
+    <script type="text/javascript" src="../assets/E01/example-feed.js"></script>
+
+    <!-- cwc objects -->
+    <script type="text/javascript" src="../assets/cwc_objects/cwc_display-min.js"></script>
+
+    <!-- This exsample code -->
+    <script type="text/javascript" src="../assets/E01/display.js"></script>
+    <link   rel='stylesheet'       href='../assets/E01/style/normalize.css'  type='text/css'>
+    <link   rel='stylesheet'       href='../assets/E01/style/main.css'  type='text/css'>
+  </head>
+
+  <body id="scroll-target" class="display"  >
+
+    <div id="controller-connection-alert">
+        <h2></h2>
+    </div>
+
+    <div class="connection-status">
+      <div class="search"
+      data-cwc-navgroup="search"
+      data-cwc-instructions='{ "down" : "ng-global-nav", "onnaventrance" : "hook-on-search-focus" }' >
+        <span >
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search"
+          data-cwc-navitem
+          data-cwc-overide='{"right" : "ng-controller-tally"}'
+          data-cwc-textcapture='cwc-textcapture-search'
+          data-cwc-instructions='{"controller-placeholder" : "Make a search"}'>
+        </span>
+      </div>
+
+      <div class="controller-tally" data-cwc-navgroup="controller-tally"
+      data-cwc-instructions='{ "down" : "ng-global-nav", "left" : "ni-prev", "right" : "ni-next" }' >
+        <i class="fa fa-gamepad" aria-hidden="true" data-cwc-navitem
+        data-cwc-overide='{"left" : "ng-search" }' ></i>
+        <i class="fa fa-gamepad" aria-hidden="true" data-cwc-navitem ></i>
+        <i class="fa fa-gamepad" aria-hidden="true" data-cwc-navitem ></i>
+      </div>
+      <div class="connection-code" >
+        <p>01. Go to www.google.com</p>
+        <p>02. Enter code : <span>00000</span></p>
+      </div>
+    </div>
+
+    <div id="top-nav" data-cwc-navgroup="global-nav"
+    data-cwc-instructions='{ "left" : "ni-prev" , "down" : "ng-2", "right" : "ni-next", "enter" : "hook-gn-item-selected", "history-item" : "ture", "onnaventrance" : "hook-move-page-onentrance"  }' >
+        <nav class="navigation" >
+          <section data-cwc-navitem="starting-point"
+            data-cwc-overide='{"up" : "ng-search", "onitementrance" : "hook-on-global-nav-enter" }'  >
+            <p>New Releases</p>
+          </section>
+          <section data-cwc-navitem
+            data-cwc-overide='{"up" : "ng-search", "onitementrance" : "hook-on-global-nav-enter" }'  >
+            <p>Latest movies</p>
+          </section>
+          <section data-cwc-navitem
+            data-cwc-overide='{"up" : "ng-controller-tally", "onitementrance" : "hook-on-global-nav-enter" }'  >
+            <p>Your favourite</p>
+          </section>
+          <section data-cwc-navitem
+            data-cwc-overide='{"up" : "ng-controller-tally", "onitementrance" : "hook-on-global-nav-enter" }'  >
+            <p>Connect your controller</p>
+          </section>
+        </nav>
+    </div>
+
+    <div id="home-screen" data-firstscreen-app="true" >
+      <!-- List items -->
+      <div class="item-list" >
+      </div>
+
+      <!-- infromation side screen -->
+      <div id="infromation-side-screen" >
+        <div class="info">
+          <div class="left">
+            <img src="" width="600" height="900" />
+          </div>
+          <div class="right">
+            <div class="btns" data-cwc-navgroup="infromation-screen"
+            data-cwc-instructions='{ "left" : "ni-prev", "right" : "ni-next" }' >
+              <p class="btn light" data-cwc-navitem
+              data-cwc-overide='{ "enter" : "hook-info-window-btn-clicked" }' >Trailler</p>
+              <p class="btn dark"  data-cwc-navitem
+              data-cwc-overide='{ "enter" : "hook-info-window-btn-clicked" }' >Exit</p>
+            </div>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="connection-screen" data-firstscreen-app="true" >
+    </div>
+
+  </body>
+
+</html>
