@@ -38,7 +38,8 @@
         * Defines a Foundation plugin, adding it to the `Foundation` namespace and the list of plugins to initialize when reflowing.
         * @param {Object} plugin - The constructor of the plugin.
         */
-        plugin: function(plugin, name) {
+        plugin: function(plugin, name)
+        {
             // Object key to use when adding to global Foundation object
             // Examples: Foundation.Reveal, Foundation.OffCanvas
             var className = (name || functionName(plugin));
@@ -58,7 +59,8 @@
         * @param {Object} plugin - an instance of a plugin, usually `this` in context.
         * @fires Plugin#init
         */
-        registerPlugin: function(plugin, name){
+        registerPlugin: function( plugin, name )
+        {
             var pluginName  = name ? hyphenate(name) : functionName( plugin.constructor ).toLowerCase();
                 plugin.uuid = this.GetYoDigits(6, pluginName);
 
@@ -75,7 +77,8 @@
         * @default {String} '' - if no plugin name is provided, nothing is appended to the uid.
         * @returns {String} - unique id
         */
-        GetYoDigits: function(length, namespace){
+        GetYoDigits: function(length, namespace)
+        {
             length = length || 6;
             return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1) + (namespace ? '-' + namespace : '');
         },
@@ -97,9 +100,11 @@
 /*------------------------------------------------------
 * -- Controller Assets --
 */
-//@codekit-append "_ClusterCodeCache.js";
+//@codekit-append "_CacheControl.js";
+
 //@codekit-append "_ControllerMaster.js";
 //@codekit-append "_DpadController.js";
 //@codekit-append "_TouchPadController.js";
 //@codekit-append "_AnalogController.js";
 //@codekit-append "_PullbarController.js";
+//@codekit-append "_TextCapture.js";

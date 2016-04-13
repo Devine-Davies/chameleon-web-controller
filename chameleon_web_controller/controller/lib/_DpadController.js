@@ -28,8 +28,8 @@
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @object - Taxonomy
+    * @info   - To store all data and class names
     */
     DPadController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
@@ -41,11 +41,16 @@
     };
 
     /*------------------------------------------------------
-    * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @object - All controllers
+    * @info   - Keep and record of all controllers found
     */
-    DPadController.prototype.all_DPadControllers = [];
+    DPadController.prototype.all_controllers = [
+    ];
 
+    /*------------------------------------------------------
+    * @function -  Controller lookup
+    * @info     -  Looks thought DOM to gather all controllers
+    */
     DPadController.prototype.controller_lookup = function()
     {
         /* -- Get names -- */
@@ -56,12 +61,12 @@
         {
             var controller = controllers[ c_id ];
 
-            /* -- Find all item in group -- */
-            var actions = this.controller_actions_lookup(
+            /* -- Find all btns associated with controller -- */
+            var actions = this.controller_buttons_lookup(
                 controllers[ c_id ], c_id
             );
 
-            this.all_DPadControllers[ c_id ] = {
+            this.all_controllers[ c_id ] = {
                 container     : controller,
                 actions       : actions,
                 instructions  : cwc.ControllerMaster.prototype.fetch_instructions( controller )
@@ -69,14 +74,13 @@
 
         };
 
-    }
+    };
 
-   /*------------------------------------------------------
-    * @function - Navitems lookup
-    * @info - Find elms with data-(navitem) add the this to object
-    * @return - true : false
+    /*------------------------------------------------------
+    * @function - Controller buttons lookup
+    * @info - Find all btns associated with controller
     */
-    DPadController.prototype.controller_actions_lookup = function( group, c_id )
+    DPadController.prototype.controller_buttons_lookup = function( group, c_id )
     {
         var descendents     = group.querySelectorAll('['+ this.taxonomy.data.btn +']');
         var descendents_len = descendents.length;
@@ -94,7 +98,7 @@
                 mc.add(new Hammer.Tap({ event: 'doubletap', taps: 2 }));
                 mc.add(new Hammer.Tap());
 
-                mc.on("tap", function( ev ){
+                mc.on("tap", function( ev ) {
                      cwc.DPadController.prototype.button_invoked(
                         ev.target.c_id,
                         ev.target.a_id
@@ -104,16 +108,21 @@
                 });
 
             actions.push( action )
+
         }
 
         return actions;
 
     };
 
+    /*------------------------------------------------------
+    * @function - Button invoked
+    * @info - Users is intracting with controller
+    */
     DPadController.prototype.button_invoked = function( c_id, a_id )
     {
-        var action       = this.all_DPadControllers[ c_id ].actions[ a_id ];
-        var instructions = this.all_DPadControllers[ c_id ].instructions;
+        var action       = this.all_controllers[ c_id ].actions[ a_id ];
+        var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- Check to see if action can be indertfyed -- */
         if(! action.hasAttribute( 'data-cwc-cbtn' ) )
@@ -167,7 +176,8 @@
 
         /* -- check if hook has been applied -- */
         cwc.ControllerMaster.prototype.invoke_hook( 'on-tap', instructions, info );
-    }
+
+    };
 
     /*------------------------------------------------------
     * @function

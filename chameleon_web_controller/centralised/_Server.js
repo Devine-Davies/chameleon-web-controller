@@ -188,7 +188,7 @@
         if( cwc._cwc_type  == 'controller' )
         {
             try {
-                cwc.ClusterCodeCache.prototype.save_cluster_code(
+                cwc.CacheControl.prototype.save_cluster_code(
                     server_feedback.metadata
                 );
             } catch ( e ) {
@@ -275,10 +275,10 @@
     * @function - On message
     * @info - Server has sent a message
     */
-    Server.prototype.onmessage = function( data )
+    Server.prototype.onmessage = function( sned_package )
     {
         /* -- Message data -- */
-        var data = JSON.parse( data.data );
+        var data = JSON.parse( sned_package.data );
 
         /* -- Is a valid mesage : return true not valid -- */
         if( cwc.Server.prototype.validate_onmessage( data ) )

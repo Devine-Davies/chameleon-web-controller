@@ -29,7 +29,7 @@ function cwc_object_declaration()
     * System messages should be declared here
     * We will have a list or predefined functions
     */
-    ClusterCodeCache = new cwc.ClusterCodeCache({
+    CacheControl = new cwc.CacheControl({
     });
 
     /*------------------------------------------------------
@@ -95,9 +95,9 @@ function cwc_Hooks()
 
 function start_conection_process()
 {
-    if( ClusterCodeCache.retrieve_storage_data() )
+    if( CacheControl.retrieve_storage_data() )
     {
-        var object =  ClusterCodeCache.retrieve_storage_data();
+        var object =  CacheControl.retrieve_storage_data();
         var html   = '';
 
         for (var key in object )

@@ -26,13 +26,13 @@
     {
         cwc.registerPlugin(this, 'AnalogController');
 
-        this.pad_lookup();
+        this.lookup();
 
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @object - Taxonomy
+    * @info   - To store all data and class names
     */
     AnalogController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
@@ -42,36 +42,35 @@
     };
 
     /*------------------------------------------------------
-    * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @object - All controllers
+    * @info   - Keep and record of all controllers found
     */
-    AnalogController.prototype.all_AnalogControllers = [];
+    AnalogController.prototype.all_controllers = [];
 
     /*------------------------------------------------------
     * @object - Returned data
-    * @info - All of the infromation gatherd during movement
-    * @info -
+    * @info   - All of the information gathered during movement
+    * and return back to user
     */
     AnalogController.prototype.returned_data = {};
 
     /*------------------------------------------------------
     * @object - Tracking
-    * @info - Keep and drecord of all found nav elms
+    * @info   - Holds the index of the controller in use
     */
     AnalogController.prototype.tracking = null;
 
     /*------------------------------------------------------
-    * @object - Request id
-    * @info - animation request id
+    * @object - Animation frame
+    * @info   - Use when pluse movemnt
     */
-    AnalogController.prototype.request_id = 0;
+    AnalogController.prototype.animation_frame = 0;
 
     /*------------------------------------------------------
-    * @function - On pullbars trigger pan
-    * @info - Panning opctions an constraints
-    * @return - true : false
+    * @function - Pad lookup
+    * @info - Looks thought DOM to gather all controllers
     */
-    AnalogController.prototype.pad_lookup = function()
+    AnalogController.prototype.lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -96,7 +95,7 @@
             });
 
             /* -- Save the group -- */
-            this.all_AnalogControllers[ c_id ] = {
+            this.all_controllers[ c_id ] = {
                 analog        : analog,
                 trigger       : trigger,
                 instructions  : cwc.ControllerMaster.prototype.fetch_instructions( analog )
@@ -107,17 +106,16 @@
     };
 
     /*------------------------------------------------------
-    * @function - On pullbars trigger pan
-    * @info - Panning opctions an constraints
-    * @return - true : false
+    * @function - On analog pan
+    * @info - Main methord thst undergos on controller movment
     */
     AnalogController.prototype.on_analog_pan = function( ev )
     {
         var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
 
-        var analog       = this.all_AnalogControllers[ c_id ].analog;
-        var trigger      = this.all_AnalogControllers[ c_id ].trigger;
-        var instructions = this.all_AnalogControllers[ c_id ].instructions;
+        var analog       = this.all_controllers[ c_id ].analog;
+        var trigger      = this.all_controllers[ c_id ].trigger;
+        var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -239,6 +237,7 @@
 
     /*------------------------------------------------------
     * @function - On pan start
+    * @info - Fired as when controller first inteacted
     */
     AnalogController.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
     {
@@ -259,6 +258,7 @@
 
     /*------------------------------------------------------
     * @function - On pan end
+    * @info - Fired as soon as user has finshed inteacteing with controller
     */
     AnalogController.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
@@ -288,13 +288,13 @@
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - @http://goo.gl/bQdzfN
+    * @function - Get movment type
+    * @info - Check witch intraction has been set for controller
     */
     AnalogController.prototype.get_movment_type = function(  )
     {
         /* -- get the insrtuctions for the current analog -- */
-        var instructions = this.all_AnalogControllers[ this.tracking ].instructions;
+        var instructions = this.all_controllers[ this.tracking ].instructions;
 
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
@@ -316,8 +316,8 @@
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - @http://goo.gl/bQdzfN
+    * @function - On tick
+    * @info - When controller has enterd continuous movment
     */
     AnalogController.prototype.on_tick = function( order )
     {
@@ -325,7 +325,7 @@
         if( order === 'destroy' )
         {
             window.cancelAnimationFrame(
-                cwc.AnalogController.prototype.request_id
+                cwc.AnalogController.prototype.animation_frame
             );
         }
 
@@ -333,7 +333,7 @@
         else
         {
             /* -- get the insrtuctions for the current analog -- */
-            var instructions = cwc.AnalogController.prototype.all_AnalogControllers[
+            var instructions = cwc.AnalogController.prototype.all_controllers[
                 cwc.AnalogController.prototype.tracking
             ].instructions;
 
@@ -343,7 +343,7 @@
             );
 
             /* -- Build the loop -- */
-            cwc.AnalogController.prototype.request_id = window.requestAnimationFrame(
+            cwc.AnalogController.prototype.animation_frame = window.requestAnimationFrame(
                 cwc.AnalogController.prototype.on_tick
             );
         }
@@ -351,8 +351,8 @@
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - Clear out the fimer and reset collishion
+    * @function - Trigger translate
+    * @info - Used to change the css 3D translate state of the controller
     */
     AnalogController.prototype.trigger_translate = function( prams )
     {

@@ -5,7 +5,7 @@
  -------------------------------------------------------
  • Centralising functions to allow shared code to reduce
    development time from the lack of writing repetitive
-   code and file size
+   code
  -------------------------------------------------------
 */
 
@@ -35,7 +35,7 @@
 
     /*------------------------------------------------------
     * @object - Last Posistion
-    * @info - this will allow us to determan
+    * @info - this will allow to determan
     */
     ControllerMaster.prototype.last_delta_pos = {
         x : 0,
@@ -100,18 +100,22 @@
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - @http://goo.gl/bQdzfN
+    * @function - Calculate axis as coordinate
+    * @info - Retuns UE Editor like feedback for controller
     */
     ControllerMaster.prototype.calculate_axis_as_coordinate = function( z )
     {
         var int = Math.round( (z / 100) * 10 ) / 10;
         return this.clamp( (int * 2), -1, 1 );
-        //return Number( ( z < 0 )? (int - 1) : (int + 1) );
 
     };
 
-    ControllerMaster.prototype.clamp = function(num, min, max) {
+    /*------------------------------------------------------
+    * @function - Clamp
+    * @info - restricted the threshold of movemnt
+    */
+    ControllerMaster.prototype.clamp = function(num, min, max)
+    {
       return num < min ? min : num > max ? max : num;
     }
 
@@ -144,8 +148,8 @@
     };
 
     /*------------------------------------------------------
-    * @function
-    * bind this object to the main object
+    * @function - invoke hook
+    * @info - used to invoke call back hook functions
     */
     ControllerMaster.prototype.invoke_hook = function( hook, instructions, arg )
     {

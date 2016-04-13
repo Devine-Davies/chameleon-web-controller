@@ -35,20 +35,20 @@
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @object - All controllers
+    * @info   - Keep and record of all controllers found
     */
-    TouchPadController.prototype.all_TouchPadControllers = [];
+    TouchPadController.prototype.all_controllers = [];
 
     /*------------------------------------------------------
     * @object - Tracking
-    * @info - Keep and drecord of all found nav elms
+    * @info   - Holds the index of the controller in use
     */
     TouchPadController.prototype.tracking = null;
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @function - Lookup
+    * @info     - Finds all pullbars within the dom
     */
     TouchPadController.prototype.lookup = function()
     {
@@ -73,7 +73,7 @@
             } );
 
             /* -- Add the touch pad -- */
-            this.all_TouchPadControllers.push({
+            this.all_controllers.push({
                 pad          : controller,
                 instructions : instructions
             });
@@ -105,12 +105,13 @@
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
+    * @function - Get movment type
+    * @info     - Find the movment type given by user
     */
     TouchPadController.prototype.get_movment_type = function( c_id )
     {
         /* -- get the insrtuctions for the current analog -- */
-        var instructions = this.all_TouchPadControllers[ c_id ].instructions;
+        var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
@@ -132,15 +133,15 @@
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @function - On Move
+    * @info     - User is intracting with controller
     */
     TouchPadController.prototype.on_move = function( ev )
     {
         var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
 
-        var analog       = this.all_TouchPadControllers[ c_id ].pad;
-        var instructions = this.all_TouchPadControllers[ c_id ].instructions;
+        var analog       = this.all_controllers[ c_id ].pad;
+        var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -178,8 +179,8 @@
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @function - Validate action
+    * @info     - Hammer.js dirs
     */
     TouchPadController.prototype.validate_action = function( type )
     {
@@ -199,16 +200,13 @@
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @function - Send action to first screen
     */
     TouchPadController.prototype.send_actions_to_first_screen = function( action )
     {
-        console.log( action );
-
         cwc.Server.prototype.send_message({
             recipient : 'display',
-            action    : 'move navigation',
+            action    : 'move-navigation',
             arguments : action
         });
 

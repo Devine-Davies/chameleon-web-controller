@@ -27,7 +27,7 @@
         cwc.registerPlugin(this, 'PullbarController');
 
         /* -- Search for pullbars -- */
-        this.pullbars_lookup();
+        this.lookup();
     };
 
     /*------------------------------------------------------
@@ -43,7 +43,7 @@
     };
 
     /*------------------------------------------------------
-    * @object - Groups & Items
+    * @object - All pullbars
     * @info   - Keep and record of all found pullbar elms
     */
     PullbarController.prototype.all_pullbars = [
@@ -52,7 +52,6 @@
     /*------------------------------------------------------
     * @object - Returned data
     * @info - All of the infromation gatherd during movement
-    * @info -
     */
     PullbarController.prototype.returned_data = {
     };
@@ -70,10 +69,10 @@
     PullbarController.prototype.tracking = null;
 
     /*------------------------------------------------------
-    * @function - Pullbar lookup
+    * @function - Lookup
     * @info     - Finds all pullbars within the dom
     */
-    PullbarController.prototype.pullbars_lookup = function( )
+    PullbarController.prototype.lookup = function( )
     {
         var all_pullbars_in_dom      = document.querySelectorAll('['+ this.taxonomy.data.pullbar +']');
         var all_pullbars_in_dom_leng = all_pullbars_in_dom.length;

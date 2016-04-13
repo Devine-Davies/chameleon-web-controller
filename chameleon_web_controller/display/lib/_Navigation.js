@@ -21,7 +21,7 @@
         /* -- Ser for any data attrs in page -- */
         this.navgroups_lookup();
 
-        if ( this.navgroups_count() )
+        if ( this.navgroups_count() > 0 )
         {
             /* -- Add Navigation events -- */
             this.add_window_key_events();
@@ -29,6 +29,8 @@
             /* -- Add Server events -- */
             this.add_server_events();
         }
+
+        //console.log( this.nav_elms );
 
     };
 
@@ -54,9 +56,6 @@
         /* -- HTML:(data-*) -- */
         data : {
             group     : 'data-cwc-navgroup',
-            group_end : 'data-cwc-onnavend',
-            group_dir : 'data-cwc-navdir',
-
             item      : 'data-cwc-navitem',
             starting  : 'starting-point'
         }
@@ -84,9 +83,7 @@
     * @object - Groups & Items
     * @info - Keep and drecord of all found nav elms
     */
-    Navigation.prototype.all_nav_elms = {
-        groups         : [],
-        item_overrides : []
+    Navigation.prototype.nav_elms = {
 
     };
 
@@ -162,40 +159,25 @@
 
         for( var g_id = 0; g_id < nav_groups_count; g_id++ )
         {
+            var g_name = nav_groups[ g_id ].dataset.cwcNavgroup;
+
             /* -- Find all item in group -- */
-            var added = this.navitems_lookup(
-                nav_groups[ g_id ], g_id
+            var navitems = this.navitems_lookup(
+                nav_groups[ g_id ], g_id, g_name
             );
 
-            if( added )
-            {
-                this.navgroups_instructions(
-                    nav_groups[ g_id ], g_id
-                );
-            };
+            /* -- Find instructions -- */
+            var instructions = this.navgroups_instructions(
+                nav_groups[ g_id ], g_id, g_name
+            );
 
+            this.nav_elms[ g_name ] = {
+                navitems     : navitems,
+                instructions : instructions,
+                g_id         : g_id,
+                container    : nav_groups[ g_id ],
+            }
         };
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Update nav tracking
-    * @info - Will update the tracking system for next items and groups
-    */
-    Navigation.prototype.navgroups_instructions = function( group, g_id )
-    {
-        //var tax = this.taxonomy.data.group_end;
-        var tax = 'data-cwc-nav-key-instructions'
-
-        /* -- Search for nav end inftructions-- */
-        if( group.hasAttribute( tax )  )
-        {
-            var instructions = JSON.parse(
-                group.getAttribute( tax )
-            );
-
-            this.all_nav_elms.groups[ g_id ].instructions = instructions;
-        }
 
     };
 
@@ -204,10 +186,12 @@
     * @info - Find elms with data-(navitem) add the this to object
     * @return - true : false
     */
-    Navigation.prototype.navitems_lookup = function( group, g_id )
+    Navigation.prototype.navitems_lookup = function( group, g_id, g_name )
     {
         var descendents     = group.getElementsByTagName('*');
         var descendents_len = descendents.length;
+
+        var g_name = group.dataset.cwcNavgroup;
 
         var items = [
         ];
@@ -232,53 +216,53 @@
             if( check.one && check.two )
             {
                 /* -- store found items -- */
-                items.push( item );
+                var item_obj = {
+                    item      : item,
+                    overrides : this.item_overrides( item )
+                };
 
-                /* -- Save the item overrides-- */
-                this.item_overrides(
-                    g_id,
-
-                    /* -- Cannot use i_id out of sync with items (not all our elms) -- */
-                    items.length - 1,
-                    item
-                );
+                items.push( item_obj );
 
                 /* -- Up date the current group and index -- */
                 if( check.three )
                 {
-                    tracking = {
+                    /* -- user would like to start here -- */
+                    this.update_nav_tracking( {
+                        g_name : g_name,
                         g_id   : g_id,
                         g_elm  : group,
 
                         /* -- Cannot use i_id out of sync with items (not all our elms) -- */
                         i_id  : items.length - 1,
-                        i_elm : item,
-                    };
+                        i_elm : item_obj,
+                    } );
                 }
             }
-
         }
 
-        /* -- We have found items ;) -- */
-        if( items.length > 1 )
+        return items;
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Update nav tracking
+    * @info - Will update the tracking system for next items and groups
+    */
+    Navigation.prototype.navgroups_instructions = function( group, g_id, g_name )
+    {
+        var tax = 'data-cwc-instructions'
+
+        /* -- Search for nav end inftructions-- */
+        if( group.hasAttribute( tax )  )
         {
-            this.all_nav_elms.groups[ g_id ] = {
-                container : group,
-                items     : items,
-            }
+            var instructions = JSON.parse(
+                group.getAttribute( tax )
+            );
 
-            /* -- user would like to start here -- */
-            if( tracking )
-            {
-                this.update_nav_tracking(
-                    tracking
-                );
-            }
-
-            return true;
+            return instructions;
         }
 
-        return false;
+        return null;
 
     };
 
@@ -287,24 +271,20 @@
     * @info - look to see if there are override instructions for navigation
     *
     */
-    Navigation.prototype.item_overrides = function( g_id, i_id, item )
+    Navigation.prototype.item_overrides = function( item )
     {
-        var tax = 'data-cwc-item-overide'
+        var tax = 'data-cwc-overide'
 
         /* -- look for data-cwc-item-overide -- */
         if( item.hasAttribute( tax )  )
         {
-            if(! this.all_nav_elms.item_overrides[ g_id ] )
-            {
-                this.all_nav_elms.item_overrides[ g_id ] = {};
-            }
-
-            /* -- Save overrides -- */
-            this.all_nav_elms.item_overrides[ g_id ][i_id] = JSON.parse(
+            /* -- Return overrides -- */
+            return JSON.parse(
                 item.getAttribute( tax )
             );
         }
 
+        return null;
     };
 
     /*------------------------------------------------------
@@ -313,7 +293,12 @@
     */
     Navigation.prototype.navgroups_count = function()
     {
-        return this.all_nav_elms.groups.length;
+        var count = 0;
+
+        for ( var key in this.nav_elms )
+            count++;
+
+        return count;
 
     };
 
@@ -321,16 +306,11 @@
     * @function - Items in current group count
     * @return - count items in grop : defult current group
     */
-    Navigation.prototype.items_in_current_group_count = function( index )
+    Navigation.prototype.items_in_current_group_count = function( )
     {
-        if( ! index )
-        {
-            index = this.tracking.current.g_id;
-        }
-
-        return this.all_nav_elms.groups[
-            index
-        ].items.length;
+        return this.nav_elms[
+            this.tracking.current.g_name
+        ].navitems.length;
 
     };
 
@@ -366,13 +346,8 @@
             /* -- Find if the key is in our object -- */
             if ( $keys.hasOwnProperty( event.keyCode || event.which ) )
             {
-                // try {
-                    $keys[key]()
-                    event.preventDefault();
-                // }
-                // catch(err) {
-                //     console.log('Only callback functions');
-                // };
+                $keys[key]()
+                event.preventDefault();
             }
         });
 
@@ -422,54 +397,54 @@
     /*------------------------------------------------------
     * @function - Key function
     * @info     - Wehn key has been pressed : action sent here
-    * - up    // pass one of the following n* items as an argument
-    * - right // pass one of the following n* items as an argument
-    * - down  // pass one of the following n* items as an argument
-    * - left  // pass one of the following n* items as an argument
-    * - enter // pass one of the following n* items as an argument
-    * - space // pass one of the following n* items as an argument
+    * - up      // pass one of the following n* items as an argument
+    * - right   // pass one of the following n* items as an argument
+    * - down    // pass one of the following n* items as an argument
+    * - left    // pass one of the following n* items as an argument
+    * - enter   // pass one of the following n* items as an argument
+    * - space   // pass one of the following n* items as an argument
     */
     Navigation.prototype.key_function = function( dir )
     {
-        var curren_group = this.tracking.current.g_id;
-        var curren_item  = this.tracking.current.i_id;
+        var group_name    = this.tracking.current.g_name;
+        var current_group = this.tracking.current.g_id;
+        var current_item  = this.tracking.current.i_id;
 
         /* -- Clone the index -- */
         var c_indexs = {
-            group : JSON.parse(JSON.stringify( curren_group )),
-            item  : JSON.parse(JSON.stringify( curren_item  )),
+            group_name : JSON.parse( JSON.stringify( group_name    ) ),
+            group      : JSON.parse( JSON.stringify( current_group ) ),
+            item       : JSON.parse( JSON.stringify( current_item  ) )
         }
 
-        var item_overrides = this.all_nav_elms.item_overrides;
+        var instructions = this.nav_elms[ group_name ].instructions;
+        var overrides    = this.nav_elms[ group_name ].navitems[ current_item ].overrides;
 
-        /* -- Check to see if overrides has been set on item -- */
-        if( item_overrides.hasOwnProperty( curren_group ) )
+        /* -- Check to see if item has overids : before moving -- */
+        if( overrides != null )
         {
-            if( item_overrides[curren_group].hasOwnProperty( curren_item ) )
+            if( overrides.hasOwnProperty( dir ) )
             {
-                if( item_overrides[curren_group][ curren_item ][ dir ] )
-                {
-                    /* -- Get the group overrides -- */
-                    this.analyse_instructions(
-                        item_overrides[curren_group][ curren_item ][dir],
-                        c_indexs
-                    );
+                /* -- Get the group overrides -- */
+                this.analyse_instructions(
+                    overrides[ dir ],
+                    c_indexs
+                );
 
-                    return true;
-                }
+                return true;
             }
         }
 
         /* -- Check to see if instructions has been set on navgroup -- */
-        if( this.all_nav_elms.groups[ curren_group ].hasOwnProperty( 'instructions' ) )
+        if( instructions != null )
         {
-            /* -- Get the group instructions -- */
-            var instructions = this.all_nav_elms.groups[ curren_group ].instructions;
-
-            /* -- Has been set and not null -- */
-            if( instructions.hasOwnProperty( dir ) && instructions[dir] )
+             /* -- Has been set and not null -- */
+            if( instructions.hasOwnProperty( dir ) )
             {
-                this.analyse_instructions(  instructions[dir], c_indexs )
+                this.analyse_instructions(
+                    instructions[ dir ],
+                    c_indexs
+                );
 
                 return true;
             }
@@ -479,40 +454,40 @@
 
     /*------------------------------------------------------
     * @function - Analyse instructions
-    * - ni-next              // next nav item
-    * - ni-prev              // previous nav item
-    * - ng-next              // next nav group
-    * - ng-prev              // previous nav group
-    * - ng-*(index)          // index number of the group you wish to navigation too
-    * - cm-*(custom methord) // add custom methord to end of arg, must be set up in custom methords
+    * - ni-next                // next nav item
+    * - ni-prev                // previous nav item
+    * - ng-next                // next nav group
+    * - ng-prev                // previous nav group
+    * - ng-*(name)             // name of the group you wish to navigation too
+    * - hook-*(custom methord) // add custom methord to end of arg, must be set up in custom methords
     */
     Navigation.prototype.analyse_instructions = function( instruction, c_index )
     {
-        if(  instruction.indexOf('cm-') > -1 )
+        /* -- Hook -- */
+        if( instruction.indexOf('hook-') > -1 )
         {
-            var action = instruction.replace('cm-','');
-            cwc.CustomMethod.prototype.call_method(  {
-                method    : action,
+            cwc.Hooks.prototype.invoke(  {
+                name      : instruction.replace('hook-',''),
                 arguments : this.tracking.current
             } );
+
         }
 
+        /* -- Move to item -- */
         else if( instruction.indexOf('ni-') > -1 )
         {
             var action = instruction.replace('ni-','');
 
-            /* -- The user is trying to update item -- */
-            if( action == 'next' || action == 'prev' )
+            if((action == 'next'))
             {
-                if((action == 'next'))
-                {
-                    this.on_new_item_update( c_index.item += 1  );
-                }
-                else
-                {
-                    this.on_new_item_update( c_index.item -= 1 );
-                }
+                this.on_new_item_update( c_index.item += 1  );
             }
+
+            else if ( action == 'prev' )
+            {
+                this.on_new_item_update( c_index.item -= 1 );
+            }
+
         }
 
         /* -- The user is trying to update group -- */
@@ -520,28 +495,27 @@
         {
             var action = instruction.replace('ng-','');
 
-            /* -- The user is trying to update item -- */
-            if( action == 'next' || action == 'prev' )
+            /* -- We know the name of the guoup -- */
+            if( this.nav_elms.hasOwnProperty( action ) )
             {
-                if((action == 'next'))
-                {
-                    this.on_new_nav( c_index.group += 1  );
-                }
-                else
-                {
-                    this.on_new_nav( c_index.group -= 1 );
-                }
+                this.move_to_nav_name( action );
             }
 
-            /* -- Were looking for a int : check constraints -- */
-            else if( action > -1 && action < this.navgroups_count( parseInt( action ) ) )
+            else if( action == 'next' )
             {
-                /* -- Get int and update -- */
-                this.on_new_nav(
-                    parseInt( action )
+                this.move_to_new_nav_index(
+                    c_index.group += 1
                 );
             }
-        }
+
+            else if ( action == 'prev' )
+            {
+                this.move_to_new_nav_index(
+                    c_index.group -= 1
+                );
+            }
+
+        };
 
     };
 
@@ -549,12 +523,12 @@
     * @function - On new nav
     * @info     - Change to new nav item
     */
-    Navigation.prototype.on_new_nav = function( g_id )
+    Navigation.prototype.move_to_new_nav_index = function( g_id )
     {
         /* -- Nav constraints -- */
         var constraint = {
-            under : (g_id <= -1),
-            over  : (g_id == this.navgroups_count()),
+            under : ( g_id < 0 ),
+            over  : ( g_id == this.navgroups_count() ),
         }
 
         if( constraint.under )
@@ -567,32 +541,68 @@
             g_id = 0;
         }
 
-        var new_group = this.all_nav_elms.groups[ g_id ].container;
-        var tax       = 'data-cwc-onnaventrance';
-
-        if( new_group.hasAttribute( tax ) )
+        for ( var key in this.nav_elms )
         {
-            var c_item = this.lookup_history_item(
-                g_id
-            );
+            if( this.nav_elms[ key ].g_id == g_id )
+            {
+                this.move_to_nav_name( key );
+                break;
+            }
         }
-        else
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Move to nav name
+    * @info     - Change to new nav item
+    */
+    Navigation.prototype.move_to_nav_name = function( group_name )
+    {
+        var nav_group = this.nav_elms[ group_name ];
+        var c_item    = null;
+
+        if( nav_group.instructions != null )
         {
-            var c_item = this.find_best_item(
-                g_id
+            /* -- Check for history item -- */
+            if( nav_group.instructions.hasOwnProperty('history-item') )
+            {
+                c_item = this.lookup_history_item(
+                    nav_group
+                );
+            }
+
+        }
+
+        if( c_item == null )
+        {
+            c_item = this.find_best_item(
+                nav_group
             );
+
         }
 
         /* -- Update the tracking process -- */
         this.update_nav_tracking({
-            g_id  : g_id,
+            g_name  : group_name,
+            g_id    : nav_group.g_id,
+            g_elm   : nav_group.container,
 
-            g_elm : this.all_nav_elms.groups[ g_id ].container,
+            i_id    : c_item.i_id,
 
-            i_id  : c_item.i_id,
-
-            i_elm : c_item.i_elm
+            i_elm   : c_item.i_elm
         });
+
+        if( nav_group.instructions != null )
+        {
+            /* -- Check for entrance hook -- */
+            if( nav_group.instructions.hasOwnProperty('onnaventrance') )
+            {
+                this.analyse_instructions(
+                    nav_group.instructions['onnaventrance']
+                );
+            }
+
+        }
 
         /* -- Run callback function for nav change -- */
         this.callbacks.onnav_changed(
@@ -601,37 +611,16 @@
 
     };
 
-    Navigation.prototype.find_best_item = function( g_id )
+    /*------------------------------------------------------
+    * @function - Find best item
+    * @info     - Find best object to swap
+    */
+    Navigation.prototype.find_best_item = function( nav_group )
     {
-        var current_group = this.all_nav_elms.groups[ g_id ];
-        var current_item  = this.tracking.current.i_id;
-        var limit         = current_group.items.length;
-        var return_obj    = {};
-
-        var i_id          = 0;
-
-        var constraint = {
-            higher      : ( current_item < limit ),
-            go_higgher  : ( ( limit - current_item ) == 0  ),
-            // pick_a_side : will need developing.
-        }
-
-        /* -- Logic -- */
-        if( constraint.higher  )
-        {
-            i_id = current_item;
-        }
-
-        /* -- Go higgher -- */
-        if(  constraint.go_higgher  )
-        {
-            i_id = limit - 1;
-        }
-
-        return return_obj = {
-            i_id  : i_id,
-            i_elm : current_group.items[ i_id ]
-        }
+        return {
+            i_id  : 0,
+            i_elm : nav_group.navitems[ 0 ]
+        };
 
     };
 
@@ -639,23 +628,24 @@
     * @function - Lookup history item
     * @info     - Change to new nav item
     */
-    Navigation.prototype.lookup_history_item = function( g_id )
+    Navigation.prototype.lookup_history_item = function( nav_group )
     {
-        var current_group_items = this.all_nav_elms.groups[ g_id ];
-        var limit               = current_group_items.items.length;
+        var current_group_items = nav_group['navitems'];
+
+        var limit               = current_group_items.length;
         var tax                 = 'data-lastitem'
 
         var return_obj = {};
 
         for( var i = 0; i < limit; i++ )
         {
-            var item = current_group_items.items[i];
+            var item = current_group_items[i].item;
 
             if( item.hasAttribute( tax ) )
             {
                 return_obj = {
                     i_id  : i,
-                    i_elm : current_group_items.items[i]
+                    i_elm : current_group_items[i]
                 }
 
                 break;
@@ -664,11 +654,11 @@
             {
                 return_obj = {
                     i_id  : 0,
-                    i_elm : current_group_items.items[0]
+                    i_elm : current_group_items[0]
                 }
             }
 
-        }
+        };
 
         item.removeAttribute( tax )
         return return_obj;
@@ -696,15 +686,28 @@
             index = 0;
         }
 
-        var g_id = this.tracking.current.g_id;
+        var g_name    = this.tracking.current.g_name;
+        var overrides = this.nav_elms[ g_name ].navitems[ index ].overrides;
 
         this.update_nav_tracking({
-            g_id  : g_id,
-            g_elm : this.all_nav_elms.groups[ g_id ].container,
+            g_id   : this.nav_elms[ g_name ].g_id,
+            g_elm  : this.nav_elms[ g_name ].container,
+            g_name : g_name,
 
             i_id  : index,
-            i_elm : this.all_nav_elms.groups[ g_id ].items[ index ]
+            i_elm : this.nav_elms[ g_name ].navitems[ index ]
         });
+
+        if( overrides != null )
+        {
+            /* -- Check for entrance hook -- */
+            if( overrides.hasOwnProperty('onitementrance') )
+            {
+                this.analyse_instructions(
+                    overrides['onitementrance']
+                );
+            }
+        }
 
         /* -- Run callback function for item change -- */
         try {
@@ -713,6 +716,7 @@
             );
         }
         catch(err) {
+            console.log( err );
             console.log('All Callbacks are functions');
         };
 
@@ -751,7 +755,7 @@
             );
 
             /* -- Record the last visited nav item -- */
-            this.tracking.previous.i_elm.dataset.lastitem = true;
+            this.tracking.previous.i_elm.item.dataset.lastitem = true;
         }
 
         if( this.tracking.current.g_elm )
@@ -771,14 +775,14 @@
     {
         if( this.tracking.previous.i_elm )
         {
-            this.tracking.previous.i_elm.classList.remove(
+            this.tracking.previous.i_elm.item.classList.remove(
                 this.taxonomy.classes.item
             );
         }
 
         if( this.tracking.current.i_elm )
         {
-            this.tracking.current.i_elm.classList.add(
+            this.tracking.current.i_elm.item.classList.add(
                 this.taxonomy.classes.item
             );
         }

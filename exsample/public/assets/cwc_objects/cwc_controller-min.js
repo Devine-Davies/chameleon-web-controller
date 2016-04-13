@@ -38,7 +38,8 @@
         * Defines a Foundation plugin, adding it to the `Foundation` namespace and the list of plugins to initialize when reflowing.
         * @param {Object} plugin - The constructor of the plugin.
         */
-        plugin: function(plugin, name) {
+        plugin: function(plugin, name)
+        {
             // Object key to use when adding to global Foundation object
             // Examples: Foundation.Reveal, Foundation.OffCanvas
             var className = (name || functionName(plugin));
@@ -58,7 +59,8 @@
         * @param {Object} plugin - an instance of a plugin, usually `this` in context.
         * @fires Plugin#init
         */
-        registerPlugin: function(plugin, name){
+        registerPlugin: function( plugin, name )
+        {
             var pluginName  = name ? hyphenate(name) : functionName( plugin.constructor ).toLowerCase();
                 plugin.uuid = this.GetYoDigits(6, pluginName);
 
@@ -75,7 +77,8 @@
         * @default {String} '' - if no plugin name is provided, nothing is appended to the uid.
         * @returns {String} - unique id
         */
-        GetYoDigits: function(length, namespace){
+        GetYoDigits: function(length, namespace)
+        {
             length = length || 6;
             return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1) + (namespace ? '-' + namespace : '');
         },
@@ -97,12 +100,14 @@
 /*------------------------------------------------------
 * -- Controller Assets --
 */
-//@codekit-append "_ClusterCodeCache.js";
+//@codekit-append "_CacheControl.js";
+
 //@codekit-append "_ControllerMaster.js";
 //@codekit-append "_DpadController.js";
 //@codekit-append "_TouchPadController.js";
 //@codekit-append "_AnalogController.js";
 //@codekit-append "_PullbarController.js";
+//@codekit-append "_TextCapture.js";
 
 // Polyfill to get the name of a function in IE9
 function functionName(fn)
@@ -325,7 +330,7 @@ function isFunctionA(object)
         if( cwc._cwc_type  == 'controller' )
         {
             try {
-                cwc.ClusterCodeCache.prototype.save_cluster_code(
+                cwc.CacheControl.prototype.save_cluster_code(
                     server_feedback.metadata
                 );
             } catch ( e ) {
@@ -412,10 +417,10 @@ function isFunctionA(object)
     * @function - On message
     * @info - Server has sent a message
     */
-    Server.prototype.onmessage = function( data )
+    Server.prototype.onmessage = function( sned_package )
     {
         /* -- Message data -- */
-        var data = JSON.parse( data.data );
+        var data = JSON.parse( sned_package.data );
 
         /* -- Is a valid mesage : return true not valid -- */
         if( cwc.Server.prototype.validate_onmessage( data ) )
@@ -560,12 +565,14 @@ function isFunctionA(object)
     {
         var hooks = ( reserved )? this.all_reserved_hooks : this.all_hooks;
 
-        try {
-            hooks[ prams.name ].method( prams.arguments, prams.cwc_metadata )
-        } catch( e ) {
-            console.log( e );
+        if( hooks.hasOwnProperty( prams.name ) )
+        {
+            try {
+                hooks[ prams.name ].method( prams.arguments, prams.cwc_metadata )
+            } catch( e ) {
+                console.log( e );
+            }
         }
-
     };
 
     /* -- Add this new object to the main object -- */
@@ -574,15 +581,11 @@ function isFunctionA(object)
 }( window.cwc );
 
 /*------------------------------------------------------
- * To-Do
+ * Cache Control
  ------------------------------------------------------
- • Add support for data attr nav dir - up, down, left, right
- • Add support for NO end last and first attr
- • Add support for Enter key for on select
- • Must show testing on Screen
- • Add commit
+ • Need to add support for the user to attach there own data
+   when a cline thas been saved
  ------------------------------------------------------
- • Start D-pad
 */
 
 !function( cwc ){
@@ -591,38 +594,40 @@ function isFunctionA(object)
     /*------------------------------------------------------
     * @function
     */
-    function ClusterCodeCache( extend )
+    function CacheControl( extend )
     {
-        cwc.registerPlugin(this, 'ClusterCodeCache');
+        cwc.registerPlugin(this, 'CacheControl');
 
         /* -- Fetch any saved data -- */
         this.fetch_storage_data();
 
+        /* -- Check for old connections -- */
+        this.delete_old_codes();
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @string - Storage name
+    * @info     - The name givent to the localstorga eobject
     */
-    ClusterCodeCache.prototype.storage_name = 'cwc-cluster-cache';
+    CacheControl.prototype.storage_name = 'cwc-cluster-cache';
 
     /*------------------------------------------------------
-    * @function - Time request
-    * @info - Send the message to the right clinet
+    * @int - Time Threshold
+    * @info - declare hoiw long data should live in localstorga
     */
-    ClusterCodeCache.prototype.time_threshold = 120;
+    CacheControl.prototype.time_threshold = 120;
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @object - Storage data
+    * @info - Save the loaclstrage object here
     */
-    ClusterCodeCache.prototype.storage_data = {};
+    CacheControl.prototype.storage_data = {};
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Fetch storage data
+    * @info - Function to retrieve strage data
     */
-    ClusterCodeCache.prototype.fetch_storage_data = function()
+    CacheControl.prototype.fetch_storage_data = function()
     {
         if ( localStorage.getItem( this.storage_name ) !== null )
         {
@@ -634,26 +639,23 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Retrieve storage data
+    * @info - function to get the local stage object
     */
-    ClusterCodeCache.prototype.retrieve_storage_data = function()
+    CacheControl.prototype.retrieve_storage_data = function()
     {
         return this.storage_data;
 
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Save connection infromation
+    * @info - Called when a suscsessfull connection has been made to the server
     */
-    ClusterCodeCache.prototype.save_cluster_code = function( client_data )
+    CacheControl.prototype.save_cluster_code = function( client_data )
     {
-        /* -- remove old code from local data -- */
-        this.delete_old_codes();
-
         /* -- Check to see if the code has been saved -- */
-        if( ! this.dose_code_exists( client_data ) )
+        if( ! this.check_for_existence( client_data ) )
         {
             /* -- Formate the cluster code -- */
             this.storage_data[ client_data.key ] = client_data;
@@ -667,10 +669,10 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Delete old codes
+    * @info - removes the old codes from the localstage
     */
-    ClusterCodeCache.prototype.delete_old_codes = function()
+    CacheControl.prototype.delete_old_codes = function()
     {
         var object     = this.storage_data;
         var new_object = {
@@ -693,10 +695,10 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Check for existence
+    * @info - Check to see if the code has been set
     */
-    ClusterCodeCache.prototype.dose_code_exists = function( client_data )
+    CacheControl.prototype.check_for_existence = function( client_data )
     {
         var object = this.storage_data;
 
@@ -716,7 +718,7 @@ function isFunctionA(object)
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(ClusterCodeCache, 'ClusterCodeCache');
+    cwc.plugin(CacheControl, 'CacheControl');
 
 }( window.cwc );
 
@@ -727,7 +729,7 @@ function isFunctionA(object)
  -------------------------------------------------------
  • Centralising functions to allow shared code to reduce
    development time from the lack of writing repetitive
-   code and file size
+   code
  -------------------------------------------------------
 */
 
@@ -757,7 +759,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @object - Last Posistion
-    * @info - this will allow us to determan
+    * @info - this will allow to determan
     */
     ControllerMaster.prototype.last_delta_pos = {
         x : 0,
@@ -822,18 +824,22 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - @http://goo.gl/bQdzfN
+    * @function - Calculate axis as coordinate
+    * @info - Retuns UE Editor like feedback for controller
     */
     ControllerMaster.prototype.calculate_axis_as_coordinate = function( z )
     {
         var int = Math.round( (z / 100) * 10 ) / 10;
         return this.clamp( (int * 2), -1, 1 );
-        //return Number( ( z < 0 )? (int - 1) : (int + 1) );
 
     };
 
-    ControllerMaster.prototype.clamp = function(num, min, max) {
+    /*------------------------------------------------------
+    * @function - Clamp
+    * @info - restricted the threshold of movemnt
+    */
+    ControllerMaster.prototype.clamp = function(num, min, max)
+    {
       return num < min ? min : num > max ? max : num;
     }
 
@@ -866,8 +872,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function
-    * bind this object to the main object
+    * @function - invoke hook
+    * @info - used to invoke call back hook functions
     */
     ControllerMaster.prototype.invoke_hook = function( hook, instructions, arg )
     {
@@ -919,8 +925,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @object - Taxonomy
+    * @info   - To store all data and class names
     */
     DPadController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
@@ -932,11 +938,16 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @object - All controllers
+    * @info   - Keep and record of all controllers found
     */
-    DPadController.prototype.all_DPadControllers = [];
+    DPadController.prototype.all_controllers = [
+    ];
 
+    /*------------------------------------------------------
+    * @function -  Controller lookup
+    * @info     -  Looks thought DOM to gather all controllers
+    */
     DPadController.prototype.controller_lookup = function()
     {
         /* -- Get names -- */
@@ -947,12 +958,12 @@ function isFunctionA(object)
         {
             var controller = controllers[ c_id ];
 
-            /* -- Find all item in group -- */
-            var actions = this.controller_actions_lookup(
+            /* -- Find all btns associated with controller -- */
+            var actions = this.controller_buttons_lookup(
                 controllers[ c_id ], c_id
             );
 
-            this.all_DPadControllers[ c_id ] = {
+            this.all_controllers[ c_id ] = {
                 container     : controller,
                 actions       : actions,
                 instructions  : cwc.ControllerMaster.prototype.fetch_instructions( controller )
@@ -960,14 +971,13 @@ function isFunctionA(object)
 
         };
 
-    }
+    };
 
-   /*------------------------------------------------------
-    * @function - Navitems lookup
-    * @info - Find elms with data-(navitem) add the this to object
-    * @return - true : false
+    /*------------------------------------------------------
+    * @function - Controller buttons lookup
+    * @info - Find all btns associated with controller
     */
-    DPadController.prototype.controller_actions_lookup = function( group, c_id )
+    DPadController.prototype.controller_buttons_lookup = function( group, c_id )
     {
         var descendents     = group.querySelectorAll('['+ this.taxonomy.data.btn +']');
         var descendents_len = descendents.length;
@@ -985,7 +995,7 @@ function isFunctionA(object)
                 mc.add(new Hammer.Tap({ event: 'doubletap', taps: 2 }));
                 mc.add(new Hammer.Tap());
 
-                mc.on("tap", function( ev ){
+                mc.on("tap", function( ev ) {
                      cwc.DPadController.prototype.button_invoked(
                         ev.target.c_id,
                         ev.target.a_id
@@ -995,16 +1005,21 @@ function isFunctionA(object)
                 });
 
             actions.push( action )
+
         }
 
         return actions;
 
     };
 
+    /*------------------------------------------------------
+    * @function - Button invoked
+    * @info - Users is intracting with controller
+    */
     DPadController.prototype.button_invoked = function( c_id, a_id )
     {
-        var action       = this.all_DPadControllers[ c_id ].actions[ a_id ];
-        var instructions = this.all_DPadControllers[ c_id ].instructions;
+        var action       = this.all_controllers[ c_id ].actions[ a_id ];
+        var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- Check to see if action can be indertfyed -- */
         if(! action.hasAttribute( 'data-cwc-cbtn' ) )
@@ -1058,7 +1073,8 @@ function isFunctionA(object)
 
         /* -- check if hook has been applied -- */
         cwc.ControllerMaster.prototype.invoke_hook( 'on-tap', instructions, info );
-    }
+
+    };
 
     /*------------------------------------------------------
     * @function
@@ -1105,20 +1121,20 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @object - All controllers
+    * @info   - Keep and record of all controllers found
     */
-    TouchPadController.prototype.all_TouchPadControllers = [];
+    TouchPadController.prototype.all_controllers = [];
 
     /*------------------------------------------------------
     * @object - Tracking
-    * @info - Keep and drecord of all found nav elms
+    * @info   - Holds the index of the controller in use
     */
     TouchPadController.prototype.tracking = null;
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @function - Lookup
+    * @info     - Finds all pullbars within the dom
     */
     TouchPadController.prototype.lookup = function()
     {
@@ -1143,7 +1159,7 @@ function isFunctionA(object)
             } );
 
             /* -- Add the touch pad -- */
-            this.all_TouchPadControllers.push({
+            this.all_controllers.push({
                 pad          : controller,
                 instructions : instructions
             });
@@ -1175,12 +1191,13 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
+    * @function - Get movment type
+    * @info     - Find the movment type given by user
     */
     TouchPadController.prototype.get_movment_type = function( c_id )
     {
         /* -- get the insrtuctions for the current analog -- */
-        var instructions = this.all_TouchPadControllers[ c_id ].instructions;
+        var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
@@ -1202,15 +1219,15 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @function - On Move
+    * @info     - User is intracting with controller
     */
     TouchPadController.prototype.on_move = function( ev )
     {
         var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
 
-        var analog       = this.all_TouchPadControllers[ c_id ].pad;
-        var instructions = this.all_TouchPadControllers[ c_id ].instructions;
+        var analog       = this.all_controllers[ c_id ].pad;
+        var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -1248,8 +1265,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @function - Validate action
+    * @info     - Hammer.js dirs
     */
     TouchPadController.prototype.validate_action = function( type )
     {
@@ -1269,16 +1286,13 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @function - Send action to first screen
     */
     TouchPadController.prototype.send_actions_to_first_screen = function( action )
     {
-        console.log( action );
-
         cwc.Server.prototype.send_message({
             recipient : 'display',
-            action    : 'move navigation',
+            action    : 'move-navigation',
             arguments : action
         });
 
@@ -1320,13 +1334,13 @@ function isFunctionA(object)
     {
         cwc.registerPlugin(this, 'AnalogController');
 
-        this.pad_lookup();
+        this.lookup();
 
     };
 
     /*------------------------------------------------------
-    * @obj
-    * To store all data and class names
+    * @object - Taxonomy
+    * @info   - To store all data and class names
     */
     AnalogController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
@@ -1336,36 +1350,35 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @object - All controllers
+    * @info   - Keep and record of all controllers found
     */
-    AnalogController.prototype.all_AnalogControllers = [];
+    AnalogController.prototype.all_controllers = [];
 
     /*------------------------------------------------------
     * @object - Returned data
-    * @info - All of the infromation gatherd during movement
-    * @info -
+    * @info   - All of the information gathered during movement
+    * and return back to user
     */
     AnalogController.prototype.returned_data = {};
 
     /*------------------------------------------------------
     * @object - Tracking
-    * @info - Keep and drecord of all found nav elms
+    * @info   - Holds the index of the controller in use
     */
     AnalogController.prototype.tracking = null;
 
     /*------------------------------------------------------
-    * @object - Request id
-    * @info - animation request id
+    * @object - Animation frame
+    * @info   - Use when pluse movemnt
     */
-    AnalogController.prototype.request_id = 0;
+    AnalogController.prototype.animation_frame = 0;
 
     /*------------------------------------------------------
-    * @function - On pullbars trigger pan
-    * @info - Panning opctions an constraints
-    * @return - true : false
+    * @function - Pad lookup
+    * @info - Looks thought DOM to gather all controllers
     */
-    AnalogController.prototype.pad_lookup = function()
+    AnalogController.prototype.lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -1390,7 +1403,7 @@ function isFunctionA(object)
             });
 
             /* -- Save the group -- */
-            this.all_AnalogControllers[ c_id ] = {
+            this.all_controllers[ c_id ] = {
                 analog        : analog,
                 trigger       : trigger,
                 instructions  : cwc.ControllerMaster.prototype.fetch_instructions( analog )
@@ -1401,17 +1414,16 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - On pullbars trigger pan
-    * @info - Panning opctions an constraints
-    * @return - true : false
+    * @function - On analog pan
+    * @info - Main methord thst undergos on controller movment
     */
     AnalogController.prototype.on_analog_pan = function( ev )
     {
         var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
 
-        var analog       = this.all_AnalogControllers[ c_id ].analog;
-        var trigger      = this.all_AnalogControllers[ c_id ].trigger;
-        var instructions = this.all_AnalogControllers[ c_id ].instructions;
+        var analog       = this.all_controllers[ c_id ].analog;
+        var trigger      = this.all_controllers[ c_id ].trigger;
+        var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- deltas of pointer pos -- */
         var delta = {
@@ -1533,6 +1545,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On pan start
+    * @info - Fired as when controller first inteacted
     */
     AnalogController.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
     {
@@ -1553,6 +1566,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On pan end
+    * @info - Fired as soon as user has finshed inteacteing with controller
     */
     AnalogController.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
@@ -1582,13 +1596,13 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - @http://goo.gl/bQdzfN
+    * @function - Get movment type
+    * @info - Check witch intraction has been set for controller
     */
     AnalogController.prototype.get_movment_type = function(  )
     {
         /* -- get the insrtuctions for the current analog -- */
-        var instructions = this.all_AnalogControllers[ this.tracking ].instructions;
+        var instructions = this.all_controllers[ this.tracking ].instructions;
 
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
@@ -1610,8 +1624,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - @http://goo.gl/bQdzfN
+    * @function - On tick
+    * @info - When controller has enterd continuous movment
     */
     AnalogController.prototype.on_tick = function( order )
     {
@@ -1619,7 +1633,7 @@ function isFunctionA(object)
         if( order === 'destroy' )
         {
             window.cancelAnimationFrame(
-                cwc.AnalogController.prototype.request_id
+                cwc.AnalogController.prototype.animation_frame
             );
         }
 
@@ -1627,7 +1641,7 @@ function isFunctionA(object)
         else
         {
             /* -- get the insrtuctions for the current analog -- */
-            var instructions = cwc.AnalogController.prototype.all_AnalogControllers[
+            var instructions = cwc.AnalogController.prototype.all_controllers[
                 cwc.AnalogController.prototype.tracking
             ].instructions;
 
@@ -1637,7 +1651,7 @@ function isFunctionA(object)
             );
 
             /* -- Build the loop -- */
-            cwc.AnalogController.prototype.request_id = window.requestAnimationFrame(
+            cwc.AnalogController.prototype.animation_frame = window.requestAnimationFrame(
                 cwc.AnalogController.prototype.on_tick
             );
         }
@@ -1645,8 +1659,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Clear auto scroll
-    * @info - Clear out the fimer and reset collishion
+    * @function - Trigger translate
+    * @info - Used to change the css 3D translate state of the controller
     */
     AnalogController.prototype.trigger_translate = function( prams )
     {
@@ -1696,7 +1710,7 @@ function isFunctionA(object)
         cwc.registerPlugin(this, 'PullbarController');
 
         /* -- Search for pullbars -- */
-        this.pullbars_lookup();
+        this.lookup();
     };
 
     /*------------------------------------------------------
@@ -1712,7 +1726,7 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @object - Groups & Items
+    * @object - All pullbars
     * @info   - Keep and record of all found pullbar elms
     */
     PullbarController.prototype.all_pullbars = [
@@ -1721,7 +1735,6 @@ function isFunctionA(object)
     /*------------------------------------------------------
     * @object - Returned data
     * @info - All of the infromation gatherd during movement
-    * @info -
     */
     PullbarController.prototype.returned_data = {
     };
@@ -1739,10 +1752,10 @@ function isFunctionA(object)
     PullbarController.prototype.tracking = null;
 
     /*------------------------------------------------------
-    * @function - Pullbar lookup
+    * @function - Lookup
     * @info     - Finds all pullbars within the dom
     */
-    PullbarController.prototype.pullbars_lookup = function( )
+    PullbarController.prototype.lookup = function( )
     {
         var all_pullbars_in_dom      = document.querySelectorAll('['+ this.taxonomy.data.pullbar +']');
         var all_pullbars_in_dom_leng = all_pullbars_in_dom.length;
@@ -1986,6 +1999,102 @@ function isFunctionA(object)
     * bind this object to the main object
     */
     cwc.plugin(PullbarController, 'PullbarController');
+
+}( window.cwc );
+
+/*------------------------------------------------------
+ * Viewport Scroll Display
+ *------------------------------------------------------
+ * To-Do
+ -------------------------------------------------------
+ • Fix support for scroll animation on tap.
+ ------------------------------------------------------
+*/
+
+!function( cwc ){
+  'use strict';
+
+    /*------------------------------------------------------
+    * @function
+    */
+    function TextCapture( )
+    {
+        cwc.registerPlugin(this, 'TextCapture');
+
+        /* -- Set the hooks -- */
+        this.set_hooks();
+    };
+
+    /*------------------------------------------------------
+    * @function - lookup
+    * @info - Find elms with data-(textcapture) add the this to object
+    */
+    TextCapture.prototype.set_hooks = function()
+    {
+        /* -- Crete connection fil | Hook -- */
+        cwc.Hooks.prototype.set_reserved_hook( {
+          name      : 'text-capture-invoked',
+          method    : function( prams ) {
+            cwc.TextCapture.prototype.create_text_capture(
+                prams
+            );
+        } } );
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Create text capture
+    * @info - Append a text captrue item to the DOM
+    */
+    TextCapture.prototype.create_text_capture = function( prams )
+    {
+        var input = document.createElement("textarea");
+            input.maxLength = "5000";
+            input.cols = "80";
+            input.rows = "40";
+            input.className  = 'cwc-text-capture';
+            input.placeholder = prams.placeholder;
+
+            /* -- Use the name as #id -- */
+            input.id = prams.name;
+
+            input.addEventListener("blur", function(){
+                cwc.TextCapture.prototype.text_capture_done( this );
+            });
+
+        /* -- Add to the body -- */
+        document.body.appendChild(input);
+
+        /* -- Focus into the elm -- */
+        document.querySelector('#' + name ).focus();
+    }
+
+    /*------------------------------------------------------
+    * @function - Text capture done
+    * @info - Called when the user has finshed inputing text
+    */
+    TextCapture.prototype.text_capture_done = function( elm )
+    {
+        /* -- Remove elment -- */
+        document.body.removeChild( elm );
+
+        /* -- Send the recorded data -- */
+        cwc.Server.prototype.send_message({
+            action    : 'text-capture-done',
+            recipient : 'display',
+            arguments : {
+                name  : elm.id,
+                value : elm.value
+            }
+        });
+
+    }
+
+    /*------------------------------------------------------
+    * @function
+    * bind this object to the main object
+    */
+    cwc.plugin(TextCapture, 'TextCapture');
 
 }( window.cwc );
 

@@ -1,13 +1,9 @@
 /*------------------------------------------------------
- * To-Do
+ * Cache Control
  ------------------------------------------------------
- • Add support for data attr nav dir - up, down, left, right
- • Add support for NO end last and first attr
- • Add support for Enter key for on select
- • Must show testing on Screen
- • Add commit
+ • Need to add support for the user to attach there own data
+   when a cline thas been saved
  ------------------------------------------------------
- • Start D-pad
 */
 
 !function( cwc ){
@@ -16,38 +12,40 @@
     /*------------------------------------------------------
     * @function
     */
-    function ClusterCodeCache( extend )
+    function CacheControl( extend )
     {
-        cwc.registerPlugin(this, 'ClusterCodeCache');
+        cwc.registerPlugin(this, 'CacheControl');
 
         /* -- Fetch any saved data -- */
         this.fetch_storage_data();
 
+        /* -- Check for old connections -- */
+        this.delete_old_codes();
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @string - Storage name
+    * @info     - The name givent to the localstorga eobject
     */
-    ClusterCodeCache.prototype.storage_name = 'cwc-cluster-cache';
+    CacheControl.prototype.storage_name = 'cwc-cluster-cache';
 
     /*------------------------------------------------------
-    * @function - Time request
-    * @info - Send the message to the right clinet
+    * @int - Time Threshold
+    * @info - declare hoiw long data should live in localstorga
     */
-    ClusterCodeCache.prototype.time_threshold = 120;
+    CacheControl.prototype.time_threshold = 120;
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @object - Storage data
+    * @info - Save the loaclstrage object here
     */
-    ClusterCodeCache.prototype.storage_data = {};
+    CacheControl.prototype.storage_data = {};
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Fetch storage data
+    * @info - Function to retrieve strage data
     */
-    ClusterCodeCache.prototype.fetch_storage_data = function()
+    CacheControl.prototype.fetch_storage_data = function()
     {
         if ( localStorage.getItem( this.storage_name ) !== null )
         {
@@ -59,26 +57,23 @@
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Retrieve storage data
+    * @info - function to get the local stage object
     */
-    ClusterCodeCache.prototype.retrieve_storage_data = function()
+    CacheControl.prototype.retrieve_storage_data = function()
     {
         return this.storage_data;
 
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Save connection infromation
+    * @info - Called when a suscsessfull connection has been made to the server
     */
-    ClusterCodeCache.prototype.save_cluster_code = function( client_data )
+    CacheControl.prototype.save_cluster_code = function( client_data )
     {
-        /* -- remove old code from local data -- */
-        this.delete_old_codes();
-
         /* -- Check to see if the code has been saved -- */
-        if( ! this.dose_code_exists( client_data ) )
+        if( ! this.check_for_existence( client_data ) )
         {
             /* -- Formate the cluster code -- */
             this.storage_data[ client_data.key ] = client_data;
@@ -92,10 +87,10 @@
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Delete old codes
+    * @info - removes the old codes from the localstage
     */
-    ClusterCodeCache.prototype.delete_old_codes = function()
+    CacheControl.prototype.delete_old_codes = function()
     {
         var object     = this.storage_data;
         var new_object = {
@@ -118,10 +113,10 @@
     };
 
     /*------------------------------------------------------
-    * @function - Process request
-    * @info - Send the message to the right clinet
+    * @function - Check for existence
+    * @info - Check to see if the code has been set
     */
-    ClusterCodeCache.prototype.dose_code_exists = function( client_data )
+    CacheControl.prototype.check_for_existence = function( client_data )
     {
         var object = this.storage_data;
 
@@ -141,6 +136,6 @@
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(ClusterCodeCache, 'ClusterCodeCache');
+    cwc.plugin(CacheControl, 'CacheControl');
 
 }( window.cwc );

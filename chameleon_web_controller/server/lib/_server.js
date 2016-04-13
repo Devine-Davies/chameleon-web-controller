@@ -344,17 +344,15 @@
     */
     Server.prototype.send_message_controllers = function( sent_package )
     {
-        var c_client       = this.client_clusters[ sent_package.cluster_code ].clients;
-        var format_package = this.format_msg( message );
+        var c_client       = this.client_clusters[ sent_package.cwc_metadata.cluster_code ].controllers;
+        var format_package = this.format_msg( sent_package );
 
-        if( c_client != null )
+        for( var index in c_client )
         {
-            for( var i = 0; i < c_client.length; i++)
-            {
-                c_client[ i ].send( this.format_msg(
-                     format_package
-                ));
-            }
+            var controller = c_client[ index];
+                controller.send(
+                    format_package
+                );
         }
 
     };

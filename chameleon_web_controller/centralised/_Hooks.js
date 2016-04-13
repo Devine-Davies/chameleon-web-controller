@@ -52,12 +52,14 @@
     {
         var hooks = ( reserved )? this.all_reserved_hooks : this.all_hooks;
 
-        try {
-            hooks[ prams.name ].method( prams.arguments, prams.cwc_metadata )
-        } catch( e ) {
-            console.log( e );
+        if( hooks.hasOwnProperty( prams.name ) )
+        {
+            try {
+                hooks[ prams.name ].method( prams.arguments, prams.cwc_metadata )
+            } catch( e ) {
+                console.log( e );
+            }
         }
-
     };
 
     /* -- Add this new object to the main object -- */

@@ -29,7 +29,7 @@ function cwc_object_declaration()
     * System messages should be declared here
     * We will have a list or predefined functions
     */
-    ClusterCodeCache = new cwc.ClusterCodeCache({
+    ClusterCodeCache = new cwc.CacheControl({
     });
 
     /*------------------------------------------------------
@@ -41,6 +41,14 @@ function cwc_object_declaration()
         host         : seed || 'http://localhost:5000/',
         port         : 5000,
         type         : 'ws'
+    });
+
+    /*------------------------------------------------------
+    * @function in array
+    * System messages should be declared here
+    * We will have a list or predefined functions
+    */
+    textcapture = new cwc.TextCapture({
     });
 
     /*------------------------------------------------------
