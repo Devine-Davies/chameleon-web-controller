@@ -23,7 +23,7 @@ show_excerpt : true
                 </div>
 
                 <div class="info">
-                  <h1 class="post-title" itemprop="name headline">{{ page.categories }} - {{ page.title }}</h1>
+                  <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
                   <p class="post-meta">
                   <time datetime="{{ page.date_updated | date_to_xmlschema }}" itemprop="datePublished">
                     last updated: {{ page.date_updated | date: "%b %-d, %Y" }}

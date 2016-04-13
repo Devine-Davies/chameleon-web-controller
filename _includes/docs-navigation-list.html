@@ -1,50 +1,48 @@
 <div class="docs-side-bar">
     <h1 class="vershion" >v1.1.0 <span>(Changelog)</span></h1>
 
-    <div class="server docs">
-        <h2>Server</h2>
-        <ul>
-          {% for post in site.categories['server'] %}
-            <li>
-              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-              {% if show_excerpt %}
-                <p>{{ post.excerpt }}</p>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-    </div>
-
-    <div class="display docs">
-        <h2>Display</h2>
-        <ul>
-          {% for post in site.categories['display'] %}
-            <li>
-              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-    </div>
-
-    <div class="controller docs">
-        <h2>Controller</h2>
-        <ul>
-          {% for post in site.categories['controller'] %}
-            <li>
-              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-    </div>
-
     <div class="general docs">
         <h2>General</h2>
         <ul>
           {% for post in site.categories['general'] %}
             <li>
-              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+              <img src="{{ post.f_image }}" />
+                <a href="{{ post.url | prepend: site.baseurl }}">
+                  <h3>{{ post.title }}</h3>
+                  {% if post.tax contains "general" %}
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                  {% endif %}
+                </a>
+                <p>
+                  {{ post.excerpt }}
+                </p>
             </li>
           {% endfor %}
         </ul>
     </div>
+
+    <div class="features docs">
+        <h2>Features</h2>
+        <ul>
+          {% for post in site.categories['feature'] %}
+            <li>
+              <img src="{{ post.f_image }}" />
+                <a href="{{ post.url | prepend: site.baseurl }}">
+                  <h3>{{ post.title }}</h3>
+                  {% if post.tax contains "display" %}
+                    <i class="fa fa-television" aria-hidden="true"></i>
+                  {% endif %}
+
+                  {% if post.tax contains "controller" %}
+                    <i class="fa fa-gamepad"    aria-hidden="true"></i>
+                  {% endif %}
+                </a>
+                <p>
+                  {{ post.excerpt }}
+                </p>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+
 </div>
