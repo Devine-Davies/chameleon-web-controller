@@ -115,7 +115,7 @@
                         sender       : 'server',
                         recipient    : 'display',
                         action       : 'controller-disconnected',
-                        arguments    : this.get_all_controller_keys_in_cluster( metadata.cluster_code ),
+                        arguments    : this.get_all_controller_in_cluster( metadata.cluster_code ),
                     } ) );
                 }
             }
@@ -154,8 +154,7 @@
                 recipient    : clinet_type,
                 sender       : 'server',
                 action       : 'connection-failed',
-                arguments    : 'There was a problem trying to connent...',
-                cwc_metadata : client.cwc_metadata
+                arguments    : 'There was a problem trying to connent...'
             } ) );
 
             /* -- Close clinet if no cluster to join onto -- */
@@ -168,11 +167,7 @@
                 recipient    : clinet_type,
                 sender       : 'server',
                 action       : 'connection-sucsess',
-                arguments    : {
-                    metadata  : client.cwc_metadata,
-                    apollo_13 : 'Bidirectional connection established...',
-                },
-                cwc_metadata : client.cwc_metadata
+                arguments    : client.cwc_metadata
             } ) );
         }
 
@@ -250,7 +245,7 @@
                 sender       : 'server',
                 recipient    : 'display',
                 action       : 'controller-connected',
-                arguments    : this.get_all_controller_keys_in_cluster( cluster_code ),
+                arguments    : this.get_all_controller_in_cluster( cluster_code ),
             } ) );
 
             return true;
@@ -260,7 +255,11 @@
 
     };
 
-    Server.prototype.get_all_controller_keys_in_cluster = function( cluster_code )
+    /*------------------------------------------------------
+    * @function - Get all controller keys in cluster
+    * @info     - Will add the clinet to a required cluster id
+    */
+    Server.prototype.get_all_controller_in_cluster = function( cluster_code )
     {
         /* -- Check to see if cluster exsists -- */
         if( this.client_clusters.hasOwnProperty( cluster_code ) )
@@ -270,17 +269,15 @@
 
             for (var controller_key in c_clients)
             {
-                var metadata = this.client_clusters[ cluster_code ].controllers[ controller_key ].cwc_metadata;
+                var metadata = c_clients[ controller_key ].cwc_metadata;
 
-                clinets_metadata.push( {
-                    'connected-timestamp'  : metadata.timestamp,
-                    'key'                  : controller_key
-                } );
+                clinets_metadata.push( metadata );
             }
 
             return clinets_metadata;
         }
-    }
+
+    };
 
     /*------------------------------------------------------
     * @function - Process request

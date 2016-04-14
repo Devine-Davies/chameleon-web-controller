@@ -255,14 +255,22 @@ function connect_to_server()
 
 function on_connect( data )
 {
+    console.log('on connet data');
+    console.log( data );
+    console.log('-----------');
+
     $('.connection-code p span').text(
-        data.metadata.cluster_code
+        data.cluster_code
     );
 
 };
 
 function controller_connected( controllers )
 {
+    console.log('controllers');
+    console.log( controllers );
+    console.log('-----------');
+
     var speed = 1000;
     $( '#controller-connection-alert h2' ).text('Welcome controller');
     $( '#controller-connection-alert' ).fadeIn( speed , function(){
