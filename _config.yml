@@ -7,28 +7,26 @@
 
 # Site settings
 title: Chameleon Web Controller
-email: your-email@domain.com
 description: > # A node framework for setting up second screen experience.
+# baseurl: "http://devine-davies.github.io/chameleon-web-controller" # the subpath of your site, e.g. /blog
+# url: "http://devine-davies.github.io/chameleon-web-controller" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
 
-baseurl: "http://devine-davies.github.io/chameleon-web-controller" # the subpath of your site, e.g. /blog
-url: "http://devine-davies.github.io/chameleon-web-controller" # the base hostname & protocol for your site
-
-# baseurl: "" # the subpath of your site, e.g. /blog
-# url: "" # the base hostname & protocol for your site
-
+email: rhysdevine@gmail.com
 twitter_username: jekyllrb
 github_username:  jekyll
 
 # Build settings
 markdown: kramdown
-
-# Permalinks
-permalink: /:categories/:title.
-# permalink:        pretty
-
+excerpt_separator : <!--more-->
+encoding: UTF-8
 # Server
 # destination:      _gh_pages
 # host:             127.0.0.1
 # port:             9001
 # baseurl:          /
-# encoding:         UTF-8
+
+# Permalinks
+permalink: /:categories/:title.
+# permalink:        pretty

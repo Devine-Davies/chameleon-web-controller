@@ -9,6 +9,7 @@ categories   : general
 tax 	     : general
 ---
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+<!--more-->
 
 ## Introduction
 There are many ways to install Foundation, but if you're just getting started, we have a few suggestions.

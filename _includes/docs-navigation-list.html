@@ -6,7 +6,7 @@
         <ul>
           {% for post in site.categories['general'] %}
             <li>
-              <img src="{{ post.f_image }}" />
+              <img src="{{ post.f_image | prepend: site.baseurl }}" />
                 <a href="{{ post.url | prepend: site.baseurl }}">
                   <h3>{{ post.title }}</h3>
                   {% if post.tax contains "general" %}
@@ -26,7 +26,7 @@
         <ul>
           {% for post in site.categories['feature'] %}
             <li>
-              <img src="{{ post.f_image }}" />
+              <img src="{{ post.f_image | prepend: site.baseurl }}" />
                 <a href="{{ post.url | prepend: site.baseurl }}">
                   <h3>{{ post.title }}</h3>
                   {% if post.tax contains "display" %}

@@ -32,7 +32,7 @@ show_excerpt : true
               </header>
 
               <section class="post-body">
-                {{ content }}
+                {{ content | remove_first:page.excerpt }}
               </section>
             </artical>
 
