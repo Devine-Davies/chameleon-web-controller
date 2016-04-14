@@ -275,10 +275,10 @@
     * @function - On message
     * @info - Server has sent a message
     */
-    Server.prototype.onmessage = function( sned_package )
+    Server.prototype.onmessage = function( recived_package )
     {
         /* -- Message data -- */
-        var data = JSON.parse( sned_package.data );
+        var data = JSON.parse( recived_package.data );
 
         /* -- Is a valid mesage : return true not valid -- */
         if( cwc.Server.prototype.validate_onmessage( data ) )
@@ -302,12 +302,6 @@
                 arguments    : data.arguments,
                 cwc_metadata : data.cwc_metadata,
             } );
-        }
-
-        /* -- Message for display & controller -- */
-        else if( data.recipient  == 'all' )
-        {
-            cwc.ServerMethod.prototype.call_method( data );
         }
 
     };

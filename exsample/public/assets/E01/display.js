@@ -36,7 +36,7 @@ window.onload = function()
 
     /* -- to make full screen -- */
     $(document).on('click', function(){
-        //launch_into_fullscreen( document.documentElement );
+      //  launch_into_fullscreen( document.documentElement );
     })
 
 };
@@ -288,14 +288,43 @@ function controller_disconnected( controllers )
 function show_controller_tally( controllers )
 {
     var count = 0;
+    var html     = '';
 
-    for( var i = 0; i < controllers.length; i++ ) {
-        count++;
+    $( $('.controller-tally i') ).each( function (){
+        /* -- add the new cwc to  the new elms -- */
+        navigation.ng_remove_item(
+            this , 'controller-tally'
+        );
+    });
+
+    for( var i = 0; i < controllers.length; i++ )
+    {
+        if( i == 0 )
+        {
+          html += '<i class="fa fa-gamepad" aria-hidden="true" data-cwc-navitem ';
+          html += "data-cwc-overide='{ \"left\" : \"ng-search\"}' ";
+          html += '></i>';
+        }
+        else
+        {
+          html += '<i class="fa fa-gamepad" aria-hidden="true" data-cwc-navitem';
+          html += '></i>';
+        }
+
     }
 
-    $('.controller-tally p span').text(
-        count
-    );
+    console.log( 'controllers' + controllers.length );
+    console.log( html );
+
+    /* -- Add to the dom -- */
+    $('.controller-tally').html( html );
+
+    $( $('.controller-tally i') ).each( function (){
+        /* -- add the new cwc to  the new elms -- */
+        navigation.ng_append_item(
+            this , 'controller-tally'
+        );
+    });
 
 };
 

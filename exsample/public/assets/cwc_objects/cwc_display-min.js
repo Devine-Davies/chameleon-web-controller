@@ -408,10 +408,10 @@ function isFunctionA(object)
     * @function - On message
     * @info - Server has sent a message
     */
-    Server.prototype.onmessage = function( sned_package )
+    Server.prototype.onmessage = function( recived_package )
     {
         /* -- Message data -- */
-        var data = JSON.parse( sned_package.data );
+        var data = JSON.parse( recived_package.data );
 
         /* -- Is a valid mesage : return true not valid -- */
         if( cwc.Server.prototype.validate_onmessage( data ) )
@@ -435,12 +435,6 @@ function isFunctionA(object)
                 arguments    : data.arguments,
                 cwc_metadata : data.cwc_metadata,
             } );
-        }
-
-        /* -- Message for display & controller -- */
-        else if( data.recipient  == 'all' )
-        {
-            cwc.ServerMethod.prototype.call_method( data );
         }
 
     };
@@ -592,7 +586,7 @@ function isFunctionA(object)
         this.set_extended_options( extend );
 
         /* -- Ser for any data attrs in page -- */
-        this.navgroups_lookup();
+        this.reflow();
 
         if ( this.navgroups_count() > 0 )
         {
@@ -603,7 +597,7 @@ function isFunctionA(object)
             this.add_server_events();
         }
 
-        //console.log( this.nav_elms );
+        console.log( this.nav_elms );
 
     };
 
@@ -724,7 +718,7 @@ function isFunctionA(object)
     * @function - Navgroups lookup
     * @info - Find elms with data-(group) add the this to object
     */
-    Navigation.prototype.navgroups_lookup = function()
+    Navigation.prototype.reflow = function()
     {
         /* -- Get names -- */
         var nav_groups       = document.querySelectorAll('['+ this.taxonomy.data.group +']');
@@ -811,9 +805,47 @@ function isFunctionA(object)
                     } );
                 }
             }
+
         }
 
         return items;
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Update nav tracking
+    * @info     - Will update the tracking system for next items and groups
+    */
+    Navigation.prototype.ng_append_item = function( item, g_name )
+    {
+        /* -- Only add if there -- */
+        if( this.nav_elms.hasOwnProperty( g_name ) )
+        {
+            /* -- store item -- */
+            this.nav_elms[ g_name ].navitems.push({
+                item      : item,
+                overrides : this.item_overrides( item )
+            });
+        }
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Update nav tracking
+    * @info     - Will update the tracking system for next items and groups
+    */
+    Navigation.prototype.ng_remove_item = function( index, g_name )
+    {
+        /* -- Only add if there -- */
+        if( this.nav_elms.hasOwnProperty( g_name ) )
+        {
+            console.log( this.nav_elms[ g_name ].navitems );
+
+            /* -- Remove the item -- */
+            this.nav_elms[ g_name ].navitems.splice( index , 1 );
+
+            console.log( this.nav_elms[ g_name ].navitems );
+        }
 
     };
 
@@ -876,14 +908,19 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Items in current group count
+    * @function - Total items in group
     * @return - count items in grop : defult current group
     */
-    Navigation.prototype.items_in_current_group_count = function( )
+    Navigation.prototype.total_items_in_group = function( group_name )
     {
-        return this.nav_elms[
-            this.tracking.current.g_name
-        ].navitems.length;
+        group_name = ( ! group_name )? this.tracking.current.g_name : group_name;
+
+        if( this.nav_elms.hasOwnProperty( group_name ) )
+        {
+            return this.nav_elms[
+                group_name
+            ].navitems.length;
+        };
 
     };
 
@@ -1131,6 +1168,14 @@ function isFunctionA(object)
     */
     Navigation.prototype.move_to_nav_name = function( group_name )
     {
+        /* -- Check first -- */
+        if( ! this.nav_elms.hasOwnProperty( group_name ) ) {
+            return;
+        }
+        else if ( this.total_items_in_group( group_name ) == 0 ) {
+            return;
+        }
+
         var nav_group = this.nav_elms[ group_name ];
         var c_item    = null;
 
@@ -1246,12 +1291,12 @@ function isFunctionA(object)
     {
         var collision = {
             first : ( index <= -1 ),
-            last  : ( index >= this.items_in_current_group_count( ) )
+            last  : ( index >= this.total_items_in_group( ) )
         }
 
         if( collision.first )
         {
-            index = this.items_in_current_group_count( ) - 1;
+            index = this.total_items_in_group( ) - 1;
         }
 
         if( collision.last )

@@ -19,7 +19,7 @@
         this.set_extended_options( extend );
 
         /* -- Ser for any data attrs in page -- */
-        this.navgroups_lookup();
+        this.reflow();
 
         if ( this.navgroups_count() > 0 )
         {
@@ -30,7 +30,7 @@
             this.add_server_events();
         }
 
-        //console.log( this.nav_elms );
+        console.log( this.nav_elms );
 
     };
 
@@ -151,7 +151,7 @@
     * @function - Navgroups lookup
     * @info - Find elms with data-(group) add the this to object
     */
-    Navigation.prototype.navgroups_lookup = function()
+    Navigation.prototype.reflow = function()
     {
         /* -- Get names -- */
         var nav_groups       = document.querySelectorAll('['+ this.taxonomy.data.group +']');
@@ -238,9 +238,47 @@
                     } );
                 }
             }
+
         }
 
         return items;
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Update nav tracking
+    * @info     - Will update the tracking system for next items and groups
+    */
+    Navigation.prototype.ng_append_item = function( item, g_name )
+    {
+        /* -- Only add if there -- */
+        if( this.nav_elms.hasOwnProperty( g_name ) )
+        {
+            /* -- store item -- */
+            this.nav_elms[ g_name ].navitems.push({
+                item      : item,
+                overrides : this.item_overrides( item )
+            });
+        }
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Update nav tracking
+    * @info     - Will update the tracking system for next items and groups
+    */
+    Navigation.prototype.ng_remove_item = function( index, g_name )
+    {
+        /* -- Only add if there -- */
+        if( this.nav_elms.hasOwnProperty( g_name ) )
+        {
+            console.log( this.nav_elms[ g_name ].navitems );
+
+            /* -- Remove the item -- */
+            this.nav_elms[ g_name ].navitems.splice( index , 1 );
+
+            console.log( this.nav_elms[ g_name ].navitems );
+        }
 
     };
 
@@ -303,14 +341,19 @@
     };
 
     /*------------------------------------------------------
-    * @function - Items in current group count
+    * @function - Total items in group
     * @return - count items in grop : defult current group
     */
-    Navigation.prototype.items_in_current_group_count = function( )
+    Navigation.prototype.total_items_in_group = function( group_name )
     {
-        return this.nav_elms[
-            this.tracking.current.g_name
-        ].navitems.length;
+        group_name = ( ! group_name )? this.tracking.current.g_name : group_name;
+
+        if( this.nav_elms.hasOwnProperty( group_name ) )
+        {
+            return this.nav_elms[
+                group_name
+            ].navitems.length;
+        };
 
     };
 
@@ -558,6 +601,14 @@
     */
     Navigation.prototype.move_to_nav_name = function( group_name )
     {
+        /* -- Check first -- */
+        if( ! this.nav_elms.hasOwnProperty( group_name ) ) {
+            return;
+        }
+        else if ( this.total_items_in_group( group_name ) == 0 ) {
+            return;
+        }
+
         var nav_group = this.nav_elms[ group_name ];
         var c_item    = null;
 
@@ -673,12 +724,12 @@
     {
         var collision = {
             first : ( index <= -1 ),
-            last  : ( index >= this.items_in_current_group_count( ) )
+            last  : ( index >= this.total_items_in_group( ) )
         }
 
         if( collision.first )
         {
-            index = this.items_in_current_group_count( ) - 1;
+            index = this.total_items_in_group( ) - 1;
         }
 
         if( collision.last )

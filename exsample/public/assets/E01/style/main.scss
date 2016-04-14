@@ -17,15 +17,14 @@ body.display {
   .connection-status {
     text-align: left;
     background: rgba(255, 255, 255, 0.1);
-    position: fixed;
-    height: 8vh;
-    min-height: 70px;
     z-index: 9999;
     width: 100vw;
+    overflow: hidden;
 
     .search {
       float: left;
-      margin: 15px 10px;
+      margin: 20px;
+      clear: both;
 
       &.cwc-selected-group {
         outline: 1px solid white;
@@ -47,18 +46,20 @@ body.display {
           outline: none;
           background: none;
           border: none;
+          color: white;
 
-          &:focus {
-            color: white;
+          &:placeholder-shown {
+              opacity: 0.8;
           }
         }
+
       }
 
     }
 
     .connection-code,
     .controller-tally {
-      height: 5vh;
+      float: right;
       display: inline-block;
 
       p {
@@ -107,8 +108,6 @@ body.display {
     z-index: 1;
     margin: 0;
     padding: 0;
-    padding-top: 8vh;
-
 
     .navigation {
       align-self: center;
@@ -279,13 +278,13 @@ body.display {
         padding: 0 3rem;
         margin: 1rem 0;
         font-weight: 400;
+        text-transform: capitalize;
       }
 
       .section-list {
         width: 100vw;
         padding: 2rem 0rem;
         margin: 0rem auto;
-        // background: rgba(000, 000, 000, 0.2);
         box-shadow: 0px 0px 10px 1px rgba(000, 000, 000, 0.6);
 
         list-style: none;
@@ -299,8 +298,8 @@ body.display {
             color: white;
             font-weight: bold;
             text-align: center;
-            width: 300px;
-            height: 440px;
+            width: 265px;
+            height: 388px;
             background-position: center;
 
             background-size: 100%;

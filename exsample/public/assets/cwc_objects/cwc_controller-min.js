@@ -417,10 +417,10 @@ function isFunctionA(object)
     * @function - On message
     * @info - Server has sent a message
     */
-    Server.prototype.onmessage = function( sned_package )
+    Server.prototype.onmessage = function( recived_package )
     {
         /* -- Message data -- */
-        var data = JSON.parse( sned_package.data );
+        var data = JSON.parse( recived_package.data );
 
         /* -- Is a valid mesage : return true not valid -- */
         if( cwc.Server.prototype.validate_onmessage( data ) )
@@ -444,12 +444,6 @@ function isFunctionA(object)
                 arguments    : data.arguments,
                 cwc_metadata : data.cwc_metadata,
             } );
-        }
-
-        /* -- Message for display & controller -- */
-        else if( data.recipient  == 'all' )
-        {
-            cwc.ServerMethod.prototype.call_method( data );
         }
 
     };
@@ -2048,25 +2042,29 @@ function isFunctionA(object)
     */
     TextCapture.prototype.create_text_capture = function( prams )
     {
-        var input = document.createElement("textarea");
-            input.maxLength = "5000";
-            input.cols = "80";
-            input.rows = "40";
-            input.className  = 'cwc-text-capture';
-            input.placeholder = prams.placeholder;
+        /* -- Check elm dose not exsist -- */
+        if ( ! document.querySelector('#' + prams.name ) )
+        {
+            var input = document.createElement("textarea");
+                input.maxLength = "5000";
+                input.cols = "80";
+                input.rows = "40";
+                input.className  = 'cwc-text-capture';
+                input.placeholder = prams.placeholder;
 
-            /* -- Use the name as #id -- */
-            input.id = prams.name;
+                /* -- Use the name as #id -- */
+                input.id = prams.name;
 
-            input.addEventListener("blur", function(){
-                cwc.TextCapture.prototype.text_capture_done( this );
-            });
+                input.addEventListener("blur", function(){
+                    cwc.TextCapture.prototype.text_capture_done( this );
+                });
 
-        /* -- Add to the body -- */
-        document.body.appendChild(input);
+            /* -- Add to the body -- */
+            document.body.appendChild(input);
 
-        /* -- Focus into the elm -- */
-        document.querySelector('#' + name ).focus();
+            /* -- Focus into the elm -- */
+            document.querySelector('#' + name ).focus();
+        }
     }
 
     /*------------------------------------------------------

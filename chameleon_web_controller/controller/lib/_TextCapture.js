@@ -44,25 +44,29 @@
     */
     TextCapture.prototype.create_text_capture = function( prams )
     {
-        var input = document.createElement("textarea");
-            input.maxLength = "5000";
-            input.cols = "80";
-            input.rows = "40";
-            input.className  = 'cwc-text-capture';
-            input.placeholder = prams.placeholder;
+        /* -- Check elm dose not exsist -- */
+        if ( ! document.querySelector('#' + prams.name ) )
+        {
+            var input = document.createElement("textarea");
+                input.maxLength = "5000";
+                input.cols = "80";
+                input.rows = "40";
+                input.className  = 'cwc-text-capture';
+                input.placeholder = prams.placeholder;
 
-            /* -- Use the name as #id -- */
-            input.id = prams.name;
+                /* -- Use the name as #id -- */
+                input.id = prams.name;
 
-            input.addEventListener("blur", function(){
-                cwc.TextCapture.prototype.text_capture_done( this );
-            });
+                input.addEventListener("blur", function(){
+                    cwc.TextCapture.prototype.text_capture_done( this );
+                });
 
-        /* -- Add to the body -- */
-        document.body.appendChild(input);
+            /* -- Add to the body -- */
+            document.body.appendChild(input);
 
-        /* -- Focus into the elm -- */
-        document.querySelector('#' + name ).focus();
+            /* -- Focus into the elm -- */
+            document.querySelector('#' + name ).focus();
+        }
     }
 
     /*------------------------------------------------------
