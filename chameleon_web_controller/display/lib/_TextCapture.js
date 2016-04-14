@@ -39,7 +39,7 @@
     {
         /* -- Crete connection fil | Hook -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          name      : 'text-capture-done',
+          hook_name : 'text-capture-done',
           method    : function( feedback ) {
             cwc.TextCapture.prototype.on_text_capture_done(
                 feedback
@@ -125,9 +125,9 @@
             }
         }
 
-        cwc.Server.prototype.send_message({
-            action    : 'text-capture-invoked',
+        Hooks.invoke_clinet_hook({
             recipient : 'controller',
+            hook_name : 'text-capture-invoked',
             arguments : {
                 name        : name,
                 placeholder : placeholder

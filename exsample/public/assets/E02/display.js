@@ -40,22 +40,22 @@ var cwc_object_declaration = function() {
     Hooks = new cwc.Hooks({ });
 
     Hooks.set_hook( {
-        name   : 'rand-color',
-        method : function( feedback, mdata ) {
+        hook_name : 'rand-color',
+        method    : function( feedback, mdata ) {
           rand_color_got( feedback,  mdata );
         }
     });
 
     Hooks.set_hook( {
-        name   : 'on-analog-move',
-        method : function( feedback, mdata ) {
+        hook_name : 'on-analog-move',
+        method    : function( feedback, mdata ) {
           on_analog_move( feedback, mdata );
         }
     });
 
     Hooks.set_hook( {
-        name   : 'on-analog-end',
-        method : function( info ) {
+        hook_name : 'on-analog-end',
+        method    : function( info ) {
           on_analog_end( info );
         }
     });
@@ -80,20 +80,45 @@ function on_analog_move( feedback, mdata )
 
 function connect_to_server()
 {
-    /* -- connect to the host via web sockets -- */
-    server.connect({
-      'connection-sucsess'      : function ( data ){ on_connect( data ) },
-      'connection-failed'       : function ( data ){ console.log( data ); },
-      'controller-connected'    : function ( controller ){ controller_connected( controller );    },
-      'controller-disconnected' : function ( controller ){ controller_disconnected( controller ); }
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name      : 'connection-success',
+      method    : function( feedback ) { on_connect( feedback ) }
+    } );
+
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name      : 'connection-failed',
+      method    : function( feedback ) { console.log( data ); }
+    } );
+
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name      : 'controller-connected',
+      method    : function( controller ) { controller_connected( controller ) }
+    } );
+
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name      : 'controller-disconnected',
+      method    : function( controller ) { controller_disconnected( controller ) }
+    } );
+
+    Hooks.set_hook( {
+      hook_name   : 'gn-item-selected',
+      method : function( feedback ) {
+      }
     });
+
+    /* -- connect to the host via web sockets -- */
+    server.connect( );
 
 }
 
 function on_connect( data )
 {
     $('.top-bar .connection-code p span').text(
-        data.metadata.cluster_code
+        data.cluster_code
     );
 
 }

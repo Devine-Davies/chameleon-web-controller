@@ -187,7 +187,9 @@
             });
 
             /* -- check if hook has been applied -- */
-            cwc.ControllerMaster.prototype.invoke_hook( 'on-pull', instructions,
+            cwc.ControllerMaster.prototype.invoke_hook(
+                'on-pull',
+                instructions,
                 this.get_feedback_data( ev )
             );
 
@@ -299,7 +301,9 @@
             ].instructions;
 
             /* -- check if hook has been applied -- */
-            cwc.ControllerMaster.prototype.invoke_hook( 'on-pull', instructions,
+            cwc.ControllerMaster.prototype.invoke_hook(
+                'on-pull',
+                instructions,
                 cwc.PullbarController.prototype.returned_data
             );
 

@@ -19,6 +19,7 @@
 
         /* -- Set the hooks -- */
         this.set_hooks();
+
     };
 
     /*------------------------------------------------------
@@ -29,7 +30,7 @@
     {
         /* -- Crete connection fil | Hook -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          name      : 'text-capture-invoked',
+          hook_name : 'text-capture-invoked',
           method    : function( prams ) {
             cwc.TextCapture.prototype.create_text_capture(
                 prams
@@ -67,7 +68,8 @@
             /* -- Focus into the elm -- */
             document.querySelector('#' + name ).focus();
         }
-    }
+
+    };
 
     /*------------------------------------------------------
     * @function - Text capture done
@@ -79,8 +81,8 @@
         document.body.removeChild( elm );
 
         /* -- Send the recorded data -- */
-        cwc.Server.prototype.send_message({
-            action    : 'text-capture-done',
+        cwc.Hooks.prototype.invoke_clinet_hook({
+            hook_name : 'text-capture-done',
             recipient : 'display',
             arguments : {
                 name  : elm.id,
@@ -88,7 +90,7 @@
             }
         });
 
-    }
+    };
 
     /*------------------------------------------------------
     * @function

@@ -71,7 +71,7 @@
     {
         /* -- Crete connection fil | Hook -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          name      : 'scroll-viewport',
+          hook_name : 'scroll-viewport',
           method    : function( feedback ) {
             cwc.ViewportScroll.prototype.start_scroll_process( feedback );
         } } );

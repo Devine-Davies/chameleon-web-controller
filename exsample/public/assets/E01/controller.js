@@ -17,7 +17,7 @@ document.ontouchmove = function(event){
 window.onload = function()
 {
     cwc_object_declaration();
-    cwc_Hooks();
+    cwc_hooks();
     start_conection_process();
 
 };
@@ -103,12 +103,11 @@ function cwc_object_declaration()
 
 var is_sending = null;
 
-function cwc_Hooks()
+function cwc_hooks()
 {
     Hooks.set_hook( {
-      name   : 'on-move-navigation',
-      method : function( prams ) {
-        //console.log( prams );
+      hook_name : 'on-move-navigation',
+      method    : function( prams ) {
         if( prams.in_out.x == 'out' || prams.in_out.y == 'out' )
         {
             slow_down( prams.cardinal_direction );
@@ -117,11 +116,11 @@ function cwc_Hooks()
     });
 
     Hooks.set_hook( {
-      name   : 'scroll-view',
-      method : function( prams ) {
-        Server.send_message({
+      hook_name : 'scroll-view',
+      method    : function( prams ) {
+        Hooks.invoke_clinet_hook({
             recipient : 'display',
-            action    : 'scroll-viewport',
+            hook_name : 'scroll-viewport',
             arguments : {
               viewport_target : 'scroll-target',
               direction       : (prams.cardinal_direction.indexOf('N') > -1 )? 'up' : 'down',
@@ -132,10 +131,22 @@ function cwc_Hooks()
       }
     });
 
-}
+};
 
 function start_conection_process()
 {
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name  : 'connection-success',
+      method    : function( feedback ) { on_connect( feedback ) }
+    } );
+
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name  : 'connection-failed',
+      method    : function( feedback ) { console.log( feedback ); }
+    } );
+
     if( ClusterCodeCache.retrieve_storage_data() )
     {
         var object =  ClusterCodeCache.retrieve_storage_data();
@@ -150,36 +161,31 @@ function start_conection_process()
 
         /* -- Run cwc server object to connect to server with code -- */
         $('#connect-code-list li').on('click', function() {
-            Server.connect({
-               'connect-code'       : $(this).text(),
-               'connection-sucsess' : function(){ on_connection_sucsess() },
-               'connection-failed'  : function(){ on_connection_faild()   }
-            } );
+            Server.connect( $(this).text() );
         } );
 
     }
 
     $('#connect-code').on('focusout', function(){
         /* -- Run cwc server object to connect to server with code -- */
-        Server.connect({
-           'connect-code'       : $('#connect-code').val(),
-           'connection-sucsess' : function(){ on_connection_sucsess() },
-           'connection-failed'  : function(){ on_connection_faild()   }
-        } );
+        Server.connect( $('#connect-code').val() );
     } );
-}
 
-function on_connection_sucsess()
+};
+
+function on_connect()
 {
     console.log('on_connection_sucsess');
     $('.connect-code-process').removeClass('open');
-}
+
+};
 
 function on_connection_faild()
 {
     console.log('on_connection_faild');
     $('.connect-code-process').addClass('open');
-}
+
+};
 
 function slow_down( dir )
 {
@@ -188,9 +194,9 @@ function slow_down( dir )
         is_sending = true;
 
         setTimeout( function(){
-            Server.send_message({
+            Hooks.invoke_clinet_hook({
                 recipient : 'display',
-                action    : 'move navigation',
+                hook_name : 'move-navigation',
                 arguments : dir
             });
 

@@ -272,12 +272,9 @@
         /* -- Only add if there -- */
         if( this.nav_elms.hasOwnProperty( g_name ) )
         {
-            console.log( this.nav_elms[ g_name ].navitems );
-
             /* -- Remove the item -- */
             this.nav_elms[ g_name ].navitems.splice( index , 1 );
 
-            console.log( this.nav_elms[ g_name ].navitems );
         }
 
     };
@@ -366,7 +363,7 @@
     {
         /* -- Crete connection fil | Hook -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          name      : 'move navigation',
+          hook_name : 'move-navigation',
           method    : function( feedback ) {
             cwc.Navigation.prototype.invoke_dir( feedback );
         } } );
@@ -510,7 +507,7 @@
         if( instruction.indexOf('hook-') > -1 )
         {
             cwc.Hooks.prototype.invoke(  {
-                name      : instruction.replace('hook-',''),
+                hook_name : instruction,
                 arguments : this.tracking.current
             } );
 

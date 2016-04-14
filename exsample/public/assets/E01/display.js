@@ -144,15 +144,8 @@ function cwc_object_declaration()
     Hooks = new cwc.Hooks({ });
 
     Hooks.set_hook( {
-        name   : 'gn-item-selected',
-        method : function( feedback ) {
-        }
-
-    });
-
-    Hooks.set_hook( {
-        name   : 'on-global-nav-enter',
-        method : function( feedback ) {
+        hook_name : 'on-global-nav-enter',
+        method    : function( feedback ) {
           move_page( feedback );
           $( '#top-nav .navigation section.active' ).removeClass('active');
           $( feedback.i_elm.item ).addClass('active');
@@ -160,35 +153,35 @@ function cwc_object_declaration()
     });
 
     Hooks.set_hook( {
-        name   : 'movie-item-selected',
+        hook_name   : 'movie-item-selected',
         method : function( feedback ) {
             loade_data_feed( $( feedback.i_elm.item ).data('feed-info') );
         }
     });
 
     Hooks.set_hook( {
-        name   : 'load-movie-window',
+        hook_name   : 'load-movie-window',
         method : function( feedback ) {
             open_trailler_window(  );
         }
     });
 
     Hooks.set_hook( {
-        name   : 'info-window-btn-clicked',
+        hook_name   : 'info-window-btn-clicked',
         method : function( feedback ) {
             info_window_btn_clicked( feedback );
         }
     });
 
     Hooks.set_hook( {
-        name   : 'on-search-focus',
+        hook_name   : 'on-search-focus',
         method : function( feedback ) {
             textcapture.run_on_controller('cwc-textcapture-search');
         }
     });
 
     Hooks.set_hook( {
-        name   : 'move-page-onentrance',
+        hook_name   : 'move-page-onentrance',
         method : function( feedback ) {
             move_page( feedback );
         }
@@ -213,7 +206,8 @@ function move_page( info )
 
     /* -- Save the move -- */
     _nav_moves.push( info.g_id );
-}
+
+};
 
 function loade_data_feed( feed )
 {
@@ -243,13 +237,38 @@ function info_window_btn_clicked( feedback )
 
 function connect_to_server()
 {
-    /* -- connect to the host via web sockets -- */
-    server.connect({
-      'connection-sucsess'      : function ( data ){ on_connect( data ) },
-      'connection-failed'       : function ( data ){ console.log( data ); },
-      'controller-connected'    : function ( controller ){ controller_connected( controller );    },
-      'controller-disconnected' : function ( controller ){ controller_disconnected( controller ); }
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name      : 'connection-success',
+      method    : function( feedback ) { on_connect( feedback ) }
+    } );
+
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name      : 'connection-failed',
+      method    : function( feedback ) { console.log( data ); }
+    } );
+
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name      : 'controller-connected',
+      method    : function( controller ) { controller_connected( controller ) }
+    } );
+
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name      : 'controller-disconnected',
+      method    : function( controller ) { controller_disconnected( controller ) }
+    } );
+
+    Hooks.set_hook( {
+      hook_name   : 'gn-item-selected',
+      method : function( feedback ) {
+      }
     });
+
+    /* -- connect to the host via web sockets -- */
+    server.connect( );
 
 };
 

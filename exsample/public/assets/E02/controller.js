@@ -74,18 +74,18 @@ var is_sending = null;
 function cwc_Hooks()
 {
     Hooks.set_hook( {
-      name   : 'on-analog-move',
-      method : function( prams ) {
+      hook_name : 'on-analog-move',
+      method    : function( prams ) {
         on_analog_move( prams.coordinate );
       }
     });
 
     Hooks.set_hook( {
-      name   : 'on-analog-end',
-      method : function( ) {
-        Server.send_message({
+      hook_name : 'on-analog-end',
+      method :   function( ) {
+        Hooks.invoke_clinet_hook({
             recipient : 'display',
-            action    : 'on-analog-end',
+            hook_name : 'on-analog-end',
             arguments : ''
         });
     } } );
@@ -95,6 +95,18 @@ function cwc_Hooks()
 
 function start_conection_process()
 {
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name  : 'connection-success',
+      method    : function( feedback ) { on_connection_sucsess( feedback ) }
+    } );
+
+    /* -- Crete connection sucsess | Hook -- */
+    Hooks.set_hook( {
+      hook_name  : 'connection-failed',
+      method    : function( feedback ) { console.log( feedback ); }
+    } );
+
     if( CacheControl.retrieve_storage_data() )
     {
         var object =  CacheControl.retrieve_storage_data();
@@ -109,23 +121,14 @@ function start_conection_process()
 
         /* -- Run cwc server object to connect to server with code -- */
         $('#connect-code-list li').on('click', function() {
-            Server.connect({
-               'connect-code'       : $(this).text(),
-               'connection-sucsess' : function(){ on_connection_sucsess() },
-               'connection-failed'  : function(){ on_connection_faild()   }
-            } );
+            Server.connect( $(this).text() );
         } );
 
     }
 
     $('#connect-code').on('focusout', function(){
         /* -- Run cwc server object to connect to server with code -- */
-        Server.connect({
-           'connect-code'       : $('#connect-code').val(),
-           'connection-sucsess' : function(){ on_connection_sucsess() },
-           'connection-failed'  : function(){ on_connection_faild()   }
-        } );
-
+        Server.connect( $('#connect-code').val() );
     } );
 
 }
@@ -135,9 +138,9 @@ function on_connection_sucsess()
     $('.connect-code-process').removeClass('open');
 
     /* -- Send the random color -- */
-    Server.send_message({
+    Hooks.invoke_clinet_hook({
         recipient : 'display',
-        action    : 'rand-color',
+        hook_name : 'rand-color',
         arguments : getRandomColor()
     });
 
@@ -173,19 +176,13 @@ function update_controller_style( color )
     );
 }
 
-function on_connection_faild()
-{
-    console.log('on_connection_faild');
-    $('.connect-code-process').addClass('open');
-
-}
-
 
 function on_analog_move( prams )
 {
-    Server.send_message({
+    /* -- Send the random color -- */
+    Hooks.invoke_clinet_hook({
         recipient : 'display',
-        action    : 'on-analog-move',
+        hook_name : 'on-analog-move',
         arguments : prams
     });
 

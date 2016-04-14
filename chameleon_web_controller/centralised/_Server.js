@@ -58,51 +58,25 @@
     * @function - Connect
     * @info - Connect to the server
     */
-    Server.prototype.connect = function( prams )
+    Server.prototype.connect = function( cluster_code )
     {
         /* -- Flush any old connections -- */
         ( cwc._server_connection )? this.onclose() : null;
 
         /* -- Cluster code setting -- */
-        this.cluster_code = ( cwc._cwc_type  == 'controller' )?
-        prams['connect-code'] : this.gen_cluster_code( );
-
-        /* -- Crete connection sucsess | Hook -- */
-        cwc.Hooks.prototype.set_hook( {
-          name      : 'connection-sucsess',
-          method    : function( feedback ) {
-            ( prams.hasOwnProperty('connection-sucsess') )? prams['connection-sucsess']( feedback ) : null;
-        } } );
-
-        /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_hook( {
-          name      : 'connection-failed',
-          method    : function( feedback ) {
-            ( prams.hasOwnProperty('connection-failed') )? prams['connection-failed']( feedback ) : null;
-        } } );
+        if( ( cwc._cwc_type  == 'controller' ) && ( cluster_code != null ) )
+        {
+            this.cluster_code = cluster_code;
+        }
+        else
+        {
+            this.cluster_code = this.gen_cluster_code( );
+        }
 
         var socket = null,
         host = this.connection_options.host,
         port = this.connection_options.port,
         type = this.connection_options.type;
-
-        /* -- We are running on a display clinet -- */
-        if( cwc._cwc_type  == 'display' )
-        {
-            /* -- Create hook | for controller connected CB-Func -- */
-            cwc.Hooks.prototype.set_hook( {
-              name      : 'controller-connected',
-              method    : function( controllers ) {
-                ( prams.hasOwnProperty('controller-connected') )? prams['controller-connected']( controllers ) : null;
-            } } );
-
-            /* -- Create hook | for controller disconnected CB-Func -- */
-            cwc.Hooks.prototype.set_hook( {
-              name      : 'controller-disconnected',
-              method    : function( controllers ) {
-                ( prams.hasOwnProperty('controller-disconnected') )? prams['controller-disconnected']( controllers ) : null;
-            } } );
-        }
 
         /* -- Check the type of connection -- */
         switch ( type )
@@ -110,7 +84,6 @@
             case 'ws':
                 socket = new WebSocket ( this.build_ws_connection (host, port, type) );
             break;
-
         }
 
         /* -- Allow our cwc object to be reatch at the _global scope -- */
@@ -139,14 +112,14 @@
     {
         /* -- Crete connection fil | Hook -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          name      : 'connection-sucsess',
+          hook_name : 'connection-success',
           method    : function( feedback ) {
-            cwc.Server.prototype.on_connection_sucsess( feedback );
+            cwc.Server.prototype.on_connection_success( feedback );
         } } );
 
         /* -- Crete connection fil | Hook -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          name      : 'connection-failed',
+          hook_name : 'connection-failed',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_faild( feedback );
         } } );
@@ -180,17 +153,21 @@
     };
 
     /*------------------------------------------------------
-    * @function - On connection sucsess
-    * @info     - how to react when connection sucsessfull
+    * @function - On connection success
+    * @info     - how to react when connection successfull
     */
-    Server.prototype.on_connection_sucsess = function( server_feedback )
+    Server.prototype.on_connection_success = function( server_feedback )
     {
+        console.log( server_feedback );
+
         if( cwc._cwc_type  == 'controller' )
         {
             try {
-                cwc.CacheControl.prototype.save_cluster_code(
-                    server_feedback.metadata
-                );
+                /* -- Invoke the connection success message -- */
+                cwc.Hooks.prototype.invoke({
+                    hook_name : 'save-client-data',
+                    arguments : server_feedback,
+                }, true );
             } catch ( e ) {
                 console.log('saved faild');
             }
@@ -200,13 +177,13 @@
 
     /*------------------------------------------------------
     * @function - On greeting message
-    * @info     - how to react when connection sucsessfull
+    * @info     - how to react when connection successfull
     */
     Server.prototype.on_connection_faild = function()
     {
-        /* -- Invoke the connection sucsess message -- */
+        /* -- Invoke the connection success message -- */
         cwc.Hooks.prototype.invoke({
-            name      : 'connection-failed',
+            hook_name      : 'connection-failed',
             arguments : this.connection_options,
         });
 
@@ -278,31 +255,23 @@
     Server.prototype.onmessage = function( recived_package )
     {
         /* -- Message data -- */
-        var data = JSON.parse( recived_package.data );
+        var hook_info = JSON.parse( recived_package.data );
 
-        /* -- Is a valid mesage : return true not valid -- */
-        if( cwc.Server.prototype.validate_onmessage( data ) )
-        {
-            console.log( 'Message not properly formatted' );
-        }
+        /* -- Look at reserved -- */
+        cwc.Hooks.prototype.invoke({
+            hook_name    : hook_info.hook_name,
+            arguments    : hook_info.arguments,
+            recipient    : hook_info.recipient,
+            cwc_metadata : hook_info.cwc_metadata,
+        }, true );
 
-        /* -- Message for Display || Controller-- */
-        else if( cwc._cwc_type  == data.recipient )
-        {
-            /* -- Look at reserved -- */
-            cwc.Hooks.prototype.invoke({
-                name         : data.action,
-                arguments    : data.arguments,
-                cwc_metadata : data.cwc_metadata,
-            }, true );
-
-            /* -- Look for users -- */
-            cwc.Hooks.prototype.invoke({
-                name         : data.action,
-                arguments    : data.arguments,
-                cwc_metadata : data.cwc_metadata,
-            } );
-        }
+        /* -- Look for users -- */
+        cwc.Hooks.prototype.invoke({
+            hook_name    : hook_info.hook_name,
+            arguments    : hook_info.arguments,
+            recipient    : hook_info.recipient,
+            cwc_metadata : hook_info.cwc_metadata,
+        } );
 
     };
 

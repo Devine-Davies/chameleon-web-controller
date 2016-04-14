@@ -156,9 +156,10 @@
         if( instructions.hasOwnProperty( hook ) )
         {
             cwc.Hooks.prototype.invoke(  {
-                name      : instructions[ hook ],
+                hook_name : instructions[ hook ],
                 arguments : arg
             } );
+
         }
 
     };

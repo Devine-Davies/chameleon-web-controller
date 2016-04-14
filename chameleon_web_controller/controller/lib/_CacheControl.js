@@ -17,6 +17,9 @@
         cwc.registerPlugin(this, 'CacheControl');
 
         /* -- Fetch any saved data -- */
+        this.define_hooks();
+
+        /* -- Fetch any saved data -- */
         this.fetch_storage_data();
 
         /* -- Check for old connections -- */
@@ -40,6 +43,21 @@
     * @info - Save the loaclstrage object here
     */
     CacheControl.prototype.storage_data = {};
+
+    /*------------------------------------------------------
+    * @function - Define hooks
+    * @info     - Set reserved hooks
+    */
+    CacheControl.prototype.define_hooks = function( )
+    {
+        /* -- Crete Hook for saving data -- */
+        cwc.Hooks.prototype.set_reserved_hook( {
+          hook_name : 'save-client-data',
+          method    : function( feedback ) {
+            cwc.CacheControl.prototype.save_cluster_code( feedback );
+        } } );
+
+    };
 
     /*------------------------------------------------------
     * @function - Fetch storage data
