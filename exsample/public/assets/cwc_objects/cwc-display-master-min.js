@@ -620,7 +620,6 @@ function isFunctionA(object)
  To-Do •
  ------------------------------------------------------
 */
-
 !function( cwc ){
   'use strict';
 
@@ -823,10 +822,7 @@ function isFunctionA(object)
                 one : item.nodeType == 1,
 
                 /* -- has nav item -- */
-                two : item.hasAttribute( this.taxonomy.data.item ),
-
-                /* -- check to see if user set starting pint -- */
-                three : (item.getAttribute( this.taxonomy.data.item ) == this.taxonomy.data.starting)
+                two : item.hasAttribute( this.taxonomy.data.item )
             };
 
             if( check.one && check.two )
@@ -837,10 +833,11 @@ function isFunctionA(object)
                     overrides : this.item_overrides( item )
                 };
 
+                /* -- Add tje ite, -- */
                 items.push( item_obj );
 
                 /* -- Up date the current group and index -- */
-                if( check.three )
+                if( item_obj.overrides.hasOwnProperty( 'starting-point' ) )
                 {
                     /* -- user would like to start here -- */
                     this.update_nav_tracking( {
@@ -899,21 +896,17 @@ function isFunctionA(object)
     * @function - Update nav tracking
     * @info - Will update the tracking system for next items and groups
     */
-    Navigation.prototype.navgroups_instructions = function( group, g_id, g_name )
+    Navigation.prototype.navgroups_instructions = function( group )
     {
         var tax = 'data-cwc-instructions'
 
         /* -- Search for nav end inftructions-- */
         if( group.hasAttribute( tax )  )
         {
-            var instructions = JSON.parse(
+            return JSON.parse(
                 group.getAttribute( tax )
             );
-
-            return instructions;
         }
-
-        return null;
 
     };
 
@@ -935,7 +928,7 @@ function isFunctionA(object)
             );
         }
 
-        return null;
+        return {};
     };
 
     /*------------------------------------------------------
