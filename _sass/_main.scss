@@ -1,11 +1,13 @@
-
 body#home {
+    background: #f3f5f6;
+
     .page-header {
       color: #fff;
       text-align: center;
       background-color: #159957;
       background-image: linear-gradient(120deg, #155799, #159957);
       padding: 10rem 6rem;
+
     }
 
     .btn {
@@ -28,6 +30,7 @@ body#home {
         @media screen and (max-width: 42em) {
             display: block;
         }
+
     }
 
     .header {
@@ -45,6 +48,7 @@ body#home {
 
             }
         }
+
     }
 
     .demo-window {
@@ -56,6 +60,7 @@ body#home {
             height: 500px;
             border: 1px solid tomato;
         }
+
     }
 
     .docs-side-bar {
@@ -68,6 +73,11 @@ body#home {
             padding: 1rem 0;
         }
 
+        h2 {
+            border-bottom: 1px solid #FCA2A2;
+            padding-bottom: 0.5em;
+        }
+
         ul {
             margin: 0;
             padding: 0;
@@ -76,8 +86,6 @@ body#home {
             display: flex;
             justify-content: space-between;
             flex-flow: row wrap;
-
-
 
             li {
                 float: left;
@@ -91,6 +99,15 @@ body#home {
                     max-width: 300px;
                     margin-bottom: 20px;
                     margin: auto;
+                }
+
+                a {
+                    display: block;
+                    padding: 0.5em 0;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
                 }
 
                 h3 {
@@ -114,7 +131,9 @@ body#home {
                     font-size: 0.9em;
                 }
             }
+
         }
+
     }
 
 }
@@ -125,6 +144,7 @@ body#feature-doc {
     .wrapper {
         display: flex;
         flex-flow: row wrap;
+
     }
 
     &.nav-active {
@@ -136,7 +156,8 @@ body#feature-doc {
     }
 
     .docs-side-bar {
-        background: #282929;
+        background: #292929;
+        // background: white;
         flex-basis: 20%;
         transform: translate(-100%, 0);
         position: fixed;
@@ -147,7 +168,9 @@ body#feature-doc {
         h1.vershion {
             font-size: 1em;
             border-bottom: 1px solid rgb(70, 70, 70);
-            color: white;
+            // border-bottom: 6px solid #F3F5F6;
+            // color: white;
+            color: #999;
             padding: 1em 0;
             text-align: center;
 
@@ -161,20 +184,29 @@ body#feature-doc {
             font-size: 0.8em;
             margin: 0;
             padding: 0;
-            padding: 0 0.8em;
-            color: #717177;
-            text-transform: uppercase;
+            padding: 0 0.8em 0.8em;
+            color: #999;
+            // text-transform: uppercase;
         }
 
         ul {
             list-style: none;
             margin: 0 0 1em 0;
-            padding: 0 0 1em 0;
+            padding: 0 0 0.5em 0;
             border-bottom: 1px solid rgb(70, 70, 70);
 
             li {
-                margin: 0.5rem 0;
                 padding: 0.5rem 0;
+                // border: 1px solid #F3F5F6;
+
+                &.active, &:hover {
+                    background: none !important;
+                    // border: 1px solid #FCA2A2;
+
+                    * {
+                        color: #FC644D;
+                    }
+                }
 
                 h3 {
                     margin: 0;
@@ -188,6 +220,8 @@ body#feature-doc {
                     display: inline-block;
                     float: left;
                     padding: 5px 10px 0 0;
+                    color: white;
+                    margin: 0;
                 }
 
                 img {
@@ -204,12 +238,14 @@ body#feature-doc {
 
                 a {
                     font-size: 0.8em;
-                    color: white;
                     text-decoration: none;
                     padding: 0.2em 0.8em;
                     display: block;
                     font-family: 'Oxygen', sans-serif;
                     text-transform: capitalize;
+
+                    color: white;
+                    // color: #999;
                 }
             }
 
@@ -258,12 +294,12 @@ body#feature-doc {
 
             .info {
                 padding: 10px;
-                height: 55px;
+                height: 75px;
 
                 h1 {
                     font-size: 1.7em;
                     text-transform: capitalize;
-                    margin: 0;
+                    margin: 7px 0;
                 }
             }
 
@@ -274,46 +310,86 @@ body#feature-doc {
             margin: 1.3em;
             margin-top: 115px;
             padding: 1em 2em;
-            border-top: 3px solid #07C7B5;
+            border-top: 3px solid #FC644D;
             border-radius: 2px;
             box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.23);
 
-            h2 {
-                &:not(:first-child) {
-                    margin-top: 1.5em;
-                    padding-top: 1em;
-                    border-top: 6px solid rgba(0, 0, 0, 0.03);
-                    margin-bottom: 0;
-                    padding-bottom: 15px;
+            h1, h2, h3, h4 {
+                text-transform: lowercase;
+
+                &:first-letter {
+                    text-transform: uppercase;
                 }
+            }
+
+            img {
+                max-width: 350px;
+                display: inline-block;
+            }
+
+            h2 {
+                margin-top: 1.5em;
+                padding-top: 1em;
+                border-top: 6px solid rgb(243, 245, 246);
+                margin-bottom: 0;
+                padding-bottom: 0px;
+
+                &#introduction {
+                    margin-top: 0em;
+                    padding-top: 0em;
+                    border-top: 0px solid rgb(243, 245, 246);
+                }
+
+            }
+
+            h3 {
+                margin-bottom: 0;
+                font-weight: 300;
+                border-bottom: 1px solid rgb(189, 189, 189);
+                padding-bottom: 0.5em;
+                margin-bottom: 0.5em;
 
             }
 
             h4 {
                 margin-bottom: 0;
-                font-weight: 600;
+                font-weight: 300;
+            }
+
+            table, .highlight {
+                margin-top: 15px;
+            }
+
+            table tr th {
+                font-weight: normal;
+                background: #FFE8E8;
+            }
+
+            .highlight table {
+                margin-top: 0;
             }
 
             code {
                 font-weight: normal;
-                background-color: #e6e6e6;
-                border: 1px solid #cacaca;
+                border: 1px solid #BFBFBF;
+                padding: 0.125rem 0.3125rem 0.0625rem;
                 padding: 0.125rem 0.3125rem 0.0625rem;
 
             }
 
+            > p { &:first-child {
+                // display: none; /* -- excerpt fix  -- */
+            } }
+
             blockquote {
-                outline: 1px solid #CACACA;
+                outline: 1px solid #FCA2A2;
                 padding: 1em;
-                margin-bottom: 15px;
-                background: rgb(242, 249, 255);
+                margin-bottom: 20px;
+                margin-top: 20px;
+                background: #FFE8E8;
 
-                &.alert {
-                    background: rgb(244, 255, 242);
-                }
-
-                &.warn {
-                    outline: 1px solid #CACACA;
+                code {
+                    background: white;
                 }
 
                 p {
@@ -338,14 +414,14 @@ body#feature-doc {
             transform: translate(0%, 0);
             position: fixed;
             overflow-y: scroll;
-            width: 20%;
+            //width: 15%;
             height: 100%;
             top: 0;
         }
 
         .post-content {
-            flex-basis: 80%;
-            margin-left: 20%;
+            // flex-basis: 80%;
+            margin-left: 15%;
 
             .post-header {
                 .mobile-nav-button {
@@ -355,13 +431,12 @@ body#feature-doc {
                 .info  {
                     margin: 0 1em;
                     padding: 10px 0;
-                    height: 55px;
                 }
 
             }
 
             .post-body {
-                margin-top: 75px;
+                margin-top: 105px;
             }
 
         }

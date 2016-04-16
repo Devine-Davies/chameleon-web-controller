@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <title>Hooks</title>
+  <title>Analog controller</title>
   <meta name="description" content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -70,7 +70,7 @@
             </li>
           
             
-            <li class="active" >
+            <li>
             
               <img src="/images/hooks@2x.png" />
                 <a href="/general/hooks.">
@@ -189,7 +189,7 @@
             </li>
           
             
-            <li>
+            <li class="active" >
             
               <img src="/images/a-pad@2x.png" />
                 <a href="/components/analogo-stick.">
@@ -224,16 +224,16 @@
 
                 <div class="info">
                   <h1 class="post-title" itemprop="name headline">
-                    Hooks
+                    Analog controller
                     
                     
+                      <i class="fa fa-gamepad"    aria-hidden="true"></i>
                     
-                      <i class="fa fa-cogs" aria-hidden="true"></i>
                     
                   </h1>
                   <p class="post-meta">
-                  <time datetime="2016-01-25T00:31:02+00:00" itemprop="datePublished">
-                    last updated: Jan 25, 2016
+                  <time datetime="2016-01-24T00:31:02+00:00" itemprop="datePublished">
+                    last updated: Jan 24, 2016
                   </time>
                 </div>
               </header>
@@ -242,206 +242,241 @@
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s
 <!--more--></p>
 
-<h2 id="introduction">Introduction</h2>
-<p>Hooks build up the foundations of cwc object allowing everything to connect. Hooks proved a way of defining callback functions for cwc events and also have the functionality to execute other hooks created on clients within the same cluster group.</p>
+<p><img src="/images/a-pad-2@2x.png" alt="alt text" title="Logo Title Text 1" />
+<img src="/images/a-pad@2x.png" alt="alt text" title="Logo Title Text 1" /></p>
 
-<h4 id="javascript-declaration">JavaScript declaration</h4>
+<h4 id="simple-html-sample">Simple html sample</h4>
+<p>Elements with an <code class="highlighter-rouge">data-cwc-controller="analog"</code> attribute applied to them will be treated as an Analog component by the <strong>cwc</strong> object.</p>
+
+<p>Add a the cwc style to your Analog controller with the <code class="highlighter-rouge">.cwc-style</code> class.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"cwc-style"</span> <span class="na">data-cwc-controller=</span><span class="s">"analog"</span>  <span class="nt">&gt;</span>
+  <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h4 id="javascript-declaration">JavaScript Declaration</h4>
+<p><code class="highlighter-rouge">cwc.ControllerMaster({})</code> must be included and the <code class="highlighter-rouge">cwc.PullbarController({})</code> has to be initiated after the DOM has finshed loading.</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
-6</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
+* @object - CWC Main ControllerMaster Object
+* @info   - initiate CWC ControllerMaster Object
+*/</span>
+<span class="kd">var</span> <span class="nx">ControllerMaster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">ControllerMaster</span><span class="p">({</span>
+<span class="p">});</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/*------------------------------------------------------
+    * @object - CWC Main AnalogController Object
+    * @info   - initiate CWC AnalogController Object
+    */</span>
+    <span class="nx">AnalogPad</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">AnalogController</span><span class="p">({</span>
+    <span class="p">});</span>
+<span class="p">};</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="analog-controller-instructions">Analog controller Instructions</h2>
+<p>Additional settings can be added to each Analog controller through the use of the <code class="highlighter-rouge">data-cwc-instructions</code> data attrabute.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Properties</th>
+      <th>Type</th>
+      <th>Vales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>movement-type</td>
+      <td>String</td>
+      <td>pan or touch</td>
+    </tr>
+    <tr>
+      <td>on-movment</td>
+      <td>Hook</td>
+      <td>The hook name created on the client wish to invoke</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="analog-controller-movement-types">Analog controller movement types</h2>
+<p>You can change the way the user intracts with the Analog controller by setting the <code class="highlighter-rouge">movement-type</code> property within the data instructions attribute.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Properties</th>
+      <th>Type</th>
+      <th>Vales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>movement-type</td>
+      <td>String</td>
+      <td>pan or touch</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="pan"><strong>Pan</strong></h4>
+<p>You can spesify a Hook to be called for when the user is interacting with the Analog controller. Mutipal Analog controller’s can be defined in one document.</p>
+
+<h4 id="touch"><strong>Touch</strong></h4>
+<p>You can spesify a Hook to be called for when the pull bar is pulling by providing an on-pull parameter within the. Mutipal Pullbars can be set in one document.</p>
+
+<h2 id="on-movment">On movment</h2>
+<p>You can spesify a Hook to be called for when the component is moving, by defining a hook the the on <code class="highlighter-rouge">on-movement</code> parameter within the components instructions attribute.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Properties</th>
+      <th>Type</th>
+      <th>Vales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>on-movment</td>
+      <td>Hook</td>
+      <td>The hook name created on the client wish to invoke</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="javascript">JavaScript</h4>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
 * @object - CWC Main Hooks Object
 * @info   - initiate CWC Hooks Object
 */</span>
 <span class="kd">var</span> <span class="nx">Hooks</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">Hooks</span><span class="p">({</span>
-<span class="p">});</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="p">});</span>
 
-<h2 id="set-hook">Set hook</h2>
-<p>Use the <code class="highlighter-rouge">set_hook</code> method on the <strong>cwc.Hooks</strong> object to define a hook. When setting a hook, the required parameters must be present:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Keys</th>
-      <th>Type</th>
-      <th>Vales</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>hook_name</td>
-      <td>Sting</td>
-      <td>The name you wish to call the hook.</td>
-    </tr>
-    <tr>
-      <td>method</td>
-      <td>Function</td>
-      <td>Function to be called when a hook is invoked.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="javascript-example">JavaScript Example</h4>
-
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
-* @Hook - cwc.Hooks Custom Hook
-* @info - Create a hook to that can be called from the display
-*/</span>
 <span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'custom-hook-function'</span><span class="p">,</span>
-  <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">prams</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">prams</span> <span class="p">)</span>  <span class="p">}</span>
-<span class="p">});</span><span class="w">
+  <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span>  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="cm">/*------------------------------------------------------
+* @object - CWC Main ControllerMaster Object
+* @info   - initiate CWC ControllerMaster Object
+*/</span>
+<span class="kd">var</span> <span class="nx">ControllerMaster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">ControllerMaster</span><span class="p">({</span>
+<span class="p">});</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/*------------------------------------------------------
+    * @Object AnalogPad
+    * Main AnalogPad object
+    */</span>
+    <span class="kd">var</span> <span class="nx">AnalogPad</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">AnalogController</span><span class="p">({</span>
+    <span class="p">});</span>
+<span class="p">};</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="invoking-hook">Invoking hook</h2>
-<p>The <code class="highlighter-rouge">invoke</code> method on the <strong>cwc.Hooks</strong> is used to call a hook that has been set on that clinet.</p>
+<h4 id="html">HTML</h4>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"cwc-style"</span> <span class="na">data-cwc-controller=</span><span class="s">"pullbar"</span>
+    <span class="na">data-cwc-instructions=</span><span class="s">'{ "on-movment" : "custom-hook-function" }'</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h4 id="movement-diagrams">Movement diagrams</h4>
+<p><img src="/images/a-pad-cardinal-direction@2x.png" alt="alt text" title="Logo Title Text 1" />
+<img src="/images/a-pad-angle-diagram@2x.png" alt="alt text" title="Logo Title Text 1" />
+<img src="/images/a-pad-coordinates-diagram@2x.png" alt="alt text" title="Logo Title Text 1" /></p>
+
+<p><strong>Diagram .01</strong> cardinal_direction, you can spesify a Hook to be called for when the pull bar is pulling by providing an on-pull parameter within the. Mutipal Pullbars can be set in one document.</p>
+
+<p><strong>Diagram .02</strong>: - You can spesify a Hook to be called for when the pull bar is pulling by providing an on-pull parameter within the. Mutipal Pullbars can be set in one document.</p>
+
+<p><strong>Diagram .03</strong>: - You can spesify a Hook to be called for when the pull bar is pulling by providing an on-pull parameter within the. Mutipal Pullbars can be set in one document.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Keys</th>
-      <th>Type</th>
-      <th>Vales</th>
+      <th>Return data (key)</th>
+      <th>value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>hook_name</td>
-      <td>Sting</td>
-      <td>The name of the hook you wish to invoke</td>
+      <td>cardinal_direction</td>
+      <td>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</td>
     </tr>
     <tr>
-      <td>arguments</td>
-      <td>*</td>
-      <td>Arguments can be passed in the method given in the creation of the hook</td>
+      <td>direction</td>
+      <td>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</td>
+    </tr>
+    <tr>
+      <td>in_out</td>
+      <td>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</td>
+    </tr>
+    <tr>
+      <td>coordinate</td>
+      <td>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</td>
+    </tr>
+    <tr>
+      <td>delta</td>
+      <td>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</td>
+    </tr>
+    <tr>
+      <td>angle</td>
+      <td>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</td>
     </tr>
   </tbody>
 </table>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
-* @Hook - cwc.Hooks Connect methord
-* @info - Create a hook to that can be called from the display
-*/</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_hook</span><span class="p">(</span> <span class="p">{</span>
-  <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'called-from-display'</span><span class="p">,</span>
-  <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
-<span class="p">});</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<blockquote>
-  <p>Arguments can be passed in the form of an object, boolean, intergure or string.</p>
-</blockquote>
-
-<h2 id="invoking-a-client-hook">Invoking a client hook</h2>
-<p>Hooks can also be used to call hooks created on other clients that are connected to the same cluster. This can be achieved by calling the <code class="highlighter-rouge">invoke_clinet_hook</code> on the <strong>cwc.Hooks</strong> object. The <code class="highlighter-rouge">invoke_clinet_hook</code> method requires three parameters:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Keys</th>
-      <th>Type</th>
-      <th>Vales</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>recipient</td>
-      <td>Sting</td>
-      <td>To whome the message should be sent to <code class="highlighter-rouge">display</code> or <code class="highlighter-rouge">Controllers</code>.</td>
-    </tr>
-    <tr>
-      <td>hook_name</td>
-      <td>Sting</td>
-      <td>Name of the hook created on the client.</td>
-    </tr>
-    <tr>
-      <td>arguments</td>
-      <td>*</td>
-      <td>Any values that will need to be passed along with the message.</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p><code class="highlighter-rouge">JSON.stringify</code> is applied to all arguments being passed to the server and deconstructed by clients.</p>
-</blockquote>
-
-<h4 id="example">Example</h4>
-
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6</pre></td><td class="code"><pre><span class="cm">/* -- Crete connection sucsess | Hook -- */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_clinet_hook</span><span class="p">({</span>
-    <span class="na">recipient</span> <span class="p">:</span> <span class="s1">'display'</span><span class="p">,</span>
-    <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'hook-called-by-controller'</span><span class="p">,</span>
-    <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
-<span class="p">});</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<blockquote>
-  <p>The same principle applies when invoking hooks from the display on to the controllers. Just chnage the <code class="highlighter-rouge">recipient</code> parameter from display to controller.</p>
-</blockquote>
-
-<h2 id="code-snippets">Code snippets</h2>
-<p>Examples you may find useful to used within your application.</p>
-
-<h3 id="invoking-hook-on-other-clinets">Invoking hook on other clinets</h3>
-<p>Below is an example of preparing a hook on once client, that can be called from another client.</p>
-
-<h4 id="clinet-01">Clinet .01</h4>
-
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
-* @Hook - cwc.Hooks Connect methord
-* @info - Create a hook to that can be called from the display
-*/</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
-  <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'hook-called-by-controller'</span><span class="p">,</span>
-  <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span>  <span class="p">}</span> <span class="c1">// { one : 1, two : 2, three : 3 }</span>
-<span class="p">});</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<h4 id="clinet-02">Clinet .02</h4>
-
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6</pre></td><td class="code"><pre><span class="cm">/* -- Crete connection sucsess | Hook -- */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_clinet_hook</span><span class="p">({</span>
-    <span class="na">recipient</span> <span class="p">:</span> <span class="s1">'display'</span><span class="p">,</span>
-    <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'hook-called-by-controller'</span><span class="p">,</span>
-    <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
-<span class="p">});</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<p>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</p>
 
               </section>
             </artical>

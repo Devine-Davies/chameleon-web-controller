@@ -1,7 +1,3 @@
----
-show_excerpt : true
----
-
 <!DOCTYPE html>
 <html>
 
@@ -23,7 +19,18 @@ show_excerpt : true
                 </div>
 
                 <div class="info">
-                  <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+                  <h1 class="post-title" itemprop="name headline">
+                    {{ page.title }}
+                    {% if page.tax contains "display" %}
+                      <i class="fa fa-television" aria-hidden="true"></i>
+                    {% endif %}
+                    {% if page.tax contains "controller" %}
+                      <i class="fa fa-gamepad"    aria-hidden="true"></i>
+                    {% endif %}
+                    {% if page.tax contains "general" %}
+                      <i class="fa fa-cogs" aria-hidden="true"></i>
+                    {% endif %}
+                  </h1>
                   <p class="post-meta">
                   <time datetime="{{ page.date_updated | date_to_xmlschema }}" itemprop="datePublished">
                     last updated: {{ page.date_updated | date: "%b %-d, %Y" }}

@@ -5,7 +5,11 @@
         <h2>General</h2>
         <ul>
           {% for post in site.categories['general'] %}
+            {% if page.title == post.title %}
+            <li class="active" >
+            {% else %}
             <li>
+            {% endif %}
               <img src="{{ post.f_image | prepend: site.baseurl }}" />
                 <a href="{{ post.url | prepend: site.baseurl }}">
                   <h3>{{ post.title }}</h3>
@@ -22,10 +26,14 @@
     </div>
 
     <div class="features docs">
-        <h2>Features</h2>
+        <h2>Components</h2>
         <ul>
-          {% for post in site.categories['feature'] %}
+          {% for post in site.categories['components'] %}
+            {% if page.title == post.title %}
+            <li class="active" >
+            {% else %}
             <li>
+            {% endif %}
               <img src="{{ post.f_image | prepend: site.baseurl }}" />
                 <a href="{{ post.url | prepend: site.baseurl }}">
                   <h3>{{ post.title }}</h3>
