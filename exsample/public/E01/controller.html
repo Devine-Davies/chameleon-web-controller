@@ -160,7 +160,8 @@
     </div>
 
     <!--  CWC Assets  -->
-    <section class="dpad cwc-style" data-cwc-controller="dpad" data-cwc-instructions='{ "on-tap" : "on-move-navigation"  }'  >
+    <section class="dpad cwc-style" data-cwc-controller="dpad"
+        data-cwc-instructions='{ "on-tap" : "d-hook:cwc:navgroup-action"  }' >
         <span data-cwc-cbtn="up" ></span>
         <span data-cwc-cbtn="right" ></span>
         <span data-cwc-cbtn="down" ></span>
@@ -168,17 +169,20 @@
         <span data-cwc-cbtn="enter" ></span>
     </section>
 
-    <section class="touchpad cwc-style"  data-cwc-controller="touchpad" data-cwc-instructions='{ "movement-type" : "pan", "on-touch" : "on-move-navigation"  }' >
+    <section class="gesturepad cwc-style"  data-cwc-controller="gesture-pad"
+      data-cwc-instructions='{ "movement-type" : "swipe", "on-move" : "d-hook:cwc:navgroup-action" }' >
       <span></span>
     </section>
 
     <section class="analog-pad-con">
-      <div class="analog-pad cwc-style" data-cwc-controller="analog"   data-cwc-instructions='{ "movement-type" : "tick", "pan" : "on-move-navigation"  }'  >
+      <div class="analog-pad cwc-style" data-cwc-controller="analog"
+        data-cwc-instructions='{ "movement-type" : "tick", "on-move" : "d-hook:cwc:navgroup-action"  }' >
         <span></span>
       </div>
     </section>
 
-    <div class="pullbar cwc-style"    data-cwc-controller="pullbar"  data-cwc-instructions='{ "type" : "vertical", "on-pull" : "scroll-view" }' >
+    <div class="pullbar cwc-style" data-cwc-controller="pullbar"
+        data-cwc-instructions='{ "type" : "vertical", "on-pull" : "d-hook:cwc:scroll-viewport", "viewport-target" : "scroll-target" }' >
         <span></span>
     </div>
 

@@ -43,19 +43,19 @@
 
       <div class="search"
       data-cwc-navgroup="search"
-      data-cwc-instructions='{ "down" : "ng-global-nav", "onnaventrance" : "hook-on-search-focus" }' >
+      data-cwc-instructions='{ "down" : "ng:global-nav", "on-entrance" : "hook:on-search-focus" }' >
         <span >
           <i class="fa fa-search" aria-hidden="true"></i>
           <input type="text" placeholder="Search"
           data-cwc-navitem
-          data-cwc-overide='{"right" : "ng-controller-tally"}'
+          data-cwc-instructions='{"right" : "ng:controller-tally", "controller-placeholder" : "Make a search"}'
+
           data-cwc-textcapture='cwc-textcapture-search'
-          data-cwc-instructions='{"controller-placeholder" : "Make a search"}'>
         </span>
       </div>
 
       <div class="controller-tally" data-cwc-navgroup="controller-tally"
-      data-cwc-instructions='{ "down" : "ng-global-nav", "left" : "ni-prev", "right" : "ni-next" }' >
+      data-cwc-instructions='{ "down" : "ng:global-nav", "left" : "ni:prev", "right" : "ni:next" }' >
       </div>
 
       <div class="connection-code" >
@@ -65,22 +65,23 @@
     </div>
 
     <div id="top-nav" data-cwc-navgroup="global-nav"
-    data-cwc-instructions='{ "left" : "ni-prev" , "down" : "ng-2", "right" : "ni-next", "enter" : "hook-gn-item-selected", "history-item" : "ture", "onnaventrance" : "hook-move-page-onentrance"  }' >
+    data-cwc-instructions='{ "left" : "ni:prev" , "down" : "ng:2", "right" : "ni:next", "enter" : "hook:gn-item-selected", "history-item" : "ture", "on-entrance" : "hook:move-page-onentrance"  }' >
         <nav class="navigation" >
           <section data-cwc-navitem
-            data-cwc-overide='{ "starting-point" : "true",  "up" : "ng-search", "onitementrance" : "hook-on-global-nav-enter" }'  >
+            data-cwc-instructions='{ "starting-point" : "true",  "up" : "ng:search",
+            "on-entrance" : "hook:on-global-nav-enter" }'  >
             <p>New Releases</p>
           </section>
           <section data-cwc-navitem
-            data-cwc-overide='{"up" : "ng-search", "onitementrance" : "hook-on-global-nav-enter" }'  >
+            data-cwc-instructions='{"up" : "ng:search", "on-entrance" : "hook:on-global-nav-enter" }'  >
             <p>Latest movies</p>
           </section>
           <section data-cwc-navitem
-            data-cwc-overide='{"up" : "ng-controller-tally", "onitementrance" : "hook-on-global-nav-enter" }'  >
+            data-cwc-instructions='{"up" : "ng:controller-tally", "on-entrance" : "hook:on-global-nav-enter" }'  >
             <p>Your favourite</p>
           </section>
           <section data-cwc-navitem
-            data-cwc-overide='{"up" : "ng-controller-tally", "onitementrance" : "hook-on-global-nav-enter" }'  >
+            data-cwc-instructions='{"up" : "ng:controller-tally", "on-entrance" : "hook:on-global-nav-enter" }'  >
             <p>Connect your controller</p>
           </section>
         </nav>
@@ -99,11 +100,11 @@
           </div>
           <div class="right">
             <div class="btns" data-cwc-navgroup="infromation-screen"
-            data-cwc-instructions='{ "left" : "ni-prev", "right" : "ni-next" }' >
+            data-cwc-instructions='{ "left" : "ni:prev", "right" : "ni:next" }' >
               <p class="btn light" data-cwc-navitem
-              data-cwc-overide='{ "enter" : "hook-info-window-btn-clicked" }' >Trailler</p>
+              data-cwc-instructions='{ "enter" : "hook:info-window-btn-clicked" }' >Trailler</p>
               <p class="btn dark"  data-cwc-navitem
-              data-cwc-overide='{ "enter" : "hook-info-window-btn-clicked" }' >Exit</p>
+              data-cwc-instructions='{ "enter" : "hook:info-window-btn-clicked" }' >Exit</p>
             </div>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
           </div>

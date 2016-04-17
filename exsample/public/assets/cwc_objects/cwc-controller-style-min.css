@@ -91,18 +91,17 @@
     background-color: white;
     border: 1px solid tomato; }
     [data-cwc-controller="dpad"].cwc-style [data-cwc-cbtn="enter"]::after {
-      content: ' ';
       display: block;
+      font-size: 1.5em;
+      content: "OK";
+      color: tomato;
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
       margin: auto;
-      width: 85%;
-      height: 85%;
-      background: tomato;
-      border-radius: 50%; }
+      height: 27px; }
 
 [data-cwc-controller="analog"].cwc-style {
   width: 120px;
@@ -147,13 +146,13 @@
       background-color: tomato;
       z-index: 1; }
 
-[data-cwc-controller="touchpad"].cwc-style {
+[data-cwc-controller="gesture-pad"].cwc-style {
   width: 150px;
   height: 150px;
   background: white;
   border: 1px solid tomato;
   position: relative; }
-  [data-cwc-controller="touchpad"].cwc-style:after, [data-cwc-controller="touchpad"].cwc-style:before, [data-cwc-controller="touchpad"].cwc-style *:after, [data-cwc-controller="touchpad"].cwc-style *:before {
+  [data-cwc-controller="gesture-pad"].cwc-style:after, [data-cwc-controller="gesture-pad"].cwc-style:before, [data-cwc-controller="gesture-pad"].cwc-style *:after, [data-cwc-controller="gesture-pad"].cwc-style *:before {
     content: '';
     display: block;
     width: 45%;
@@ -167,17 +166,17 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid tomato; }
-  [data-cwc-controller="touchpad"].cwc-style:before {
+  [data-cwc-controller="gesture-pad"].cwc-style:before {
     top: 10%;
     right: 0;
     left: 0;
     transform: rotate(0deg); }
-  [data-cwc-controller="touchpad"].cwc-style:after {
+  [data-cwc-controller="gesture-pad"].cwc-style:after {
     bottom: 10%;
     right: 0;
     left: 0;
     transform: rotate(180deg); }
-  [data-cwc-controller="touchpad"].cwc-style span {
+  [data-cwc-controller="gesture-pad"].cwc-style span {
     display: block;
     line-height: 64px;
     height: 100%;
@@ -192,12 +191,12 @@
     left: 0;
     user-select: none;
     transform: translate3d(0%, 0%, 0); }
-    [data-cwc-controller="touchpad"].cwc-style span:before {
+    [data-cwc-controller="gesture-pad"].cwc-style span:before {
       top: 0;
       bottom: 0;
       left: 10%;
       transform: rotate(270deg); }
-    [data-cwc-controller="touchpad"].cwc-style span:after {
+    [data-cwc-controller="gesture-pad"].cwc-style span:after {
       top: 0;
       bottom: 0;
       right: 10%;

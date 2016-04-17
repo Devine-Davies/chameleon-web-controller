@@ -68,7 +68,7 @@ body {
   font-size: 1em;
 }
 
-.touchpad  {
+.gesturepad  {
     /*display: none;*/
     position: absolute !important;
     margin: auto;
@@ -77,7 +77,7 @@ body {
 }
 
 .dpad {
-    display: none;
+    /*display: none;*/
     position: absolute !important;
     margin: auto;
     top: 0;
@@ -88,7 +88,7 @@ body {
 }
 
 .analog-pad-con {
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 5%;
     left: 5%;
@@ -112,7 +112,7 @@ and (orientation : landscape) {
     top: 50px;
   }
 
-  .touchpad  {
+  .gesturepad  {
     display: block;
     left: 5%;
     bottom: 50px;

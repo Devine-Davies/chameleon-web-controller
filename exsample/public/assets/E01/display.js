@@ -43,7 +43,7 @@ window.onload = function()
 
 function load_movie_images( )
 {
-    $('body.display #top-nav .align .navigation section:first-child').addClass('active');
+    $('body.display #top-nav .align .Navgroup section:first-child').addClass('active');
 
     var html  = '';
     var ng    = 2;
@@ -52,17 +52,17 @@ function load_movie_images( )
     for ( var key in _fake_api )
     {
         var instructions = {
-          'down'          : 'ng-next',
-          'up'            : 'ng-prev',
-          'right'         : 'ni-next',
-          'left'          : 'ni-prev',
+          'down'          : 'ng:next',
+          'up'            : 'ng:prev',
+          'right'         : 'ni:next',
+          'left'          : 'ni:prev',
           'history-item'  : 'true',
-          'onnaventrance' : 'hook-move-page-onentrance',
+          'on-entrance'   : 'hook:move-page-onentrance',
         };
 
         if( count == Object.keys(_fake_api).length - 1 )
         {
-            instructions['down'] = 'ng-prev';
+            instructions['down'] = 'ng:prev';
         }
 
         html +="<h2>" + key.replace('_', ' ') + "</h2>";
@@ -76,11 +76,11 @@ function load_movie_images( )
 
             var img     = data.image;
             var overide = {
-              'enter'        : 'hook-movie-item-selected',
+              'enter'        : 'hook:movie-item-selected',
             };
 
             html += '<div class="item" data-cwc-navitem ';
-            html += 'data-cwc-overide=' + JSON.stringify( overide ) + ' ';
+            html += 'data-cwc-instructions=' + JSON.stringify( overide ) + ' ';
             html += 'style="background-image:url(' + img + ')"';
             html += 'data-feed-info="' + key + ':' + i + '" >';
             html += '</div>';
@@ -114,18 +114,26 @@ function cwc_object_declaration()
     * System messages should be declared here
     * We will have a list or predefined functions
     */
-    navigation = new cwc.Navigation({
-      callbacks : {
-          onnav_changed  : function( feedback ){
-            // console.log( feedback );
-            _nav_moves.push( feedback.g_name )
-          },
+    Hooks = new cwc.Hooks({ });
 
-          onitem_changed : function( feedback ) {
-            // console.log( feedback );
-            _audio.play();
-          }
-      }
+    /* -- On navgroup update -- */
+    Hooks.set_hook( {
+      hook_name : 'navgroup-updated',
+      method    : function( tracking ) { _nav_moves.push( tracking.g_name ); }
+    } );
+
+    /* -- On item update -- */
+    Hooks.set_hook( {
+      hook_name : 'navitem-updated',
+      method    : function( tracking ) { _audio.play(); }
+    } );
+
+    /*------------------------------------------------------
+    * @function in array
+    * System messages should be declared here
+    * We will have a list or predefined functions
+    */
+    Navgroup = new cwc.Navgroup({
     });
 
     /*------------------------------------------------------
@@ -136,18 +144,12 @@ function cwc_object_declaration()
     textcapture = new cwc.TextCapture({
     });
 
-    /*------------------------------------------------------
-    * @function in array
-    * System messages should be declared here
-    * We will have a list or predefined functions
-    */
-    Hooks = new cwc.Hooks({ });
 
     Hooks.set_hook( {
         hook_name : 'on-global-nav-enter',
         method    : function( feedback ) {
           move_page( feedback );
-          $( '#top-nav .navigation section.active' ).removeClass('active');
+          $( '#top-nav .Navgroup section.active' ).removeClass('active');
           $( feedback.i_elm.item ).addClass('active');
         }
     });
@@ -220,7 +222,7 @@ function loade_data_feed( feed )
     $('#infromation-side-screen').fadeIn( 500 );
 
     /* -- Move onto the loaded data feed window -- */
-    navigation.move_to_nav_name( 'infromation-screen' );
+    Navgroup.move_to_nav_name( 'infromation-screen' );
 
 };
 
@@ -230,7 +232,7 @@ function info_window_btn_clicked( feedback )
     if( feedback.i_elm.item.innerHTML == 'Exit' )
     {
         $('#infromation-side-screen').css({ 'display' : 'none' });
-        navigation.move_to_nav_name( _nav_moves[ _nav_moves.length - 2 ] );
+        Navgroup.move_to_nav_name( _nav_moves[ _nav_moves.length - 2 ] );
     }
 
 };
@@ -319,7 +321,7 @@ function show_controller_tally( controllers )
 
     $( $('.controller-tally i') ).each( function (){
         /* -- add the new cwc to  the new elms -- */
-        navigation.ng_remove_item(
+        Navgroup.ng_remove_item(
             this , 'controller-tally'
         );
     });
@@ -329,7 +331,7 @@ function show_controller_tally( controllers )
         if( i == 0 )
         {
           html += '<i class="fa fa-gamepad" aria-hidden="true" data-cwc-navitem ';
-          html += "data-cwc-overide='{ \"left\" : \"ng-search\"}' ";
+          html += "data-cwc-instructions='{ \"left\" : \"ng-search\"}' ";
           html += '></i>';
         }
         else
@@ -348,7 +350,7 @@ function show_controller_tally( controllers )
 
     $( $('.controller-tally i') ).each( function (){
         /* -- add the new cwc to  the new elms -- */
-        navigation.ng_append_item(
+        Navgroup.ng_append_item(
             this , 'controller-tally'
         );
     });

@@ -38,7 +38,7 @@
 
 //@codekit-append "_ControllerMaster.js";
 //@codekit-append "_DpadController.js";
-//@codekit-append "_TouchPadController.js";
+//@codekit-append "_GesturePadController.js";
 //@codekit-append "_AnalogController.js";
 //@codekit-append "_PullbarController.js";
 //@codekit-append "_TextCapture.js";
@@ -327,9 +327,9 @@ function isFunctionA(object)
             try {
                 /* -- Invoke the connection success message -- */
                 cwc.Hooks.prototype.invoke({
-                    hook_name : 'save-client-data',
+                    hook_name : 'cwc:save-client-data',
                     arguments : server_feedback,
-                }, true );
+                } );
             } catch ( e ) {
                 console.log('saved faild');
             }
@@ -345,7 +345,7 @@ function isFunctionA(object)
     {
         /* -- Invoke the connection success message -- */
         cwc.Hooks.prototype.invoke({
-            hook_name      : 'connection-failed',
+            hook_name      : 'cwc:connection-failed',
             arguments : this.connection_options,
         });
 
@@ -418,14 +418,6 @@ function isFunctionA(object)
     {
         /* -- Message data -- */
         var hook_info = JSON.parse( recived_package.data );
-
-        /* -- Look at reserved -- */
-        cwc.Hooks.prototype.invoke({
-            hook_name    : hook_info.hook_name,
-            arguments    : hook_info.arguments,
-            recipient    : hook_info.recipient,
-            cwc_metadata : hook_info.cwc_metadata,
-        }, true );
 
         /* -- Look for users -- */
         cwc.Hooks.prototype.invoke({
@@ -520,6 +512,8 @@ function isFunctionA(object)
     */
     Hooks.prototype.set_reserved_hook = function( prams )
     {
+        console.log( prams );
+
         this.all_reserved_hooks[ prams.hook_name ] = {
             'hook_name': prams.hook_name,
             'method'   : prams.method
@@ -568,10 +562,10 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function
+    * @function - Invoke client hook
     * where we invoke custom methods
     */
-    Hooks.prototype.invoke_clinet_hook = function( hook_info )
+    Hooks.prototype.invoke_client_hook = function( hook_info )
     {
         /* -- Is this a valid mesage : return true not valid -- */
         if( this.validate_hook( hook_info ) )
@@ -593,15 +587,54 @@ function isFunctionA(object)
     * @function
     * where we invoke custom methods
     */
-    Hooks.prototype.invoke = function( hook_info, reserved )
+    Hooks.prototype.invoke = function( hook_info )
     {
-        /* -- check formatting -- */
-        if( hook_info.hasOwnProperty( 'hook_name' ) )
+        if( ! hook_info.hasOwnProperty( 'hook_name' ) )
         {
-            var hooks = ( reserved )? this.all_reserved_hooks : this.all_hooks;
+            console.log('A hook name in required');
+            return;
+        }
 
-            /* -- Can be called using hook-*(name) usfull on data attr -- */
-            var hook_name = hook_info.hook_name.replace('hook-','')
+        /* -- Get the raw hook name -- */
+        var hook_name = hook_info.hook_name
+
+        console.log( hook_info );
+
+        /* -- Hook is for display -- */
+        if ( hook_name.includes('d-hook:') )
+        {
+            cwc.Hooks.prototype.invoke_clinet_hook( {
+                recipient : 'display',
+                hook_name : hook_name.replace("d-hook:", ""),
+                arguments : hook_info.arguments
+            } );
+
+        }
+
+        /* -- Check to see if is ment for display -- */
+        else if ( hook_name.includes('c-hook:') )
+        {
+            cwc.Hooks.prototype.invoke_clinet_hook( {
+                recipient : 'controllers',
+                hook_name : hook_name.replace("c-hook:", ""),
+                arguments : hook_info.arguments
+            } );
+
+        }
+
+        /* -- Check to see if is ment for display -- */
+        else
+        {
+            /* -- Look at reserved || -- Look for users -- */
+            var hooks  = ( hook_name.includes('cwc:') )? this.all_reserved_hooks : this.all_hooks;
+
+            /* -- Can be called using hook:*(name) usfull on data attr -- */
+            var hook_name = hook_info.hook_name.replace('hook:','')
+
+                /* -- Can be called using hook:*(name) usfull on data attr -- */
+                hook_name = hook_info.hook_name.replace('cwc:','')
+
+                console.log( hook_name );
 
             if( hooks.hasOwnProperty( hook_name ) )
             {
@@ -611,6 +644,7 @@ function isFunctionA(object)
                     console.log( e );
                 }
             }
+
         }
 
     };
@@ -674,7 +708,7 @@ function isFunctionA(object)
     {
         /* -- Crete Hook for saving data -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'save-client-data',
+          hook_name : 'cwc:save-client-data',
           method    : function( feedback ) {
             cwc.CacheControl.prototype.save_cluster_code( feedback );
         } } );
@@ -865,7 +899,7 @@ function isFunctionA(object)
     * @info : angle 0 :  180 is converted 180-360
     * @info : angle 0 : -180 is converted 0-180
     */
-    ControllerMaster.prototype.calculate_axis_as_cardinal_direction = function( angle )
+    ControllerMaster.prototype.calculate_compass_rose = function( angle )
     {
         /* -- Negative number -- */
         if( angle < 0 ) { angle = ( 180 - Math.abs( angle ) ); }
@@ -882,10 +916,10 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Calculate axis as coordinate
+    * @function - Calculate cartesian coordinates
     * @info - Retuns UE Editor like feedback for controller
     */
-    ControllerMaster.prototype.calculate_axis_as_coordinate = function( z )
+    ControllerMaster.prototype.calculate_cartesian_coordinates = function( z )
     {
         var int = Math.round( (z / 100) * 10 ) / 10;
         return this.clamp( (int * 2), -1, 1 );
@@ -902,11 +936,11 @@ function isFunctionA(object)
     }
 
     /*------------------------------------------------------
-    * @function - Get moving direction
+    * @function - Calculate axis direction
     * x : ( in || out )
     * y : ( in || out )
     */
-    ControllerMaster.prototype.get_moving_direction = function( delta )
+    ControllerMaster.prototype.calculate_axis_direction = function( delta )
     {
         /* -- Find out what direction we are moving in -- */
         function check( z, z1 ) {
@@ -926,6 +960,35 @@ function isFunctionA(object)
 
         /* -- Return the values -- */
         return dir;
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Get feedback data
+    * @info     - builds the return data object to feed back to user
+    */
+    ControllerMaster.prototype.get_feedback_data = function( ev, controller_name )
+    {
+        return {
+            controller : (controller_name)? controller_name : 'undefined',
+
+            /* -- cardinal the users is moving in -- */
+            compass_rose : cwc.ControllerMaster.prototype.calculate_compass_rose(
+                ev.angle
+            ),
+
+            /* -- coordinates of x and y -- */
+            cartesian_coordinates : {
+                x : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaX ),
+                y : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaY )
+            },
+
+            /* -- check to see if we are moving to the center or to the endge (in : out) -- */
+            axis_direction : cwc.ControllerMaster.prototype.calculate_axis_direction({
+                x : ev.deltaX,
+                y : ev.deltaY,
+            } )
+        };
 
     };
 
@@ -1089,46 +1152,47 @@ function isFunctionA(object)
         {
             case 'up'     :
             var info = {
-                direction          : 'UP',
-                cardinal_direction : 'N',
-                angle              : 0,
-                in_out             : { x : 'out', y : 'out' }
+                direction    : 'UP',
+                compass_rose : 'N',
+                angle        : 0,
             }
             break;
 
             case 'right'  :
             var info = {
-                direction          : 'RIGHT',
-                cardinal_direction : 'E',
-                angle              : 90,
-                in_out             : { x : 'out', y : 'out' }
+                direction    : 'RIGHT',
+                compass_rose : 'E',
+                angle        : 90,
             }
             break;
 
             case 'down'   :
             var info = {
-                direction          : 'DOWN',
-                cardinal_direction : 'S',
-                angle              : 180,
-                in_out             : { x : 'out', y : 'out' }
+                direction    : 'DOWN',
+                compass_rose : 'S',
+                angle        : 180,
             }
             break;
 
             case 'left'   :
             var info = {
-                direction          : 'LEFT',
-                cardinal_direction : 'W',
-                angle              : 270,
-                in_out             : { x : 'out', y : 'out' }
+                direction    : 'LEFT',
+                compass_rose : 'W',
+                angle        : 270,
             }
             break;
 
             case 'enter'  :
             info = {
-                direction : 'ENTER',
+                direction    : 'ENTER',
+                compass_rose : 'X',
+                angle        : 0,
             }
             break;
+
         }
+
+        info.controller = "DPadController";
 
         /* -- check if hook has been applied -- */
         cwc.ControllerMaster.prototype.invoke_hook( 'on-tap', instructions, info );
@@ -1144,15 +1208,8 @@ function isFunctionA(object)
 }( window.cwc, Hammer );
 
 /*------------------------------------------------------
- * To-Do
+ * GesturePadController
  ------------------------------------------------------
- • Add support for data attr nav dir - up, down, left, right
- • Add support for NO end last and first attr
- • Add support for Enter key for on select
- • Must show testing on Screen
- • Add commit
- ------------------------------------------------------
- • Start D-pad
 */
 
 !function( cwc, Hammer ){
@@ -1161,9 +1218,9 @@ function isFunctionA(object)
     /*------------------------------------------------------
     * @function
     */
-    function TouchPadController( extend )
+    function GesturePadController( extend )
     {
-        cwc.registerPlugin(this, 'TouchPadController');
+        cwc.registerPlugin(this, 'GesturePadController');
 
         this.lookup();
     };
@@ -1172,10 +1229,10 @@ function isFunctionA(object)
     * @obj
     * To store all data and class names
     */
-    TouchPadController.prototype.taxonomy = {
+    GesturePadController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
-            controller : 'data-cwc-controller="touchpad"'
+            controller : 'data-cwc-controller="gesture-pad"'
         }
     };
 
@@ -1183,19 +1240,19 @@ function isFunctionA(object)
     * @object - All controllers
     * @info   - Keep and record of all controllers found
     */
-    TouchPadController.prototype.all_controllers = [];
+    GesturePadController.prototype.all_controllers = [];
 
     /*------------------------------------------------------
     * @object - Tracking
     * @info   - Holds the index of the controller in use
     */
-    TouchPadController.prototype.tracking = null;
+    GesturePadController.prototype.tracking = null;
 
     /*------------------------------------------------------
     * @function - Lookup
     * @info     - Finds all pullbars within the dom
     */
-    TouchPadController.prototype.lookup = function()
+    GesturePadController.prototype.lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -1231,7 +1288,7 @@ function isFunctionA(object)
                 }) );
 
                 mc.on("swipe", function( ev ) {
-                    cwc.TouchPadController.prototype.on_move( ev );
+                    cwc.GesturePadController.prototype.on_move( ev );
                 });
             }
 
@@ -1242,7 +1299,7 @@ function isFunctionA(object)
                 } ) );
 
                 mc.on("panmove panstart panend", function( ev ){
-                    cwc.TouchPadController.prototype.on_move( ev );
+                    cwc.GesturePadController.prototype.on_move( ev );
                 });
             }
         };
@@ -1253,7 +1310,7 @@ function isFunctionA(object)
     * @function - Get movment type
     * @info     - Find the movment type given by user
     */
-    TouchPadController.prototype.get_movment_type = function( c_id )
+    GesturePadController.prototype.get_movment_type = function( c_id )
     {
         /* -- get the insrtuctions for the current analog -- */
         var instructions = this.all_controllers[ c_id ].instructions;
@@ -1261,19 +1318,16 @@ function isFunctionA(object)
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
         {
-            if( instructions['movement-type'] == 'pan' )
+            switch( instructions['movement-type'] )
             {
+                case  'pan'  :
+                case  'swipe':
                 return instructions['movement-type'];
-            }
-            else
-            {
-                return 'swipe';
+                break;
             }
         }
-        else
-        {
-            return 'swipe';
-        }
+
+        return 'swipe';
 
     };
 
@@ -1281,79 +1335,24 @@ function isFunctionA(object)
     * @function - On Move
     * @info     - User is intracting with controller
     */
-    TouchPadController.prototype.on_move = function( ev )
+    GesturePadController.prototype.on_move = function( ev )
     {
-        var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
+        var c_id = ( ev.target.dataset.cid == undefined )? this.tracking : ev.target.dataset.cid;
 
         var analog       = this.all_controllers[ c_id ].pad;
         var instructions = this.all_controllers[ c_id ].instructions;
 
-        /* -- deltas of pointer pos -- */
-        var delta = {
-            x : ev.deltaX,
-            y : ev.deltaY
-        };
-
-        /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
-            ev.angle
+        /* -- Feed back infaomtion -- */
+        var feedback = cwc.ControllerMaster.prototype.get_feedback_data(
+            ev, 'GesturePadController'
         );
-
-        /* -- coordinates of x and y -- */
-        var coordinate = {
-            x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
-            y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
-        };
-
-        /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.ControllerMaster.prototype.get_moving_direction(
-            delta
-        );
-
-        cwc.ControllerMaster.prototype.invoke_hook
 
         /* -- check if hook has been applied -- */
-        cwc.ControllerMaster.prototype.invoke_hook( 'on-touch', instructions, {
-            cardinal_direction : cardinal_direction,
-            coordinate         : coordinate,
-            in_out             : in_out
-        } );
-
-        this.tracking = c_id;
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Validate action
-    * @info     - Hammer.js dirs
-    */
-    TouchPadController.prototype.validate_action = function( type )
-    {
-        var dirs = {
-           8   : 'up',
-           4   : 'right',
-           16  : 'down',
-           2   : 'left',
-           500 : 'enter'
-        };
-
-        // -- Send the action to the main screen --
-        this.send_actions_to_first_screen(
-            dirs[ type ]
+        cwc.ControllerMaster.prototype.invoke_hook(
+            'on-move', instructions, feedback
         );
 
-    };
-
-    /*------------------------------------------------------
-    * @function - Send action to first screen
-    */
-    TouchPadController.prototype.send_actions_to_first_screen = function( action )
-    {
-        cwc.Server.prototype.send_message({
-            recipient : 'display',
-            action    : 'move-navigation',
-            arguments : action
-        });
+        this.tracking = c_id;
 
     };
 
@@ -1361,7 +1360,7 @@ function isFunctionA(object)
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(TouchPadController, 'TouchPadController');
+    cwc.plugin(GesturePadController, 'GesturePadController');
 
 }( window.cwc, Hammer );
 
@@ -1490,51 +1489,40 @@ function isFunctionA(object)
             y : ev.deltaY
         };
 
-        /* -- coordinates of x and y -- */
-        var coordinate = {
-            x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( delta.x ),
-            y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( delta.y )
-        };
-
-        /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
-            ev.angle
+        /* -- Feed back infaomtion -- */
+        var feedback = cwc.ControllerMaster.prototype.get_feedback_data(
+            ev, 'AnalogController'
         );
 
-        /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.ControllerMaster.prototype.get_moving_direction(
-            delta
-        );
+        feedback.direction = cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ];
+        feedback.delta     = delta;
+        feedback.angle     = ev.angle;
 
         /* -- Store all the infromation caculaed to return back -- */
-        this.returned_data = {
-            cardinal_direction : cardinal_direction,
-            direction          : cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ],
-            in_out             : in_out,
-            coordinate         : coordinate,
-            delta              : delta,
-            angle              : ev.angle,
-            event_type         : ev.type,
-        };
+        this.returned_data = feedback;
 
-        /* -- analog container circal -- */
+        /* -- Analog container circle -- */
         var analog_c = {
             x: analog.offsetLeft,
             y: analog.offsetTop,
             radius: analog.clientWidth / 2,
+
         };
 
+        /* -- Trigger container circle -- */
         var trigger_c = {
             radius: trigger.clientWidth / 2,
             x: delta.x,
             y: delta.y,
             s_x: trigger.offsetLeft,
             s_y: trigger.offsetTop,
+
         };
 
         /* --- Collision detection for when moving out of circle -- */
         var dx  = (analog_c.x + analog_c.radius) - (trigger_c.x + trigger_c.radius) - trigger_c.s_x;
         var dy  = (analog_c.y + analog_c.radius) - (trigger_c.y + trigger_c.radius) - trigger_c.s_y;
+
         var dis = Math.sqrt(dx * dx + dy * dy) + ( trigger_c.radius );
 
         /* -- Collishion happerning  --*/
@@ -1581,7 +1569,9 @@ function isFunctionA(object)
                 analog,
                 trigger
             );
+
         }
+
         /* -- Remove all -- */
         else if( ev.type === 'panend' )
         {
@@ -1592,12 +1582,15 @@ function isFunctionA(object)
                 analog,
                 trigger
             );
+
         }
+
         /* -- If the movment has been set to pull, then call the users function -- */
         else if( this.get_movment_type() == 'pull' )
         {
             /* -- check if hook has been applied -- */
-            cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions, this.returned_data );
+            cwc.ControllerMaster.prototype.invoke_hook( 'on-move', instructions, this.returned_data );
+
         }
 
     };
@@ -1612,7 +1605,9 @@ function isFunctionA(object)
         this.tracking = c_id;
 
         /* -- check if hook has been applied -- */
-        cwc.ControllerMaster.prototype.invoke_hook( 'panstart', instructions, null);
+        cwc.ControllerMaster.prototype.invoke_hook(
+            'panstart', instructions, null
+        );
 
         if( this.get_movment_type() == 'tick' )
         {
@@ -1630,7 +1625,9 @@ function isFunctionA(object)
     AnalogController.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
         /* -- check if hook has been applied -- */
-        cwc.ControllerMaster.prototype.invoke_hook( 'panend', instructions, null);
+        cwc.ControllerMaster.prototype.invoke_hook(
+            'panend', instructions, null
+        );
 
         /* -- Remove any if nessary -- */
         analog.classList.remove("active");
@@ -1889,14 +1886,19 @@ function isFunctionA(object)
             }
         }
 
+        /* -- Set the data to be returned -- */
+        this.returned_data = cwc.ControllerMaster.prototype.get_feedback_data(
+            ev, 'PullbarController'
+        );
+
+        if( instructions.hasOwnProperty('viewport-target') )
+        {
+            this.returned_data.viewport_target = instructions['viewport-target'];
+        }
+
         /* -- Collishion -- */
         if( threshold.y.top || threshold.y.btm )
         {
-            /* -- Set the data to be returned -- */
-            this.returned_data = this.get_feedback_data(
-                ev
-            );
-
             /* -- Check if we in enter frame -- */
             if( this.request_id == 0 )
             {
@@ -1930,41 +1932,12 @@ function isFunctionA(object)
 
             /* -- check if hook has been applied -- */
             cwc.ControllerMaster.prototype.invoke_hook(
-                'on-pull',
-                instructions,
-                this.get_feedback_data( ev )
+                'on-pull', instructions, this.returned_data
             );
 
         }
 
         this.start_and_end_toggle( ev.type, g_id, pullbar, trigger )
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Get feedback data
-    * @info     - builds the return data object to feed back to user
-    */
-    PullbarController.prototype.get_feedback_data = function( ev )
-    {
-        return {
-            /* -- cardinal the users is moving in -- */
-            cardinal_direction : cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
-                ev.angle
-            ),
-
-            /* -- coordinates of x and y -- */
-            coordinate : {
-                x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
-                y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
-            },
-
-            /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-            in_out : cwc.ControllerMaster.prototype.get_moving_direction({
-                x : ev.deltaX,
-                y : ev.deltaY,
-            } )
-        };
 
     };
 

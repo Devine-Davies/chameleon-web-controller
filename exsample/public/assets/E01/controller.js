@@ -80,7 +80,7 @@ function cwc_object_declaration()
     * System messages should be declared here
     * We will have a list or predefined functions
     */
-    TouchPad = new cwc.TouchPadController({
+    GesturePad = new cwc.GesturePadController({
     });
 
     /*------------------------------------------------------
@@ -108,30 +108,33 @@ function cwc_hooks()
     Hooks.set_hook( {
       hook_name : 'on-move-navigation',
       method    : function( prams ) {
-        if( prams.in_out.x == 'out' || prams.in_out.y == 'out' )
-        {
-            slow_down( prams.cardinal_direction );
-        }
-      }
-    });
-
-    Hooks.set_hook( {
-      hook_name : 'scroll-view',
-      method    : function( prams ) {
-        Hooks.invoke_clinet_hook({
-            recipient : 'display',
-            hook_name : 'scroll-viewport',
-            arguments : {
-              viewport_target : 'scroll-target',
-              direction       : (prams.cardinal_direction.indexOf('N') > -1 )? 'up' : 'down',
-              ammount         : 15,
-              type            : 'scroll to'
-            }
-        });
+        controller_active( prams );
       }
     });
 
 };
+
+
+function controller_active( prams )
+{
+    if( prams.controller == 'GesturePadController' )
+    {
+        if( prams.axis_direction.x == 'in' || prams.axis_direction.y == 'in' )
+        {
+            return;
+        }
+    }
+
+    if ( ! prams.compass_rose.includes('NE NW SE SW') )
+    {
+        Hooks.invoke_clinet_hook({
+            recipient : 'display',
+            hook_name : 'move-navgroup',
+            arguments : prams.compass_rose
+        });
+    }
+
+}
 
 function start_conection_process()
 {
@@ -184,24 +187,5 @@ function on_connection_faild()
 {
     console.log('on_connection_faild');
     $('.connect-code-process').addClass('open');
-
-};
-
-function slow_down( dir )
-{
-    if ( ! this.is_sending )
-    {
-        is_sending = true;
-
-        setTimeout( function(){
-            Hooks.invoke_clinet_hook({
-                recipient : 'display',
-                hook_name : 'move-navigation',
-                arguments : dir
-            });
-
-          is_sending = false;
-        } , ( 150 ) );
-    }
 
 };
