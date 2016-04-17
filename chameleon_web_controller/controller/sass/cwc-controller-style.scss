@@ -118,18 +118,18 @@
           border: 1px solid tomato;
 
           &::after {
-            content: ' ';
             display: block;
+            font-size: 1.5em;
+            content: "OK";
+            color: tomato;
+
             position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
             left: 0;
             margin: auto;
-            width: 85%;
-            height: 85%;
-            background: tomato;
-            border-radius: 50%;
+            height: 27px;
           }
       }
 
@@ -204,7 +204,7 @@
 
 }
 
-[data-cwc-controller="touchpad"] {
+[data-cwc-controller="gesture-pad"] {
 
     &.cwc-style {
         width: 150px;

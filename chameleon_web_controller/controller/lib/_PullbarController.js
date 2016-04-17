@@ -147,14 +147,19 @@
             }
         }
 
+        /* -- Set the data to be returned -- */
+        this.returned_data = cwc.ControllerMaster.prototype.get_feedback_data(
+            ev, 'PullbarController'
+        );
+
+        if( instructions.hasOwnProperty('viewport-target') )
+        {
+            this.returned_data.viewport_target = instructions['viewport-target'];
+        }
+
         /* -- Collishion -- */
         if( threshold.y.top || threshold.y.btm )
         {
-            /* -- Set the data to be returned -- */
-            this.returned_data = this.get_feedback_data(
-                ev
-            );
-
             /* -- Check if we in enter frame -- */
             if( this.request_id == 0 )
             {
@@ -188,41 +193,12 @@
 
             /* -- check if hook has been applied -- */
             cwc.ControllerMaster.prototype.invoke_hook(
-                'on-pull',
-                instructions,
-                this.get_feedback_data( ev )
+                'on-pull', instructions, this.returned_data
             );
 
         }
 
         this.start_and_end_toggle( ev.type, g_id, pullbar, trigger )
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Get feedback data
-    * @info     - builds the return data object to feed back to user
-    */
-    PullbarController.prototype.get_feedback_data = function( ev )
-    {
-        return {
-            /* -- cardinal the users is moving in -- */
-            cardinal_direction : cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
-                ev.angle
-            ),
-
-            /* -- coordinates of x and y -- */
-            coordinate : {
-                x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
-                y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
-            },
-
-            /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-            in_out : cwc.ControllerMaster.prototype.get_moving_direction({
-                x : ev.deltaX,
-                y : ev.deltaY,
-            } )
-        };
 
     };
 

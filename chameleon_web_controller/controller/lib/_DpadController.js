@@ -133,46 +133,47 @@
         {
             case 'up'     :
             var info = {
-                direction          : 'UP',
-                cardinal_direction : 'N',
-                angle              : 0,
-                in_out             : { x : 'out', y : 'out' }
+                direction    : 'UP',
+                compass_rose : 'N',
+                angle        : 0,
             }
             break;
 
             case 'right'  :
             var info = {
-                direction          : 'RIGHT',
-                cardinal_direction : 'E',
-                angle              : 90,
-                in_out             : { x : 'out', y : 'out' }
+                direction    : 'RIGHT',
+                compass_rose : 'E',
+                angle        : 90,
             }
             break;
 
             case 'down'   :
             var info = {
-                direction          : 'DOWN',
-                cardinal_direction : 'S',
-                angle              : 180,
-                in_out             : { x : 'out', y : 'out' }
+                direction    : 'DOWN',
+                compass_rose : 'S',
+                angle        : 180,
             }
             break;
 
             case 'left'   :
             var info = {
-                direction          : 'LEFT',
-                cardinal_direction : 'W',
-                angle              : 270,
-                in_out             : { x : 'out', y : 'out' }
+                direction    : 'LEFT',
+                compass_rose : 'W',
+                angle        : 270,
             }
             break;
 
             case 'enter'  :
             info = {
-                direction : 'ENTER',
+                direction    : 'ENTER',
+                compass_rose : 'X',
+                angle        : 0,
             }
             break;
+
         }
+
+        info.controller = "DPadController";
 
         /* -- check if hook has been applied -- */
         cwc.ControllerMaster.prototype.invoke_hook( 'on-tap', instructions, info );

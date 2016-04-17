@@ -38,7 +38,7 @@
 
 //@codekit-append "_ControllerMaster.js";
 //@codekit-append "_DpadController.js";
-//@codekit-append "_TouchPadController.js";
+//@codekit-append "_GesturePadController.js";
 //@codekit-append "_AnalogController.js";
 //@codekit-append "_PullbarController.js";
 //@codekit-append "_TextCapture.js";

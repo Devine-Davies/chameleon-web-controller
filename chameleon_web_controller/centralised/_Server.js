@@ -165,9 +165,9 @@
             try {
                 /* -- Invoke the connection success message -- */
                 cwc.Hooks.prototype.invoke({
-                    hook_name : 'save-client-data',
+                    hook_name : 'cwc:save-client-data',
                     arguments : server_feedback,
-                }, true );
+                } );
             } catch ( e ) {
                 console.log('saved faild');
             }
@@ -183,7 +183,7 @@
     {
         /* -- Invoke the connection success message -- */
         cwc.Hooks.prototype.invoke({
-            hook_name      : 'connection-failed',
+            hook_name      : 'cwc:connection-failed',
             arguments : this.connection_options,
         });
 
@@ -256,14 +256,6 @@
     {
         /* -- Message data -- */
         var hook_info = JSON.parse( recived_package.data );
-
-        /* -- Look at reserved -- */
-        cwc.Hooks.prototype.invoke({
-            hook_name    : hook_info.hook_name,
-            arguments    : hook_info.arguments,
-            recipient    : hook_info.recipient,
-            cwc_metadata : hook_info.cwc_metadata,
-        }, true );
 
         /* -- Look for users -- */
         cwc.Hooks.prototype.invoke({

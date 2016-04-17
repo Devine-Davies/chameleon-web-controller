@@ -34,7 +34,7 @@
 /*------------------------------------------------------
 * -- Display --
 */
-//@codekit-append "_Navigation.js"
+//@codekit-append "_Navgroup.js"
 //@codekit-append "_ViewportScroll.js"
 //@codekit-append "_TextCapture.js"
 

@@ -24,6 +24,8 @@
     */
     Hooks.prototype.set_reserved_hook = function( prams )
     {
+        console.log( prams );
+
         this.all_reserved_hooks[ prams.hook_name ] = {
             'hook_name': prams.hook_name,
             'method'   : prams.method
@@ -72,10 +74,10 @@
     };
 
     /*------------------------------------------------------
-    * @function
+    * @function - Invoke client hook
     * where we invoke custom methods
     */
-    Hooks.prototype.invoke_clinet_hook = function( hook_info )
+    Hooks.prototype.invoke_client_hook = function( hook_info )
     {
         /* -- Is this a valid mesage : return true not valid -- */
         if( this.validate_hook( hook_info ) )
@@ -97,15 +99,54 @@
     * @function
     * where we invoke custom methods
     */
-    Hooks.prototype.invoke = function( hook_info, reserved )
+    Hooks.prototype.invoke = function( hook_info )
     {
-        /* -- check formatting -- */
-        if( hook_info.hasOwnProperty( 'hook_name' ) )
+        if( ! hook_info.hasOwnProperty( 'hook_name' ) )
         {
-            var hooks = ( reserved )? this.all_reserved_hooks : this.all_hooks;
+            console.log('A hook name in required');
+            return;
+        }
 
-            /* -- Can be called using hook-*(name) usfull on data attr -- */
-            var hook_name = hook_info.hook_name.replace('hook-','')
+        /* -- Get the raw hook name -- */
+        var hook_name = hook_info.hook_name
+
+        console.log( hook_info );
+
+        /* -- Hook is for display -- */
+        if ( hook_name.includes('d-hook:') )
+        {
+            cwc.Hooks.prototype.invoke_clinet_hook( {
+                recipient : 'display',
+                hook_name : hook_name.replace("d-hook:", ""),
+                arguments : hook_info.arguments
+            } );
+
+        }
+
+        /* -- Check to see if is ment for display -- */
+        else if ( hook_name.includes('c-hook:') )
+        {
+            cwc.Hooks.prototype.invoke_clinet_hook( {
+                recipient : 'controllers',
+                hook_name : hook_name.replace("c-hook:", ""),
+                arguments : hook_info.arguments
+            } );
+
+        }
+
+        /* -- Check to see if is ment for display -- */
+        else
+        {
+            /* -- Look at reserved || -- Look for users -- */
+            var hooks  = ( hook_name.includes('cwc:') )? this.all_reserved_hooks : this.all_hooks;
+
+            /* -- Can be called using hook:*(name) usfull on data attr -- */
+            var hook_name = hook_info.hook_name.replace('hook:','')
+
+                /* -- Can be called using hook:*(name) usfull on data attr -- */
+                hook_name = hook_info.hook_name.replace('cwc:','')
+
+                console.log( hook_name );
 
             if( hooks.hasOwnProperty( hook_name ) )
             {
@@ -115,6 +156,7 @@
                     console.log( e );
                 }
             }
+
         }
 
     };

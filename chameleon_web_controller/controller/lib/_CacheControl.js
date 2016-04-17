@@ -52,7 +52,7 @@
     {
         /* -- Crete Hook for saving data -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'save-client-data',
+          hook_name : 'cwc:save-client-data',
           method    : function( feedback ) {
             cwc.CacheControl.prototype.save_cluster_code( feedback );
         } } );

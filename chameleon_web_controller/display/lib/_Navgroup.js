@@ -10,23 +10,31 @@
     /*------------------------------------------------------
     * @function
     */
-    function Navigation( extend )
+    function Navgroup( extend )
     {
-        cwc.registerPlugin(this, 'Navigation');
+        cwc.registerPlugin(this, 'Navgroup');
 
         /* -- Update options if are assigned -- */
-        this.set_extended_options( extend );
+        if( extend )
+        {
+            this.options = Object.assign(
+                this.options,
+                extend
+            );
 
-        /* -- Ser for any data attrs in page -- */
+        }
+
+        /* -- Start the navgroup process -- */
         this.reflow();
 
         if ( this.navgroups_count() > 0 )
         {
-            /* -- Add Navigation events -- */
+            /* -- Add Navgroup events -- */
             this.add_window_key_events();
 
             /* -- Add Server events -- */
             this.add_server_events();
+
         }
 
         console.log( this.nav_elms );
@@ -37,7 +45,7 @@
     * @obj
     * To store all data and class names
     */
-    Navigation.prototype.callbacks = {
+    Navgroup.prototype.callbacks = {
         onnav_changed    : function(){},
         onitem_changed   : function(){}
     }
@@ -46,7 +54,16 @@
     * @obj
     * To store all data and class names
     */
-    Navigation.prototype.taxonomy = {
+    Navgroup.prototype.options = {
+        active_group_class : 'cwc-selected-group',
+        active_item_class  : 'cwc-selected-item',
+    };
+
+    /*------------------------------------------------------
+    * @obj
+    * To store all data and class names
+    */
+    Navgroup.prototype.taxonomy = {
         classes : {
             group : 'cwc-selected-group',
             item  : 'cwc-selected-item',
@@ -65,7 +82,7 @@
     * @object - Tracking
     * @info - away of tracking last and previous nav items
     */
-    Navigation.prototype.tracking = {
+    Navgroup.prototype.tracking = {
         previous : {},
 
         current : {
@@ -82,7 +99,7 @@
     * @object - Groups & Items
     * @info - Keep and drecord of all found nav elms
     */
-    Navigation.prototype.nav_elms = {
+    Navgroup.prototype.nav_elms = {
 
     };
 
@@ -90,59 +107,29 @@
     * @array
     * Place to store all custom methord
     */
-    Navigation.prototype.keys = {
+    Navgroup.prototype.keys = {
             /* -- ESC -- */
             27 : function(){ },
 
             /* -- Enter -- */
-            13 : function(){ cwc.Navigation.prototype.key_function( 'enter' ) },
-            32 : function(){ cwc.Navigation.prototype.key_function( 'enter' ) },
+            13 : function(){ cwc.Navgroup.prototype.key_function( 'enter' ) },
+            32 : function(){ cwc.Navgroup.prototype.key_function( 'enter' ) },
 
             /* -- W & up -- */
-            87 : function(){ cwc.Navigation.prototype.key_function( 'up' ) },
-            38 : function(){ cwc.Navigation.prototype.key_function( 'up' ) },
+            87 : function(){ cwc.Navgroup.prototype.key_function( 'up' ) },
+            38 : function(){ cwc.Navgroup.prototype.key_function( 'up' ) },
 
             /* -- S & down -- */
-            83 : function(){ cwc.Navigation.prototype.key_function( 'down' ) },
-            40 : function(){ cwc.Navigation.prototype.key_function( 'down' ) },
+            83 : function(){ cwc.Navgroup.prototype.key_function( 'down' ) },
+            40 : function(){ cwc.Navgroup.prototype.key_function( 'down' ) },
 
             /* -- A & left -- */
-            65 : function(){ cwc.Navigation.prototype.key_function( 'left' ) },
-            37 : function(){ cwc.Navigation.prototype.key_function( 'left' ) },
+            65 : function(){ cwc.Navgroup.prototype.key_function( 'left' ) },
+            37 : function(){ cwc.Navgroup.prototype.key_function( 'left' ) },
 
             /* -- D & right -- */
-            68 : function(){ cwc.Navigation.prototype.key_function( 'right' ) },
-            39 : function(){ cwc.Navigation.prototype.key_function( 'right' ) },
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Set extended options
-    * @info - Combines the global extend object with this options object
-    * allowing further extended options
-    */
-    Navigation.prototype.set_extended_options = function ( extend )
-    {
-        if( extend )
-        {
-            /* -- extend users options classes --- */
-            if( extend.hasOwnProperty( 'classes' ) )
-            {
-                this.taxonomy.classes = Object.assign(
-                    this.taxonomy.classes,
-                    extend.classes
-                );
-            }
-
-            /* -- extend users options callbacks --- */
-            if( extend.hasOwnProperty( 'callbacks' ) )
-            {
-                this.callbacks = Object.assign(
-                    this.callbacks,
-                    extend.callbacks
-                );
-            }
-        }
+            68 : function(){ cwc.Navgroup.prototype.key_function( 'right' ) },
+            39 : function(){ cwc.Navgroup.prototype.key_function( 'right' ) },
 
     };
 
@@ -150,7 +137,7 @@
     * @function - Navgroups lookup
     * @info - Find elms with data-(group) add the this to object
     */
-    Navigation.prototype.reflow = function()
+    Navgroup.prototype.reflow = function()
     {
         /* -- Get names -- */
         var nav_groups       = document.querySelectorAll('['+ this.taxonomy.data.group +']');
@@ -166,7 +153,7 @@
             );
 
             /* -- Find instructions -- */
-            var instructions = this.navgroups_instructions(
+            var instructions = this.retrive_instructions(
                 nav_groups[ g_id ], g_id, g_name
             );
 
@@ -185,7 +172,7 @@
     * @info - Find elms with data-(navitem) add the this to object
     * @return - true : false
     */
-    Navigation.prototype.navitems_lookup = function( group, g_id, g_name )
+    Navgroup.prototype.navitems_lookup = function( group, g_id, g_name )
     {
         var descendents     = group.getElementsByTagName('*');
         var descendents_len = descendents.length;
@@ -213,15 +200,15 @@
             {
                 /* -- store found items -- */
                 var item_obj = {
-                    item      : item,
-                    overrides : this.item_overrides( item )
+                    item         : item,
+                    instructions : this.retrive_instructions( item )
                 };
 
                 /* -- Add tje ite, -- */
                 items.push( item_obj );
 
                 /* -- Up date the current group and index -- */
-                if( item_obj.overrides.hasOwnProperty( 'starting-point' ) )
+                if( item_obj.instructions.hasOwnProperty( 'starting-point' ) )
                 {
                     /* -- user would like to start here -- */
                     this.update_nav_tracking( {
@@ -246,15 +233,15 @@
     * @function - Update nav tracking
     * @info     - Will update the tracking system for next items and groups
     */
-    Navigation.prototype.ng_append_item = function( item, g_name )
+    Navgroup.prototype.ng_append_item = function( item, g_name )
     {
         /* -- Only add if there -- */
         if( this.nav_elms.hasOwnProperty( g_name ) )
         {
             /* -- store item -- */
             this.nav_elms[ g_name ].navitems.push({
-                item      : item,
-                overrides : this.item_overrides( item )
+                item         : item,
+                instructions : this.retrive_instructions( item )
             });
         }
 
@@ -264,7 +251,7 @@
     * @function - Update nav tracking
     * @info     - Will update the tracking system for next items and groups
     */
-    Navigation.prototype.ng_remove_item = function( index, g_name )
+    Navgroup.prototype.ng_remove_item = function( index, g_name )
     {
         /* -- Only add if there -- */
         if( this.nav_elms.hasOwnProperty( g_name ) )
@@ -280,46 +267,25 @@
     * @function - Update nav tracking
     * @info - Will update the tracking system for next items and groups
     */
-    Navigation.prototype.navgroups_instructions = function( group )
+    Navgroup.prototype.retrive_instructions = function( item )
     {
         var tax = 'data-cwc-instructions'
 
-        /* -- Search for nav end inftructions-- */
-        if( group.hasAttribute( tax )  )
-        {
-            return JSON.parse(
-                group.getAttribute( tax )
-            );
-        }
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Item overrides
-    * @info - look to see if there are override instructions for navigation
-    *
-    */
-    Navigation.prototype.item_overrides = function( item )
-    {
-        var tax = 'data-cwc-overide'
-
-        /* -- look for data-cwc-item-overide -- */
+        /* -- Search for nav end inftructions -- */
         if( item.hasAttribute( tax )  )
         {
-            /* -- Return overrides -- */
             return JSON.parse(
                 item.getAttribute( tax )
             );
         }
 
-        return {};
     };
 
     /*------------------------------------------------------
     * @function - Navgroups count
     * @return - Found nav count
     */
-    Navigation.prototype.navgroups_count = function()
+    Navgroup.prototype.navgroups_count = function()
     {
         var count = 0;
 
@@ -334,7 +300,7 @@
     * @function - Total items in group
     * @return - count items in grop : defult current group
     */
-    Navigation.prototype.total_items_in_group = function( group_name )
+    Navgroup.prototype.total_items_in_group = function( group_name )
     {
         group_name = ( ! group_name )? this.tracking.current.g_name : group_name;
 
@@ -349,26 +315,33 @@
 
     /*------------------------------------------------------
     * @function - Add window key events
-    * @info - Add window keybinds for Navigation
+    * @info - Add window keybinds for Navgroup
     * @condishion set - Only if Navitems found
     */
-    Navigation.prototype.add_server_events = function()
+    Navgroup.prototype.add_server_events = function()
     {
         /* -- Crete connection fil | Hook -- */
         cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'move-navigation',
+          hook_name : 'navgroup-action',
           method    : function( feedback ) {
-            cwc.Navigation.prototype.invoke_dir( feedback );
+            if( feedback.hasOwnProperty('compass_rose') )
+            {
+                cwc.Navgroup.prototype.call_action( feedback.compass_rose );
+            }
+            else if( feedback.hasOwnProperty('direction') )
+            {
+                cwc.Navgroup.prototype.call_action( feedback.compass_rose );
+            }
         } } );
 
-    }
+    };
 
     /*------------------------------------------------------
     * @function - Add window key events
-    * @info - Add window keybinds for Navigation
+    * @info - Add window keybinds for Navgroup
     * @condishion set - Only if Navitems found
     */
-    Navigation.prototype.add_window_key_events = function()
+    Navgroup.prototype.add_window_key_events = function()
     {
         var $keys = this.keys;
 
@@ -391,7 +364,7 @@
     * @info     - page initialization code here the DOM will be available here
     * Only start the process when the dom is ready
     */
-    Navigation.prototype.invoke_dir = function( dir, cb )
+    Navgroup.prototype.call_action = function( dir, cb )
     {
         var a_enter  = ['enter', 'select'];
         var a_up     = ['up',    'N', 'NE', 'NW'];
@@ -437,7 +410,7 @@
     * - enter   // pass one of the following n* items as an argument
     * - space   // pass one of the following n* items as an argument
     */
-    Navigation.prototype.key_function = function( dir )
+    Navgroup.prototype.key_function = function( dir )
     {
         var group_name    = this.tracking.current.g_name;
         var current_group = this.tracking.current.g_id;
@@ -450,17 +423,18 @@
             item       : JSON.parse( JSON.stringify( current_item  ) )
         }
 
-        var instructions = this.nav_elms[ group_name ].instructions;
-        var overrides    = this.nav_elms[ group_name ].navitems[ current_item ].overrides;
+        /* -- Get instruction -- */
+        var group_instructions = this.nav_elms[ group_name ].instructions;
+        var item_instructions  = this.nav_elms[ group_name ].navitems[ current_item ].instructions;
 
         /* -- Check to see if item has overids : before moving -- */
-        if( overrides != null )
+        if( item_instructions != null )
         {
-            if( overrides.hasOwnProperty( dir ) )
+            if( item_instructions.hasOwnProperty( dir ) )
             {
-                /* -- Get the group overrides -- */
+                /* -- Get the item instructions -- */
                 this.analyse_instructions(
-                    overrides[ dir ],
+                    item_instructions[ dir ],
                     c_indexs
                 );
 
@@ -469,13 +443,13 @@
         }
 
         /* -- Check to see if instructions has been set on navgroup -- */
-        if( instructions != null )
+        if( group_instructions != null )
         {
              /* -- Has been set and not null -- */
-            if( instructions.hasOwnProperty( dir ) )
+            if( group_instructions.hasOwnProperty( dir ) )
             {
                 this.analyse_instructions(
-                    instructions[ dir ],
+                    group_instructions[ dir ],
                     c_indexs
                 );
 
@@ -487,17 +461,22 @@
 
     /*------------------------------------------------------
     * @function - Analyse instructions
-    * - ni-next                // next nav item
-    * - ni-prev                // previous nav item
-    * - ng-next                // next nav group
-    * - ng-prev                // previous nav group
-    * - ng-*(name)             // name of the group you wish to navigation too
-    * - hook-*(custom methord) // add custom methord to end of arg, must be set up in custom methords
+    * - ni:next                // next nav item
+    * - ni:prev                // previous nav item
+    * - ng:next                // next nav group
+    * - ng:prev                // previous nav group
+    * - ng:(*)                 // name of the group you wish to Navgroup too
+    * - hook:*(custom methord) // add custom methord to end of arg, must be set up in custom methords
     */
-    Navigation.prototype.analyse_instructions = function( instruction, c_index )
+    Navgroup.prototype.analyse_instructions = function( instruction, c_index )
     {
+        var delimiter = ':';
+        var navgroup  = 'ng'   + delimiter;
+        var navitem   = 'ni'   + delimiter;
+        var hook      = 'hook' + delimiter;
+
         /* -- Hook -- */
-        if( instruction.indexOf('hook-') > -1 )
+        if( instruction.indexOf( hook ) > -1 )
         {
             cwc.Hooks.prototype.invoke(  {
                 hook_name : instruction,
@@ -507,9 +486,9 @@
         }
 
         /* -- Move to item -- */
-        else if( instruction.indexOf('ni-') > -1 )
+        else if( instruction.indexOf( navitem ) > -1 )
         {
-            var action = instruction.replace('ni-','');
+            var action = instruction.replace( navitem ,'');
 
             if((action == 'next'))
             {
@@ -524,9 +503,9 @@
         }
 
         /* -- The user is trying to update group -- */
-        else if( instruction.indexOf('ng-') > -1 )
+        else if( instruction.indexOf( navgroup ) > -1 )
         {
-            var action = instruction.replace('ng-','');
+            var action = instruction.replace( navgroup ,'');
 
             /* -- We know the name of the guoup -- */
             if( this.nav_elms.hasOwnProperty( action ) )
@@ -556,7 +535,7 @@
     * @function - On new nav
     * @info     - Change to new nav item
     */
-    Navigation.prototype.move_to_new_nav_index = function( g_id )
+    Navgroup.prototype.move_to_new_nav_index = function( g_id )
     {
         /* -- Nav constraints -- */
         var constraint = {
@@ -589,12 +568,13 @@
     * @function - Move to nav name
     * @info     - Change to new nav item
     */
-    Navigation.prototype.move_to_nav_name = function( group_name )
+    Navgroup.prototype.move_to_nav_name = function( group_name )
     {
-        /* -- Check first -- */
+        /* -- Check to see if the group has been set -- */
         if( ! this.nav_elms.hasOwnProperty( group_name ) ) {
             return;
         }
+        /* -- Check to see if we have items -- */
         else if ( this.total_items_in_group( group_name ) == 0 ) {
             return;
         }
@@ -636,19 +616,20 @@
         if( nav_group.instructions != null )
         {
             /* -- Check for entrance hook -- */
-            if( nav_group.instructions.hasOwnProperty('onnaventrance') )
+            if( nav_group.instructions.hasOwnProperty('on-entrance') )
             {
                 this.analyse_instructions(
-                    nav_group.instructions['onnaventrance']
+                    nav_group.instructions['on-entrance']
                 );
             }
 
         }
 
-        /* -- Run callback function for nav change -- */
-        this.callbacks.onnav_changed(
-            this.tracking.current
-        );
+        /* -- Check to see if global hook has been created-- */
+        cwc.Hooks.prototype.invoke(  {
+            hook_name : 'navgroup-updated',
+            arguments : this.tracking.current
+        } );
 
     };
 
@@ -656,7 +637,7 @@
     * @function - Find best item
     * @info     - Find best object to swap
     */
-    Navigation.prototype.find_best_item = function( nav_group )
+    Navgroup.prototype.find_best_item = function( nav_group )
     {
         return {
             i_id  : 0,
@@ -669,7 +650,7 @@
     * @function - Lookup history item
     * @info     - Change to new nav item
     */
-    Navigation.prototype.lookup_history_item = function( nav_group )
+    Navgroup.prototype.lookup_history_item = function( nav_group )
     {
         var current_group_items = nav_group['navitems'];
 
@@ -710,7 +691,7 @@
     * @function - Update nav tracking
     * @info - Will update the tracking system for next items and groups
     */
-    Navigation.prototype.on_new_item_update = function( index )
+    Navgroup.prototype.on_new_item_update = function( index )
     {
         var collision = {
             first : ( index <= -1 ),
@@ -727,8 +708,8 @@
             index = 0;
         }
 
-        var g_name    = this.tracking.current.g_name;
-        var overrides = this.nav_elms[ g_name ].navitems[ index ].overrides;
+        var g_name             = this.tracking.current.g_name;
+        var item_instructions  = this.nav_elms[ g_name ].navitems[ index ].instructions;
 
         this.update_nav_tracking({
             g_id   : this.nav_elms[ g_name ].g_id,
@@ -739,27 +720,23 @@
             i_elm : this.nav_elms[ g_name ].navitems[ index ]
         });
 
-        if( overrides != null )
+        /* -- Check to see if item has overids : before moving -- */
+        if( item_instructions != null )
         {
             /* -- Check for entrance hook -- */
-            if( overrides.hasOwnProperty('onitementrance') )
+            if( item_instructions.hasOwnProperty('on-entrance') )
             {
                 this.analyse_instructions(
-                    overrides['onitementrance']
+                    item_instructions['on-entrance']
                 );
             }
         }
 
-        /* -- Run callback function for item change -- */
-        try {
-            this.callbacks.onitem_changed(
-                this.tracking.current
-            );
-        }
-        catch(err) {
-            console.log( err );
-            console.log('All Callbacks are functions');
-        };
+        /* -- Check to see if global hook has been created-- */
+        cwc.Hooks.prototype.invoke(  {
+            hook_name : 'navitem-updated',
+            arguments : this.tracking.current
+        } );
 
     };
 
@@ -767,7 +744,7 @@
     * @function - Update nav tracking
     * @info - Will update the tracking system for next items and groups
     */
-    Navigation.prototype.update_nav_tracking = function( prams )
+    Navgroup.prototype.update_nav_tracking = function( prams )
     {
         /* -- Record previous state -- */
         this.tracking.previous = this.tracking.current;
@@ -787,12 +764,12 @@
     * @function - Highlight group
     * @info - Add highlight class to group
     */
-    Navigation.prototype.highlight_group = function()
+    Navgroup.prototype.highlight_group = function()
     {
         if( this.tracking.previous.g_elm )
         {
             this.tracking.previous.g_elm.classList.remove(
-                this.taxonomy.classes.group
+                this.options.active_group_class
             );
 
             /* -- Record the last visited nav item -- */
@@ -802,7 +779,7 @@
         if( this.tracking.current.g_elm )
         {
             this.tracking.current.g_elm.classList.add(
-                this.taxonomy.classes.group
+                this.options.active_group_class
             );
         }
 
@@ -812,19 +789,19 @@
     * @function - Highlight item
     * @info - Add highlight class to item
     */
-    Navigation.prototype.highlight_item = function()
+    Navgroup.prototype.highlight_item = function()
     {
         if( this.tracking.previous.i_elm )
         {
             this.tracking.previous.i_elm.item.classList.remove(
-                this.taxonomy.classes.item
+                this.options.active_item_class
             );
         }
 
         if( this.tracking.current.i_elm )
         {
             this.tracking.current.i_elm.item.classList.add(
-                this.taxonomy.classes.item
+                this.options.active_item_class
             );
         }
 
@@ -834,6 +811,6 @@
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(Navigation, 'Navigation');
+    cwc.plugin(Navgroup, 'Navgroup');
 
 }( window.cwc );

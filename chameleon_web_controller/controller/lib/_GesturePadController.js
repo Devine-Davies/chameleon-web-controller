@@ -1,13 +1,6 @@
 /*------------------------------------------------------
- * To-Do
+ * GesturePadController
  ------------------------------------------------------
- • Add support for data attr nav dir - up, down, left, right
- • Add support for NO end last and first attr
- • Add support for Enter key for on select
- • Must show testing on Screen
- • Add commit
- ------------------------------------------------------
- • Start D-pad
 */
 
 !function( cwc, Hammer ){
@@ -16,9 +9,9 @@
     /*------------------------------------------------------
     * @function
     */
-    function TouchPadController( extend )
+    function GesturePadController( extend )
     {
-        cwc.registerPlugin(this, 'TouchPadController');
+        cwc.registerPlugin(this, 'GesturePadController');
 
         this.lookup();
     };
@@ -27,10 +20,10 @@
     * @obj
     * To store all data and class names
     */
-    TouchPadController.prototype.taxonomy = {
+    GesturePadController.prototype.taxonomy = {
         /* -- HTML:(data-*) -- */
         data : {
-            controller : 'data-cwc-controller="touchpad"'
+            controller : 'data-cwc-controller="gesture-pad"'
         }
     };
 
@@ -38,19 +31,19 @@
     * @object - All controllers
     * @info   - Keep and record of all controllers found
     */
-    TouchPadController.prototype.all_controllers = [];
+    GesturePadController.prototype.all_controllers = [];
 
     /*------------------------------------------------------
     * @object - Tracking
     * @info   - Holds the index of the controller in use
     */
-    TouchPadController.prototype.tracking = null;
+    GesturePadController.prototype.tracking = null;
 
     /*------------------------------------------------------
     * @function - Lookup
     * @info     - Finds all pullbars within the dom
     */
-    TouchPadController.prototype.lookup = function()
+    GesturePadController.prototype.lookup = function()
     {
         /* -- Get names -- */
         var controllers       = document.querySelectorAll('['+ this.taxonomy.data.controller +']');
@@ -86,7 +79,7 @@
                 }) );
 
                 mc.on("swipe", function( ev ) {
-                    cwc.TouchPadController.prototype.on_move( ev );
+                    cwc.GesturePadController.prototype.on_move( ev );
                 });
             }
 
@@ -97,7 +90,7 @@
                 } ) );
 
                 mc.on("panmove panstart panend", function( ev ){
-                    cwc.TouchPadController.prototype.on_move( ev );
+                    cwc.GesturePadController.prototype.on_move( ev );
                 });
             }
         };
@@ -108,7 +101,7 @@
     * @function - Get movment type
     * @info     - Find the movment type given by user
     */
-    TouchPadController.prototype.get_movment_type = function( c_id )
+    GesturePadController.prototype.get_movment_type = function( c_id )
     {
         /* -- get the insrtuctions for the current analog -- */
         var instructions = this.all_controllers[ c_id ].instructions;
@@ -116,19 +109,16 @@
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
         {
-            if( instructions['movement-type'] == 'pan' )
+            switch( instructions['movement-type'] )
             {
+                case  'pan'  :
+                case  'swipe':
                 return instructions['movement-type'];
-            }
-            else
-            {
-                return 'swipe';
+                break;
             }
         }
-        else
-        {
-            return 'swipe';
-        }
+
+        return 'swipe';
 
     };
 
@@ -136,79 +126,24 @@
     * @function - On Move
     * @info     - User is intracting with controller
     */
-    TouchPadController.prototype.on_move = function( ev )
+    GesturePadController.prototype.on_move = function( ev )
     {
-        var c_id = ( event.target.dataset.cid == undefined )? this.tracking : event.target.dataset.cid;
+        var c_id = ( ev.target.dataset.cid == undefined )? this.tracking : ev.target.dataset.cid;
 
         var analog       = this.all_controllers[ c_id ].pad;
         var instructions = this.all_controllers[ c_id ].instructions;
 
-        /* -- deltas of pointer pos -- */
-        var delta = {
-            x : ev.deltaX,
-            y : ev.deltaY
-        };
-
-        /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
-            ev.angle
+        /* -- Feed back infaomtion -- */
+        var feedback = cwc.ControllerMaster.prototype.get_feedback_data(
+            ev, 'GesturePadController'
         );
-
-        /* -- coordinates of x and y -- */
-        var coordinate = {
-            x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaX ),
-            y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( ev.deltaY )
-        };
-
-        /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.ControllerMaster.prototype.get_moving_direction(
-            delta
-        );
-
-        cwc.ControllerMaster.prototype.invoke_hook
 
         /* -- check if hook has been applied -- */
-        cwc.ControllerMaster.prototype.invoke_hook( 'on-touch', instructions, {
-            cardinal_direction : cardinal_direction,
-            coordinate         : coordinate,
-            in_out             : in_out
-        } );
-
-        this.tracking = c_id;
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Validate action
-    * @info     - Hammer.js dirs
-    */
-    TouchPadController.prototype.validate_action = function( type )
-    {
-        var dirs = {
-           8   : 'up',
-           4   : 'right',
-           16  : 'down',
-           2   : 'left',
-           500 : 'enter'
-        };
-
-        // -- Send the action to the main screen --
-        this.send_actions_to_first_screen(
-            dirs[ type ]
+        cwc.ControllerMaster.prototype.invoke_hook(
+            'on-move', instructions, feedback
         );
 
-    };
-
-    /*------------------------------------------------------
-    * @function - Send action to first screen
-    */
-    TouchPadController.prototype.send_actions_to_first_screen = function( action )
-    {
-        cwc.Server.prototype.send_message({
-            recipient : 'display',
-            action    : 'move-navigation',
-            arguments : action
-        });
+        this.tracking = c_id;
 
     };
 
@@ -216,6 +151,6 @@
     * @function
     * bind this object to the main object
     */
-    cwc.plugin(TouchPadController, 'TouchPadController');
+    cwc.plugin(GesturePadController, 'GesturePadController');
 
 }( window.cwc, Hammer );

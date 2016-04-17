@@ -19,14 +19,11 @@
 
         if( scrollTargets.length >= 0 )
         {
-            /* -- Save the ids -- */
-            this.scroll_target_ids = scrollTargets;
+            /* -- Cache each of the elements -- */
+            this.cache_targets( scrollTargets );
 
             /* -- Add the server events -- */
             this.add_server_events();
-
-            /* -- Cache each of the elements -- */
-            this.cache_targets( );
         }
 
     };
@@ -50,8 +47,11 @@
     * @function - Cached scroll target
     * @info - Save all of the elements to optimise and seed up perforamce
     */
-    ViewportScroll.prototype.cache_targets = function( )
+    ViewportScroll.prototype.cache_targets = function( scrollTargets )
     {
+        /* -- Save the ids -- */
+        this.scroll_target_ids = scrollTargets;
+
         var sti = this.scroll_target_ids;
 
         for( var i = 0; i < sti.length; i++ )
@@ -87,10 +87,13 @@
         /* -- Get all ids sent to class -- */
         var sti = this.scroll_target_ids;
 
+
         /* -- Try and find posistion -- */
         var pos =  sti.indexOf(
             args.viewport_target
         );
+
+        console.log( args.viewport_target );
 
         /* -- Check posistion -- */
         if( pos != -1 )
@@ -100,7 +103,7 @@
 
             this.check_action(
                 a_elms[ pos ],
-                args
+                args.compass_rose
             );
 
         }
@@ -111,62 +114,24 @@
     * @function - Check action
     * @info - and that the actions are good.
     */
-    ViewportScroll.prototype.check_action = function( elm, args )
+    ViewportScroll.prototype.check_action = function( elm, direction )
     {
-        var ammount = 0;
+        var ammount = 15;
 
-        if( args.direction == 'down'  )
+        switch( direction.toUpperCase() )
         {
-            elm.scrollTop = elm.scrollTop + args.ammount;
-        }
+            case 'DOWN' :
+            case 'S'    :
+            elm.scrollTop = elm.scrollTop + 15;
+            break;
 
-        else if( args.direction == 'up'  )
-        {
-            elm.scrollTop = elm.scrollTop - args.ammount;
+            case 'UP' :
+            case 'N'    :
+            elm.scrollTop = elm.scrollTop - 15;
+            break;
         }
 
         return;
-
-        var duration = (args.type === 'scroll to' )? 600 : 10;
-
-        this.scroll_to(
-            elm, ammount, duration
-        );
-
-    };
-
-    /*------------------------------------------------------
-    * @function - Scrool to with animation
-    * @info - Courtesy of abroz && TimWolla on
-    * @info - Animation snippt take from :
-    * @info - http://stackoverflow.com/questions/8917921/cross-browser-javascript-not-jquery-scroll-to-top-animation
-    */
-    ViewportScroll.prototype.scroll_to = function(element, to, duration) {
-        var start = element.scrollTop,
-            change = to - start,
-            increment = 20;
-
-        var animateScroll = function(elapsedTime) {
-            elapsedTime += increment;
-            var position = easeInOut(elapsedTime, start, change, duration);
-            element.scrollTop = position;
-            if (elapsedTime < duration) {
-                setTimeout(function() {
-                    animateScroll(elapsedTime);
-                }, increment);
-            }
-        };
-
-        function easeInOut(currentTime, start, change, duration) {
-            currentTime /= duration / 2;
-            if (currentTime < 1) {
-                return change / 2 * currentTime * currentTime + start;
-            }
-            currentTime -= 1;
-            return -change / 2 * (currentTime * (currentTime - 2) - 1) + start;
-        }
-
-        animateScroll(0);
 
     };
 

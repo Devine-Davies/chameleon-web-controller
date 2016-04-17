@@ -123,51 +123,40 @@
             y : ev.deltaY
         };
 
-        /* -- coordinates of x and y -- */
-        var coordinate = {
-            x : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( delta.x ),
-            y : cwc.ControllerMaster.prototype.calculate_axis_as_coordinate( delta.y )
-        };
-
-        /* -- cardinal the users is moving in -- */
-        var cardinal_direction = cwc.ControllerMaster.prototype.calculate_axis_as_cardinal_direction(
-            ev.angle
+        /* -- Feed back infaomtion -- */
+        var feedback = cwc.ControllerMaster.prototype.get_feedback_data(
+            ev, 'AnalogController'
         );
 
-        /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-        var in_out = cwc.ControllerMaster.prototype.get_moving_direction(
-            delta
-        );
+        feedback.direction = cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ];
+        feedback.delta     = delta;
+        feedback.angle     = ev.angle;
 
         /* -- Store all the infromation caculaed to return back -- */
-        this.returned_data = {
-            cardinal_direction : cardinal_direction,
-            direction          : cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ],
-            in_out             : in_out,
-            coordinate         : coordinate,
-            delta              : delta,
-            angle              : ev.angle,
-            event_type         : ev.type,
-        };
+        this.returned_data = feedback;
 
-        /* -- analog container circal -- */
+        /* -- Analog container circle -- */
         var analog_c = {
             x: analog.offsetLeft,
             y: analog.offsetTop,
             radius: analog.clientWidth / 2,
+
         };
 
+        /* -- Trigger container circle -- */
         var trigger_c = {
             radius: trigger.clientWidth / 2,
             x: delta.x,
             y: delta.y,
             s_x: trigger.offsetLeft,
             s_y: trigger.offsetTop,
+
         };
 
         /* --- Collision detection for when moving out of circle -- */
         var dx  = (analog_c.x + analog_c.radius) - (trigger_c.x + trigger_c.radius) - trigger_c.s_x;
         var dy  = (analog_c.y + analog_c.radius) - (trigger_c.y + trigger_c.radius) - trigger_c.s_y;
+
         var dis = Math.sqrt(dx * dx + dy * dy) + ( trigger_c.radius );
 
         /* -- Collishion happerning  --*/
@@ -214,7 +203,9 @@
                 analog,
                 trigger
             );
+
         }
+
         /* -- Remove all -- */
         else if( ev.type === 'panend' )
         {
@@ -225,12 +216,15 @@
                 analog,
                 trigger
             );
+
         }
+
         /* -- If the movment has been set to pull, then call the users function -- */
         else if( this.get_movment_type() == 'pull' )
         {
             /* -- check if hook has been applied -- */
-            cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions, this.returned_data );
+            cwc.ControllerMaster.prototype.invoke_hook( 'on-move', instructions, this.returned_data );
+
         }
 
     };
@@ -245,7 +239,9 @@
         this.tracking = c_id;
 
         /* -- check if hook has been applied -- */
-        cwc.ControllerMaster.prototype.invoke_hook( 'panstart', instructions, null);
+        cwc.ControllerMaster.prototype.invoke_hook(
+            'panstart', instructions, null
+        );
 
         if( this.get_movment_type() == 'tick' )
         {
@@ -263,7 +259,9 @@
     AnalogController.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
         /* -- check if hook has been applied -- */
-        cwc.ControllerMaster.prototype.invoke_hook( 'panend', instructions, null);
+        cwc.ControllerMaster.prototype.invoke_hook(
+            'panend', instructions, null
+        );
 
         /* -- Remove any if nessary -- */
         analog.classList.remove("active");

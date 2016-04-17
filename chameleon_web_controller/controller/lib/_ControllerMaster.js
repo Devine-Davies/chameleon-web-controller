@@ -83,7 +83,7 @@
     * @info : angle 0 :  180 is converted 180-360
     * @info : angle 0 : -180 is converted 0-180
     */
-    ControllerMaster.prototype.calculate_axis_as_cardinal_direction = function( angle )
+    ControllerMaster.prototype.calculate_compass_rose = function( angle )
     {
         /* -- Negative number -- */
         if( angle < 0 ) { angle = ( 180 - Math.abs( angle ) ); }
@@ -100,10 +100,10 @@
     };
 
     /*------------------------------------------------------
-    * @function - Calculate axis as coordinate
+    * @function - Calculate cartesian coordinates
     * @info - Retuns UE Editor like feedback for controller
     */
-    ControllerMaster.prototype.calculate_axis_as_coordinate = function( z )
+    ControllerMaster.prototype.calculate_cartesian_coordinates = function( z )
     {
         var int = Math.round( (z / 100) * 10 ) / 10;
         return this.clamp( (int * 2), -1, 1 );
@@ -120,11 +120,11 @@
     }
 
     /*------------------------------------------------------
-    * @function - Get moving direction
+    * @function - Calculate axis direction
     * x : ( in || out )
     * y : ( in || out )
     */
-    ControllerMaster.prototype.get_moving_direction = function( delta )
+    ControllerMaster.prototype.calculate_axis_direction = function( delta )
     {
         /* -- Find out what direction we are moving in -- */
         function check( z, z1 ) {
@@ -144,6 +144,35 @@
 
         /* -- Return the values -- */
         return dir;
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Get feedback data
+    * @info     - builds the return data object to feed back to user
+    */
+    ControllerMaster.prototype.get_feedback_data = function( ev, controller_name )
+    {
+        return {
+            controller : (controller_name)? controller_name : 'undefined',
+
+            /* -- cardinal the users is moving in -- */
+            compass_rose : cwc.ControllerMaster.prototype.calculate_compass_rose(
+                ev.angle
+            ),
+
+            /* -- coordinates of x and y -- */
+            cartesian_coordinates : {
+                x : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaX ),
+                y : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaY )
+            },
+
+            /* -- check to see if we are moving to the center or to the endge (in : out) -- */
+            axis_direction : cwc.ControllerMaster.prototype.calculate_axis_direction({
+                x : ev.deltaX,
+                y : ev.deltaY,
+            } )
+        };
 
     };
 
