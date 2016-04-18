@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <title>Installation</title>
-  <meta name="description" content="cwc makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly ...">
+  <title>Controller feedback data</title>
+  <meta name="description" content="The Navgroup is a flexible, powerful component for navigation around big screen experiance. You can quickly build simply to complex navigation structure to y...">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
@@ -36,7 +36,7 @@
         <ul>
           
             
-            <li class="active" >
+            <li>
             
               <img src="/images/installation@2x.png" />
                 <a href="/general/Installation.">
@@ -223,11 +223,9 @@
 
                 <div class="info">
                   <h1 class="post-title" itemprop="name headline">
-                    Installation
+                    Controller feedback data
                     
                     
-                    
-                      <i class="fa fa-cogs" aria-hidden="true"></i>
                     
                   </h1>
                   <p class="post-meta">
@@ -238,103 +236,218 @@
               </header>
 
               <section class="post-body" >
-                <p><strong>cwc</strong> makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly customisable.
+                <p>The Navgroup is a flexible, powerful component for navigation around big screen experiance. You can quickly build simply to complex navigation structure to your application, allowing your users move around freely using keyboard events.
 <!--more--></p>
 
-<h2 id="introduction">Introduction</h2>
-<p>There are many ways to install Foundation, but if you’re just getting started, we have a few suggestions.</p>
+<h2 id="information-returned-back-to-controller-hooks">Information returned back to controller Hooks.</h2>
 
-<h3 id="package-managers">Package Managers</h3>
-<p>There are many ways to install Foundation, but if you’re just getting started, we have a few suggestions.</p>
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Return keys</th>
+      <th>Return values</th>
+      <th style="text-align: center">Pullbar</th>
+      <th style="text-align: center">Analog pad</th>
+      <th style="text-align: center">DPad</th>
+      <th style="text-align: center">GesturePad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>01.</td>
+      <td>compass_rose</td>
+      <td>The direction the user is moving the controller</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+    </tr>
+    <tr>
+      <td>02.</td>
+      <td>cartesian_coordinate</td>
+      <td>Cartesian coordinates of x and y</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+    </tr>
+    <tr>
+      <td>03.</td>
+      <td>axis_direction</td>
+      <td>in, out, static</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✘</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✘</td>
+    </tr>
+    <tr>
+      <td>04.</td>
+      <td>direction</td>
+      <td>UP, RIGHT, DOWN, LEFT</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+    </tr>
+    <tr>
+      <td>06.</td>
+      <td>angle</td>
+      <td>in, out, static</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✘</td>
+      <td style="text-align: center">✘</td>
+      <td style="text-align: center">✘</td>
+    </tr>
+    <tr>
+      <td>05.</td>
+      <td>delta</td>
+      <td>Cartesian coordinates of x and y</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center">✔</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">✔</td>
+    </tr>
+  </tbody>
+</table>
 
-<ul>
-  <li>Node:</li>
-</ul>
+<h2 id="compass-rose">01. Compass rose</h2>
+<p>compass_rose is the movment given as</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  npm install foundation-sites<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<p><img src="/images/a-pad-cardinal-direction@2x.png" alt="alt text" title="Logo Title Text 1" />
+<img src="/images/a-pad-cardinal-direction@2x.png" alt="alt text" title="Logo Title Text 1" />
+<img src="/images/a-pad-cardinal-direction@2x.png" alt="alt text" title="Logo Title Text 1" /></p>
 
-<ul>
-  <li>Bower:</li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Movment type</th>
+      <th>Compass rose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>01.</td>
+      <td>Move up</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>02.</td>
+      <td>Move up right</td>
+      <td>NE</td>
+    </tr>
+    <tr>
+      <td>03.</td>
+      <td>Move right</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <td>04.</td>
+      <td>Move down right</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <td>05.</td>
+      <td>Move down</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <td>06.</td>
+      <td>Move down left</td>
+      <td>SW</td>
+    </tr>
+    <tr>
+      <td>07.</td>
+      <td>Move left</td>
+      <td>W</td>
+    </tr>
+    <tr>
+      <td>08.</td>
+      <td>Move up left</td>
+      <td>NW</td>
+    </tr>
+  </tbody>
+</table>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  bower install foundation-sites<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<h2 id="cartesian-coordinate">02. Cartesian coordinate</h2>
+<p>Table below otulines Cartesian coordinate that will be return by a support controler.</p>
 
-<ul>
-  <li>Github:</li>
-</ul>
+<p><img src="/images/a-pad-coordinates-diagram@2x.png" alt="alt text" title="Logo Title Text 1" />
+<img src="/images/a-pad-coordinates-diagram@2x.png" alt="alt text" title="Logo Title Text 1" />
+<img src="/images/a-pad-coordinates-diagram@2x.png" alt="alt text" title="Logo Title Text 1" /></p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  git add zurb:foundation-sites<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Movment type</th>
+      <th>Cartesian coordinate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>01.</td>
+      <td>Move up</td>
+      <td>Values 0 to -1.0 on y axis.</td>
+    </tr>
+    <tr>
+      <td>02.</td>
+      <td>Move down</td>
+      <td>Values 0 to 1.0 on y axis.</td>
+    </tr>
+    <tr>
+      <td>03.</td>
+      <td>Move left</td>
+      <td>Values 0 to -1.0 on x axis.</td>
+    </tr>
+    <tr>
+      <td>04.</td>
+      <td>Move right</td>
+      <td>Values 0 to 1.0 on x axis.</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="package-contents">Package Contents</h2>
-<p>Here’s what comes in the package.</p>
+<h2 id="axis-direction">03. Axis direction</h2>
+<p>Table below otulines the axis direction that will be return by a support controler.</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26</pre></td><td class="code"><pre><span class="nx">master</span>
-<span class="o">|--</span> <span class="nx">chameleon_web_controller</span>
-<span class="o">|</span>    <span class="o">|--</span> <span class="nx">display</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
-<span class="o">|</span>    <span class="o">+--</span> <span class="nx">controller</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
-<span class="o">|</span>    <span class="o">+--</span> <span class="nx">server</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
-<span class="o">|</span>    <span class="o">+--</span> <span class="nx">server</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
-<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
-<span class="o">+--</span> <span class="kr">public</span>
-  <span class="o">|--</span> <span class="nx">css</span>
-  <span class="o">|--</span> <span class="nx">images</span>
-  <span class="o">+--</span> <span class="nx">scripts</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Movment type</th>
+      <th>Cartesian coordinate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>01.</td>
+      <td>In</td>
+      <td>User is moving in towards the centre of the Controller feedback data.</td>
+    </tr>
+    <tr>
+      <td>02.</td>
+      <td>Out</td>
+      <td>User is moving in away from the centre of the Controller feedback data.</td>
+    </tr>
+    <tr>
+      <td>03.</td>
+      <td>Static</td>
+      <td>Moving in the same direction.</td>
+    </tr>
+  </tbody>
+</table>
 
-<ol>
-  <li>
-    <p><strong>chameleon_web_controller</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
-  </li>
-  <li>
-    <p><strong>display</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
-  </li>
-  <li>
-    <p><strong>controller</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
-  </li>
-</ol>
+<h2 id="direction">04. Direction</h2>
+<p>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</p>
+
+<h2 id="delta-hammerjs">05. Delta (Hammer.js)</h2>
+<p>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</p>
+
+<h2 id="angle-hammerjs">06. Angle (Hammer.js)</h2>
+<p><img src="/images/a-pad-angle-diagram@2x.png" alt="alt text" title="Logo Title Text 1" />
+— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</p>
 
               </section>
             </artical>

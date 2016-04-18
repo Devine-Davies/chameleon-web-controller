@@ -8,8 +8,10 @@ f_image      : "/images/installation@2x.png"
 categories   : general
 tax 	     : general
 ---
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+**cwc** makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly customisable.
 <!--more-->
+
+
 
 ## Introduction
 There are many ways to install Foundation, but if you're just getting started, we have a few suggestions.

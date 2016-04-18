@@ -547,13 +547,13 @@ body#feature-doc {
         margin-bottom: 0;
         font-weight: 300;
         border-bottom: 1px solid #bdbdbd;
-        padding-bottom: 0.5em;
-        margin-bottom: 0.5em; }
+        margin-bottom: 15px; }
       body#feature-doc .post-content .post-body h4 {
-        margin-bottom: 0;
+        margin: 10px 0;
         font-weight: 300; }
-      body#feature-doc .post-content .post-body table, body#feature-doc .post-content .post-body .highlight {
-        margin-top: 15px; }
+      body#feature-doc .post-content .post-body table {
+        display: inline-table;
+        width: 100%; }
       body#feature-doc .post-content .post-body table tr th {
         font-weight: normal;
         background: #FFE8E8; }
@@ -567,8 +567,6 @@ body#feature-doc {
       body#feature-doc .post-content .post-body blockquote {
         outline: 1px solid #FCA2A2;
         padding: 1em;
-        margin-bottom: 20px;
-        margin-top: 20px;
         background: #FFE8E8; }
         body#feature-doc .post-content .post-body blockquote code {
           background: white; }

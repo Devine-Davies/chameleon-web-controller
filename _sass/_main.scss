@@ -346,18 +346,18 @@ body#feature-doc {
                 margin-bottom: 0;
                 font-weight: 300;
                 border-bottom: 1px solid rgb(189, 189, 189);
-                padding-bottom: 0.5em;
-                margin-bottom: 0.5em;
+                margin-bottom: 15px;
 
             }
 
             h4 {
-                margin-bottom: 0;
+                margin: 10px 0;
                 font-weight: 300;
             }
 
-            table, .highlight {
-                margin-top: 15px;
+            table {
+                display: inline-table;
+                width: 100%;
             }
 
             table tr th {
@@ -365,8 +365,10 @@ body#feature-doc {
                 background: #FFE8E8;
             }
 
-            .highlight table {
-                margin-top: 0;
+            .highlight {
+                table {
+                    margin-top: 0;
+                }
             }
 
             code {
@@ -384,8 +386,6 @@ body#feature-doc {
             blockquote {
                 outline: 1px solid #FCA2A2;
                 padding: 1em;
-                margin-bottom: 20px;
-                margin-top: 20px;
                 background: #FFE8E8;
 
                 code {
