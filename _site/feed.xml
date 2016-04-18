@@ -3,16 +3,17 @@
   <channel>
     <title>Chameleon Web Controller</title>
     <description></description>
-    <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Apr 2016 14:33:31 +0100</pubDate>
-    <lastBuildDate>Mon, 18 Apr 2016 14:33:31 +0100</lastBuildDate>
+    <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/</link>
+    <atom:link href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 18 Apr 2016 14:45:13 +0100</pubDate>
+    <lastBuildDate>Mon, 18 Apr 2016 14:45:13 +0100</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
         <title>Installation</title>
         <description>&lt;p&gt;&lt;strong&gt;cwc&lt;/strong&gt; makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly customisable.
-&lt;!--more--&gt;&lt;/p&gt;
+&lt;!--more--&gt;
+&amp;lt;!–&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;There are many ways to install Foundation, but if you’re just getting started, we have a few suggestions.&lt;/p&gt;
@@ -105,13 +106,14 @@
     &lt;p&gt;&lt;strong&gt;display&lt;/strong&gt; - You can have properly indented paragraphs within list items. Notice the blank line above&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;controller&lt;/strong&gt; - You can have properly indented paragraphs within list items. Notice the blank line above&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;controller&lt;/strong&gt; - You can have properly indented paragraphs within list items. Notice the blank line above
+ –&amp;gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:02 +0000</pubDate>
-        <link>/general/installation.</link>
-        <guid isPermaLink="true">/general/installation.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/Installation.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/Installation.</guid>
         
         
         <category>general</category>
@@ -147,8 +149,8 @@
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/components/ViewportScroll.</link>
-        <guid isPermaLink="true">/components/ViewportScroll.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/ViewportScroll.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/ViewportScroll.</guid>
         
         
         <category>components</category>
@@ -158,10 +160,10 @@
       <item>
         <title>Connecting</title>
         <description>&lt;p&gt;When you have installed the &lt;strong&gt;cwc&lt;/strong&gt; node server, connecting clinet so that they can shear bidrectinal data can be acomplised is just a few steps.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Both the &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc-display-master.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc-controller-master.js&lt;/code&gt; have a built in server object, allowing each client to connect to the server. The following pramaters have to set when initiating the &lt;strong&gt;cwc.Server&lt;/strong&gt; object.&lt;/p&gt;
+&lt;!--more--&gt;
+&amp;lt;!–
+## Introduction
+Both the &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc-display-master.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc-controller-master.js&lt;/code&gt; have a built in server object, allowing each client to connect to the server. The following pramaters have to set when initiating the &lt;strong&gt;cwc.Server&lt;/strong&gt; object.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -566,10 +568,11 @@
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;–&amp;gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/general/Server.</link>
-        <guid isPermaLink="true">/general/Server.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/Server.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/Server.</guid>
         
         
         <category>general</category>
@@ -579,9 +582,9 @@
       <item>
         <title>Pullbars</title>
         <description>&lt;p&gt;— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/p-par@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
+&lt;!--more--&gt;
+&amp;lt;!–
+&lt;img src=&quot;/images/p-par@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;html-markup&quot;&gt;HTML markup&lt;/h3&gt;
 &lt;p&gt;Elements with an attribute of &lt;code class=&quot;highlighter-rouge&quot;&gt;data-cwc-controller=&quot;pullbar&quot;&lt;/code&gt; applied to them will be treated as a Pullbars component by the &lt;strong&gt;cwc&lt;/strong&gt; object.&lt;/p&gt;
@@ -746,12 +749,12 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;When the hook is invoked by the &lt;code class=&quot;highlighter-rouge&quot;&gt;on-pull&lt;/code&gt; method of the Pullbars feedback information is passed back into that hooks method. Feedback information can be found here &lt;a href=&quot;/include/ControllerFeedbackData.&quot;&gt;controller-feedback-data&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;When the hook is invoked by the &lt;code class=&quot;highlighter-rouge&quot;&gt;on-pull&lt;/code&gt; method of the Pullbars feedback information is passed back into that hooks method. Feedback information can be found here &lt;a href=&quot;/include/ControllerFeedbackData.&quot;&gt;controller-feedback-data&lt;/a&gt;. –&amp;gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/components/PullbarController.</link>
-        <guid isPermaLink="true">/components/PullbarController.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/PullbarController.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/PullbarController.</guid>
         
         
         <category>components</category>
@@ -761,9 +764,9 @@
       <item>
         <title>Navgroup &amp; Navitems</title>
         <description>&lt;p&gt;The Navgroup is a flexible, powerful component for navigation around big screen experience. You can quickly build simply to complex navigation structure to your application, allowing your users move around freely using keyboard events.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/navgroup@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
+&lt;!--more--&gt;
+&amp;lt;!–
+&lt;img src=&quot;/images/navgroup@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;html-markup&quot;&gt;HTML markup&lt;/h3&gt;
 &lt;p&gt;To set up an Navgroup add a &lt;code class=&quot;highlighter-rouge&quot;&gt;data-cwc-navgroup&lt;/code&gt; attribute to define the container. To then add a series of child elements add &lt;code class=&quot;highlighter-rouge&quot;&gt;data-cwc-navitem&lt;/code&gt; to each element you make a wild of that Navgroup/&lt;/p&gt;
@@ -1111,12 +1114,12 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Here hopping to roll out some template to help you kick off your second screen application.&lt;/p&gt;
+  &lt;p&gt;Here hopping to roll out some template to help you kick off your second screen application. –&amp;gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/components/Navgroup.</link>
-        <guid isPermaLink="true">/components/Navgroup.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/Navgroup.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/Navgroup.</guid>
         
         
         <category>components</category>
@@ -1126,9 +1129,9 @@ Navitem instructions take priority over Navgroup instructions allowing from more
       <item>
         <title>Gesture Pad</title>
         <description>&lt;p&gt;4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/swipe-pad@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Gesture Pad&quot; /&gt;&lt;/p&gt;
+&lt;!--more--&gt;
+&amp;lt;!–
+&lt;img src=&quot;/images/swipe-pad@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Gesture Pad&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;html-markup&quot;&gt;HTML markup&lt;/h3&gt;
 &lt;p&gt;Elements with an attribute of &lt;code class=&quot;highlighter-rouge&quot;&gt;data-cwc-controller=“gesture-pad&quot;&lt;/code&gt; applied to them will be treated as a Gesture Pad component by the &lt;strong&gt;cwc&lt;/strong&gt; object.&lt;/p&gt;
@@ -1379,10 +1382,11 @@ Navitem instructions take priority over Navgroup instructions allowing from more
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/section&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;–&amp;gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/components/GesturePadController.</link>
-        <guid isPermaLink="true">/components/GesturePadController.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/GesturePadController.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/GesturePadController.</guid>
         
         
         <category>components</category>
@@ -1392,9 +1396,9 @@ Navitem instructions take priority over Navgroup instructions allowing from more
       <item>
         <title>Directional pad</title>
         <description>&lt;p&gt;A 1-way or 5-way Directional pad is perfect for games movement, user interfaces or if you want to have 4 buttons on a controller.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/d-pad@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Directional pad&quot; /&gt;&lt;/p&gt;
+&lt;!--more--&gt;
+&amp;lt;!–
+&lt;img src=&quot;/images/d-pad@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Directional pad&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;html-markup&quot;&gt;HTML markup&lt;/h3&gt;
 &lt;p&gt;A basic Directional pad can be created with minimal markup by adding the attribute &lt;code class=&quot;highlighter-rouge&quot;&gt;data-cwc-controller=&quot;d-pad&quot;&lt;/code&gt; to the HTML elements you wish to make Directional pad. This will also need to be followed by a set of &lt;code class=&quot;highlighter-rouge&quot;&gt;data-cwc-btn&lt;/code&gt; in order to create a set of button for the Directional pad&lt;/p&gt;
@@ -1583,10 +1587,11 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
+&lt;p&gt;–&amp;gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/components/DPadController.</link>
-        <guid isPermaLink="true">/components/DPadController.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/DPadController.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/DPadController.</guid>
         
         
         <category>components</category>
@@ -1946,8 +1951,8 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/components/AnalogController.</link>
-        <guid isPermaLink="true">/components/AnalogController.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/AnalogController.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/AnalogController.</guid>
         
         
         <category>components</category>
@@ -1956,222 +1961,80 @@ Navitem instructions take priority over Navgroup instructions allowing from more
     
       <item>
         <title>Controller feedback data</title>
-        <description>&lt;p&gt;The Navgroup is a flexible, powerful component for navigation around big screen experiance. You can quickly build simply to complex navigation structure to your application, allowing your users move around freely using keyboard events.
-&lt;!--more--&gt;&lt;/p&gt;
+        <description>&lt;!--
+## Information returned back to controller Hooks.
 
-&lt;h2 id=&quot;information-returned-back-to-controller-hooks&quot;&gt;Information returned back to controller Hooks.&lt;/h2&gt;
+| No. | Return keys           | Return values                                   | Pullbar    | Analog pad | DPad     | GesturePad |
+|---- | --------------------  | ----------------------------------              | :-:        | :-:        | :-:      | :-:        |
+| 01. | compass_rose          | The direction the user is moving the controller | &amp;#x2714; | &amp;#x2714;   | &amp;#x2714; | &amp;#x2714;   |
+| 02. | cartesian_coordinate  | Cartesian coordinates of x and y                | &amp;#x2714; | &amp;#x2714;   |          | &amp;#x2714;   |
+| 03. | axis_direction        | in, out, static                                 | &amp;#x2714; | &amp;#x2718;   |          | &amp;#x2718;   |
+| 04. | direction             | UP, RIGHT, DOWN, LEFT                           | &amp;#x2714; | &amp;#x2714;   | &amp;#x2714; | &amp;#x2714;   |
+| 06. | angle                 | in, out, static                                 | &amp;#x2714; | &amp;#x2718;   | &amp;#x2718; | &amp;#x2718;   |
+| 05. | delta                 | Cartesian coordinates of x and y                | &amp;#x2714; | &amp;#x2714;   |          | &amp;#x2714;   |
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;No.&lt;/th&gt;
-      &lt;th&gt;Return keys&lt;/th&gt;
-      &lt;th&gt;Return values&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Pullbar&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Analog pad&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;DPad&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;GesturePad&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;01.&lt;/td&gt;
-      &lt;td&gt;compass_rose&lt;/td&gt;
-      &lt;td&gt;The direction the user is moving the controller&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;02.&lt;/td&gt;
-      &lt;td&gt;cartesian_coordinate&lt;/td&gt;
-      &lt;td&gt;Cartesian coordinates of x and y&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;03.&lt;/td&gt;
-      &lt;td&gt;axis_direction&lt;/td&gt;
-      &lt;td&gt;in, out, static&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✘&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✘&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;04.&lt;/td&gt;
-      &lt;td&gt;direction&lt;/td&gt;
-      &lt;td&gt;UP, RIGHT, DOWN, LEFT&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;06.&lt;/td&gt;
-      &lt;td&gt;angle&lt;/td&gt;
-      &lt;td&gt;in, out, static&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✘&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✘&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✘&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;05.&lt;/td&gt;
-      &lt;td&gt;delta&lt;/td&gt;
-      &lt;td&gt;Cartesian coordinates of x and y&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;✔&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+## 01. Compass rose
+compass_rose is the movment given as
 
-&lt;h2 id=&quot;compass-rose&quot;&gt;01. Compass rose&lt;/h2&gt;
-&lt;p&gt;compass_rose is the movment given as&lt;/p&gt;
+![alt text]( /images/a-pad-cardinal-direction@2x.png &quot;Logo Title Text 1&quot;)
+![alt text]( /images/a-pad-cardinal-direction@2x.png &quot;Logo Title Text 1&quot;)
+![alt text]( /images/a-pad-cardinal-direction@2x.png &quot;Logo Title Text 1&quot;)
 
-&lt;p&gt;&lt;img src=&quot;/images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-&lt;img src=&quot;/images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-&lt;img src=&quot;/images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
+| No. | Movment type    | Compass rose |
+|---- | -------------   | ------------ |
+| 01. | Move up         | N            |
+| 02. | Move up right   | NE           |
+| 03. | Move right      | E            |
+| 04. | Move down right | SE           |
+| 05. | Move down       | S            |
+| 06. | Move down left  | SW           |
+| 07. | Move left       | W            |
+| 08. | Move up left    | NW           |
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;No.&lt;/th&gt;
-      &lt;th&gt;Movment type&lt;/th&gt;
-      &lt;th&gt;Compass rose&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;01.&lt;/td&gt;
-      &lt;td&gt;Move up&lt;/td&gt;
-      &lt;td&gt;N&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;02.&lt;/td&gt;
-      &lt;td&gt;Move up right&lt;/td&gt;
-      &lt;td&gt;NE&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;03.&lt;/td&gt;
-      &lt;td&gt;Move right&lt;/td&gt;
-      &lt;td&gt;E&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;04.&lt;/td&gt;
-      &lt;td&gt;Move down right&lt;/td&gt;
-      &lt;td&gt;SE&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;05.&lt;/td&gt;
-      &lt;td&gt;Move down&lt;/td&gt;
-      &lt;td&gt;S&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;06.&lt;/td&gt;
-      &lt;td&gt;Move down left&lt;/td&gt;
-      &lt;td&gt;SW&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;07.&lt;/td&gt;
-      &lt;td&gt;Move left&lt;/td&gt;
-      &lt;td&gt;W&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;08.&lt;/td&gt;
-      &lt;td&gt;Move up left&lt;/td&gt;
-      &lt;td&gt;NW&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+## 02. Cartesian coordinate
+Table below otulines Cartesian coordinate that will be return by a support controler.
 
-&lt;h2 id=&quot;cartesian-coordinate&quot;&gt;02. Cartesian coordinate&lt;/h2&gt;
-&lt;p&gt;Table below otulines Cartesian coordinate that will be return by a support controler.&lt;/p&gt;
+![alt text]( /images/a-pad-coordinates-diagram@2x.png &quot;Logo Title Text 1&quot;)
+![alt text]( /images/a-pad-coordinates-diagram@2x.png &quot;Logo Title Text 1&quot;)
+![alt text]( /images/a-pad-coordinates-diagram@2x.png &quot;Logo Title Text 1&quot;)
 
-&lt;p&gt;&lt;img src=&quot;/images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-&lt;img src=&quot;/images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-&lt;img src=&quot;/images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
+| No. | Movment type  | Cartesian coordinate               |
+|---- | ------------- | ---------------------------------- |
+| 01. | Move up       | Values 0 to -1.0 on y axis.        |
+| 02. | Move down     | Values 0 to 1.0 on y axis.         |
+| 03. | Move left     | Values 0 to -1.0 on x axis.        |
+| 04. | Move right    | Values 0 to 1.0 on x axis.         |
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;No.&lt;/th&gt;
-      &lt;th&gt;Movment type&lt;/th&gt;
-      &lt;th&gt;Cartesian coordinate&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;01.&lt;/td&gt;
-      &lt;td&gt;Move up&lt;/td&gt;
-      &lt;td&gt;Values 0 to -1.0 on y axis.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;02.&lt;/td&gt;
-      &lt;td&gt;Move down&lt;/td&gt;
-      &lt;td&gt;Values 0 to 1.0 on y axis.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;03.&lt;/td&gt;
-      &lt;td&gt;Move left&lt;/td&gt;
-      &lt;td&gt;Values 0 to -1.0 on x axis.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;04.&lt;/td&gt;
-      &lt;td&gt;Move right&lt;/td&gt;
-      &lt;td&gt;Values 0 to 1.0 on x axis.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
 
-&lt;h2 id=&quot;axis-direction&quot;&gt;03. Axis direction&lt;/h2&gt;
-&lt;p&gt;Table below otulines the axis direction that will be return by a support controler.&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;No.&lt;/th&gt;
-      &lt;th&gt;Movment type&lt;/th&gt;
-      &lt;th&gt;Cartesian coordinate&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;01.&lt;/td&gt;
-      &lt;td&gt;In&lt;/td&gt;
-      &lt;td&gt;User is moving in towards the centre of the Controller feedback data.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;02.&lt;/td&gt;
-      &lt;td&gt;Out&lt;/td&gt;
-      &lt;td&gt;User is moving in away from the centre of the Controller feedback data.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;03.&lt;/td&gt;
-      &lt;td&gt;Static&lt;/td&gt;
-      &lt;td&gt;Moving in the same direction.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+## 03. Axis direction
+Table below otulines the axis direction that will be return by a support controler.
 
-&lt;h2 id=&quot;direction&quot;&gt;04. Direction&lt;/h2&gt;
-&lt;p&gt;— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
+| No. | Movment type  | Cartesian coordinate                                            |
+|---- | ------------- | ----------------------------------                              |
+| 01. | In            | User is moving in towards the centre of the Controller feedback data.   |
+| 02. | Out           | User is moving in away from the centre of the Controller feedback data. |
+| 03. | Static        | Moving in the same direction.                                   |
 
-&lt;h2 id=&quot;delta-hammerjs&quot;&gt;05. Delta (Hammer.js)&lt;/h2&gt;
-&lt;p&gt;— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 
-&lt;h2 id=&quot;angle-hammerjs&quot;&gt;06. Angle (Hammer.js)&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/images/a-pad-angle-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
+
+## 04. Direction
+— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
+
+
+
+## 05. Delta (Hammer.js)
+— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
+
+
+
+## 06. Angle (Hammer.js)
+![alt text]( /images/a-pad-angle-diagram@2x.png &quot;Logo Title Text 1&quot;)
+— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — --&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/include/ControllerFeedbackData.</link>
-        <guid isPermaLink="true">/include/ControllerFeedbackData.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/include/ControllerFeedbackData.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/include/ControllerFeedbackData.</guid>
         
         
         <category>include</category>
@@ -2644,8 +2507,8 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>/jekyll/update/stash-markdown.</link>
-        <guid isPermaLink="true">/jekyll/update/stash-markdown.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/jekyll/update/stash-markdown.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/jekyll/update/stash-markdown.</guid>
         
         
         <category>jekyll</category>

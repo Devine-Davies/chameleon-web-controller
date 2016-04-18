@@ -6,9 +6,7 @@ date_updated : 2016-01-24 00:31:02 +0000
 
 categories   : include
 ---
-The Navgroup is a flexible, powerful component for navigation around big screen experiance. You can quickly build simply to complex navigation structure to your application, allowing your users move around freely using keyboard events.
-<!--more-->
-
+<!--
 ## Information returned back to controller Hooks.
 
 | No. | Return keys           | Return values                                   | Pullbar    | Analog pad | DPad     | GesturePad |
@@ -77,4 +75,4 @@ Table below otulines the axis direction that will be return by a support control
 
 ## 06. Angle (Hammer.js)
 ![alt text]( /images/a-pad-angle-diagram@2x.png "Logo Title Text 1")
-— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
+— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — -->

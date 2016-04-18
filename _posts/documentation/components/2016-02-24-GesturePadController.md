@@ -12,7 +12,7 @@ tax         : controller
 ---
 4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
 <!--more-->
-
+<!--
 ![alt text]( {{ page.f_image }} "{{ page.title }}")
 
 ### HTML markup
@@ -171,4 +171,4 @@ window.onload = function() {
   data-cwc-instructions='{ "movement-type" : "pan", "on-move" : "d-hook:custom-hook"  }' >
   <span></span>
 </section>
-{% endhighlight %}
+{% endhighlight %} -->

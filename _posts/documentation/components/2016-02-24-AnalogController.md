@@ -150,6 +150,7 @@ The Panend events is invoked as soon as the user has finished interacting with t
 >The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [controller-feedback-data]({% post_url 2016-02-24-ControllerFeedbackData %}).
 
 
+
 [comment]: <> (--------------------------------------------------------------------------------------------------------)
 
 ## Code snippets

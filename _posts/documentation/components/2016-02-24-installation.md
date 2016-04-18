@@ -10,7 +10,7 @@ tax 	     : general
 ---
 **cwc** makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly customisable.
 <!--more-->
-
+<!--
 
 
 ## Introduction
@@ -72,3 +72,4 @@ master
 3. **display** - You can have properly indented paragraphs within list items. Notice the blank line above
 
 8. **controller** - You can have properly indented paragraphs within list items. Notice the blank line above
+ -->

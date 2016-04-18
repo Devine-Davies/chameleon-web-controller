@@ -12,8 +12,8 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="alternate" type="application/rss+xml" title="Chameleon Web Controller" href="/feed.xml">
+  <link rel="stylesheet" href="http://devine-davies.github.io/chameleon-web-controller/css/main.css">
+  <link rel="alternate" type="application/rss+xml" title="Chameleon Web Controller" href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml">
 
   <link href='https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro:400,300italic|Roboto' rel='stylesheet' type='text/css'>
 
@@ -38,8 +38,8 @@
             
             <li>
             
-              <img src="/images/installation@2x.png" />
-                <a href="/general/installation.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/installation@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/general/Installation.">
                   <h3>Installation</h3>
                   
                     <i class="fa fa-cogs" aria-hidden="true"></i>
@@ -55,8 +55,8 @@
             
             <li>
             
-              <img src="/images/server-events@2x.png" />
-                <a href="/general/Server.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/server-events@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/general/Server.">
                   <h3>Connecting</h3>
                   
                     <i class="fa fa-cogs" aria-hidden="true"></i>
@@ -72,8 +72,8 @@
             
             <li class="active" >
             
-              <img src="/images/hooks@2x.png" />
-                <a href="/general/Hooks.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/hooks@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/general/Hooks.">
                   <h3>Hooks</h3>
                   
                     <i class="fa fa-cogs" aria-hidden="true"></i>
@@ -96,8 +96,8 @@
             
             <li>
             
-              <img src="/images/viewport-scroll@2x.png" />
-                <a href="/components/ViewportScroll.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/viewport-scroll@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/components/ViewportScroll.">
                   <h3>Viewport Scroll</h3>
                   
                     <i class="fa fa-television" aria-hidden="true"></i>
@@ -115,8 +115,8 @@
             
             <li>
             
-              <img src="/images/p-par@2x.png" />
-                <a href="/components/PullbarController.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/p-par@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/components/PullbarController.">
                   <h3>Pullbars</h3>
                   
 
@@ -134,8 +134,8 @@
             
             <li>
             
-              <img src="/images/navgroup@2x.png" />
-                <a href="/components/Navgroup.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/navgroup@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/components/Navgroup.">
                   <h3>Navgroup & Navitems</h3>
                   
                     <i class="fa fa-television" aria-hidden="true"></i>
@@ -153,8 +153,8 @@
             
             <li>
             
-              <img src="/images/swipe-pad@2x.png" />
-                <a href="/components/GesturePadController.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/swipe-pad@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/components/GesturePadController.">
                   <h3>Gesture Pad</h3>
                   
 
@@ -172,8 +172,8 @@
             
             <li>
             
-              <img src="/images/d-pad@2x.png" />
-                <a href="/components/DPadController.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/d-pad@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/components/DPadController.">
                   <h3>Directional pad</h3>
                   
 
@@ -191,8 +191,8 @@
             
             <li>
             
-              <img src="/images/a-pad@2x.png" />
-                <a href="/components/AnalogController.">
+              <img src="http://devine-davies.github.io/chameleon-web-controller/images/a-pad@2x.png" />
+                <a href="http://devine-davies.github.io/chameleon-web-controller/components/AnalogController.">
                   <h3>Analog controller</h3>
                   
 
@@ -241,7 +241,8 @@
                 <p>Hooks are the building blocks of the <strong>cwc</strong> object allowing everything to connect by providing a way of defining callback functionality for series of events. Hooks can also be used to invoke hooks created on clients within the same cluster group.
 <!--more--></p>
 
-<h4 id="javascript-declaration">JavaScript declaration</h4>
+<!--
+#### JavaScript declaration
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -256,32 +257,18 @@
 <span class="p">});</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="set-hook">Set hook</h2>
-<p>Use the <code class="highlighter-rouge">set_hook</code> method on the <strong>cwc.Hooks</strong> object to define a hook. When setting a hook, the required parameters must be present:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Keys</th>
-      <th>Type</th>
-      <th>Vales</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>hook_name</td>
-      <td>Sting</td>
-      <td>The name you wish to call the hook.</td>
-    </tr>
-    <tr>
-      <td>method</td>
-      <td>Function</td>
-      <td>Function to be called when a hook is invoked.</td>
-    </tr>
-  </tbody>
-</table>
+[comment]: <> (--------------------------------------------------------------------------------------------------------)
 
-<h4 id="javascript-example">JavaScript Example</h4>
+## Set hook
+Use the `set_hook` method on the **cwc.Hooks** object to define a hook. When setting a hook, the required parameters must be present:
+
+| Keys          | Type     | Vales                                                     |
+| ------------- | -------- | --------------                                            |
+| hook_name     | Sting    | The name you wish to call the hook.                       |
+| method        | Function | Function to be called when a hook is invoked.             |
+
+#### JavaScript Example
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -300,59 +287,29 @@
 <span class="p">});</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="invoking-hooks">Invoking hooks</h2>
-<p>There are multiple ways of invoking hook created by you or the <strong>cwc</strong> object. The following table outlines prefixes that can be used for calling different hooks.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Hook prefixes</th>
-      <th>Vales</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>c-hook:</td>
-      <td>Display to Controllers hook call</td>
-    </tr>
-    <tr>
-      <td>d-hook:</td>
-      <td>Controller to Display hook call</td>
-    </tr>
-    <tr>
-      <td>cwc:</td>
-      <td>A reserved hook for the <strong>cwc</strong> object</td>
-    </tr>
-  </tbody>
-</table>
+[comment]: <> (--------------------------------------------------------------------------------------------------------)
+[comment]: <> (--------------------------------------------------------------------------------------------------------)
 
-<h3 id="invoking-hooks-via-javascript">Invoking hooks via JavaScript</h3>
+## Invoking hooks
+There are multiple ways of invoking hook created by you or the **cwc** object. The following table outlines prefixes that can be used for calling different hooks.
 
-<p>Invoking a Hook via JavaScript is  by calling the <code class="highlighter-rouge">invoke</code> method on the <strong>cwc.Hooks</strong> object.</p>
+| Hook prefixes | Vales                                    |
+| ------------- | --------------                           |
+| c-hook:       | Display to Controllers hook call         |
+| d-hook:       | Controller to Display hook call          |
+| cwc:          | A reserved hook for the **cwc** object   |
 
-<table>
-  <thead>
-    <tr>
-      <th>Keys</th>
-      <th>Type</th>
-      <th>Vales</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>hook_name</td>
-      <td>Sting</td>
-      <td>The name of the hook you wish to invoke  <code class="highlighter-rouge">my-hook</code> or <code class="highlighter-rouge">d-hook:my-hook</code></td>
-    </tr>
-    <tr>
-      <td>arguments</td>
-      <td>*</td>
-      <td>Arguments can be passed in the method given in the creation of the hook</td>
-    </tr>
-  </tbody>
-</table>
+### Invoking hooks via JavaScript
 
-<h4 id="javascript">Javascript</h4>
+Invoking a Hook via JavaScript is  by calling the `invoke` method on the **cwc.Hooks** object.
+
+| Keys          | Type     | Vales                                                                   |
+| ------------- | -------- | --------------                                                          |
+| hook_name     | Sting    | The name of the hook you wish to invoke  `my-hook` or `d-hook:my-hook`  |
+| arguments     | *        | Arguments can be passed in the method given in the creation of the hook |
+
+#### Javascript
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -389,14 +346,14 @@
 <span class="p">});</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<blockquote>
-  <p>Arguments can be passed in the form of an <code class="highlighter-rouge">object</code>, <code class="highlighter-rouge">boolean</code>, <code class="highlighter-rouge">intriguer</code> or <code class="highlighter-rouge">string</code>. <code class="highlighter-rouge">JSON.stringify</code> is applied to all arguments being passed to the server.</p>
-</blockquote>
 
-<h3 id="html-example">HTML Example</h3>
-<p>Hooks can also be given as arguments for other <strong>cwc</strong> components. Example of the can see found thought the documentation.</p>
+>Arguments can be passed in the form of an `object`, `boolean`, `intriguer` or `string`. `JSON.stringify` is applied to all arguments being passed to the server.
 
-<h4 id="html-markup">HTML markup</h4>
+
+### HTML Example
+Hooks can also be given as arguments for other **cwc** components. Example of the can see found thought the documentation.
+
+#### HTML markup
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -421,13 +378,17 @@
 <span class="nt">&lt;div</span> <span class="na">data-cwc-instructions=</span><span class="s">'{ “on-pull“ : “hook:on-start-hook“ }'</span> <span class="nt">&gt;</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="code-snippets">Code snippets</h2>
-<p>Below are some code snippets you may find useful to used within your application.</p>
 
-<h3 id="invoking-hook-on-other-clients">Invoking hook on other clients</h3>
-<p>Below is an example of preparing a hook on once client, that can be called from another client.</p>
 
-<h4 id="client-01">Client .01</h4>
+[comment]: <> (--------------------------------------------------------------------------------------------------------)
+
+## Code snippets
+Below are some code snippets you may find useful to used within your application.
+
+### Invoking hook on other clients
+Below is an example of preparing a hook on once client, that can be called from another client.
+
+#### Client .01
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -446,7 +407,8 @@
 <span class="p">});</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h4 id="client-02">Client .02</h4>
+
+#### Client .02
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -458,6 +420,7 @@
     <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 <span class="p">});</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
+ -->
 
               </section>
             </artical>

@@ -12,7 +12,7 @@ tax          : controller
 ---
 A 1-way or 5-way {{ page.title }} is perfect for games movement, user interfaces or if you want to have 4 buttons on a controller.
 <!--more-->
-
+<!--
 ![alt text]( {{ page.f_image }} "{{ page.title }}")
 
 ### HTML markup
@@ -128,3 +128,4 @@ window.onload = function() {
     });
 };
 {% endhighlight %}
+ -->
