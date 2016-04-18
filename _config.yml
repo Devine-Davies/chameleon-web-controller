@@ -11,8 +11,8 @@ description: > # A node framework for setting up second screen experience.
 baseurl: "http://devine-davies.github.io/chameleon-web-controller" # the subpath of your site, e.g. /blog
 url: "http://devine-davies.github.io/chameleon-web-controller" # the base hostname & protocol for your site
 
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site
+# baseurl: "" # the subpath of your site, e.g. /blog
+# url: "" # the base hostname & protocol for your site
 
 email: rhysdevine@gmail.com
 twitter_username: jekyllrb
