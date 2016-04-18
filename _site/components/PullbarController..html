@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <title>Viewport Scroll</title>
-  <meta name="description" content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s">
+  <title>Pullbars</title>
+  <meta name="description" content="— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
@@ -94,7 +94,7 @@
         <ul>
           
             
-            <li class="active" >
+            <li>
             
               <img src="http://devine-davies.github.io/chameleon-web-controller/images/viewport-scroll@2x.png" />
                 <a href="http://devine-davies.github.io/chameleon-web-controller/components/ViewportScroll.">
@@ -113,7 +113,7 @@
             </li>
           
             
-            <li>
+            <li class="active" >
             
               <img src="http://devine-davies.github.io/chameleon-web-controller/images/p-par@2x.png" />
                 <a href="http://devine-davies.github.io/chameleon-web-controller/components/PullbarController.">
@@ -223,10 +223,10 @@
 
                 <div class="info">
                   <h1 class="post-title" itemprop="name headline">
-                    Viewport Scroll
+                    Pullbars
                     
-                      <i class="fa fa-television" aria-hidden="true"></i>
                     
+                      <i class="fa fa-gamepad"    aria-hidden="true"></i>
                     
                     
                   </h1>
@@ -238,30 +238,175 @@
               </header>
 
               <section class="post-body" >
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s
+                <p>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 <!--more--></p>
 
-<h2 id="introduction">Introduction</h2>
-<p>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</p>
+<p><img src="/images/p-par@2x.png" alt="alt text" title="Logo Title Text 1" /></p>
 
-<h2 id="binding-actions">Binding Actions</h2>
-<p>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</p>
+<h3 id="html-markup">HTML markup</h3>
+<p>Elements with an attribute of <code class="highlighter-rouge">data-cwc-controller="pullbar"</code> applied to them will be treated as a Pullbars component by the <strong>cwc</strong> object.</p>
 
-<p>— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —</p>
+<p>Add a the cwc style to your Pullbars with the <code class="highlighter-rouge">.cwc-style</code> class.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"cwc-style"</span> <span class="na">data-cwc-controller=</span><span class="s">"pullbar"</span>  <span class="nt">&gt;</span>
+    <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="javascript-declaration">JavaScript Declaration</h3>
+<p><code class="highlighter-rouge">cwc.ControllerMaster({})</code> must be included and the <code class="highlighter-rouge">PullbarController({})</code> has to be initiated after the DOM has finshed loading.</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
-5</pre></td><td class="code"><pre> <span class="nx">viewportScroll</span><span class="p">.</span><span class="nx">scroll_to</span><span class="p">({</span>
-     <span class="na">viewport_target</span> <span class="p">:</span> <span class="s1">'scroll-target'</span><span class="p">,</span> <span class="c1">// Set as the #id on the display</span>
-     <span class="na">direction</span>       <span class="p">:</span> <span class="s1">'down'</span><span class="p">,</span>          <span class="c1">// up : down : left : right</span>
-     <span class="na">ammout</span>          <span class="p">:</span> <span class="mi">100</span>              <span class="c1">// ammount</span>
- <span class="p">});</span><span class="w">
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
+* @object - CWC Main ControllerMaster Object
+* @info   - initiate CWC ControllerMaster Object
+*/</span>
+<span class="kd">var</span> <span class="nx">ControllerMaster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">ControllerMaster</span><span class="p">({</span>
+<span class="p">});</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/*------------------------------------------------------
+    * @object - CWC Main PullbarController Object
+    * @info   - initiate CWC PullbarController Object
+    */</span>
+    <span class="kd">var</span> <span class="nx">PullbarController</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">PullbarController</span><span class="p">({</span>
+    <span class="p">});</span>
+<span class="p">};</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="pullbars-instructions">Pullbars instructions</h2>
+<p>Additional settings can be added to each Pullbar controller through the use of the <code class="highlighter-rouge">data-cwc-instructions</code> data attribute. Here is a list of all the instructions associated with the Pullbar component.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>instructions</th>
+      <th>Type</th>
+      <th>Vales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>direction</td>
+      <td>String</td>
+      <td>Horizontal or Vertical.</td>
+    </tr>
+    <tr>
+      <td>on-pull</td>
+      <td>Hook</td>
+      <td>The hook name you wish to invoke whel Pullbar is pulled</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>data-cwc-instructions='{ "direction" : "vertical", "on-pull " : "hook:cunstom-hook" }'<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="on-pull-hook">On pull hook</h2>
+<p>The on pull methord is fired when the user is interacting with a Pullbar.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>instructions</th>
+      <th>Type</th>
+      <th>Vales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>on-pull</td>
+      <td>Hook</td>
+      <td><code class="highlighter-rouge">d-hook:cwc:scroll-viewport</code>, <code class="highlighter-rouge">d-hook:</code>, <code class="highlighter-rouge">hook:</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="html">HTML</h4>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"cwc-style"</span> <span class="na">data-cwc-controller=</span><span class="s">"pullbar"</span>
+    <span class="na">data-cwc-instructions=</span><span class="s">'{ "on-pull" : “hook:custom-hook" }'</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h4 id="javascript">JavaScript</h4>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
+* @object - CWC Main Hooks Object
+* @info   - initiate CWC Hooks Object
+*/</span>
+<span class="kd">var</span> <span class="nx">Hooks</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">Hooks</span><span class="p">({</span>
+<span class="p">});</span>
+
+<span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
+  <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'custom-hook'</span><span class="p">,</span>
+  <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span>  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="cm">/*------------------------------------------------------
+* @object - CWC Main ControllerMaster Object
+* @info   - initiate CWC ControllerMaster Object
+*/</span>
+<span class="kd">var</span> <span class="nx">ControllerMaster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">ControllerMaster</span><span class="p">({</span>
+<span class="p">});</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/*------------------------------------------------------
+    * @object - CWC Main PullbarController Object
+    * @info   - initiate CWC PullbarController Object
+    */</span>
+    <span class="kd">var</span> <span class="nx">PullbarController</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">PullbarController</span><span class="p">({</span>
+    <span class="p">});</span>
+<span class="p">};</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <blockquote>
-  <p>If no callback methord are provided then the D-pad will try to work with the main screne.</p>
+  <p>When the hook is invoked by the <code class="highlighter-rouge">on-pull</code> method of the Pullbars feedback information is passed back into that hooks method. Feedback information can be found here <a href="/include/ControllerFeedbackData.">controller-feedback-data</a>.</p>
 </blockquote>
 
               </section>
