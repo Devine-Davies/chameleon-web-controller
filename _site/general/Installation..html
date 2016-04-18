@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <title>Controller feedback data</title>
-  <meta name="description" content="Information returned back to controller Hooks.            No.      Return keys      Return values      Pullbar      Analog pad      DPad      GesturePad     ...">
+  <title>Installation</title>
+  <meta name="description" content="cwc makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly ...">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
@@ -36,7 +36,7 @@
         <ul>
           
             
-            <li>
+            <li class="active" >
             
               <img src="http://devine-davies.github.io/chameleon-web-controller/images/installation@2x.png" />
                 <a href="http://devine-davies.github.io/chameleon-web-controller/general/Installation.">
@@ -167,9 +167,11 @@
 
                 <div class="info">
                   <h1 class="post-title" itemprop="name headline">
-                    Controller feedback data
+                    Installation
                     
                     
+                    
+                      <i class="fa fa-cogs" aria-hidden="true"></i>
                     
                   </h1>
                   <p class="post-meta">
@@ -180,7 +182,104 @@
               </header>
 
               <section class="post-body" >
-                
+                <p><strong>cwc</strong> makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly customisable.
+<!--more--></p>
+
+<h2 id="introduction">Introduction</h2>
+<p>There are many ways to install Foundation, but if you’re just getting started, we have a few suggestions.</p>
+
+<h3 id="package-managers">Package Managers</h3>
+<p>There are many ways to install Foundation, but if you’re just getting started, we have a few suggestions.</p>
+
+<ul>
+  <li>Node:</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  npm install foundation-sites<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ul>
+  <li>Bower:</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  bower install foundation-sites<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ul>
+  <li>Github:</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  git add zurb:foundation-sites<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="package-contents">Package Contents</h2>
+<p>Here’s what comes in the package.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></td><td class="code"><pre><span class="nx">master</span>
+<span class="o">|--</span> <span class="nx">chameleon_web_controller</span>
+<span class="o">|</span>    <span class="o">|--</span> <span class="nx">display</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">+--</span> <span class="nx">controller</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">+--</span> <span class="nx">server</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">+--</span> <span class="nx">server</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">php</span>
+<span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">settings</span>
+<span class="o">+--</span> <span class="kr">public</span>
+  <span class="o">|--</span> <span class="nx">css</span>
+  <span class="o">|--</span> <span class="nx">images</span>
+  <span class="o">+--</span> <span class="nx">scripts</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol>
+  <li>
+    <p><strong>chameleon_web_controller</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
+  </li>
+  <li>
+    <p><strong>display</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
+  </li>
+  <li>
+    <p><strong>controller</strong> - You can have properly indented paragraphs within list items. Notice the blank line above</p>
+  </li>
+</ol>
+
               </section>
             </artical>
 
