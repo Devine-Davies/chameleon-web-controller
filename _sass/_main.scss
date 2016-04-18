@@ -123,13 +123,17 @@ body {
                     p {
                         font-size: 0.6em;
 
-                      span {
-                        outline: 1px solid tomato;
-                        color: tomato;
-                        font-size: 1.5em;
-                        font-weight: bold;
-                        padding: 7px 13px;
-                      }
+                        &.code {
+                            display: inline-block;
+                            padding: 2px 13px;
+                            font-size: 1.5em;
+                            outline: 1px solid tomato;
+                            color: tomato;
+
+                              span {
+                                font-weight: bold;
+                              }
+                        }
 
                     }
                 }

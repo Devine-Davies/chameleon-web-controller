@@ -369,12 +369,14 @@ body {
           top: 52px; }
           #home-page .demo-window .window .connect .instruct p {
             font-size: 0.6em; }
-            #home-page .demo-window .window .connect .instruct p span {
-              outline: 1px solid tomato;
-              color: tomato;
+            #home-page .demo-window .window .connect .instruct p.code {
+              display: inline-block;
+              padding: 2px 13px;
               font-size: 1.5em;
-              font-weight: bold;
-              padding: 7px 13px; }
+              outline: 1px solid tomato;
+              color: tomato; }
+              #home-page .demo-window .window .connect .instruct p.code span {
+                font-weight: bold; }
         #home-page .demo-window .window .connect .hand-icon {
           background-size: contain;
           background-repeat: no-repeat;
