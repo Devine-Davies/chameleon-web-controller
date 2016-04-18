@@ -21,9 +21,9 @@ categories   : include
 ## 01. Compass rose
 compass_rose is the movment given as
 
-![alt text]( /images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
-![alt text]( /images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
-![alt text]( /images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
 
 | No. | Movment type    | Compass rose |
 |---- | -------------   | ------------ |
@@ -39,9 +39,9 @@ compass_rose is the movment given as
 ## 02. Cartesian coordinate
 Table below otulines Cartesian coordinate that will be return by a support controler.
 
-![alt text]( /images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
-![alt text]( /images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
-![alt text]( /images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
 
 | No. | Movment type  | Cartesian coordinate               |
 |---- | ------------- | ---------------------------------- |
@@ -74,5 +74,5 @@ Table below otulines the axis direction that will be return by a support control
 
 
 ## 06. Angle (Hammer.js)
-![alt text]( /images/a-pad-angle-diagram@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-angle-diagram@2x.png "Logo Title Text 1")
 — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —

@@ -13,8 +13,8 @@ tax          : controller
 
 <!--more-->
 
-![alt text]( /images/a-pad-2@2x.png "Logo Title Text 1")
-![alt text]( /images/a-pad@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-2@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad@2x.png "Logo Title Text 1")
 
 ### Simple html sample
 Elements with an `data-cwc-controller="analog"` attribute applied to them will be treated as an {{ page.title }} by the **cwc** object. The child span tag is required in order to be used as the {{ page.title }} stick. To add the **cwc** style to your {{ page.title }} toy will need to include the class name of `.cwc-style`.

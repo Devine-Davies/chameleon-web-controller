@@ -13,7 +13,7 @@ tax          : controller
 A 1-way or 5-way {{ page.title }} is perfect for games movement, user interfaces or if you want to have 4 buttons on a controller.
 <!--more-->
 
-![alt text]( {{ page.f_image }} "{{ page.title }}")
+![alt text]( ..{{ page.f_image }} "{{ page.title }}")
 
 ### HTML markup
 A basic {{ page.title }} can be created with minimal markup by adding the attribute `data-cwc-controller="d-pad"` to the HTML elements you wish to make {{ page.title }}. This will also need to be followed by a set of `data-cwc-btn` in order to create a set of button for the {{ page.title }}

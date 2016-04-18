@@ -13,7 +13,7 @@ tax         : controller
 4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
 <!--more-->
 
-![alt text]( {{ page.f_image }} "{{ page.title }}")
+![alt text]( ..{{ page.f_image }} "{{ page.title }}")
 
 ### HTML markup
 Elements with an attribute of `data-cwc-controller=“gesture-pad"` applied to them will be treated as a {{ page.title }} component by the **cwc** object.

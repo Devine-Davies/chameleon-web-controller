@@ -14,7 +14,7 @@ tax        : controller
 — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 <!--more-->
 
-![alt text]( /images/p-par@2x.png "Logo Title Text 1")
+![alt text]( ../images/p-par@2x.png "Logo Title Text 1")
 
 ### HTML markup
 Elements with an attribute of `data-cwc-controller="pullbar"` applied to them will be treated as a {{ page.title }} component by the **cwc** object.
