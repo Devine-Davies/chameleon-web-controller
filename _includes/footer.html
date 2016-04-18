@@ -1,38 +1,18 @@
-<footer class="site-footer">
+<!-- The content of your page would go here. -->
 
-  <div class="wrapper">
+<footer class="footer-basic-centered">
 
-    <h2 class="footer-heading">{{ site.title }}</h2>
+  <p class="footer-company-motto">Brinning the web to a more social environment.</p>
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>{{ site.title }}</li>
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-        </ul>
-      </div>
+  <p class="footer-links">
+    {% if site.github_username %}
+      {% include icon-github.html username=site.github_username %}
+    {% endif %}
+    {% if site.twitter_username %}
+      {% include icon-twitter.html username=site.twitter_username %}
+    {% endif %}
+  </p>
 
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          {% if site.github_username %}
-          <li>
-            {% include icon-github.html username=site.github_username %}
-          </li>
-          {% endif %}
-
-          {% if site.twitter_username %}
-          <li>
-            {% include icon-twitter.html username=site.twitter_username %}
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description }}</p>
-      </div>
-    </div>
-
-  </div>
+  <p class="footer-company-name">Chameleon Web Controller &copy; 2016</p>
 
 </footer>

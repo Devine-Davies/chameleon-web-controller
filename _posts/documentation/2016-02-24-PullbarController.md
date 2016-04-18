@@ -10,8 +10,7 @@ f_image    : "/images/p-par@2x.png"
 categories : components
 tax        : controller
 ---
-
-— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 <!--more-->
 
 ![alt text]( ../images/p-par@2x.png "Logo Title Text 1")

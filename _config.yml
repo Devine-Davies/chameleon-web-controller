@@ -15,8 +15,8 @@ url: "http://devine-davies.github.io/chameleon-web-controller" # the base hostna
 # url: "" # the base hostname & protocol for your site
 
 email: rhysdevine@gmail.com
-twitter_username: jekyllrb
-github_username:  jekyll
+twitter_username: Devine-Davies
+github_username:  Devine-Davies
 
 # Build settings
 markdown: kramdown
