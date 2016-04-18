@@ -3,10 +3,10 @@
   <channel>
     <title>Chameleon Web Controller</title>
     <description></description>
-    <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/</link>
-    <atom:link href="http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Apr 2016 14:28:43 +0100</pubDate>
-    <lastBuildDate>Mon, 18 Apr 2016 14:28:43 +0100</lastBuildDate>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 18 Apr 2016 14:33:31 +0100</pubDate>
+    <lastBuildDate>Mon, 18 Apr 2016 14:33:31 +0100</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -110,8 +110,8 @@
 &lt;/ol&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:02 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/installation.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/installation.</guid>
+        <link>/general/installation.</link>
+        <guid isPermaLink="true">/general/installation.</guid>
         
         
         <category>general</category>
@@ -147,8 +147,8 @@
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/ViewportScroll.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/ViewportScroll.</guid>
+        <link>/components/ViewportScroll.</link>
+        <guid isPermaLink="true">/components/ViewportScroll.</guid>
         
         
         <category>components</category>
@@ -568,8 +568,8 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/Server.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/general/Server.</guid>
+        <link>/general/Server.</link>
+        <guid isPermaLink="true">/general/Server.</guid>
         
         
         <category>general</category>
@@ -750,8 +750,8 @@
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/PullbarController.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/PullbarController.</guid>
+        <link>/components/PullbarController.</link>
+        <guid isPermaLink="true">/components/PullbarController.</guid>
         
         
         <category>components</category>
@@ -1115,8 +1115,8 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/Navgroup.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/Navgroup.</guid>
+        <link>/components/Navgroup.</link>
+        <guid isPermaLink="true">/components/Navgroup.</guid>
         
         
         <category>components</category>
@@ -1381,8 +1381,8 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/GesturePadController.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/GesturePadController.</guid>
+        <link>/components/GesturePadController.</link>
+        <guid isPermaLink="true">/components/GesturePadController.</guid>
         
         
         <category>components</category>
@@ -1585,8 +1585,8 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/DPadController.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/DPadController.</guid>
+        <link>/components/DPadController.</link>
+        <guid isPermaLink="true">/components/DPadController.</guid>
         
         
         <category>components</category>
@@ -1946,8 +1946,8 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/AnalogController.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/components/AnalogController.</guid>
+        <link>/components/AnalogController.</link>
+        <guid isPermaLink="true">/components/AnalogController.</guid>
         
         
         <category>components</category>
@@ -2170,8 +2170,8 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/include/ControllerFeedbackData.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/include/ControllerFeedbackData.</guid>
+        <link>/include/ControllerFeedbackData.</link>
+        <guid isPermaLink="true">/include/ControllerFeedbackData.</guid>
         
         
         <category>include</category>
@@ -2644,8 +2644,8 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/jekyll/update/stash-markdown.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controllerhttp://devine-davies.github.io/chameleon-web-controller/jekyll/update/stash-markdown.</guid>
+        <link>/jekyll/update/stash-markdown.</link>
+        <guid isPermaLink="true">/jekyll/update/stash-markdown.</guid>
         
         
         <category>jekyll</category>
