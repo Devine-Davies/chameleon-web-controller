@@ -28,19 +28,19 @@
 
     /*------------------------------------------------------
     * @string - Storage name
-    * @info     - The name given to the local storage object
+    * @info   - The name given to the local storage object
     */
     CacheControl.prototype.storage_name = 'cwc-cluster-cache';
 
     /*------------------------------------------------------
-    * @int - Time Threshold
+    * @int  - Time Threshold
     * @info - declare how long data should live in local storage
     */
     CacheControl.prototype.time_threshold = 120;
 
     /*------------------------------------------------------
     * @object - Storage data
-    * @info - Save the local storage object here
+    * @info   - Save the local storage object here
     */
     CacheControl.prototype.storage_data = {};
 
@@ -61,7 +61,7 @@
 
     /*------------------------------------------------------
     * @function - Fetch storage data
-    * @info - Function to retrieve local storage data
+    * @info      - Function to retrieve local storage data
     */
     CacheControl.prototype.fetch_storage_data = function()
     {
@@ -76,7 +76,7 @@
 
     /*------------------------------------------------------
     * @function - Retrieve storage data
-    * @info - function to get the local stage object
+    * @info      - function to get the local stage object
     */
     CacheControl.prototype.retrieve_storage_data = function()
     {
@@ -106,7 +106,7 @@
 
     /*------------------------------------------------------
     * @function - Delete old codes
-    * @info - removes the old codes from the local storage
+    * @info      - removes the old codes from the local storage
     */
     CacheControl.prototype.delete_old_codes = function()
     {
@@ -132,7 +132,7 @@
 
     /*------------------------------------------------------
     * @function - Check for existence
-    * @info - Check to see if the code has been set
+    * @info      - Check to see if the code has been set
     */
     CacheControl.prototype.check_for_existence = function( client_data )
     {

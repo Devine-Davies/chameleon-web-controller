@@ -1,6 +1,21 @@
 /*------------------------------------------------------
- * GesturePadController
+ GesturePadController
  ------------------------------------------------------
+ * Hammer.js was used thought the build of this component,
+ * special thanks to the awesome developers at http://hammerjs.github.io/
+ ------------------------------------------------------
+ * What to talk about
+ ------------------------------------------------------
+ • Différent directions
+ • About return types (angle, dir, coords, CD)
+ • Talk about design
+ • Input filters
+ ------------------------------------------------------
+ * Testing
+ ------------------------------------------------------
+ • Browser testing
+ • Adding multi controllers to a single page
+ • Unit testing on function
 */
 
 !function( cwc, Hammer ){
@@ -71,8 +86,8 @@
                 instructions : instructions
             });
 
-            /* -- If the movment has been set to pull, then call the users function -- */
-            if( this.get_movment_type( c_id ) == 'swipe' )
+            /* -- If the movement has been set to pull, then call the users function -- */
+            if( this.get_movement_type( c_id ) == 'swipe' )
             {
                 mc.add( new Hammer.Swipe({
                     threshold: 0
@@ -83,7 +98,7 @@
                 });
             }
 
-            else if( this.get_movment_type( c_id ) == 'pan' )
+            else if( this.get_movement_type( c_id ) == 'pan' )
             {
                 mc.add(new Hammer.Pan({
                     domEvents: true, threshold: 4, pointers: 0
@@ -98,15 +113,15 @@
     };
 
     /*------------------------------------------------------
-    * @function - Get movment type
-    * @info     - Find the movment type given by user
+    * @function - Get movement type
+    * @info     - Find the movement type given by user
     */
-    GesturePadController.prototype.get_movment_type = function( c_id )
+    GesturePadController.prototype.get_movement_type = function( c_id )
     {
-        /* -- get the insrtuctions for the current analog -- */
+        /* -- get the instructions for the current analog -- */
         var instructions = this.all_controllers[ c_id ].instructions;
 
-        /* -- Check the type of movment -- */
+        /* -- Check the type of movement -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
         {
             switch( instructions['movement-type'] )
@@ -124,7 +139,7 @@
 
     /*------------------------------------------------------
     * @function - On Move
-    * @info     - User is intracting with controller
+    * @info     - User is instructions with controller
     */
     GesturePadController.prototype.on_move = function( ev )
     {
@@ -133,7 +148,7 @@
         var analog       = this.all_controllers[ c_id ].pad;
         var instructions = this.all_controllers[ c_id ].instructions;
 
-        /* -- Feed back infaomtion -- */
+        /* -- Feed back information -- */
         var input_data = cwc.ControllerMaster.prototype.get_input_data(
             ev, 'GesturePadController', instructions
         );

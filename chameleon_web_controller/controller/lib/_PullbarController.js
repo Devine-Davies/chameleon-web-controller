@@ -1,12 +1,15 @@
 /*------------------------------------------------------
- Pull bar Controller
+ GesturePadController
+ ------------------------------------------------------
+ * Hammer.js was used thought the build of this component,
+ * special thanks to the awesome developers at http://hammerjs.github.io/
  ------------------------------------------------------
  * What to talk about
  ------------------------------------------------------
- • Talk about on tick and pan movments
+ • Talk about on tick and pan movements
  • About return types (angle, dir, coords, CD)
- • The two dirrent type of collusion
- • Involvment when moving and how circal reacts to colloshion
+ • The two different type of collusion
+ • Involvement when moving and how circle reacts to collision
  • Talk about design
  ------------------------------------------------------
  * Testing
@@ -51,7 +54,7 @@
 
     /*------------------------------------------------------
     * @object - Returned data
-    * @info - All of the infromation gatherd during movement
+    * @info - All of the information goatherd during movement
     */
     PullbarController.prototype.returned_data = {
     };
@@ -114,7 +117,7 @@
 
     /*------------------------------------------------------
     * @function - On pullbars trigger pan
-    * @info     - Panning options an collishion
+    * @info     - Panning options an collision
     */
     PullbarController.prototype.on_pullbars_trigger_pan = function( ev )
     {
@@ -157,7 +160,7 @@
             this.returned_data.viewport_target = instructions['viewport-target'];
         }
 
-        /* -- Collishion -- */
+        /* -- collision -- */
         if( threshold.y.top || threshold.y.btm )
         {
             /* -- Check if we in enter frame -- */
@@ -172,7 +175,7 @@
 
         }
 
-        /* -- no collishion -- */
+        /* -- no collision -- */
         else if( (! threshold.y.top) && (! threshold.y.btm) )
         {
             /* -- Start the tick process -- */
@@ -239,7 +242,7 @@
 
     /*------------------------------------------------------
     * @function - Pullbar trigger translate
-    * @info     - Clear out the fimer and reset collishion
+    * @info     - Clear out the timer and reset collision
     */
     PullbarController.prototype.pullbar_trigger_translate = function( prams )
     {

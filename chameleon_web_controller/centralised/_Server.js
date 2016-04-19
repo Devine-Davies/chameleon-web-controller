@@ -1,6 +1,8 @@
 /*------------------------------------------------------
-* @object - TODO
-* @OnFail - Would like to pass message down on why it faild
+ Server
+ ------------------------------------------------------
+ * Handles connection process
+ ------------------------------------------------------
 */
 
 !function( cwc ){
@@ -22,7 +24,7 @@
     };
 
     /*------------------------------------------------------
-    * @object - Clinet key
+    * @object - Client key
     * @info   - Key given to clinet by server
     */
     Server.prototype.clinet_key = '';
@@ -96,7 +98,7 @@
             cwc._server_connection = socket;
         }
 
-        /* -- Set appropiat socket evetn's -- */
+        /* -- Set appropriate socket events -- */
         if( socket && type == 'ws' )
         {
             this.set_connection_events();
@@ -106,7 +108,7 @@
 
     /*------------------------------------------------------
     * @function - Create hooks
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.create_reserved_connection_status_hooks = function( length )
     {
@@ -128,7 +130,7 @@
 
     /*------------------------------------------------------
     * @function - Connect
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.gen_cluster_code = function( length  )
     {
@@ -139,7 +141,7 @@
 
     /*------------------------------------------------------
     * @function - Connect
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.build_ws_connection = function( host, port )
     {
@@ -154,7 +156,7 @@
 
     /*------------------------------------------------------
     * @function - On connection success
-    * @info     - how to react when connection successfull
+    * @info     - how to react when connection successful
     */
     Server.prototype.on_connection_success = function( server_feedback )
     {
@@ -178,7 +180,7 @@
 
     /*------------------------------------------------------
     * @function - On greeting message
-    * @info     - how to react when connection successfull
+    * @info     - how to react when connection successful
     */
     Server.prototype.on_connection_faild = function()
     {
@@ -192,7 +194,7 @@
 
     /*------------------------------------------------------
     * @function - Set connection events
-    * @info - onerror, onclose, onopen,onmessage
+    * @info     - onerror, onclose, onopen, onmessage
     */
     Server.prototype.set_connection_events = function()
     {
@@ -223,7 +225,7 @@
 
     /*------------------------------------------------------
     * @function - On open
-    * @info - on connect open
+    * @info     - on connect open
     */
     Server.prototype.onopen = function( con )
     {
@@ -232,7 +234,7 @@
 
     /*------------------------------------------------------
     * @function - On error
-    * @info - on connect error
+    * @info     - on connect error
     */
     Server.prototype.onerror = function()
     {
@@ -242,7 +244,7 @@
 
     /*------------------------------------------------------
     * @function - On close
-    * @info - Server has sent a message
+    * @info     - Server has sent a message
     */
     Server.prototype.onclose = function()
     {
@@ -251,12 +253,12 @@
 
     /*------------------------------------------------------
     * @function - On message
-    * @info - Server has sent a message
+    * @info     - Server has sent a message
     */
-    Server.prototype.onmessage = function( recived_package )
+    Server.prototype.onmessage = function( revived_package )
     {
         /* -- Message data -- */
-        var hook_info = JSON.parse( recived_package.data );
+        var hook_info = JSON.parse( revived_package );
 
         /* -- Look for users -- */
         cwc.Hooks.prototype.invoke({
@@ -274,7 +276,7 @@
     */
     Server.prototype.send_message = function( data )
     {
-        /* -- Is this a valid mesage : return true not valid -- */
+        /* -- Is this a valid message : return true not valid -- */
         if( ! this.validate_onmessage( data ) )
         {
             if( cwc._server_connection )

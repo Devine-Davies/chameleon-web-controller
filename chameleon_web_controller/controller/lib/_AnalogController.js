@@ -3,10 +3,10 @@
  ------------------------------------------------------
  * What to talk about
  ------------------------------------------------------
- • Talk about on tick and pan movments
+ • Talk about on tick and pan moments
  • About return types (angle, dir, coords, CD)
- • The two dirrent type of collusion
- • Involvment when moving and how circal reacts to colloshion
+ • The two direct type of collusion
+ • Involvement when moving and how circal reacts to colloshion
  • Talk about design
  ------------------------------------------------------
  * Testing
@@ -62,13 +62,13 @@
 
     /*------------------------------------------------------
     * @object - Animation frame
-    * @info   - Use when pluse movemnt
+    * @info   - Use when tick movement to allow for constant feedback
     */
     AnalogController.prototype.animation_frame = 0;
 
     /*------------------------------------------------------
     * @function - Pad lookup
-    * @info - Looks thought DOM to gather all controllers
+    * @info      - Looks thought DOM to gather all controllers
     */
     AnalogController.prototype.lookup = function()
     {
@@ -107,7 +107,7 @@
 
     /*------------------------------------------------------
     * @function - On analog pan
-    * @info - Main methord thst undergos on controller movment
+    * @info - Main method this undergoes on controller moment
     */
     AnalogController.prototype.on_analog_pan = function( ev )
     {
@@ -123,7 +123,7 @@
             y : ev.deltaY
         };
 
-        /* -- Feed back infaomtion -- */
+        /* -- Feed back information -- */
         this.returned_input_data = cwc.ControllerMaster.prototype.get_input_data(
             ev, 'AnalogController', instructions
         );
@@ -152,10 +152,10 @@
 
         var dis = Math.sqrt(dx * dx + dy * dy) + ( trigger_c.radius );
 
-        /* -- Collishion happerning  --*/
+        /* -- Collision happening  --*/
         if (dis > analog_c.radius + trigger_c.radius)
         {
-            /* --- Collision detection : for fix the triiger againsied the of the analog area -- */
+            /* --- Collision detection : to fix the a-btn to the side -- */
             var angle = ev.angle;
             var x = analog_c.x + analog_c.radius * Math.cos( angle * (Math.PI / 180) );
             var y = analog_c.y + analog_c.radius * Math.sin( angle * (Math.PI / 180) );
@@ -212,7 +212,7 @@
 
         }
 
-        /* -- If the movment has been set to pull, then call the users function -- */
+        /* -- If the moment has been set to pull, then call the users function -- */
         else if( this.get_movment_type() == 'pan' )
         {
             /* -- check if hook has been applied -- */
@@ -224,7 +224,7 @@
 
     /*------------------------------------------------------
     * @function - On pan start
-    * @info - Fired as when controller first inteacted
+    * @info     - Fired as when controller first interacted
     */
     AnalogController.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
     {
@@ -247,7 +247,7 @@
 
     /*------------------------------------------------------
     * @function - On pan end
-    * @info - Fired as soon as user has finshed inteacteing with controller
+    * @info     - Fired as soon as user has finished interacting with controller
     */
     AnalogController.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
@@ -256,7 +256,7 @@
             'panend', instructions, null
         );
 
-        /* -- Remove any if nessary -- */
+        /* -- Remove any if necessary -- */
         analog.classList.remove("active");
         analog.classList.remove("auto");
 
@@ -273,21 +273,21 @@
             this.on_tick('destroy');
         }
 
-        /* -- Track the onbject being used -- */
+        /* -- Track the object being used -- */
         this.tracking = null;
 
     };
 
     /*------------------------------------------------------
-    * @function - Get movment type
-    * @info - Check witch intraction has been set for controller
+    * @function - Get moment type
+    * @info     - Check witch interaction has been set for controller
     */
     AnalogController.prototype.get_movment_type = function(  )
     {
-        /* -- get the insrtuctions for the current analog -- */
+        /* -- get the instructions for the current analog -- */
         var instructions = this.all_controllers[ this.tracking ].instructions;
 
-        /* -- Check the type of movment -- */
+        /* -- Check the type of movement -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
         {
             return instructions['movement-type'];
@@ -301,7 +301,7 @@
 
     /*------------------------------------------------------
     * @function - On tick
-    * @info - When controller has enterd continuous movment
+    * @info - When controller has entered continuous moment
     */
     AnalogController.prototype.on_tick = function( order )
     {
@@ -316,7 +316,7 @@
         /* -- Start the tick process -- */
         else
         {
-            /* -- get the insrtuctions for the current analog -- */
+            /* -- get the instructions for the current analog -- */
             var instructions = cwc.AnalogController.prototype.all_controllers[
                 cwc.AnalogController.prototype.tracking
             ].instructions;

@@ -2,8 +2,6 @@
  * Viewport Scroll Display
  *------------------------------------------------------
  * To-Do
- -------------------------------------------------------
- • Fix support for scroll animation on tap.
  ------------------------------------------------------
 */
 
@@ -30,7 +28,7 @@
 
     /*------------------------------------------------------
     * @array - Save the ids
-    * @info - Used to store the id's of each of the elments
+    * @info - Used to store the id's of each of the elements
     */
     ViewportScroll.prototype.scroll_target_ids = [
         'scroll-target'
@@ -38,14 +36,14 @@
 
     /*------------------------------------------------------
     * @function - Cached scroll target
-    * @info - Save sned elemets here
+    * @info - Save send elements here
     */
     ViewportScroll.prototype.cached_scroll_target = [
     ];
 
     /*------------------------------------------------------
     * @function - Cached scroll target
-    * @info - Save all of the elements to optimise and seed up perforamce
+    * @info - Save all of the elements to optimise and seed up performance
     */
     ViewportScroll.prototype.cache_targets = function( scrollTargets )
     {
@@ -88,14 +86,14 @@
         var sti = this.scroll_target_ids;
 
 
-        /* -- Try and find posistion -- */
+        /* -- Try and find position -- */
         var pos =  sti.indexOf(
             args.viewport_target
         );
 
         console.log( args.viewport_target );
 
-        /* -- Check posistion -- */
+        /* -- Check position -- */
         if( pos != -1 )
         {
             /* -- Get all ids sent to class -- */
@@ -116,8 +114,6 @@
     */
     ViewportScroll.prototype.check_action = function( elm, direction )
     {
-        var ammount = 15;
-
         switch( direction.toUpperCase() )
         {
             case 'DOWN' :
@@ -130,8 +126,6 @@
             elm.scrollTop = elm.scrollTop - 15;
             break;
         }
-
-        return;
 
     };
 

@@ -1,9 +1,12 @@
 /*------------------------------------------------------
  Directional pad
  ------------------------------------------------------
+ * Hammer.js was used thought the build of this component,
+ * special thanks to the awesome developers at http://hammerjs.github.io/
+ ------------------------------------------------------
  * What to talk about
  ------------------------------------------------------
- • Diffrent directions
+ • Différent directions
  • About return types (angle, dir, coords, CD)
  • Talk about design
  ------------------------------------------------------
@@ -124,7 +127,7 @@
         var action       = this.all_controllers[ c_id ].actions[ a_id ];
         var instructions = this.all_controllers[ c_id ].instructions;
 
-        /* -- Check to see if action can be indertfyed -- */
+        /* -- Check to see if action is allowed -- */
         if(! action.hasAttribute( 'data-cwc-cbtn' ) )
             return;
 

@@ -1,3 +1,11 @@
+/*------------------------------------------------------
+ Hooks
+ ------------------------------------------------------
+ * Used for clinet communication and cwc call back function
+ * Developer can also set hooks for compnants callback function
+ ------------------------------------------------------
+*/
+
 !function( cwc ){
   'use strict';
 
@@ -8,13 +16,13 @@
 
     /*------------------------------------------------------
     * @array
-    * Place to store all custom methord
+    * Place to store all custom method
     */
     Hooks.prototype.all_reserved_hooks = {};
 
     /*------------------------------------------------------
     * @array
-    * Place to store all custom methord
+    * Place to store all custom method
     */
     Hooks.prototype.all_hooks = {};
 
@@ -26,7 +34,7 @@
     {
         if( prams.hasOwnProperty('hook_name') && prams.hasOwnProperty('method') )
         {
-            /* -- Check to see if is ment for display -- */
+            /* -- Check to see if for display -- */
             if ( prams.hook_name.includes('cwc:') )
             {
                 this.all_reserved_hooks[ prams.hook_name ] = {
@@ -44,7 +52,7 @@
         }
         else
         {
-            console.log('Hook name and methord is required: check cwc git repo for more info on Hooks');
+            console.log('Hook name and method is required: check cwc git repo for more info on Hooks');
         }
 
     };
@@ -66,7 +74,7 @@
             /* -- If property was not found : return true -- */
             if ( ! data.hasOwnProperty( checks[ i ] ) )
             {
-                console.log('Server message is not properly fromatted.');
+                console.log('Server message is not properly formatted.');
                 return false;
             }
 
@@ -82,7 +90,7 @@
     */
     Hooks.prototype.invoke_client_hook = function( hook_info )
     {
-        /* -- Is this a valid mesage : return true not valid -- */
+        /* -- Is this a valid msg : return true not valid -- */
         if( this.validate_hook( hook_info ) )
         {
             if( cwc._server_connection )
@@ -99,8 +107,12 @@
     };
 
     /*------------------------------------------------------
-    * @function
-    * where we invoke custom methods
+    * @function - invoke
+    * @info - where we invoke custom methods
+    * @d-hook: - will send the hook across server to display
+    * @c-hook: - will send the hook across server to controller
+    * @cwc:    - reserved hook by cwc can also be used with d-hook && c-hook
+    * @hook:   - user created hook
     */
     Hooks.prototype.invoke = function( hook_info )
     {
@@ -124,7 +136,7 @@
 
         }
 
-        /* -- Check to see if is ment for display -- */
+        /* -- Check to see is for controller -- */
         else if ( hook_name.includes('c-hook:') )
         {
             this.invoke_client_hook( {
@@ -135,24 +147,28 @@
 
         }
 
+        /* -- Call the hook on this client -- */
         else if ( hook_name.includes('cwc:') )
         {
-            /* -- Call the hook on this clinet -- */
             this.execute( this.all_reserved_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
         }
 
-        /* -- Check to see if is ment for display -- */
+        /* -- is user hook -- */
         else
         {
-            /* -- Can be called using hook:*(name) usfull on data attr -- */
+            /* -- Can be called using hook:*(name) useful on data attr -- */
             var hook_name = hook_info.hook_name.replace('hook:','')
 
-            /* -- Call the hook on this clinet -- */
+            /* -- Call the hook on this client -- */
             this.execute( this.all_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
         }
 
     };
 
+    /*------------------------------------------------------
+    * @function - execute
+    * @info - call the hook
+    */
     Hooks.prototype.execute = function( hooks, hook_name, args, cwc_metadata  )
     {
         if( hooks.hasOwnProperty( hook_name ) )

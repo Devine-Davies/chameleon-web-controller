@@ -1,5 +1,5 @@
 /*------------------------------------------------------
- Navigagtion
+ Navgroups
  ------------------------------------------------------
  To-Do •
  ------------------------------------------------------
@@ -97,7 +97,7 @@
 
     /*------------------------------------------------------
     * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @info - Keep and record of all found nav elms
     */
     Navgroup.prototype.nav_elms = {
 
@@ -105,7 +105,7 @@
 
     /*------------------------------------------------------
     * @array
-    * Place to store all custom methord
+    * Place to store all custom method
     */
     Navgroup.prototype.keys = {
             /* -- ESC -- */
@@ -174,8 +174,8 @@
     */
     Navgroup.prototype.navitems_lookup = function( group, g_id, g_name )
     {
-        var descendents     = group.getElementsByTagName('*');
-        var descendents_len = descendents.length;
+        var descendants     = group.getElementsByTagName('*');
+        var descendants_len = descendants.length;
 
         var g_name = group.dataset.cwcNavgroup;
 
@@ -184,9 +184,9 @@
 
         var tracking = null;
 
-        for( var i_id = 0; i_id < descendents_len; i_id++ )
+        for( var i_id = 0; i_id < descendants_len; i_id++ )
         {
-            var item = descendents[ i_id ];
+            var item = descendants[ i_id ];
 
             var check = {
                 /* -- is elm       -- */
@@ -204,7 +204,7 @@
                     instructions : this.retrive_instructions( item )
                 };
 
-                /* -- Add tje ite, -- */
+                /* -- Add the item -- */
                 items.push( item_obj );
 
                 /* -- Up date the current group and index -- */
@@ -298,7 +298,7 @@
 
     /*------------------------------------------------------
     * @function - Total items in group
-    * @return - count items in grop : defult current group
+    * @return - count items in group : default current group
     */
     Navgroup.prototype.total_items_in_group = function( group_name )
     {
@@ -315,7 +315,7 @@
 
     /*------------------------------------------------------
     * @function - Add window key events
-    * @info - Add window keybinds for Navgroup
+    * @info - Add window key-binds for Navgroup
     * @condishion set - Only if Navitems found
     */
     Navgroup.prototype.add_cwc_hooks = function()
@@ -331,7 +331,7 @@
 
     /*------------------------------------------------------
     * @function - Add window key events
-    * @info - Add window keybinds for Navgroup
+    * @info - Add window key-binds for Navgroup
     * @condishion set - Only if Navitems found
     */
     Navgroup.prototype.add_window_key_events = function()
@@ -354,8 +354,8 @@
 
     /*------------------------------------------------------
     * @function - Invoke key
-    * @info     - page initialization code here the DOM will be available here
-    * Only start the process when the dom is ready
+    * @info     - page initialisation code here the DOM will be available here
+    * Only start the process when the DOM is ready
     */
     Navgroup.prototype.call_action = function( dir, cb )
     {
@@ -395,7 +395,7 @@
 
     /*------------------------------------------------------
     * @function - Key function
-    * @info     - Wehn key has been pressed : action sent here
+    * @info     : When key has been pressed : action sent here
     * - up      // pass one of the following n* items as an argument
     * - right   // pass one of the following n* items as an argument
     * - down    // pass one of the following n* items as an argument
@@ -420,7 +420,7 @@
         var group_instructions = this.nav_elms[ group_name ].instructions;
         var item_instructions  = this.nav_elms[ group_name ].navitems[ current_item ].instructions;
 
-        /* -- Check to see if item has overids : before moving -- */
+        /* -- Check to see if item has instructions : before moving -- */
         if( item_instructions != null )
         {
             if( item_instructions.hasOwnProperty( dir ) )
@@ -459,7 +459,7 @@
     * - ng:next                // next nav group
     * - ng:prev                // previous nav group
     * - ng:(*)                 // name of the group you wish to Navgroup too
-    * - hook:*(custom methord) // add custom methord to end of arg, must be set up in custom methords
+    * - hook:*(custom methord) // add custom method to end of arg, must be set up in custom methords
     */
     Navgroup.prototype.analyse_instructions = function( instruction, c_index )
     {
@@ -500,7 +500,7 @@
         {
             var action = instruction.replace( navgroup ,'');
 
-            /* -- We know the name of the guoup -- */
+            /* -- We know the name of the group -- */
             if( this.nav_elms.hasOwnProperty( action ) )
             {
                 this.move_to_nav_name( action );

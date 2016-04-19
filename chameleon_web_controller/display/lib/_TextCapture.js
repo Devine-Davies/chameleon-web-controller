@@ -26,7 +26,7 @@
 
     /*------------------------------------------------------
     * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @info - Keep and record of all found nav elms
     */
     TextCapture.prototype.all_text_capture = [
     ];
@@ -97,7 +97,7 @@
     {
         var tax = 'data-cwc-instructions'
 
-        /* -- Search for nav end inftructions-- */
+        /* -- Search for nav end instructions -- */
         if( item.hasAttribute( tax )  )
         {
             return JSON.parse(
@@ -125,7 +125,7 @@
             }
         }
 
-        Hooks.invoke_clinet_hook({
+        Hooks.invoke_client_hook({
             recipient : 'controller',
             hook_name : 'text-capture-invoked',
             arguments : {

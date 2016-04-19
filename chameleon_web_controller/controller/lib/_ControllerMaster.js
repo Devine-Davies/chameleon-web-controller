@@ -1,8 +1,13 @@
 /*------------------------------------------------------
  * Controller Master
- *------------------------------------------------------
+ * ------------------------------------------------------
+ * Dependencies
+ * ------------------------------------------------------
+ * Hammer.js was used thought the build of this component,
+ * special thanks to the awesome developers at http://hammerjs.github.io/
+ * ------------------------------------------------------
  * Talk About
- -------------------------------------------------------
+  -------------------------------------------------------
  • Centralising functions to allow shared code to reduce
    development time from the lack of writing repetitive
    code
@@ -23,7 +28,7 @@
 
     /*------------------------------------------------------
     * @object - Hammer dirs
-    * @info - Take from the hammer js spec
+    * @info   - Take from the hammer is spec
     */
     ControllerMaster.prototype.hammer_dirs = {
         1  : 'none',
@@ -34,8 +39,8 @@
     };
 
     /*------------------------------------------------------
-    * @object - Last Posistion
-    * @info - this will allow to determan
+    * @object - Last Position
+    * @info - this will allow to determine
     */
     ControllerMaster.prototype.last_delta_pos = {
         x : 0,
@@ -62,13 +67,13 @@
 
     /*------------------------------------------------------
     * @function - Update nav tracking
-    * @info - Will update the tracking system for next items and groups
+    * @info : Will update the tracking system for next items and groups
     */
     ControllerMaster.prototype.fetch_instructions = function( elm )
     {
         var tax = 'data-cwc-instructions';
 
-        /* -- Search for nav end inftructions-- */
+        /* -- Search for nav end instructions-- */
         if( elm.hasAttribute( tax )  )
         {
             return JSON.parse(
@@ -155,8 +160,8 @@
     {
         var input_data  = {};
 
-        /* -- Check to see if user has restriced retured input data -- */
-        var input_r     = ( instructions && instructions.hasOwnProperty('input-r') )? instructions['input-r'].split("|") : 'all-input-data';
+        /* -- Check to see if user has restricted retired input data -- */
+        var input_r = ( instructions && instructions.hasOwnProperty('input-r') )? instructions['input-r'].split("|") : 'all-input-data';
 
         /* -- Direction -- */
         if( (input_r === 'all-input-data') || (input_r.indexOf("direction") != -1) )

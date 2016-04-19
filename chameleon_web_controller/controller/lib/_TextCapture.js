@@ -3,7 +3,6 @@
  *------------------------------------------------------
  * To-Do
  -------------------------------------------------------
- • Fix support for scroll animation on tap.
  ------------------------------------------------------
 */
 
@@ -41,11 +40,11 @@
 
     /*------------------------------------------------------
     * @function - Create text capture
-    * @info - Append a text captrue item to the DOM
+    * @info - Append a text capture item to the DOM
     */
     TextCapture.prototype.create_text_capture = function( prams )
     {
-        /* -- Check elm dose not exsist -- */
+        /* -- Check elm dose not exist -- */
         if ( ! document.querySelector('#' + prams.name ) )
         {
             var input = document.createElement("textarea");
@@ -77,7 +76,7 @@
     */
     TextCapture.prototype.text_capture_done = function( elm )
     {
-        /* -- Remove elment -- */
+        /* -- Remove element -- */
         document.body.removeChild( elm );
 
         /* -- Send the recorded data -- */
