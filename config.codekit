@@ -371,6 +371,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
+	"\/_site\/components\/AnalogController..html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_site\/components\/AnalogController..html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/_site\/components\/DPadController..html": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -451,6 +460,160 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
+		},
+	"\/_site\/images\/a-pad-2@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 26283,
+		"inputAbbreviatedPath": "\/_site\/images\/a-pad-2@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/a-pad-2@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/a-pad-angle-diagram@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 44599,
+		"inputAbbreviatedPath": "\/_site\/images\/a-pad-angle-diagram@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/a-pad-angle-diagram@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/a-pad-cardinal-direction@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 44017,
+		"inputAbbreviatedPath": "\/_site\/images\/a-pad-cardinal-direction@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/a-pad-cardinal-direction@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/a-pad-coordinates-diagram@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 30534,
+		"inputAbbreviatedPath": "\/_site\/images\/a-pad-coordinates-diagram@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/a-pad-coordinates-diagram@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/a-pad@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 42763,
+		"inputAbbreviatedPath": "\/_site\/images\/a-pad@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/a-pad@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/d-pad@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 34824,
+		"inputAbbreviatedPath": "\/_site\/images\/d-pad@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/d-pad@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/home-hand-icon.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2354,
+		"inputAbbreviatedPath": "\/_site\/images\/home-hand-icon.png",
+		"outputAbbreviatedPath": "\/_site\/images\/home-hand-icon.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/hooks@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 21238,
+		"inputAbbreviatedPath": "\/_site\/images\/hooks@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/hooks@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/installation@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 21335,
+		"inputAbbreviatedPath": "\/_site\/images\/installation@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/installation@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/navgroup@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 8613,
+		"inputAbbreviatedPath": "\/_site\/images\/navgroup@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/navgroup@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/p-par@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 37161,
+		"inputAbbreviatedPath": "\/_site\/images\/p-par@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/p-par@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/server-events@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 22022,
+		"inputAbbreviatedPath": "\/_site\/images\/server-events@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/server-events@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/swipe-pad@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 15085,
+		"inputAbbreviatedPath": "\/_site\/images\/swipe-pad@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/swipe-pad@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/_site\/images\/viewport-scroll@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 8948,
+		"inputAbbreviatedPath": "\/_site\/images\/viewport-scroll@2x.png",
+		"outputAbbreviatedPath": "\/_site\/images\/viewport-scroll@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/_site\/index.html": {
 		"fileType": 8192,
