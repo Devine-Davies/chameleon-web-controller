@@ -5,8 +5,8 @@
     <description></description>
     <link>http://devine-davies.github.io/chameleon-web-controller/</link>
     <atom:link href="http://devine-davies.github.io/chameleon-web-controller/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 20 Apr 2016 00:54:40 +0100</pubDate>
-    <lastBuildDate>Wed, 20 Apr 2016 00:54:40 +0100</lastBuildDate>
+    <pubDate>Wed, 20 Apr 2016 00:57:08 +0100</pubDate>
+    <lastBuildDate>Wed, 20 Apr 2016 00:57:08 +0100</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -1929,7 +1929,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
     &lt;p&gt;&lt;strong&gt;Pan&lt;/strong&gt;: Recognised when the pointer is down and moved in the allowed direction.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Tick&lt;/strong&gt;: Will continuously invoke the hook function when when pointer is down, regardless if movment is happening or not.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Tick&lt;/strong&gt;: Will continuously invoke the hook function when when pointer is down, regardless if movement is happening or not.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 

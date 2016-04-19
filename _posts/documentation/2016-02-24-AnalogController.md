@@ -71,7 +71,7 @@ You can change the way the user interacts with the {{ page.title }} by setting t
 
 - **Pan**: Recognised when the pointer is down and moved in the allowed direction.
 
-- **Tick**: Will continuously invoke the hook function when when pointer is down, regardless if movment is happening or not.
+- **Tick**: Will continuously invoke the hook function when when pointer is down, regardless if movement is happening or not.
 
 #### Setting moment type snippet
 {% highlight html linenos %}
