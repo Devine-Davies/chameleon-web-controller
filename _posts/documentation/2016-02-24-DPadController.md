@@ -68,10 +68,11 @@ data-cwc-instructions='{ "on-tap" : "on-move-navigation"  }'
 </div>
 {% endhighlight %}
 
->When the hook is invoked by the `on-tap` instruction the feedback information is passed back into that hooks method can be found here [Controller Returned InputData]({% post_url 2016-02-24-ControllerReturnedInputData %}).
+>When the hook is invoked by the `on-tap` instruction the feedback information is passed back into that hooks method can be found here [[Controller Returned InputData]{{ site.baseurl }}({% post_url 2016-02-24-ControllerReturnedInputData %}).
+
 
 ## Setting up to work with Navgroup
-The following code snippet shows how to connect the  {{ page.title }} up with the [Navgroups]({% post_url 2016-02-24-Navgroup %}) component though the use of adding the `d-hook:cwc:navgroup-action` hook to the on-tap instruction.
+The following code snippet shows how to connect the  {{ page.title }} up with the [Navgroups]{{ site.baseurl }}({% post_url 2016-02-24-Navgroup %}) component though the use of adding the `d-hook:cwc:navgroup-action` hook to the on-tap instruction.
 
 #### Display Javascript markup
 {% highlight javascript linenos %}
