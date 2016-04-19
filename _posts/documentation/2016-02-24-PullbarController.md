@@ -112,4 +112,4 @@ window.onload = function() {
 };
 {% endhighlight %}
 
->When the hook is invoked by the `on-pull` method of the {{ page.title }} feedback information is passed back into that hooks method. Feedback information can be found here [controller-feedback-data]({% post_url 2016-02-24-ControllerFeedbackData %}).
+>When the hook is invoked by the `on-pull` method of the {{ page.title }} feedback information is passed back into that hooks method. Feedback information can be found here [Controller Returned InputData]({% post_url 2016-02-24-ControllerReturnedInputData %}).

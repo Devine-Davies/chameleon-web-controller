@@ -5,8 +5,8 @@
     <description></description>
     <link>http://devine-davies.github.io/chameleon-web-controller/</link>
     <atom:link href="http://devine-davies.github.io/chameleon-web-controller/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Apr 2016 21:08:31 +0100</pubDate>
-    <lastBuildDate>Mon, 18 Apr 2016 21:08:31 +0100</lastBuildDate>
+    <pubDate>Tue, 19 Apr 2016 22:10:14 +0100</pubDate>
+    <lastBuildDate>Tue, 19 Apr 2016 22:10:14 +0100</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -746,7 +746,7 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;When the hook is invoked by the &lt;code class=&quot;highlighter-rouge&quot;&gt;on-pull&lt;/code&gt; method of the Pullbars feedback information is passed back into that hooks method. Feedback information can be found here &lt;a href=&quot;/include/ControllerFeedbackData.&quot;&gt;controller-feedback-data&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;When the hook is invoked by the &lt;code class=&quot;highlighter-rouge&quot;&gt;on-pull&lt;/code&gt; method of the Pullbars feedback information is passed back into that hooks method. Feedback information can be found here &lt;a href=&quot;/other/ControllerReturnedInputData.&quot;&gt;Controller Returned InputData&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
@@ -1293,7 +1293,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;When the hook is invoked by the &lt;code class=&quot;highlighter-rouge&quot;&gt;on-move&lt;/code&gt; method of the Gesture Pad feedback information is passed back into that hooks method. Feedback information can be found here &lt;a href=&quot;/include/ControllerFeedbackData.&quot;&gt;controller-feedback-data&lt;/a&gt;&lt;/p&gt;
+  &lt;p&gt;When the hook is invoked by the &lt;code class=&quot;highlighter-rouge&quot;&gt;on-move&lt;/code&gt; method of the Gesture Pad feedback information is passed back into that hooks method. Feedback information can be found here &lt;a href=&quot;/other/ControllerReturnedInputData.&quot;&gt;Controller Returned InputData&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;usfell-snippets&quot;&gt;Usfell snippets&lt;/h2&gt;
@@ -1480,7 +1480,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;When the hook is invoked by the &lt;code class=&quot;highlighter-rouge&quot;&gt;on-tap&lt;/code&gt; instruction the feedback information is passed back into that hooks method can be found here &lt;a href=&quot;/include/ControllerFeedbackData.&quot;&gt;controller-feedback-data&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;When the hook is invoked by the &lt;code class=&quot;highlighter-rouge&quot;&gt;on-tap&lt;/code&gt; instruction the feedback information is passed back into that hooks method can be found here &lt;a href=&quot;/other/ControllerReturnedInputData.&quot;&gt;Controller Returned InputData&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;setting-up-to-work-with-navgroup&quot;&gt;Setting up to work with Navgroup&lt;/h2&gt;
@@ -1594,8 +1594,11 @@ Navitem instructions take priority over Navgroup instructions allowing from more
       </item>
     
       <item>
-        <title>Controller feedback data</title>
-        <description>&lt;h2 id=&quot;information-returned-back-to-controller-hooks&quot;&gt;Information returned back to controller Hooks.&lt;/h2&gt;
+        <title>Controller returned inputdata</title>
+        <description>&lt;p&gt;4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;information-returned-back-to-controller-hooks&quot;&gt;Information returned back to controller Hooks.&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -1780,12 +1783,12 @@ Navitem instructions take priority over Navgroup instructions allowing from more
     &lt;tr&gt;
       &lt;td&gt;01.&lt;/td&gt;
       &lt;td&gt;In&lt;/td&gt;
-      &lt;td&gt;User is moving in towards the centre of the Controller feedback data.&lt;/td&gt;
+      &lt;td&gt;User is moving in towards the centre of the Controller returned inputdata.&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;02.&lt;/td&gt;
       &lt;td&gt;Out&lt;/td&gt;
-      &lt;td&gt;User is moving in away from the centre of the Controller feedback data.&lt;/td&gt;
+      &lt;td&gt;User is moving in away from the centre of the Controller returned inputdata.&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;03.&lt;/td&gt;
@@ -1806,11 +1809,11 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
-        <link>http://devine-davies.github.io/chameleon-web-controller/include/ControllerFeedbackData.</link>
-        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controller/include/ControllerFeedbackData.</guid>
+        <link>http://devine-davies.github.io/chameleon-web-controller/other/ControllerReturnedInputData.</link>
+        <guid isPermaLink="true">http://devine-davies.github.io/chameleon-web-controller/other/ControllerReturnedInputData.</guid>
         
         
-        <category>include</category>
+        <category>other</category>
         
       </item>
     
@@ -1985,7 +1988,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;The on &lt;code class=&quot;highlighter-rouge&quot;&gt;on-move&lt;/code&gt; instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found &lt;a href=&quot;/include/ControllerFeedbackData.&quot;&gt;controller-feedback-data&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;The on &lt;code class=&quot;highlighter-rouge&quot;&gt;on-move&lt;/code&gt; instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found &lt;a href=&quot;/other/ControllerReturnedInputData.&quot;&gt;Controller Returned InputData&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;panstart&quot;&gt;Panstart&lt;/h2&gt;
@@ -2020,7 +2023,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;The on &lt;code class=&quot;highlighter-rouge&quot;&gt;panstart&lt;/code&gt; instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found &lt;a href=&quot;/include/ControllerFeedbackData.&quot;&gt;controller-feedback-data&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;The on &lt;code class=&quot;highlighter-rouge&quot;&gt;panstart&lt;/code&gt; instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found &lt;a href=&quot;/other/ControllerReturnedInputData.&quot;&gt;Controller Returned InputData&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;panend&quot;&gt;Panend&lt;/h2&gt;
@@ -2055,7 +2058,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;The on &lt;code class=&quot;highlighter-rouge&quot;&gt;panstart&lt;/code&gt; instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found &lt;a href=&quot;/include/ControllerFeedbackData.&quot;&gt;controller-feedback-data&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;The on &lt;code class=&quot;highlighter-rouge&quot;&gt;panstart&lt;/code&gt; instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found &lt;a href=&quot;/other/ControllerReturnedInputData.&quot;&gt;Controller Returned InputData&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;code-snippets&quot;&gt;Code snippets&lt;/h2&gt;

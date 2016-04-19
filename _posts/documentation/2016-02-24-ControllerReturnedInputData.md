@@ -1,22 +1,27 @@
 ---
 layout: feature-doc
-title:  "Controller feedback data"
+title:  "Controller returned inputdata"
 date:   2016-02-24 00:31:01 +0000
 date_updated : 2016-01-24 00:31:02 +0000
 
-categories   : include
+f_image     : "/images/swipe-pad@2x.png"
+categories  : other
+tax         : controller
 ---
+
+4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
+<!--more-->
 
 ## Information returned back to controller Hooks.
 
-| No. | Return keys           | Return values                                   | Pullbar    | Analog pad | DPad     | GesturePad |
-|---- | --------------------  | ----------------------------------              | :-:        | :-:        | :-:      | :-:        |
-| 01. | compass_rose          | The direction the user is moving the controller | &#x2714; | &#x2714;   | &#x2714; | &#x2714;   |
-| 02. | cartesian_coordinate  | Cartesian coordinates of x and y                | &#x2714; | &#x2714;   |          | &#x2714;   |
-| 03. | axis_direction        | in, out, static                                 | &#x2714; | &#x2718;   |          | &#x2718;   |
-| 04. | direction             | UP, RIGHT, DOWN, LEFT                           | &#x2714; | &#x2714;   | &#x2714; | &#x2714;   |
-| 06. | angle                 | in, out, static                                 | &#x2714; | &#x2718;   | &#x2718; | &#x2718;   |
-| 05. | delta                 | Cartesian coordinates of x and y                | &#x2714; | &#x2714;   |          | &#x2714;   |
+| No. | Return keys          | Return values                                   | Pullbar  | Analog pad | DPad     | GesturePad |
+|---- | -------------------- | ----------------------------------              | :-:      | :-:        | :-:      | :-:        |
+| 01. | compass_rose         | The direction the user is moving the controller | &#x2714; | &#x2714;   | &#x2714; | &#x2714;   |
+| 02. | cartesian_coordinate | Cartesian coordinates of x and y                | &#x2714; | &#x2714;   |          | &#x2714;   |
+| 03. | axis_direction       | in, out, static                                 | &#x2714; | &#x2718;   |          | &#x2718;   |
+| 04. | direction            | UP, RIGHT, DOWN, LEFT                           | &#x2714; | &#x2714;   | &#x2714; | &#x2714;   |
+| 06. | angle                | in, out, static                                 | &#x2714; | &#x2718;   | &#x2718; | &#x2718;   |
+| 05. | delta                | Cartesian coordinates of x and y                | &#x2714; | &#x2714;   |          | &#x2714;   |
 
 ## 01. Compass rose
 compass_rose is the movment given as
@@ -49,7 +54,6 @@ Table below otulines Cartesian coordinate that will be return by a support contr
 | 02. | Move down     | Values 0 to 1.0 on y axis.         |
 | 03. | Move left     | Values 0 to -1.0 on x axis.        |
 | 04. | Move right    | Values 0 to 1.0 on x axis.         |
-
 
 
 ## 03. Axis direction

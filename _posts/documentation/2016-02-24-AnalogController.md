@@ -104,7 +104,7 @@ The `on-move` instruction can also be set up to work along side the [Navgroups](
 </div>
 {% endhighlight %}
 
->The on `on-move` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [controller-feedback-data]({% post_url 2016-02-24-ControllerFeedbackData %}).
+>The on `on-move` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [Controller Returned InputData]({% post_url 2016-02-24-ControllerReturnedInputData %}).
 
 
 
@@ -125,7 +125,7 @@ The Panstart events is invoked as soon as the user starts to interact with the c
 </div>
 {% endhighlight %}
 
->The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [controller-feedback-data]({% post_url 2016-02-24-ControllerFeedbackData %}).
+>The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [Controller Returned InputData]({% post_url 2016-02-24-ControllerReturnedInputData %}).
 
 
 
@@ -147,7 +147,7 @@ The Panend events is invoked as soon as the user has finished interacting with t
 </div>
 {% endhighlight %}
 
->The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [controller-feedback-data]({% post_url 2016-02-24-ControllerFeedbackData %}).
+>The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [Controller Returned InputData]({% post_url 2016-02-24-ControllerReturnedInputData %}).
 
 
 

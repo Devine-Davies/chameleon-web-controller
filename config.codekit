@@ -29,15 +29,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_includes\/header.html": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_includes\/header.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/_includes\/icon-github.html": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -52,6 +43,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/_includes\/icon-twitter.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/_includes\/repo-list.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_includes\/repo-list.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -113,7 +113,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-analogo-stick.md": {
+	"\/_posts\/documentation\/2016-02-24-AnalogController.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -122,9 +122,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-analogo-stick.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-AnalogController.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-analogo-stick.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-AnalogController.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -134,7 +134,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-connecting.md": {
+	"\/_posts\/documentation\/2016-02-24-ControllerReturnedInputData.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -143,9 +143,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-connecting.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-ControllerReturnedInputData.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-connecting.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-ControllerReturnedInputData.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -155,7 +155,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-directional-pad.md": {
+	"\/_posts\/documentation\/2016-02-24-DPadController.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -164,9 +164,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-directional-pad.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-DPadController.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-directional-pad.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-DPadController.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -176,7 +176,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-hooks.md": {
+	"\/_posts\/documentation\/2016-02-24-GesturePadController.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -185,9 +185,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-hooks.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-GesturePadController.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-hooks.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-GesturePadController.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -197,7 +197,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-installation.md": {
+	"\/_posts\/documentation\/2016-02-24-Hooks.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -206,9 +206,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-installation.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-Hooks.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-installation.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-Hooks.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -218,7 +218,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-navigation.md": {
+	"\/_posts\/documentation\/2016-02-24-Installation.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -227,9 +227,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-navigation.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-Installation.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-navigation.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-Installation.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -239,7 +239,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-pullbar.md": {
+	"\/_posts\/documentation\/2016-02-24-Navgroup.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -248,9 +248,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-pullbar.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-Navgroup.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-pullbar.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-Navgroup.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -260,7 +260,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-swipe-pad.md": {
+	"\/_posts\/documentation\/2016-02-24-PullbarController.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -269,9 +269,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-swipe-pad.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-PullbarController.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-swipe-pad.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-PullbarController.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -281,7 +281,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/_posts\/documentation\/components\/2016-02-24-viewport-scroll.md": {
+	"\/_posts\/documentation\/2016-02-24-Server.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 1,
 		"enableLabels": 1,
@@ -290,9 +290,30 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-viewport-scroll.md",
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-Server.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/_posts\/documentation\/components\/2016-02-24-viewport-scroll.html",
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-Server.html",
+		"outputFormat": 0,
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"parseMetadata": 1,
+		"processHTML": 0,
+		"randomFootnoteNumbers": 0,
+		"useCompatibilityMode": 0
+		},
+	"\/_posts\/documentation\/2016-02-24-ViewportScroll.md": {
+		"criticStyle": 0,
+		"enableFootnotes": 1,
+		"enableLabels": 1,
+		"enableSmartQuotes": 1,
+		"escapeLineBreaks": 0,
+		"fileType": 4096,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-ViewportScroll.md",
+		"maskEmailAddresses": 1,
+		"outputAbbreviatedPath": "\/_posts\/documentation\/2016-02-24-ViewportScroll.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -311,22 +332,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/_sass\/_base.scss",
 		"outputAbbreviatedPath": "\/css\/_base.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 0,
-		"shouldRunAutoprefixer": 0,
-		"shouldRunBless": 0,
-		"useLibsass": 0
-		},
-	"\/_sass\/_layout.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_sass\/_layout.scss",
-		"outputAbbreviatedPath": "\/css\/_layout.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
@@ -366,56 +371,56 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
-	"\/_site\/component\/analogo-stick..html": {
+	"\/_site\/components\/AnalogController..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/component\/analogo-stick..html",
+		"inputAbbreviatedPath": "\/_site\/components\/AnalogController..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/component\/directional-pad..html": {
+	"\/_site\/components\/DPadController..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/component\/directional-pad..html",
+		"inputAbbreviatedPath": "\/_site\/components\/DPadController..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/component\/navigation..html": {
+	"\/_site\/components\/GesturePadController..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/component\/navigation..html",
+		"inputAbbreviatedPath": "\/_site\/components\/GesturePadController..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/component\/pullbar..html": {
+	"\/_site\/components\/Navgroup..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/component\/pullbar..html",
+		"inputAbbreviatedPath": "\/_site\/components\/Navgroup..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/component\/swipe-pad..html": {
+	"\/_site\/components\/PullbarController..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/component\/swipe-pad..html",
+		"inputAbbreviatedPath": "\/_site\/components\/PullbarController..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/component\/viewport-scroll..html": {
+	"\/_site\/components\/ViewportScroll..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/component\/viewport-scroll..html",
+		"inputAbbreviatedPath": "\/_site\/components\/ViewportScroll..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -429,175 +434,32 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/general\/connecting..html": {
+	"\/_site\/general\/Hooks..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/general\/connecting..html",
+		"inputAbbreviatedPath": "\/_site\/general\/Hooks..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/general\/hooks..html": {
+	"\/_site\/general\/Installation..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/general\/hooks..html",
+		"inputAbbreviatedPath": "\/_site\/general\/Installation..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/_site\/general\/installation..html": {
+	"\/_site\/general\/Server..html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/_site\/general\/installation..html",
+		"inputAbbreviatedPath": "\/_site\/general\/Server..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
-		},
-	"\/_site\/images\/a-pad-2@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 26283,
-		"inputAbbreviatedPath": "\/_site\/images\/a-pad-2@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/a-pad-2@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/a-pad-angle-diagram@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 44599,
-		"inputAbbreviatedPath": "\/_site\/images\/a-pad-angle-diagram@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/a-pad-angle-diagram@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/a-pad-cardinal-direction@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 44017,
-		"inputAbbreviatedPath": "\/_site\/images\/a-pad-cardinal-direction@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/a-pad-cardinal-direction@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/a-pad-coordinates-diagram@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 30534,
-		"inputAbbreviatedPath": "\/_site\/images\/a-pad-coordinates-diagram@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/a-pad-coordinates-diagram@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/a-pad@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 42763,
-		"inputAbbreviatedPath": "\/_site\/images\/a-pad@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/a-pad@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/d-pad@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 34824,
-		"inputAbbreviatedPath": "\/_site\/images\/d-pad@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/d-pad@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/hooks@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 21238,
-		"inputAbbreviatedPath": "\/_site\/images\/hooks@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/hooks@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/installation@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 21335,
-		"inputAbbreviatedPath": "\/_site\/images\/installation@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/installation@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/p-par@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 37161,
-		"inputAbbreviatedPath": "\/_site\/images\/p-par@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/p-par@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/server-events@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 22022,
-		"inputAbbreviatedPath": "\/_site\/images\/server-events@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/server-events@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/spider-nav@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 8118,
-		"inputAbbreviatedPath": "\/_site\/images\/spider-nav@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/spider-nav@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/swipe-pad@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 15085,
-		"inputAbbreviatedPath": "\/_site\/images\/swipe-pad@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/swipe-pad@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/_site\/images\/viewport-scroll@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 8948,
-		"inputAbbreviatedPath": "\/_site\/images\/viewport-scroll@2x.png",
-		"outputAbbreviatedPath": "\/_site\/images\/viewport-scroll@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
 		},
 	"\/_site\/index.html": {
 		"fileType": 8192,
@@ -613,6 +475,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/_site\/jekyll\/update\/stash-markdown..html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/_site\/other\/ControllerReturnedInputData..html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_site\/other\/ControllerReturnedInputData..html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -681,7 +552,7 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 35892,
+		"initialSize": 42763,
 		"inputAbbreviatedPath": "\/images\/a-pad@2x.png",
 		"outputAbbreviatedPath": "\/images\/a-pad@2x.png",
 		"outputPathIsOutsideProject": 0,
@@ -695,6 +566,17 @@
 		"initialSize": 34824,
 		"inputAbbreviatedPath": "\/images\/d-pad@2x.png",
 		"outputAbbreviatedPath": "\/images\/d-pad@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/home-hand-icon.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2354,
+		"inputAbbreviatedPath": "\/images\/home-hand-icon.png",
+		"outputAbbreviatedPath": "\/images\/home-hand-icon.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -714,9 +596,20 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 22523,
+		"initialSize": 21335,
 		"inputAbbreviatedPath": "\/images\/installation@2x.png",
 		"outputAbbreviatedPath": "\/images\/installation@2x.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/navgroup@2x.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 8613,
+		"inputAbbreviatedPath": "\/images\/navgroup@2x.png",
+		"outputAbbreviatedPath": "\/images\/navgroup@2x.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -725,7 +618,7 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 27500,
+		"initialSize": 37161,
 		"inputAbbreviatedPath": "\/images\/p-par@2x.png",
 		"outputAbbreviatedPath": "\/images\/p-par@2x.png",
 		"outputPathIsOutsideProject": 0,
@@ -743,22 +636,11 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/images\/spider-nav@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 8139,
-		"inputAbbreviatedPath": "\/images\/spider-nav@2x.png",
-		"outputAbbreviatedPath": "\/images\/spider-nav@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/images\/swipe-pad@2x.png": {
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 16484,
+		"initialSize": 15085,
 		"inputAbbreviatedPath": "\/images\/swipe-pad@2x.png",
 		"outputAbbreviatedPath": "\/images\/swipe-pad@2x.png",
 		"outputPathIsOutsideProject": 0,
@@ -769,7 +651,7 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 8896,
+		"initialSize": 8948,
 		"inputAbbreviatedPath": "\/images\/viewport-scroll@2x.png",
 		"outputAbbreviatedPath": "\/images\/viewport-scroll@2x.png",
 		"outputPathIsOutsideProject": 0,
@@ -976,12 +858,12 @@
 	"jadeAutoOutputPathStyle": 0,
 	"jadeCompileDebug": 1,
 	"jadeOutputStyle": 0,
-	"javascriptAutoOutputPathEnabled": 0,
-	"javascriptAutoOutputPathFilenamePattern": "*.js",
-	"javascriptAutoOutputPathRelativePath": "\/min",
+	"javascriptAutoOutputPathEnabled": 1,
+	"javascriptAutoOutputPathFilenamePattern": "*-min.js",
+	"javascriptAutoOutputPathRelativePath": "\/exsample\/public\/assets\/cwc_objects\/",
 	"javascriptAutoOutputPathReplace1": "",
 	"javascriptAutoOutputPathReplace2": "",
-	"javascriptAutoOutputPathStyle": 3,
+	"javascriptAutoOutputPathStyle": 1,
 	"javascriptCreateSourceMap": 1,
 	"javascriptOutputStyle": 0,
 	"javascriptSyntaxCheckerStyle": 0,

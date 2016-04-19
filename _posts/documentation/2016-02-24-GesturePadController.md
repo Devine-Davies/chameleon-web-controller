@@ -117,7 +117,7 @@ You can spesify a callback function to be called for when the component is movin
 </section>
 {% endhighlight %}
 
->When the hook is invoked by the `on-move` method of the {{ page.title }} feedback information is passed back into that hooks method. Feedback information can be found here [controller-feedback-data]({% post_url 2016-02-24-ControllerFeedbackData %})
+>When the hook is invoked by the `on-move` method of the {{ page.title }} feedback information is passed back into that hooks method. Feedback information can be found here [Controller Returned InputData]({% post_url 2016-02-24-ControllerReturnedInputData %})
 
 
 
