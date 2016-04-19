@@ -8,11 +8,11 @@
 # Site settings
 title: Chameleon Web Controller
 description: > # A node framework for setting up second screen experience.
-url: "http://devine-davies.github.io" # the base hostname & protocol for your site
-baseurl: "/chameleon-web-controller" # the subpath of your site, e.g. /blog
+# url: "http://devine-davies.github.io" # the base hostname & protocol for your site
+# baseurl: "/chameleon-web-controller" # the subpath of your site, e.g. /blog
 
-# baseurl: "" # the subpath of your site, e.g. /blog
-# url: "" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
 
 email: rhysdevine@gmail.com
 twitter_username: Devine-Davies

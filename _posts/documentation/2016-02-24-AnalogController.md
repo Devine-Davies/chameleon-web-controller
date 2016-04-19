@@ -10,8 +10,10 @@ f_image      : "/images/a-pad@2x.png"
 categories   : components
 tax          : controller
 ---
+
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 <!--more-->
+
 
 ![alt text]( ../images/a-pad-2@2x.png "Logo Title Text 1")
 ![alt text]( ../images/a-pad@2x.png "Logo Title Text 1")
@@ -89,7 +91,7 @@ The On move events is invoked depending on which type of movement setting has be
 | ------------- | ------- | --------------       |
 | on-move       | Hook    | `d-hook:cwc:navgroup-action`, `d-hook:`, `hook:` |
 
-The `on-move` instruction can also be set up to work along side the [Navgroups]{{ site.baseurl }}({% post_url 2016-02-24-Navgroup %}) component. Adding `d-hook:cwc:navgroup-action` as an argument for this instruction will initiate this relationship.
+The `on-move` instruction can also be set up to work along side the [Navgroups]({{ site.baseurl }}{% post_url 2016-02-24-Navgroup %})  component. Adding `d-hook:cwc:navgroup-action` as an argument for this instruction will initiate this relationship.
 
 #### Setting on-move snippet
 {% highlight html linenos %}
@@ -104,7 +106,9 @@ The `on-move` instruction can also be set up to work along side the [Navgroups]{
 </div>
 {% endhighlight %}
 
->The on `on-move` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [Controller Returned InputData]{{ site.baseurl }}({% post_url 2016-02-24-ControllerReturnedInputData %}).
+>The on `on-move` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found
+
+
 
 
 
@@ -125,7 +129,7 @@ The Panstart events is invoked as soon as the user starts to interact with the c
 </div>
 {% endhighlight %}
 
->The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [Controller Returned InputData]{{ site.baseurl }}({% post_url 2016-02-24-ControllerReturnedInputData %}).
+>The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [Controller returned inputdata]({{ site.baseurl }}{% post_url 2016-02-24-ControllerReturnedInputData %}).
 
 
 
@@ -147,7 +151,7 @@ The Panend events is invoked as soon as the user has finished interacting with t
 </div>
 {% endhighlight %}
 
->The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [Controller Returned InputData]{{ site.baseurl }}({% post_url 2016-02-24-ControllerReturnedInputData %}).
+>The on `panstart` instruction will be feedback information about the type of movement that has occurred. Information about the type of feedback information provided can be found [Controller returned inputdata]({{ site.baseurl }}{% post_url 2016-02-24-ControllerReturnedInputData %}).
 
 
 

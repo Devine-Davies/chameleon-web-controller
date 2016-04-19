@@ -68,7 +68,7 @@ data-cwc-instructions='{ "on-tap" : "on-move-navigation"  }'
 </div>
 {% endhighlight %}
 
->When the hook is invoked by the `on-tap` instruction the feedback information is passed back into that hooks method can be found here [[Controller Returned InputData]{{ site.baseurl }}({% post_url 2016-02-24-ControllerReturnedInputData %}).
+>When the hook is invoked by the `on-tap` instruction the feedback information is passed back into that hooks method can be found here [Controller returned inputdata]({{ site.baseurl }}{% post_url 2016-02-24-ControllerReturnedInputData %}).
 
 
 ## Setting up to work with Navgroup
