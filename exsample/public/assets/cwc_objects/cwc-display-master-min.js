@@ -267,15 +267,15 @@ function isFunctionA(object)
     Server.prototype.create_reserved_connection_status_hooks = function( length )
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'connection-success',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:connection-success',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_success( feedback );
         } } );
 
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'connection-failed',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:connection-failed',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_faild( feedback );
         } } );
@@ -314,19 +314,20 @@ function isFunctionA(object)
     */
     Server.prototype.on_connection_success = function( server_feedback )
     {
-        console.log( server_feedback );
+        /* -- Check to see if the developer has set hook-- */
+        cwc.Hooks.prototype.invoke({
+            hook_name : 'connection-success',
+            arguments : server_feedback,
+        } );
 
+        /* -- Save the data -- */
         if( cwc._cwc_type  == 'controller' )
         {
-            try {
-                /* -- Invoke the connection success message -- */
-                cwc.Hooks.prototype.invoke({
-                    hook_name : 'cwc:save-client-data',
-                    arguments : server_feedback,
-                } );
-            } catch ( e ) {
-                console.log('saved faild');
-            }
+            /* -- save the connection data -- */
+            cwc.Hooks.prototype.invoke({
+                hook_name : 'cwc:save-client-data',
+                arguments : server_feedback,
+            } );
         }
 
     };
@@ -339,7 +340,7 @@ function isFunctionA(object)
     {
         /* -- Invoke the connection success message -- */
         cwc.Hooks.prototype.invoke({
-            hook_name      : 'cwc:connection-failed',
+            hook_name      : 'connection-failed',
             arguments : this.connection_options,
         });
 
@@ -504,27 +505,30 @@ function isFunctionA(object)
     * @function
     * Create custom methods
     */
-    Hooks.prototype.set_reserved_hook = function( prams )
-    {
-        console.log( prams );
-
-        this.all_reserved_hooks[ prams.hook_name ] = {
-            'hook_name': prams.hook_name,
-            'method'   : prams.method
-        };
-
-    };
-
-    /*------------------------------------------------------
-    * @function
-    * Create custom methods
-    */
     Hooks.prototype.set_hook = function( prams )
     {
-        this.all_hooks[ prams.hook_name ] = {
-            'hook_name' : prams.hook_name,
-            'method'    : prams.method
-        };
+        if( prams.hasOwnProperty('hook_name') && prams.hasOwnProperty('method') )
+        {
+            /* -- Check to see if is ment for display -- */
+            if ( prams.hook_name.includes('cwc:') )
+            {
+                this.all_reserved_hooks[ prams.hook_name ] = {
+                    'hook_name': prams.hook_name,
+                    'method'   : prams.method
+                };
+            }
+            else
+            {
+                this.all_hooks[ prams.hook_name ] = {
+                    'hook_name' : prams.hook_name,
+                    'method'    : prams.method
+                };
+            }
+        }
+        else
+        {
+            console.log('Hook name and methord is required: check cwc git repo for more info on Hooks');
+        }
 
     };
 
@@ -592,12 +596,10 @@ function isFunctionA(object)
         /* -- Get the raw hook name -- */
         var hook_name = hook_info.hook_name
 
-        console.log( hook_info );
-
         /* -- Hook is for display -- */
         if ( hook_name.includes('d-hook:') )
         {
-            cwc.Hooks.prototype.invoke_clinet_hook( {
+           this.invoke_client_hook( {
                 recipient : 'display',
                 hook_name : hook_name.replace("d-hook:", ""),
                 arguments : hook_info.arguments
@@ -608,7 +610,7 @@ function isFunctionA(object)
         /* -- Check to see if is ment for display -- */
         else if ( hook_name.includes('c-hook:') )
         {
-            cwc.Hooks.prototype.invoke_clinet_hook( {
+            this.invoke_client_hook( {
                 recipient : 'controllers',
                 hook_name : hook_name.replace("c-hook:", ""),
                 arguments : hook_info.arguments
@@ -616,32 +618,35 @@ function isFunctionA(object)
 
         }
 
+        else if ( hook_name.includes('cwc:') )
+        {
+            /* -- Call the hook on this clinet -- */
+            this.execute( this.all_reserved_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
+        }
+
         /* -- Check to see if is ment for display -- */
         else
         {
-            /* -- Look at reserved || -- Look for users -- */
-            var hooks  = ( hook_name.includes('cwc:') )? this.all_reserved_hooks : this.all_hooks;
-
             /* -- Can be called using hook:*(name) usfull on data attr -- */
             var hook_name = hook_info.hook_name.replace('hook:','')
 
-                /* -- Can be called using hook:*(name) usfull on data attr -- */
-                hook_name = hook_info.hook_name.replace('cwc:','')
-
-                console.log( hook_name );
-
-            if( hooks.hasOwnProperty( hook_name ) )
-            {
-                try {
-                    hooks[ hook_name ].method( hook_info.arguments, hook_info.cwc_metadata )
-                } catch( e ) {
-                    console.log( e );
-                }
-            }
-
+            /* -- Call the hook on this clinet -- */
+            this.execute( this.all_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
         }
 
     };
+
+    Hooks.prototype.execute = function( hooks, hook_name, args, cwc_metadata  )
+    {
+        if( hooks.hasOwnProperty( hook_name ) )
+        {
+            try {
+                hooks[ hook_name ].method( args, cwc_metadata )
+            } catch( e ) {
+                console.log( e );
+            }
+        }
+    }
 
     /* -- Add this new object to the main object -- */
     cwc.plugin(Hooks, 'Hooks');
@@ -682,8 +687,8 @@ function isFunctionA(object)
             /* -- Add Navgroup events -- */
             this.add_window_key_events();
 
-            /* -- Add Server events -- */
-            this.add_server_events();
+            /* -- Add CWC hooks -- */
+            this.add_cwc_hooks();
 
         }
 
@@ -968,20 +973,13 @@ function isFunctionA(object)
     * @info - Add window keybinds for Navgroup
     * @condishion set - Only if Navitems found
     */
-    Navgroup.prototype.add_server_events = function()
+    Navgroup.prototype.add_cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'navgroup-action',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:navgroup-action',
           method    : function( feedback ) {
-            if( feedback.hasOwnProperty('compass_rose') )
-            {
                 cwc.Navgroup.prototype.call_action( feedback.compass_rose );
-            }
-            else if( feedback.hasOwnProperty('direction') )
-            {
-                cwc.Navgroup.prototype.call_action( feedback.compass_rose );
-            }
         } } );
 
     };
@@ -1489,8 +1487,8 @@ function isFunctionA(object)
             /* -- Cache each of the elements -- */
             this.cache_targets( scrollTargets );
 
-            /* -- Add the server events -- */
-            this.add_server_events();
+            /* -- add CWC hooks -- */
+            this.add_cwc_hooks();
         }
 
     };
@@ -1534,11 +1532,11 @@ function isFunctionA(object)
     * @function - Add Server events to control class
     * @info - scroll viewport is server event
     */
-    ViewportScroll.prototype.add_server_events = function()
+    ViewportScroll.prototype.add_cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'scroll-viewport',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:scroll-viewport',
           method    : function( feedback ) {
             cwc.ViewportScroll.prototype.start_scroll_process( feedback );
         } } );
@@ -1629,8 +1627,8 @@ function isFunctionA(object)
     {
         cwc.registerPlugin(this, 'TextCapture');
 
-        /* -- Set the hook -- */
-        this.set_hooks();
+        /* -- Set CWC hooks -- */
+        this.set_cwc_hooks();
 
         /* -- Find elms -- */
         this.lookup();
@@ -1644,14 +1642,14 @@ function isFunctionA(object)
     ];
 
     /*------------------------------------------------------
-    * @function - Set hooks
+    * @function - Set CWC hooks
     * @info - Set hook for Text Capture done from controller
     */
-    TextCapture.prototype.set_hooks = function()
+    TextCapture.prototype.set_cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'text-capture-done',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:text-capture-done',
           method    : function( feedback ) {
             cwc.TextCapture.prototype.on_text_capture_done(
                 feedback

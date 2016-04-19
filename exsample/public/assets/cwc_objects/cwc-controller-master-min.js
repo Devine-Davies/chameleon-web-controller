@@ -273,15 +273,15 @@ function isFunctionA(object)
     Server.prototype.create_reserved_connection_status_hooks = function( length )
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'connection-success',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:connection-success',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_success( feedback );
         } } );
 
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'connection-failed',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:connection-failed',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_faild( feedback );
         } } );
@@ -320,19 +320,20 @@ function isFunctionA(object)
     */
     Server.prototype.on_connection_success = function( server_feedback )
     {
-        console.log( server_feedback );
+        /* -- Check to see if the developer has set hook-- */
+        cwc.Hooks.prototype.invoke({
+            hook_name : 'connection-success',
+            arguments : server_feedback,
+        } );
 
+        /* -- Save the data -- */
         if( cwc._cwc_type  == 'controller' )
         {
-            try {
-                /* -- Invoke the connection success message -- */
-                cwc.Hooks.prototype.invoke({
-                    hook_name : 'cwc:save-client-data',
-                    arguments : server_feedback,
-                } );
-            } catch ( e ) {
-                console.log('saved faild');
-            }
+            /* -- save the connection data -- */
+            cwc.Hooks.prototype.invoke({
+                hook_name : 'cwc:save-client-data',
+                arguments : server_feedback,
+            } );
         }
 
     };
@@ -345,7 +346,7 @@ function isFunctionA(object)
     {
         /* -- Invoke the connection success message -- */
         cwc.Hooks.prototype.invoke({
-            hook_name      : 'cwc:connection-failed',
+            hook_name      : 'connection-failed',
             arguments : this.connection_options,
         });
 
@@ -510,27 +511,30 @@ function isFunctionA(object)
     * @function
     * Create custom methods
     */
-    Hooks.prototype.set_reserved_hook = function( prams )
-    {
-        console.log( prams );
-
-        this.all_reserved_hooks[ prams.hook_name ] = {
-            'hook_name': prams.hook_name,
-            'method'   : prams.method
-        };
-
-    };
-
-    /*------------------------------------------------------
-    * @function
-    * Create custom methods
-    */
     Hooks.prototype.set_hook = function( prams )
     {
-        this.all_hooks[ prams.hook_name ] = {
-            'hook_name' : prams.hook_name,
-            'method'    : prams.method
-        };
+        if( prams.hasOwnProperty('hook_name') && prams.hasOwnProperty('method') )
+        {
+            /* -- Check to see if is ment for display -- */
+            if ( prams.hook_name.includes('cwc:') )
+            {
+                this.all_reserved_hooks[ prams.hook_name ] = {
+                    'hook_name': prams.hook_name,
+                    'method'   : prams.method
+                };
+            }
+            else
+            {
+                this.all_hooks[ prams.hook_name ] = {
+                    'hook_name' : prams.hook_name,
+                    'method'    : prams.method
+                };
+            }
+        }
+        else
+        {
+            console.log('Hook name and methord is required: check cwc git repo for more info on Hooks');
+        }
 
     };
 
@@ -598,12 +602,10 @@ function isFunctionA(object)
         /* -- Get the raw hook name -- */
         var hook_name = hook_info.hook_name
 
-        console.log( hook_info );
-
         /* -- Hook is for display -- */
         if ( hook_name.includes('d-hook:') )
         {
-            cwc.Hooks.prototype.invoke_clinet_hook( {
+           this.invoke_client_hook( {
                 recipient : 'display',
                 hook_name : hook_name.replace("d-hook:", ""),
                 arguments : hook_info.arguments
@@ -614,7 +616,7 @@ function isFunctionA(object)
         /* -- Check to see if is ment for display -- */
         else if ( hook_name.includes('c-hook:') )
         {
-            cwc.Hooks.prototype.invoke_clinet_hook( {
+            this.invoke_client_hook( {
                 recipient : 'controllers',
                 hook_name : hook_name.replace("c-hook:", ""),
                 arguments : hook_info.arguments
@@ -622,32 +624,35 @@ function isFunctionA(object)
 
         }
 
+        else if ( hook_name.includes('cwc:') )
+        {
+            /* -- Call the hook on this clinet -- */
+            this.execute( this.all_reserved_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
+        }
+
         /* -- Check to see if is ment for display -- */
         else
         {
-            /* -- Look at reserved || -- Look for users -- */
-            var hooks  = ( hook_name.includes('cwc:') )? this.all_reserved_hooks : this.all_hooks;
-
             /* -- Can be called using hook:*(name) usfull on data attr -- */
             var hook_name = hook_info.hook_name.replace('hook:','')
 
-                /* -- Can be called using hook:*(name) usfull on data attr -- */
-                hook_name = hook_info.hook_name.replace('cwc:','')
-
-                console.log( hook_name );
-
-            if( hooks.hasOwnProperty( hook_name ) )
-            {
-                try {
-                    hooks[ hook_name ].method( hook_info.arguments, hook_info.cwc_metadata )
-                } catch( e ) {
-                    console.log( e );
-                }
-            }
-
+            /* -- Call the hook on this clinet -- */
+            this.execute( this.all_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
         }
 
     };
+
+    Hooks.prototype.execute = function( hooks, hook_name, args, cwc_metadata  )
+    {
+        if( hooks.hasOwnProperty( hook_name ) )
+        {
+            try {
+                hooks[ hook_name ].method( args, cwc_metadata )
+            } catch( e ) {
+                console.log( e );
+            }
+        }
+    }
 
     /* -- Add this new object to the main object -- */
     cwc.plugin(Hooks, 'Hooks');
@@ -658,7 +663,7 @@ function isFunctionA(object)
  * Cache Control
  ------------------------------------------------------
  • Need to add support for the user to attach there own data
-   when a cline thas been saved
+   when a client that been saved
  ------------------------------------------------------
 */
 
@@ -673,7 +678,7 @@ function isFunctionA(object)
         cwc.registerPlugin(this, 'CacheControl');
 
         /* -- Fetch any saved data -- */
-        this.define_hooks();
+        this.define_cwc_hooks();
 
         /* -- Fetch any saved data -- */
         this.fetch_storage_data();
@@ -684,19 +689,19 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @string - Storage name
-    * @info     - The name givent to the localstorga eobject
+    * @info     - The name given to the local storage object
     */
     CacheControl.prototype.storage_name = 'cwc-cluster-cache';
 
     /*------------------------------------------------------
     * @int - Time Threshold
-    * @info - declare hoiw long data should live in localstorga
+    * @info - declare how long data should live in local storage
     */
     CacheControl.prototype.time_threshold = 120;
 
     /*------------------------------------------------------
     * @object - Storage data
-    * @info - Save the loaclstrage object here
+    * @info - Save the local storage object here
     */
     CacheControl.prototype.storage_data = {};
 
@@ -704,10 +709,10 @@ function isFunctionA(object)
     * @function - Define hooks
     * @info     - Set reserved hooks
     */
-    CacheControl.prototype.define_hooks = function( )
+    CacheControl.prototype.define_cwc_hooks = function( )
     {
         /* -- Crete Hook for saving data -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
+        cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:save-client-data',
           method    : function( feedback ) {
             cwc.CacheControl.prototype.save_cluster_code( feedback );
@@ -717,7 +722,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Fetch storage data
-    * @info - Function to retrieve strage data
+    * @info - Function to retrieve local storage data
     */
     CacheControl.prototype.fetch_storage_data = function()
     {
@@ -741,8 +746,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Save connection infromation
-    * @info - Called when a suscsessfull connection has been made to the server
+    * @function - Save connection information
+    * @info - Called when a successful connection has been made to the server
     */
     CacheControl.prototype.save_cluster_code = function( client_data )
     {
@@ -762,7 +767,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Delete old codes
-    * @info - removes the old codes from the localstage
+    * @info - removes the old codes from the local storage
     */
     CacheControl.prototype.delete_old_codes = function()
     {
@@ -775,7 +780,7 @@ function isFunctionA(object)
             var data = object[key];
             var diff = ( ( Date.now() - data.timestamp ) / 1000 / 60 ) << 0;
 
-            /* -- Add if underd : Time Threshold option -- */
+            /* -- Add if under : Time Threshold option -- */
             if( diff < this.time_threshold )
             {
                 new_object[ key ] = object[ key ];
@@ -964,31 +969,61 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Get feedback data
+    * @function - Get input data
     * @info     - builds the return data object to feed back to user
     */
-    ControllerMaster.prototype.get_feedback_data = function( ev, controller_name )
+    ControllerMaster.prototype.get_input_data = function( ev, controller_name, instructions )
     {
-        return {
-            controller : (controller_name)? controller_name : 'undefined',
+        var input_data  = {};
 
-            /* -- cardinal the users is moving in -- */
-            compass_rose : cwc.ControllerMaster.prototype.calculate_compass_rose(
+        /* -- Check to see if user has restriced retured input data -- */
+        var input_r     = ( instructions && instructions.hasOwnProperty('input-r') )? instructions['input-r'].split("|") : 'all-input-data';
+
+        /* -- Direction -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("direction") != -1) )
+        {
+            input_data.direction = cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ];
+        }
+
+        /* -- Delta -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("delta") != -1) )
+        {
+            input_data.delta = ev.delta;
+        }
+
+        /* -- Angle -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("angle") != -1) )
+        {
+            input_data.angle = ev.angle;
+        }
+
+        /* -- Compass Rose -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("compass_rose") != -1) )
+        {
+            input_data.compass_rose = cwc.ControllerMaster.prototype.calculate_compass_rose(
                 ev.angle
-            ),
+            );
+        }
 
-            /* -- coordinates of x and y -- */
-            cartesian_coordinates : {
+        /* -- Cartesian Coordinates -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("cartesian_coordinates") != -1) )
+        {
+            input_data.cartesian_coordinates = {
                 x : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaX ),
                 y : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaY )
-            },
+            }
+        }
 
-            /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-            axis_direction : cwc.ControllerMaster.prototype.calculate_axis_direction({
+        /* -- Axis Direction -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("axis_direction") != -1) )
+        {
+            input_data.axis_direction = cwc.ControllerMaster.prototype.calculate_axis_direction( {
                 x : ev.deltaX,
-                y : ev.deltaY,
-            } )
-        };
+                y : ev.deltaY
+            } );
+        }
+
+        return input_data;
 
     };
 
@@ -1343,13 +1378,13 @@ function isFunctionA(object)
         var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- Feed back infaomtion -- */
-        var feedback = cwc.ControllerMaster.prototype.get_feedback_data(
-            ev, 'GesturePadController'
+        var input_data = cwc.ControllerMaster.prototype.get_input_data(
+            ev, 'GesturePadController', instructions
         );
 
         /* -- check if hook has been applied -- */
         cwc.ControllerMaster.prototype.invoke_hook(
-            'on-move', instructions, feedback
+            'on-move', instructions, input_data
         );
 
         this.tracking = c_id;
@@ -1418,7 +1453,7 @@ function isFunctionA(object)
     * @info   - All of the information gathered during movement
     * and return back to user
     */
-    AnalogController.prototype.returned_data = {};
+    AnalogController.prototype.returned_input_data = {};
 
     /*------------------------------------------------------
     * @object - Tracking
@@ -1490,16 +1525,9 @@ function isFunctionA(object)
         };
 
         /* -- Feed back infaomtion -- */
-        var feedback = cwc.ControllerMaster.prototype.get_feedback_data(
-            ev, 'AnalogController'
+        this.returned_input_data = cwc.ControllerMaster.prototype.get_input_data(
+            ev, 'AnalogController', instructions
         );
-
-        feedback.direction = cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ];
-        feedback.delta     = delta;
-        feedback.angle     = ev.angle;
-
-        /* -- Store all the infromation caculaed to return back -- */
-        this.returned_data = feedback;
 
         /* -- Analog container circle -- */
         var analog_c = {
@@ -1586,10 +1614,10 @@ function isFunctionA(object)
         }
 
         /* -- If the movment has been set to pull, then call the users function -- */
-        else if( this.get_movment_type() == 'pull' )
+        else if( this.get_movment_type() == 'pan' )
         {
             /* -- check if hook has been applied -- */
-            cwc.ControllerMaster.prototype.invoke_hook( 'on-move', instructions, this.returned_data );
+            cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions, this.returned_input_data );
 
         }
 
@@ -1663,18 +1691,11 @@ function isFunctionA(object)
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
         {
-            if( instructions['movement-type'] == 'tick' )
-            {
-                return instructions['movement-type'];
-            }
-            else
-            {
-                return 'pull';
-            }
+            return instructions['movement-type'];
         }
         else
         {
-            return 'pull';
+            return 'pan';
         }
 
     };
@@ -1703,7 +1724,7 @@ function isFunctionA(object)
 
             /* -- check if hook has been applied -- */
             cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions,
-                cwc.AnalogController.prototype.returned_data
+                cwc.AnalogController.prototype.returned_input_data
             );
 
             /* -- Build the loop -- */
@@ -1887,7 +1908,7 @@ function isFunctionA(object)
         }
 
         /* -- Set the data to be returned -- */
-        this.returned_data = cwc.ControllerMaster.prototype.get_feedback_data(
+        this.returned_data = cwc.ControllerMaster.prototype.get_input_data(
             ev, 'PullbarController'
         );
 
@@ -2058,7 +2079,7 @@ function isFunctionA(object)
         cwc.registerPlugin(this, 'TextCapture');
 
         /* -- Set the hooks -- */
-        this.set_hooks();
+        this.set_cwc_hooks();
 
     };
 
@@ -2066,11 +2087,11 @@ function isFunctionA(object)
     * @function - lookup
     * @info - Find elms with data-(textcapture) add the this to object
     */
-    TextCapture.prototype.set_hooks = function()
+    TextCapture.prototype.set_cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'text-capture-invoked',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:text-capture-invoked',
           method    : function( prams ) {
             cwc.TextCapture.prototype.create_text_capture(
                 prams

@@ -73,22 +73,6 @@ var is_sending = null;
 
 function cwc_Hooks()
 {
-    Hooks.set_hook( {
-      hook_name : 'on-analog-move',
-      method    : function( prams ) {
-        on_analog_move( prams.coordinate );
-      }
-    });
-
-    Hooks.set_hook( {
-      hook_name : 'on-analog-end',
-      method :   function( ) {
-        Hooks.invoke_clinet_hook({
-            recipient : 'display',
-            hook_name : 'on-analog-end',
-            arguments : ''
-        });
-    } } );
 
 }
 

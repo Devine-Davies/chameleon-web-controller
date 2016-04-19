@@ -148,7 +148,7 @@
         }
 
         /* -- Set the data to be returned -- */
-        this.returned_data = cwc.ControllerMaster.prototype.get_feedback_data(
+        this.returned_data = cwc.ControllerMaster.prototype.get_input_data(
             ev, 'PullbarController'
         );
 

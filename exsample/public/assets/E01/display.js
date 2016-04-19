@@ -242,7 +242,10 @@ function connect_to_server()
     /* -- Crete connection sucsess | Hook -- */
     Hooks.set_hook( {
       hook_name      : 'connection-success',
-      method    : function( feedback ) { on_connect( feedback ) }
+      method    : function( feedback ) {
+        console.log('here');
+        on_connect( feedback )
+      }
     } );
 
     /* -- Crete connection sucsess | Hook -- */

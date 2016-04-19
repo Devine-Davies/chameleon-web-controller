@@ -17,8 +17,8 @@
     {
         cwc.registerPlugin(this, 'TextCapture');
 
-        /* -- Set the hook -- */
-        this.set_hooks();
+        /* -- Set CWC hooks -- */
+        this.set_cwc_hooks();
 
         /* -- Find elms -- */
         this.lookup();
@@ -32,14 +32,14 @@
     ];
 
     /*------------------------------------------------------
-    * @function - Set hooks
+    * @function - Set CWC hooks
     * @info - Set hook for Text Capture done from controller
     */
-    TextCapture.prototype.set_hooks = function()
+    TextCapture.prototype.set_cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'text-capture-done',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:text-capture-done',
           method    : function( feedback ) {
             cwc.TextCapture.prototype.on_text_capture_done(
                 feedback

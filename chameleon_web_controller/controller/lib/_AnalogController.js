@@ -52,7 +52,7 @@
     * @info   - All of the information gathered during movement
     * and return back to user
     */
-    AnalogController.prototype.returned_data = {};
+    AnalogController.prototype.returned_input_data = {};
 
     /*------------------------------------------------------
     * @object - Tracking
@@ -124,16 +124,9 @@
         };
 
         /* -- Feed back infaomtion -- */
-        var feedback = cwc.ControllerMaster.prototype.get_feedback_data(
-            ev, 'AnalogController'
+        this.returned_input_data = cwc.ControllerMaster.prototype.get_input_data(
+            ev, 'AnalogController', instructions
         );
-
-        feedback.direction = cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ];
-        feedback.delta     = delta;
-        feedback.angle     = ev.angle;
-
-        /* -- Store all the infromation caculaed to return back -- */
-        this.returned_data = feedback;
 
         /* -- Analog container circle -- */
         var analog_c = {
@@ -220,10 +213,10 @@
         }
 
         /* -- If the movment has been set to pull, then call the users function -- */
-        else if( this.get_movment_type() == 'pull' )
+        else if( this.get_movment_type() == 'pan' )
         {
             /* -- check if hook has been applied -- */
-            cwc.ControllerMaster.prototype.invoke_hook( 'on-move', instructions, this.returned_data );
+            cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions, this.returned_input_data );
 
         }
 
@@ -297,18 +290,11 @@
         /* -- Check the type of movment -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
         {
-            if( instructions['movement-type'] == 'tick' )
-            {
-                return instructions['movement-type'];
-            }
-            else
-            {
-                return 'pull';
-            }
+            return instructions['movement-type'];
         }
         else
         {
-            return 'pull';
+            return 'pan';
         }
 
     };
@@ -337,7 +323,7 @@
 
             /* -- check if hook has been applied -- */
             cwc.ControllerMaster.prototype.invoke_hook( 'pan', instructions,
-                cwc.AnalogController.prototype.returned_data
+                cwc.AnalogController.prototype.returned_input_data
             );
 
             /* -- Build the loop -- */

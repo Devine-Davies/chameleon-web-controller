@@ -22,8 +22,8 @@
             /* -- Cache each of the elements -- */
             this.cache_targets( scrollTargets );
 
-            /* -- Add the server events -- */
-            this.add_server_events();
+            /* -- add CWC hooks -- */
+            this.add_cwc_hooks();
         }
 
     };
@@ -67,11 +67,11 @@
     * @function - Add Server events to control class
     * @info - scroll viewport is server event
     */
-    ViewportScroll.prototype.add_server_events = function()
+    ViewportScroll.prototype.add_cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'scroll-viewport',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:scroll-viewport',
           method    : function( feedback ) {
             cwc.ViewportScroll.prototype.start_scroll_process( feedback );
         } } );

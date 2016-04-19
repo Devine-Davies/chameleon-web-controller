@@ -148,31 +148,61 @@
     };
 
     /*------------------------------------------------------
-    * @function - Get feedback data
+    * @function - Get input data
     * @info     - builds the return data object to feed back to user
     */
-    ControllerMaster.prototype.get_feedback_data = function( ev, controller_name )
+    ControllerMaster.prototype.get_input_data = function( ev, controller_name, instructions )
     {
-        return {
-            controller : (controller_name)? controller_name : 'undefined',
+        var input_data  = {};
 
-            /* -- cardinal the users is moving in -- */
-            compass_rose : cwc.ControllerMaster.prototype.calculate_compass_rose(
+        /* -- Check to see if user has restriced retured input data -- */
+        var input_r     = ( instructions && instructions.hasOwnProperty('input-r') )? instructions['input-r'].split("|") : 'all-input-data';
+
+        /* -- Direction -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("direction") != -1) )
+        {
+            input_data.direction = cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ];
+        }
+
+        /* -- Delta -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("delta") != -1) )
+        {
+            input_data.delta = ev.delta;
+        }
+
+        /* -- Angle -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("angle") != -1) )
+        {
+            input_data.angle = ev.angle;
+        }
+
+        /* -- Compass Rose -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("compass_rose") != -1) )
+        {
+            input_data.compass_rose = cwc.ControllerMaster.prototype.calculate_compass_rose(
                 ev.angle
-            ),
+            );
+        }
 
-            /* -- coordinates of x and y -- */
-            cartesian_coordinates : {
+        /* -- Cartesian Coordinates -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("cartesian_coordinates") != -1) )
+        {
+            input_data.cartesian_coordinates = {
                 x : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaX ),
                 y : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaY )
-            },
+            }
+        }
 
-            /* -- check to see if we are moving to the center or to the endge (in : out) -- */
-            axis_direction : cwc.ControllerMaster.prototype.calculate_axis_direction({
+        /* -- Axis Direction -- */
+        if( (input_r === 'all-input-data') || (input_r.indexOf("axis_direction") != -1) )
+        {
+            input_data.axis_direction = cwc.ControllerMaster.prototype.calculate_axis_direction( {
                 x : ev.deltaX,
-                y : ev.deltaY,
-            } )
-        };
+                y : ev.deltaY
+            } );
+        }
+
+        return input_data;
 
     };
 

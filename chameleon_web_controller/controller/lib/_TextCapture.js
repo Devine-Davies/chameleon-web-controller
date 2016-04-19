@@ -18,7 +18,7 @@
         cwc.registerPlugin(this, 'TextCapture');
 
         /* -- Set the hooks -- */
-        this.set_hooks();
+        this.set_cwc_hooks();
 
     };
 
@@ -26,11 +26,11 @@
     * @function - lookup
     * @info - Find elms with data-(textcapture) add the this to object
     */
-    TextCapture.prototype.set_hooks = function()
+    TextCapture.prototype.set_cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'text-capture-invoked',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:text-capture-invoked',
           method    : function( prams ) {
             cwc.TextCapture.prototype.create_text_capture(
                 prams

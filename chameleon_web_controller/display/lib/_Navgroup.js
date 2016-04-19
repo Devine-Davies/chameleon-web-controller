@@ -32,8 +32,8 @@
             /* -- Add Navgroup events -- */
             this.add_window_key_events();
 
-            /* -- Add Server events -- */
-            this.add_server_events();
+            /* -- Add CWC hooks -- */
+            this.add_cwc_hooks();
 
         }
 
@@ -318,20 +318,13 @@
     * @info - Add window keybinds for Navgroup
     * @condishion set - Only if Navitems found
     */
-    Navgroup.prototype.add_server_events = function()
+    Navgroup.prototype.add_cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'navgroup-action',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:navgroup-action',
           method    : function( feedback ) {
-            if( feedback.hasOwnProperty('compass_rose') )
-            {
                 cwc.Navgroup.prototype.call_action( feedback.compass_rose );
-            }
-            else if( feedback.hasOwnProperty('direction') )
-            {
-                cwc.Navgroup.prototype.call_action( feedback.compass_rose );
-            }
         } } );
 
     };

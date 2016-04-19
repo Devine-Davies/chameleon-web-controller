@@ -2,7 +2,7 @@
  * Cache Control
  ------------------------------------------------------
  • Need to add support for the user to attach there own data
-   when a cline thas been saved
+   when a client that been saved
  ------------------------------------------------------
 */
 
@@ -17,7 +17,7 @@
         cwc.registerPlugin(this, 'CacheControl');
 
         /* -- Fetch any saved data -- */
-        this.define_hooks();
+        this.define_cwc_hooks();
 
         /* -- Fetch any saved data -- */
         this.fetch_storage_data();
@@ -28,19 +28,19 @@
 
     /*------------------------------------------------------
     * @string - Storage name
-    * @info     - The name givent to the localstorga eobject
+    * @info     - The name given to the local storage object
     */
     CacheControl.prototype.storage_name = 'cwc-cluster-cache';
 
     /*------------------------------------------------------
     * @int - Time Threshold
-    * @info - declare hoiw long data should live in localstorga
+    * @info - declare how long data should live in local storage
     */
     CacheControl.prototype.time_threshold = 120;
 
     /*------------------------------------------------------
     * @object - Storage data
-    * @info - Save the loaclstrage object here
+    * @info - Save the local storage object here
     */
     CacheControl.prototype.storage_data = {};
 
@@ -48,10 +48,10 @@
     * @function - Define hooks
     * @info     - Set reserved hooks
     */
-    CacheControl.prototype.define_hooks = function( )
+    CacheControl.prototype.define_cwc_hooks = function( )
     {
         /* -- Crete Hook for saving data -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
+        cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:save-client-data',
           method    : function( feedback ) {
             cwc.CacheControl.prototype.save_cluster_code( feedback );
@@ -61,7 +61,7 @@
 
     /*------------------------------------------------------
     * @function - Fetch storage data
-    * @info - Function to retrieve strage data
+    * @info - Function to retrieve local storage data
     */
     CacheControl.prototype.fetch_storage_data = function()
     {
@@ -85,8 +85,8 @@
     };
 
     /*------------------------------------------------------
-    * @function - Save connection infromation
-    * @info - Called when a suscsessfull connection has been made to the server
+    * @function - Save connection information
+    * @info - Called when a successful connection has been made to the server
     */
     CacheControl.prototype.save_cluster_code = function( client_data )
     {
@@ -106,7 +106,7 @@
 
     /*------------------------------------------------------
     * @function - Delete old codes
-    * @info - removes the old codes from the localstage
+    * @info - removes the old codes from the local storage
     */
     CacheControl.prototype.delete_old_codes = function()
     {
@@ -119,7 +119,7 @@
             var data = object[key];
             var diff = ( ( Date.now() - data.timestamp ) / 1000 / 60 ) << 0;
 
-            /* -- Add if underd : Time Threshold option -- */
+            /* -- Add if under : Time Threshold option -- */
             if( diff < this.time_threshold )
             {
                 new_object[ key ] = object[ key ];

@@ -48,8 +48,8 @@ var cwc_object_declaration = function() {
 
     Hooks.set_hook( {
         hook_name : 'on-analog-move',
-        method    : function( feedback, mdata ) {
-          on_analog_move( feedback, mdata );
+        method    : function( input, mdata ) {
+          on_analog_move( input, mdata );
         }
     });
 
@@ -74,39 +74,39 @@ function on_analog_end( )
 
 function on_analog_move( feedback, mdata )
 {
-    heros[ mdata.key ].y += feedback.y * 10;
-    heros[ mdata.key ].x += feedback.x * 10;
+    heros[ mdata.key ].y += feedback.cartesian_coordinates.y * 10;
+    heros[ mdata.key ].x += feedback.cartesian_coordinates.x * 10;
 }
 
 function connect_to_server()
 {
     /* -- Crete connection sucsess | Hook -- */
     Hooks.set_hook( {
-      hook_name      : 'connection-success',
+      hook_name : 'connection-success',
       method    : function( feedback ) { on_connect( feedback ) }
     } );
 
     /* -- Crete connection sucsess | Hook -- */
     Hooks.set_hook( {
-      hook_name      : 'connection-failed',
+      hook_name : 'connection-failed',
       method    : function( feedback ) { console.log( data ); }
     } );
 
     /* -- Crete connection sucsess | Hook -- */
     Hooks.set_hook( {
-      hook_name      : 'controller-connected',
+      hook_name : 'controller-connected',
       method    : function( controller ) { controller_connected( controller ) }
     } );
 
     /* -- Crete connection sucsess | Hook -- */
     Hooks.set_hook( {
-      hook_name      : 'controller-disconnected',
+      hook_name : 'controller-disconnected',
       method    : function( controller ) { controller_disconnected( controller ) }
     } );
 
     Hooks.set_hook( {
-      hook_name   : 'gn-item-selected',
-      method : function( feedback ) {
+      hook_name : 'gn-item-selected',
+      method    : function( feedback ) {
       }
     });
 

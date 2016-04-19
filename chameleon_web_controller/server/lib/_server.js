@@ -114,7 +114,7 @@
                     this.client_clusters[ metadata.cluster_code ].display.send( this.format_msg( {
                         sender       : 'server',
                         recipient    : 'display',
-                        hook_name    : 'controller-disconnected',
+                        hook_name    : 'cwc:controller-disconnected',
                         arguments    : this.get_all_controller_in_cluster( metadata.cluster_code ),
                     } ) );
                 }
@@ -153,7 +153,7 @@
             client.send( this.format_msg( {
                 recipient    : clinet_type,
                 sender       : 'server',
-                hook_name    : 'connection-failed',
+                hook_name    : 'cwc:connection-failed',
                 arguments    : 'There was a problem trying to connent...'
             } ) );
 
@@ -166,7 +166,7 @@
             client.send( this.format_msg( {
                 recipient    : clinet_type,
                 sender       : 'server',
-                hook_name    : 'connection-success',
+                hook_name    : 'cwc:connection-success',
                 arguments    : client.cwc_metadata
             } ) );
         }
@@ -244,7 +244,7 @@
             this.client_clusters[ cluster_code ].display.send( this.format_msg( {
                 sender       : 'server',
                 recipient    : 'display',
-                hook_name    : 'controller-connected',
+                hook_name    : 'cwc:controller-connected',
                 arguments    : this.get_all_controller_in_cluster( cluster_code ),
             } ) );
 

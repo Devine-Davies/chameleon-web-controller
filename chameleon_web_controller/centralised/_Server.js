@@ -111,15 +111,15 @@
     Server.prototype.create_reserved_connection_status_hooks = function( length )
     {
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'connection-success',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:connection-success',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_success( feedback );
         } } );
 
         /* -- Crete connection fil | Hook -- */
-        cwc.Hooks.prototype.set_reserved_hook( {
-          hook_name : 'connection-failed',
+        cwc.Hooks.prototype.set_hook( {
+          hook_name : 'cwc:connection-failed',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_faild( feedback );
         } } );
@@ -158,19 +158,20 @@
     */
     Server.prototype.on_connection_success = function( server_feedback )
     {
-        console.log( server_feedback );
+        /* -- Check to see if the developer has set hook-- */
+        cwc.Hooks.prototype.invoke({
+            hook_name : 'connection-success',
+            arguments : server_feedback,
+        } );
 
+        /* -- Save the data -- */
         if( cwc._cwc_type  == 'controller' )
         {
-            try {
-                /* -- Invoke the connection success message -- */
-                cwc.Hooks.prototype.invoke({
-                    hook_name : 'cwc:save-client-data',
-                    arguments : server_feedback,
-                } );
-            } catch ( e ) {
-                console.log('saved faild');
-            }
+            /* -- save the connection data -- */
+            cwc.Hooks.prototype.invoke({
+                hook_name : 'cwc:save-client-data',
+                arguments : server_feedback,
+            } );
         }
 
     };
@@ -183,7 +184,7 @@
     {
         /* -- Invoke the connection success message -- */
         cwc.Hooks.prototype.invoke({
-            hook_name      : 'cwc:connection-failed',
+            hook_name      : 'connection-failed',
             arguments : this.connection_options,
         });
 

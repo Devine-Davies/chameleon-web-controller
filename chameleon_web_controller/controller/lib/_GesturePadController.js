@@ -134,13 +134,13 @@
         var instructions = this.all_controllers[ c_id ].instructions;
 
         /* -- Feed back infaomtion -- */
-        var feedback = cwc.ControllerMaster.prototype.get_feedback_data(
-            ev, 'GesturePadController'
+        var input_data = cwc.ControllerMaster.prototype.get_input_data(
+            ev, 'GesturePadController', instructions
         );
 
         /* -- check if hook has been applied -- */
         cwc.ControllerMaster.prototype.invoke_hook(
-            'on-move', instructions, feedback
+            'on-move', instructions, input_data
         );
 
         this.tracking = c_id;
