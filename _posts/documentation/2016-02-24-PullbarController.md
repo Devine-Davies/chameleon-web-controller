@@ -27,7 +27,7 @@ Add a the cwc style to your {{ page.title }} with the `.cwc-style` class.
 {% endhighlight %}
 
 ### JavaScript Declaration
-`cwc.ControllerMaster({})` must be included and the {{ page.this_obj }} has to be initiated after the DOM has finshed loading.
+`cwc.ControllerMaster({})` must be included and the {{ page.this_obj }} has to be initiated after the DOM has finished loading.
 
 {% highlight javascript linenos %}
 /*------------------------------------------------------
@@ -57,7 +57,7 @@ Additional settings can be added to each Pullbar controller through the use of t
 | instructions  | Type    | Vales                                                   |
 | ------------- | ------- | --------------                                          |
 | direction     | String  | Horizontal or Vertical.                                 |
-| on-pull       | Hook    | The hook name you wish to invoke whel Pullbar is pulled |
+| on-pull       | Hook    | The hook name you wish to invoke when Pullbar is pulled |
 
 {% highlight html linenos %}
 data-cwc-instructions='{ "direction" : "vertical", "on-pull " : "hook:cunstom-hook" }'
@@ -67,7 +67,7 @@ data-cwc-instructions='{ "direction" : "vertical", "on-pull " : "hook:cunstom-ho
 [comment]: <> (--------------------------------------------------------------------------------------------------------)
 
 ## On pull hook
-The on pull methord is fired when the user is interacting with a Pullbar.
+The on pull method is fired when the user is interacting with a Pullbar.
 
 | instructions  | Type    | Vales                                                |
 | ------------- | ------- | --------------                                       |

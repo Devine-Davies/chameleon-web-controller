@@ -8,7 +8,7 @@ f_image      : "/images/installation@2x.png"
 categories   : general
 tax 	     : general
 ---
-**cwc** makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly customisable.
+**cwc** makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but highly customisable.
 <!--more-->
 
 

@@ -5,13 +5,13 @@
     <description></description>
     <link>http://devine-davies.github.io/chameleon-web-controller/</link>
     <atom:link href="http://devine-davies.github.io/chameleon-web-controller/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 19 Apr 2016 23:06:27 +0100</pubDate>
-    <lastBuildDate>Tue, 19 Apr 2016 23:06:27 +0100</lastBuildDate>
+    <pubDate>Wed, 20 Apr 2016 00:54:40 +0100</pubDate>
+    <lastBuildDate>Wed, 20 Apr 2016 00:54:40 +0100</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
         <title>Installation</title>
-        <description>&lt;p&gt;&lt;strong&gt;cwc&lt;/strong&gt; makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but hightly customisable.
+        <description>&lt;p&gt;&lt;strong&gt;cwc&lt;/strong&gt; makes it easy for you to start developing your second screen applications. We have developed the framework so that minimal setup is required but highly customisable.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
@@ -157,11 +157,11 @@
     
       <item>
         <title>Connecting</title>
-        <description>&lt;p&gt;When you have installed the &lt;strong&gt;cwc&lt;/strong&gt; node server, connecting clinet so that they can shear bidrectinal data can be acomplised is just a few steps.
+        <description>&lt;p&gt;When you have installed the &lt;strong&gt;cwc&lt;/strong&gt; node server, connecting client so that they can shear bidrectinal data can be accomplished is just a few steps.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Both the &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc-display-master.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc-controller-master.js&lt;/code&gt; have a built in server object, allowing each client to connect to the server. The following pramaters have to set when initiating the &lt;strong&gt;cwc.Server&lt;/strong&gt; object.&lt;/p&gt;
+&lt;p&gt;Both the &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc-display-master.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc-controller-master.js&lt;/code&gt; have a built in server object, allowing each client to connect to the server. The following parameters have to set when initiating the &lt;strong&gt;cwc.Server&lt;/strong&gt; object.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -220,11 +220,11 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Chameleon Web Controller&lt;/strong&gt; only has support for WebSocket, in near futrue we hope to releases support for other Node Sockets implementations.&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Chameleon Web Controller&lt;/strong&gt; only has support for WebSocket, in near future we hope to releases support for other Node Sockets implementations.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;connect-method&quot;&gt;Connect method&lt;/h2&gt;
-&lt;p&gt;Whence the &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc.Server&lt;/code&gt; object is initiated, calling the &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; method on the object will allow the clinet to connect.&lt;/p&gt;
+&lt;p&gt;Whence the &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc.Server&lt;/code&gt; object is initiated, calling the &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; method on the object will allow the client to connect.&lt;/p&gt;
 
 &lt;h4 id=&quot;display-cwc-display-masterjs&quot;&gt;Display (cwc-display-master.js)&lt;/h4&gt;
 
@@ -234,7 +234,7 @@
 4
 5
 6&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cm&quot;&gt;/*------------------------------------------------------
-* @methord - cwc.Server Connect methord
+* @method - cwc.Server Connect method
 * @info    - cwc-display-master.js
 */&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;Server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
@@ -250,11 +250,11 @@
 5
 6
 7&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cm&quot;&gt;/*------------------------------------------------------
-* @methord - cwc.Server Connect methord
+* @method - cwc.Server Connect method
 * @info    - cwc-controller-master.js
 */&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;Server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;mi&quot;&gt;000000&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// You must provid cluster code&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;000000&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// You must provide cluster code&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -263,7 +263,7 @@
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;connection-hooks&quot;&gt;Connection Hooks&lt;/h2&gt;
-&lt;p&gt;Predefined hooks can be set up on both the display and controller clinets to capture connection methord sent from the server.&lt;/p&gt;
+&lt;p&gt;Predefined hooks can be set up on both the display and controller client’s to capture connection methord sent from the server.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -298,7 +298,7 @@
 &lt;/table&gt;
 
 &lt;h2 id=&quot;on-connection-success-hook&quot;&gt;On connection success hook&lt;/h2&gt;
-&lt;p&gt;A predefined hook can be set up on both the display and controller clinets to capture a &lt;code class=&quot;highlighter-rouge&quot;&gt;connection-sucsess&lt;/code&gt; event from the server. Hook will need to be defined before calling the &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;A predefined hook can be set up on both the display and controller client’s to capture a &lt;code class=&quot;highlighter-rouge&quot;&gt;connection-success&lt;/code&gt; event from the server. Hook will need to be defined before calling the &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; method.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -312,7 +312,7 @@
     &lt;tr&gt;
       &lt;td&gt;connection-success&lt;/td&gt;
       &lt;td&gt;Hook&lt;/td&gt;
-      &lt;td&gt;Called when the clinet has sucsessfuly connected&lt;/td&gt;
+      &lt;td&gt;Called when the client has successfuly connected&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -321,7 +321,7 @@
 2
 3
 4
-5&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cm&quot;&gt;/* -- Crete connection sucsess | Hook -- */&lt;/span&gt;
+5&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cm&quot;&gt;/* -- Crete connection success | Hook -- */&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;Hooks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set_hook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;na&quot;&gt;hook_name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;cwc:connection-success&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;na&quot;&gt;method&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;feedback&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;on_connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;feedback&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -329,7 +329,7 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;on-connection-failed-hook&quot;&gt;On connection failed hook&lt;/h2&gt;
-&lt;p&gt;A predefined hook can be set up on both the display and controller clinets to capture a &lt;code class=&quot;highlighter-rouge&quot;&gt;connection-failed&lt;/code&gt; event from the server. Hook will need to be defined before calling the &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;A predefined hook can be set up on both the display and controller client’s to capture a &lt;code class=&quot;highlighter-rouge&quot;&gt;connection-failed&lt;/code&gt; event from the server. Hook will need to be defined before calling the &lt;code class=&quot;highlighter-rouge&quot;&gt;connect&lt;/code&gt; method.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -343,7 +343,7 @@
     &lt;tr&gt;
       &lt;td&gt;connection-failed&lt;/td&gt;
       &lt;td&gt;Hook&lt;/td&gt;
-      &lt;td&gt;Called when the clinet has failed to connecte&lt;/td&gt;
+      &lt;td&gt;Called when the client’s has failed to connect&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -374,7 +374,7 @@
     &lt;tr&gt;
       &lt;td&gt;controller-connected&lt;/td&gt;
       &lt;td&gt;Hook&lt;/td&gt;
-      &lt;td&gt;Called when the clinet has connected to the display&lt;/td&gt;
+      &lt;td&gt;Called when the client has connected to the display&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -405,7 +405,7 @@
     &lt;tr&gt;
       &lt;td&gt;controller-disconnected&lt;/td&gt;
       &lt;td&gt;Hook&lt;/td&gt;
-      &lt;td&gt;Called when the clinet has disconnected from the display&lt;/td&gt;
+      &lt;td&gt;Called when the client has disconnected from the display&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -421,8 +421,8 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h2 id=&quot;feedback-infromation&quot;&gt;Feedback infromation&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;connection-success&lt;/code&gt; , &lt;code class=&quot;highlighter-rouge&quot;&gt;connection-failed&lt;/code&gt; , &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-connected&lt;/code&gt; , &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-disconnected&lt;/code&gt; when invoked by the server all receive feedback information from the server. The table below outlines the infromation sent by the server.&lt;/p&gt;
+&lt;h2 id=&quot;feedback-information&quot;&gt;Feedback information&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;connection-success&lt;/code&gt; , &lt;code class=&quot;highlighter-rouge&quot;&gt;connection-failed&lt;/code&gt; , &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-connected&lt;/code&gt; , &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-disconnected&lt;/code&gt; when invoked by the server all receive feedback information from the server. The table below outlines the information sent by the server.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -434,9 +434,9 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;clinet_type&lt;/td&gt;
+      &lt;td&gt;client_type&lt;/td&gt;
       &lt;td&gt;String&lt;/td&gt;
-      &lt;td&gt;The type of clinet &lt;code class=&quot;highlighter-rouge&quot;&gt;display&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;Controller&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The type of client &lt;code class=&quot;highlighter-rouge&quot;&gt;display&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;Controller&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;cluster_code&lt;/td&gt;
@@ -457,16 +457,16 @@
 &lt;/table&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;When trying to acsess this infromatrion from the &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-connected&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-disconnected&lt;/code&gt; events, infromation is presented in an &lt;code class=&quot;highlighter-rouge&quot;&gt;array&lt;/code&gt; formatt.&lt;/p&gt;
+  &lt;p&gt;When trying to access this infromatrion from the &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-connected&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-disconnected&lt;/code&gt; events, information is presented in an &lt;code class=&quot;highlighter-rouge&quot;&gt;array&lt;/code&gt; formatt.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;usfull-snippets&quot;&gt;Usfull snippets&lt;/h2&gt;
 &lt;p&gt;Examples you may find useful to used within your application.&lt;/p&gt;
 
 &lt;h3 id=&quot;looping-through-connected-controllers&quot;&gt;Looping through connected controllers&lt;/h3&gt;
-&lt;p&gt;The snippit below can be used with both the &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-connected&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-disconnected&lt;/code&gt; events to retrieve all controllers infromation whom are connected to the display.&lt;/p&gt;
+&lt;p&gt;The snippit below can be used with both the &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-connected&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;controller-disconnected&lt;/code&gt; events to retrieve all controllers information whom are connected to the display.&lt;/p&gt;
 
-&lt;h4 id=&quot;display-clinet&quot;&gt;Display clinet&lt;/h4&gt;
+&lt;h4 id=&quot;display-client&quot;&gt;Display client&lt;/h4&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -546,7 +546,7 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
 &lt;span class=&quot;cm&quot;&gt;/*------------------------------------------------------
-* @methord - cwc.Server Connect methord
+* @method - cwc.Server Connect method
 * @info    - cwc-display-master.js
 * @info    - Hooks must be created before connecting
 */&lt;/span&gt;
@@ -596,7 +596,7 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;javascript-declaration&quot;&gt;JavaScript Declaration&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cwc.ControllerMaster({})&lt;/code&gt; must be included and the &lt;code class=&quot;highlighter-rouge&quot;&gt;PullbarController({})&lt;/code&gt; has to be initiated after the DOM has finshed loading.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cwc.ControllerMaster({})&lt;/code&gt; must be included and the &lt;code class=&quot;highlighter-rouge&quot;&gt;PullbarController({})&lt;/code&gt; has to be initiated after the DOM has finished loading.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -649,7 +649,7 @@
     &lt;tr&gt;
       &lt;td&gt;on-pull&lt;/td&gt;
       &lt;td&gt;Hook&lt;/td&gt;
-      &lt;td&gt;The hook name you wish to invoke whel Pullbar is pulled&lt;/td&gt;
+      &lt;td&gt;The hook name you wish to invoke when Pullbar is pulled&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -658,7 +658,7 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;on-pull-hook&quot;&gt;On pull hook&lt;/h2&gt;
-&lt;p&gt;The on pull methord is fired when the user is interacting with a Pullbar.&lt;/p&gt;
+&lt;p&gt;The on pull method is fired when the user is interacting with a Pullbar.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -922,7 +922,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;c-hook:&lt;/td&gt;
-      &lt;td&gt;Prefixing ‘c-hook:’ will invoke a hook dfeined on the controller appliaction&lt;/td&gt;
+      &lt;td&gt;Prefixing ‘c-hook:’ will invoke a hook defined on the controller application&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -983,7 +983,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;tracking-object&quot;&gt;Tracking object&lt;/h3&gt;
-&lt;p&gt;When either the &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc:navgroup-updated&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc:navitem-updated&lt;/code&gt; has been set, the information retuned back to the hook is outlined in the table below.&lt;/p&gt;
+&lt;p&gt;When either the &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc:navgroup-updated&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;cwc:navitem-updated&lt;/code&gt; has been set, the information returned back to the hook is outlined in the table below.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -1730,7 +1730,7 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;/table&gt;
 
 &lt;h2 id=&quot;cartesian-coordinate&quot;&gt;02. Cartesian coordinate&lt;/h2&gt;
-&lt;p&gt;Table below otulines Cartesian coordinate that will be return by a support controler.&lt;/p&gt;
+&lt;p&gt;Table below outlines Cartesian coordinate that will be return by a support controller.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
 &lt;img src=&quot;../images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
@@ -1783,12 +1783,12 @@ Navitem instructions take priority over Navgroup instructions allowing from more
     &lt;tr&gt;
       &lt;td&gt;01.&lt;/td&gt;
       &lt;td&gt;In&lt;/td&gt;
-      &lt;td&gt;User is moving in towards the centre of the Controller returned inputdata.&lt;/td&gt;
+      &lt;td&gt;User is moving in towards the center of the Controller returned inputdata.&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;02.&lt;/td&gt;
       &lt;td&gt;Out&lt;/td&gt;
-      &lt;td&gt;User is moving in away from the centre of the Controller returned inputdata.&lt;/td&gt;
+      &lt;td&gt;User is moving in away from the center of the Controller returned inputdata.&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;03.&lt;/td&gt;

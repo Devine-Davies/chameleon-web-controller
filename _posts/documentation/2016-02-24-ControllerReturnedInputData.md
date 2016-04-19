@@ -42,7 +42,7 @@ compass_rose is the movment given as
 | 08. | Move up left    | NW           |
 
 ## 02. Cartesian coordinate
-Table below otulines Cartesian coordinate that will be return by a support controler.
+Table below outlines Cartesian coordinate that will be return by a support controller.
 
 ![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
 ![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
@@ -61,8 +61,8 @@ Table below otulines the axis direction that will be return by a support control
 
 | No. | Movment type  | Cartesian coordinate                                            |
 |---- | ------------- | ----------------------------------                              |
-| 01. | In            | User is moving in towards the centre of the {{ page.title }}.   |
-| 02. | Out           | User is moving in away from the centre of the {{ page.title }}. |
+| 01. | In            | User is moving in towards the center of the {{ page.title }}.   |
+| 02. | Out           | User is moving in away from the center of the {{ page.title }}. |
 | 03. | Static        | Moving in the same direction.                                   |
 
 
