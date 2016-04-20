@@ -93,7 +93,7 @@
         /* -- Negative number -- */
         if( angle < 0 ) { angle = ( 180 - Math.abs( angle ) ); }
 
-        /* -- Posative number -- */
+        /* -- Positive number -- */
         else { angle = (180 + angle); }
 
         var directions = ["W", "NW", "N", "NE", "E", "SE", "S", "SW", "W"];
@@ -105,8 +105,8 @@
     };
 
     /*------------------------------------------------------
-    * @function - Calculate cartesian coordinates
-    * @info - Retuns UE Editor like feedback for controller
+    * @function - Calculate Cartesian coordinates
+    * @info - Reruns UE Editor like feedback for controller
     */
     ControllerMaster.prototype.calculate_cartesian_coordinates = function( z )
     {
@@ -117,7 +117,7 @@
 
     /*------------------------------------------------------
     * @function - Clamp
-    * @info - restricted the threshold of movemnt
+    * @info - restricted the threshold of movement
     */
     ControllerMaster.prototype.clamp = function(num, min, max)
     {
@@ -144,7 +144,7 @@
             y : check(  Math.abs( this.last_delta_pos.y ), Math.abs( delta.y ) )
         }
 
-        /* -- Record the movment -- */
+        /* -- Record the moment -- */
         this.last_delta_pos = delta;
 
         /* -- Return the values -- */

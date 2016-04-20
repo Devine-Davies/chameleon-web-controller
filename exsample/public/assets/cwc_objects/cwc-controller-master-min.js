@@ -161,10 +161,11 @@ function isFunctionA(object)
 }
 
 /*------------------------------------------------------
-* @object - TODO
-* @OnFail - Would like to pass message down on why it faild
+ Server
+ ------------------------------------------------------
+ * Handles connection process
+ ------------------------------------------------------
 */
-
 !function( cwc ){
   'use strict';
 
@@ -175,7 +176,7 @@ function isFunctionA(object)
     */
     function Server( options )
     {
-        /* -- register the plugin -- */
+        /* -- register the plug-in -- */
         cwc.registerPlugin(this, 'Server');
 
         /* -- connect to the host via web sockets -- */
@@ -184,10 +185,10 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @object - Clinet key
-    * @info   - Key given to clinet by server
+    * @object - Client key
+    * @info   - Key given to client by server
     */
-    Server.prototype.clinet_key = '';
+    Server.prototype.client_key = '';
 
     /*------------------------------------------------------
     * @object - Cluster code
@@ -248,17 +249,17 @@ function isFunctionA(object)
             break;
         }
 
-        /* -- Allow our cwc object to be reatch at the _global scope -- */
+        /* -- If connected -- */
         if( socket )
         {
-            /* -- Creat callback for class -- */
+            /* -- Create callback for class -- */
             this.create_reserved_connection_status_hooks();
 
             /* -- Set global connection  -- */
             cwc._server_connection = socket;
         }
 
-        /* -- Set appropiat socket evetn's -- */
+        /* -- Set appropriate socket events -- */
         if( socket && type == 'ws' )
         {
             this.set_connection_events();
@@ -268,18 +269,18 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Create hooks
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.create_reserved_connection_status_hooks = function( length )
     {
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:connection-success',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_success( feedback );
         } } );
 
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:connection-failed',
           method    : function( feedback ) {
@@ -290,7 +291,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Connect
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.gen_cluster_code = function( length  )
     {
@@ -301,22 +302,22 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Connect
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.build_ws_connection = function( host, port )
     {
         var cluster_code  = this.cluster_code;
-        var clinet_type   = cwc._cwc_type;
+        var client_type   = cwc._cwc_type;
 
         return 'ws:' + host + ':'+ port +
         '?cluster_code=' + cluster_code +
-        '&clinet_type='  + clinet_type;
+        '&client_type='  + client_type;
 
     };
 
     /*------------------------------------------------------
     * @function - On connection success
-    * @info     - how to react when connection successfull
+    * @info     - how to react when connection successful
     */
     Server.prototype.on_connection_success = function( server_feedback )
     {
@@ -340,7 +341,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On greeting message
-    * @info     - how to react when connection successfull
+    * @info     - how to react when connection successful
     */
     Server.prototype.on_connection_faild = function()
     {
@@ -354,7 +355,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Set connection events
-    * @info - onerror, onclose, onopen,onmessage
+    * @info     - onerror, onclose, onopen, onmessage
     */
     Server.prototype.set_connection_events = function()
     {
@@ -385,7 +386,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On open
-    * @info - on connect open
+    * @info     - on connect open
     */
     Server.prototype.onopen = function( con )
     {
@@ -394,17 +395,17 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On error
-    * @info - on connect error
+    * @info     - on connect error
     */
     Server.prototype.onerror = function()
     {
-        console.log('Error connectiong');
+        console.log('Error connecting');
 
     };
 
     /*------------------------------------------------------
     * @function - On close
-    * @info - Server has sent a message
+    * @info     - Server has sent a message
     */
     Server.prototype.onclose = function()
     {
@@ -413,12 +414,12 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On message
-    * @info - Server has sent a message
+    * @info     - Server has sent a message
     */
-    Server.prototype.onmessage = function( recived_package )
+    Server.prototype.onmessage = function( revived_package )
     {
         /* -- Message data -- */
-        var hook_info = JSON.parse( recived_package.data );
+        var hook_info = JSON.parse( revived_package.data );
 
         /* -- Look for users -- */
         cwc.Hooks.prototype.invoke({
@@ -436,7 +437,7 @@ function isFunctionA(object)
     */
     Server.prototype.send_message = function( data )
     {
-        /* -- Is this a valid mesage : return true not valid -- */
+        /* -- Is this a valid message : return true not valid -- */
         if( ! this.validate_onmessage( data ) )
         {
             if( cwc._server_connection )
@@ -453,7 +454,7 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Validate onmessage
+    * @function - Validate on-message
     * @info - Validate the message from the server
     */
     Server.prototype.validate_onmessage = function( data )
@@ -487,6 +488,14 @@ function isFunctionA(object)
 
 }( window.cwc );
 
+/*------------------------------------------------------
+ Hooks
+ ------------------------------------------------------
+ * Used for client communication and CWC call back function
+ * Developer can also set hooks for complainants callback function
+ ------------------------------------------------------
+*/
+
 !function( cwc ){
   'use strict';
 
@@ -497,13 +506,13 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @array
-    * Place to store all custom methord
+    * Place to store all custom method
     */
     Hooks.prototype.all_reserved_hooks = {};
 
     /*------------------------------------------------------
     * @array
-    * Place to store all custom methord
+    * Place to store all custom method
     */
     Hooks.prototype.all_hooks = {};
 
@@ -515,7 +524,7 @@ function isFunctionA(object)
     {
         if( prams.hasOwnProperty('hook_name') && prams.hasOwnProperty('method') )
         {
-            /* -- Check to see if is ment for display -- */
+            /* -- Check to see if for display -- */
             if ( prams.hook_name.includes('cwc:') )
             {
                 this.all_reserved_hooks[ prams.hook_name ] = {
@@ -533,7 +542,7 @@ function isFunctionA(object)
         }
         else
         {
-            console.log('Hook name and methord is required: check cwc git repo for more info on Hooks');
+            console.log('Hook name and method is required: check cwc git repo for more info on Hooks');
         }
 
     };
@@ -555,7 +564,7 @@ function isFunctionA(object)
             /* -- If property was not found : return true -- */
             if ( ! data.hasOwnProperty( checks[ i ] ) )
             {
-                console.log('Server message is not properly fromatted.');
+                console.log('Server message is not properly formatted.');
                 return false;
             }
 
@@ -571,7 +580,7 @@ function isFunctionA(object)
     */
     Hooks.prototype.invoke_client_hook = function( hook_info )
     {
-        /* -- Is this a valid mesage : return true not valid -- */
+        /* -- Is this a valid msg : return true not valid -- */
         if( this.validate_hook( hook_info ) )
         {
             if( cwc._server_connection )
@@ -588,8 +597,12 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function
-    * where we invoke custom methods
+    * @function - invoke
+    * @info - where we invoke custom methods
+    * @d-hook: - will send the hook across server to display
+    * @c-hook: - will send the hook across server to controller
+    * @cwc:    - reserved hook by cwc can also be used with d-hook && c-hook
+    * @hook:   - user created hook
     */
     Hooks.prototype.invoke = function( hook_info )
     {
@@ -613,7 +626,7 @@ function isFunctionA(object)
 
         }
 
-        /* -- Check to see if is ment for display -- */
+        /* -- Check to see is for controller -- */
         else if ( hook_name.includes('c-hook:') )
         {
             this.invoke_client_hook( {
@@ -624,24 +637,28 @@ function isFunctionA(object)
 
         }
 
+        /* -- Call the hook on this client -- */
         else if ( hook_name.includes('cwc:') )
         {
-            /* -- Call the hook on this clinet -- */
             this.execute( this.all_reserved_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
         }
 
-        /* -- Check to see if is ment for display -- */
+        /* -- is user hook -- */
         else
         {
-            /* -- Can be called using hook:*(name) usfull on data attr -- */
+            /* -- Can be called using hook:*(name) useful on data attr -- */
             var hook_name = hook_info.hook_name.replace('hook:','')
 
-            /* -- Call the hook on this clinet -- */
+            /* -- Call the hook on this client -- */
             this.execute( this.all_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
         }
 
     };
 
+    /*------------------------------------------------------
+    * @function - execute
+    * @info - call the hook
+    */
     Hooks.prototype.execute = function( hooks, hook_name, args, cwc_metadata  )
     {
         if( hooks.hasOwnProperty( hook_name ) )
@@ -689,19 +706,19 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @string - Storage name
-    * @info     - The name given to the local storage object
+    * @info   - The name given to the local storage object
     */
     CacheControl.prototype.storage_name = 'cwc-cluster-cache';
 
     /*------------------------------------------------------
-    * @int - Time Threshold
+    * @int  - Time Threshold
     * @info - declare how long data should live in local storage
     */
     CacheControl.prototype.time_threshold = 120;
 
     /*------------------------------------------------------
     * @object - Storage data
-    * @info - Save the local storage object here
+    * @info   - Save the local storage object here
     */
     CacheControl.prototype.storage_data = {};
 
@@ -722,7 +739,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Fetch storage data
-    * @info - Function to retrieve local storage data
+    * @info      - Function to retrieve local storage data
     */
     CacheControl.prototype.fetch_storage_data = function()
     {
@@ -737,7 +754,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Retrieve storage data
-    * @info - function to get the local stage object
+    * @info      - function to get the local stage object
     */
     CacheControl.prototype.retrieve_storage_data = function()
     {
@@ -767,7 +784,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Delete old codes
-    * @info - removes the old codes from the local storage
+    * @info      - removes the old codes from the local storage
     */
     CacheControl.prototype.delete_old_codes = function()
     {
@@ -793,7 +810,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Check for existence
-    * @info - Check to see if the code has been set
+    * @info      - Check to see if the code has been set
     */
     CacheControl.prototype.check_for_existence = function( client_data )
     {
@@ -821,9 +838,14 @@ function isFunctionA(object)
 
 /*------------------------------------------------------
  * Controller Master
- *------------------------------------------------------
+ * ------------------------------------------------------
+ * Dependencies
+ * ------------------------------------------------------
+ * Hammer.js was used thought the build of this component,
+ * special thanks to the awesome developers at http://hammerjs.github.io/
+ * ------------------------------------------------------
  * Talk About
- -------------------------------------------------------
+  -------------------------------------------------------
  • Centralising functions to allow shared code to reduce
    development time from the lack of writing repetitive
    code
@@ -844,7 +866,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @object - Hammer dirs
-    * @info - Take from the hammer js spec
+    * @info   - Take from the hammer is spec
     */
     ControllerMaster.prototype.hammer_dirs = {
         1  : 'none',
@@ -855,8 +877,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @object - Last Posistion
-    * @info - this will allow to determan
+    * @object - Last Position
+    * @info - this will allow to determine
     */
     ControllerMaster.prototype.last_delta_pos = {
         x : 0,
@@ -883,13 +905,13 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Update nav tracking
-    * @info - Will update the tracking system for next items and groups
+    * @info : Will update the tracking system for next items and groups
     */
     ControllerMaster.prototype.fetch_instructions = function( elm )
     {
         var tax = 'data-cwc-instructions';
 
-        /* -- Search for nav end inftructions-- */
+        /* -- Search for nav end instructions-- */
         if( elm.hasAttribute( tax )  )
         {
             return JSON.parse(
@@ -909,7 +931,7 @@ function isFunctionA(object)
         /* -- Negative number -- */
         if( angle < 0 ) { angle = ( 180 - Math.abs( angle ) ); }
 
-        /* -- Posative number -- */
+        /* -- Positive number -- */
         else { angle = (180 + angle); }
 
         var directions = ["W", "NW", "N", "NE", "E", "SE", "S", "SW", "W"];
@@ -921,8 +943,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Calculate cartesian coordinates
-    * @info - Retuns UE Editor like feedback for controller
+    * @function - Calculate Cartesian coordinates
+    * @info - Reruns UE Editor like feedback for controller
     */
     ControllerMaster.prototype.calculate_cartesian_coordinates = function( z )
     {
@@ -933,7 +955,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Clamp
-    * @info - restricted the threshold of movemnt
+    * @info - restricted the threshold of movement
     */
     ControllerMaster.prototype.clamp = function(num, min, max)
     {
@@ -960,7 +982,7 @@ function isFunctionA(object)
             y : check(  Math.abs( this.last_delta_pos.y ), Math.abs( delta.y ) )
         }
 
-        /* -- Record the movment -- */
+        /* -- Record the moment -- */
         this.last_delta_pos = delta;
 
         /* -- Return the values -- */
@@ -976,8 +998,8 @@ function isFunctionA(object)
     {
         var input_data  = {};
 
-        /* -- Check to see if user has restriced retured input data -- */
-        var input_r     = ( instructions && instructions.hasOwnProperty('input-r') )? instructions['input-r'].split("|") : 'all-input-data';
+        /* -- Check to see if user has restricted retired input data -- */
+        var input_r = ( instructions && instructions.hasOwnProperty('input-r') )? instructions['input-r'].split("|") : 'all-input-data';
 
         /* -- Direction -- */
         if( (input_r === 'all-input-data') || (input_r.indexOf("direction") != -1) )
@@ -1055,9 +1077,12 @@ function isFunctionA(object)
 /*------------------------------------------------------
  Directional pad
  ------------------------------------------------------
+ * Hammer.js was used thought the build of this component,
+ * special thanks to the awesome developers at http://hammerjs.github.io/
+ ------------------------------------------------------
  * What to talk about
  ------------------------------------------------------
- • Diffrent directions
+ • Different directions
  • About return types (angle, dir, coords, CD)
  • Talk about design
  ------------------------------------------------------
@@ -1115,7 +1140,7 @@ function isFunctionA(object)
         {
             var controller = controllers[ c_id ];
 
-            /* -- Find all btns associated with controller -- */
+            /* -- Find all buttons associated with controller -- */
             var actions = this.controller_buttons_lookup(
                 controllers[ c_id ], c_id
             );
@@ -1132,7 +1157,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Controller buttons lookup
-    * @info - Find all btns associated with controller
+    * @info - Find all button associated with controller
     */
     DPadController.prototype.controller_buttons_lookup = function( group, c_id )
     {
@@ -1171,14 +1196,14 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Button invoked
-    * @info - Users is intracting with controller
+    * @info - Users is interacting with controller
     */
     DPadController.prototype.button_invoked = function( c_id, a_id )
     {
         var action       = this.all_controllers[ c_id ].actions[ a_id ];
         var instructions = this.all_controllers[ c_id ].instructions;
 
-        /* -- Check to see if action can be indertfyed -- */
+        /* -- Check to see if action is allowed -- */
         if(! action.hasAttribute( 'data-cwc-cbtn' ) )
             return;
 
@@ -1243,8 +1268,23 @@ function isFunctionA(object)
 }( window.cwc, Hammer );
 
 /*------------------------------------------------------
- * GesturePadController
+ GesturePadController
  ------------------------------------------------------
+ * Hammer.js was used thought the build of this component,
+ * special thanks to the awesome developers at http://hammerjs.github.io/
+ ------------------------------------------------------
+ * What to talk about
+ ------------------------------------------------------
+ • Different directions
+ • About return types (angle, dir, coords, CD)
+ • Talk about design
+ • Input filters
+ ------------------------------------------------------
+ * Testing
+ ------------------------------------------------------
+ • Browser testing
+ • Adding multi controllers to a single page
+ • Unit testing on function
 */
 
 !function( cwc, Hammer ){
@@ -1285,7 +1325,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Lookup
-    * @info     - Finds all pullbars within the dom
+    * @info     - Finds all pullbars within the DOM
     */
     GesturePadController.prototype.lookup = function()
     {
@@ -1315,8 +1355,8 @@ function isFunctionA(object)
                 instructions : instructions
             });
 
-            /* -- If the movment has been set to pull, then call the users function -- */
-            if( this.get_movment_type( c_id ) == 'swipe' )
+            /* -- If the movement has been set to pull, then call the users function -- */
+            if( this.get_movement_type( c_id ) == 'swipe' )
             {
                 mc.add( new Hammer.Swipe({
                     threshold: 0
@@ -1327,7 +1367,7 @@ function isFunctionA(object)
                 });
             }
 
-            else if( this.get_movment_type( c_id ) == 'pan' )
+            else if( this.get_movement_type( c_id ) == 'pan' )
             {
                 mc.add(new Hammer.Pan({
                     domEvents: true, threshold: 4, pointers: 0
@@ -1342,15 +1382,15 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Get movment type
-    * @info     - Find the movment type given by user
+    * @function - Get movement type
+    * @info     - Find the movement type given by user
     */
-    GesturePadController.prototype.get_movment_type = function( c_id )
+    GesturePadController.prototype.get_movement_type = function( c_id )
     {
-        /* -- get the insrtuctions for the current analog -- */
+        /* -- get the instructions for the current analog -- */
         var instructions = this.all_controllers[ c_id ].instructions;
 
-        /* -- Check the type of movment -- */
+        /* -- Check the type of movement -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
         {
             switch( instructions['movement-type'] )
@@ -1368,7 +1408,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On Move
-    * @info     - User is intracting with controller
+    * @info     - User is instructions with controller
     */
     GesturePadController.prototype.on_move = function( ev )
     {
@@ -1377,7 +1417,7 @@ function isFunctionA(object)
         var analog       = this.all_controllers[ c_id ].pad;
         var instructions = this.all_controllers[ c_id ].instructions;
 
-        /* -- Feed back infaomtion -- */
+        /* -- Feed back information -- */
         var input_data = cwc.ControllerMaster.prototype.get_input_data(
             ev, 'GesturePadController', instructions
         );
@@ -1404,10 +1444,10 @@ function isFunctionA(object)
  ------------------------------------------------------
  * What to talk about
  ------------------------------------------------------
- • Talk about on tick and pan movments
+ • Talk about on tick and pan moments
  • About return types (angle, dir, coords, CD)
- • The two dirrent type of collusion
- • Involvment when moving and how circal reacts to colloshion
+ • The two direct type of collusion
+ • Involvement when moving collision
  • Talk about design
  ------------------------------------------------------
  * Testing
@@ -1463,13 +1503,13 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @object - Animation frame
-    * @info   - Use when pluse movemnt
+    * @info   - Use when tick movement to allow for constant feedback
     */
     AnalogController.prototype.animation_frame = 0;
 
     /*------------------------------------------------------
     * @function - Pad lookup
-    * @info - Looks thought DOM to gather all controllers
+    * @info      - Looks thought DOM to gather all controllers
     */
     AnalogController.prototype.lookup = function()
     {
@@ -1507,8 +1547,8 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - On analog pan
-    * @info - Main methord thst undergos on controller movment
+    * @function - On analogue pan
+    * @info - Main method this undergoes on controller moment
     */
     AnalogController.prototype.on_analog_pan = function( ev )
     {
@@ -1524,7 +1564,7 @@ function isFunctionA(object)
             y : ev.deltaY
         };
 
-        /* -- Feed back infaomtion -- */
+        /* -- Feed back information -- */
         this.returned_input_data = cwc.ControllerMaster.prototype.get_input_data(
             ev, 'AnalogController', instructions
         );
@@ -1553,10 +1593,10 @@ function isFunctionA(object)
 
         var dis = Math.sqrt(dx * dx + dy * dy) + ( trigger_c.radius );
 
-        /* -- Collishion happerning  --*/
+        /* -- Collision happening  --*/
         if (dis > analog_c.radius + trigger_c.radius)
         {
-            /* --- Collision detection : for fix the triiger againsied the of the analog area -- */
+            /* --- Collision detection : to fix the a-btn to the side -- */
             var angle = ev.angle;
             var x = analog_c.x + analog_c.radius * Math.cos( angle * (Math.PI / 180) );
             var y = analog_c.y + analog_c.radius * Math.sin( angle * (Math.PI / 180) );
@@ -1564,7 +1604,7 @@ function isFunctionA(object)
             /* -- add auto class -- */
             analog.classList.add("auto");
 
-            /* -- Move the tigger handle -- */
+            /* -- Move the trigger handle -- */
             this.trigger_translate({
                 trigger : trigger,
                 delta_x : x,
@@ -1578,7 +1618,7 @@ function isFunctionA(object)
             /* -- Remove class auto -- */
             analog.classList.remove("auto");
 
-            /* -- Move the tigger handle -- */
+            /* -- Move the trigger handle -- */
             this.trigger_translate({
                 trigger : trigger,
                 delta_x : delta.x,
@@ -1613,7 +1653,7 @@ function isFunctionA(object)
 
         }
 
-        /* -- If the movment has been set to pull, then call the users function -- */
+        /* -- If the moment has been set to pull, then call the users function -- */
         else if( this.get_movment_type() == 'pan' )
         {
             /* -- check if hook has been applied -- */
@@ -1625,11 +1665,11 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On pan start
-    * @info - Fired as when controller first inteacted
+    * @info     - Fired as when controller first interacted
     */
     AnalogController.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
     {
-        /* -- Track the onbject being used -- */
+        /* -- Track the object being used -- */
         this.tracking = c_id;
 
         /* -- check if hook has been applied -- */
@@ -1648,7 +1688,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On pan end
-    * @info - Fired as soon as user has finshed inteacteing with controller
+    * @info     - Fired as soon as user has finished interacting with controller
     */
     AnalogController.prototype.on_pan_end = function( c_id, instructions, analog, trigger )
     {
@@ -1657,7 +1697,7 @@ function isFunctionA(object)
             'panend', instructions, null
         );
 
-        /* -- Remove any if nessary -- */
+        /* -- Remove any if necessary -- */
         analog.classList.remove("active");
         analog.classList.remove("auto");
 
@@ -1674,21 +1714,21 @@ function isFunctionA(object)
             this.on_tick('destroy');
         }
 
-        /* -- Track the onbject being used -- */
+        /* -- Track the object being used -- */
         this.tracking = null;
 
     };
 
     /*------------------------------------------------------
-    * @function - Get movment type
-    * @info - Check witch intraction has been set for controller
+    * @function - Get moment type
+    * @info     - Check witch interaction has been set for controller
     */
     AnalogController.prototype.get_movment_type = function(  )
     {
-        /* -- get the insrtuctions for the current analog -- */
+        /* -- get the instructions for the current analogue -- */
         var instructions = this.all_controllers[ this.tracking ].instructions;
 
-        /* -- Check the type of movment -- */
+        /* -- Check the type of movement -- */
         if( instructions.hasOwnProperty( 'movement-type' ) )
         {
             return instructions['movement-type'];
@@ -1702,7 +1742,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On tick
-    * @info - When controller has enterd continuous movment
+    * @info - When controller has entered continuous moment
     */
     AnalogController.prototype.on_tick = function( order )
     {
@@ -1717,7 +1757,7 @@ function isFunctionA(object)
         /* -- Start the tick process -- */
         else
         {
-            /* -- get the insrtuctions for the current analog -- */
+            /* -- get the instructions for the current analog -- */
             var instructions = cwc.AnalogController.prototype.all_controllers[
                 cwc.AnalogController.prototype.tracking
             ].instructions;
@@ -1759,14 +1799,17 @@ function isFunctionA(object)
 }( window.cwc, Hammer );
 
 /*------------------------------------------------------
- Pull bar Controller
+ GesturePadController
+ ------------------------------------------------------
+ * Hammer.js was used thought the build of this component,
+ * special thanks to the awesome developers at http://hammerjs.github.io/
  ------------------------------------------------------
  * What to talk about
  ------------------------------------------------------
- • Talk about on tick and pan movments
+ • Talk about on tick and pan movements
  • About return types (angle, dir, coords, CD)
- • The two dirrent type of collusion
- • Involvment when moving and how circal reacts to colloshion
+ • The two different type of collusion
+ • Involvement when moving and how circle reacts to collision
  • Talk about design
  ------------------------------------------------------
  * Testing
@@ -1811,14 +1854,14 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @object - Returned data
-    * @info - All of the infromation gatherd during movement
+    * @info - All of the information goatherd during movement
     */
     PullbarController.prototype.returned_data = {
     };
 
     /*------------------------------------------------------
     * @object - Request id
-    * @info   - reuest animation frame id
+    * @info   - request animation frame id
     */
     PullbarController.prototype.request_id = 0;
 
@@ -1830,7 +1873,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Lookup
-    * @info     - Finds all pullbars within the dom
+    * @info     - Finds all pullbars within the DOM
     */
     PullbarController.prototype.lookup = function( )
     {
@@ -1874,7 +1917,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On pullbars trigger pan
-    * @info     - Panning options an collishion
+    * @info     - Panning options an collision
     */
     PullbarController.prototype.on_pullbars_trigger_pan = function( ev )
     {
@@ -1884,7 +1927,7 @@ function isFunctionA(object)
         var trigger         = this.all_pullbars[ g_id ].trigger;
         var instructions    = this.all_pullbars[ g_id ].instructions;
 
-        /* -- Get the style infromation about the componants -- */
+        /* -- Get the style information about the components -- */
         var style = {
             pbh : pullbar.clientHeight,
             pbw : pullbar.clientWidth,
@@ -1917,7 +1960,7 @@ function isFunctionA(object)
             this.returned_data.viewport_target = instructions['viewport-target'];
         }
 
-        /* -- Collishion -- */
+        /* -- collision -- */
         if( threshold.y.top || threshold.y.btm )
         {
             /* -- Check if we in enter frame -- */
@@ -1932,7 +1975,7 @@ function isFunctionA(object)
 
         }
 
-        /* -- no collishion -- */
+        /* -- no collision -- */
         else if( (! threshold.y.top) && (! threshold.y.btm) )
         {
             /* -- Start the tick process -- */
@@ -1999,7 +2042,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Pullbar trigger translate
-    * @info     - Clear out the fimer and reset collishion
+    * @info     - Clear out the timer and reset collision
     */
     PullbarController.prototype.pullbar_trigger_translate = function( prams )
     {
@@ -2031,7 +2074,7 @@ function isFunctionA(object)
         /* -- Start the tick process -- */
         else
         {
-            /* -- get the insrtuctions for the current analog -- */
+            /* -- get the instructions for the current analog -- */
             var instructions = cwc.PullbarController.prototype.all_pullbars[
                 cwc.PullbarController.prototype.tracking
             ].instructions;
@@ -2064,7 +2107,6 @@ function isFunctionA(object)
  *------------------------------------------------------
  * To-Do
  -------------------------------------------------------
- • Fix support for scroll animation on tap.
  ------------------------------------------------------
 */
 
@@ -2089,7 +2131,7 @@ function isFunctionA(object)
     */
     TextCapture.prototype.set_cwc_hooks = function()
     {
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:text-capture-invoked',
           method    : function( prams ) {
@@ -2102,11 +2144,11 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Create text capture
-    * @info - Append a text captrue item to the DOM
+    * @info - Append a text capture item to the DOM
     */
     TextCapture.prototype.create_text_capture = function( prams )
     {
-        /* -- Check elm dose not exsist -- */
+        /* -- Check elm dose not exist -- */
         if ( ! document.querySelector('#' + prams.name ) )
         {
             var input = document.createElement("textarea");
@@ -2134,11 +2176,11 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Text capture done
-    * @info - Called when the user has finshed inputing text
+    * @info - Called when the user has finished inputting text
     */
     TextCapture.prototype.text_capture_done = function( elm )
     {
-        /* -- Remove elment -- */
+        /* -- Remove element -- */
         document.body.removeChild( elm );
 
         /* -- Send the recorded data -- */

@@ -1,8 +1,8 @@
 /*------------------------------------------------------
  Hooks
  ------------------------------------------------------
- * Used for clinet communication and cwc call back function
- * Developer can also set hooks for compnants callback function
+ * Used for client communication and CWC call back function
+ * Developer can also set hooks for complainants callback function
  ------------------------------------------------------
 */
 

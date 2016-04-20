@@ -27,7 +27,7 @@
     */
     TextCapture.prototype.set_cwc_hooks = function()
     {
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:text-capture-invoked',
           method    : function( prams ) {
@@ -72,7 +72,7 @@
 
     /*------------------------------------------------------
     * @function - Text capture done
-    * @info - Called when the user has finshed inputing text
+    * @info - Called when the user has finished inputting text
     */
     TextCapture.prototype.text_capture_done = function( elm )
     {

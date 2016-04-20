@@ -24,7 +24,7 @@
 
         }
 
-        /* -- Start the navgroup process -- */
+        /* -- Start the Navgroup process -- */
         this.reflow();
 
         if ( this.navgroups_count() > 0 )
@@ -80,7 +80,7 @@
 
     /*------------------------------------------------------
     * @object - Tracking
-    * @info - away of tracking last and previous nav items
+    * @info - away of tracking last and previous Navitem
     */
     Navgroup.prototype.tracking = {
         previous : {},
@@ -97,7 +97,7 @@
 
     /*------------------------------------------------------
     * @object - Groups & Items
-    * @info - Keep and record of all found nav elms
+    * @info - Keep and record of all found Navitems elms
     */
     Navgroup.prototype.nav_elms = {
 
@@ -192,7 +192,7 @@
                 /* -- is elm       -- */
                 one : item.nodeType == 1,
 
-                /* -- has nav item -- */
+                /* -- has Navitem -- */
                 two : item.hasAttribute( this.taxonomy.data.item )
             };
 
@@ -230,7 +230,7 @@
     };
 
     /*------------------------------------------------------
-    * @function - Update nav tracking
+    * @function - Ng append item
     * @info     - Will update the tracking system for next items and groups
     */
     Navgroup.prototype.ng_append_item = function( item, g_name )
@@ -248,7 +248,7 @@
     };
 
     /*------------------------------------------------------
-    * @function - Update nav tracking
+    * @function - Ng remove item
     * @info     - Will update the tracking system for next items and groups
     */
     Navgroup.prototype.ng_remove_item = function( index, g_name )
@@ -271,7 +271,7 @@
     {
         var tax = 'data-cwc-instructions'
 
-        /* -- Search for nav end inftructions -- */
+        /* -- Search for nav end instructions -- */
         if( item.hasAttribute( tax )  )
         {
             return JSON.parse(
@@ -316,7 +316,7 @@
     /*------------------------------------------------------
     * @function - Add window key events
     * @info - Add window key-binds for Navgroup
-    * @condishion set - Only if Navitems found
+    * @conditions set - Only if Navitems found
     */
     Navgroup.prototype.add_cwc_hooks = function()
     {
@@ -332,7 +332,7 @@
     /*------------------------------------------------------
     * @function - Add window key events
     * @info - Add window key-binds for Navgroup
-    * @condishion set - Only if Navitems found
+    * @conditions set - Only if Navitems found
     */
     Navgroup.prototype.add_window_key_events = function()
     {
@@ -454,12 +454,12 @@
 
     /*------------------------------------------------------
     * @function - Analyse instructions
-    * - ni:next                // next nav item
-    * - ni:prev                // previous nav item
-    * - ng:next                // next nav group
-    * - ng:prev                // previous nav group
+    * - ni:next                // next Navitem
+    * - ni:prev                // previous Navitem
+    * - ng:next                // next Navgroup
+    * - ng:prev                // previous Navgroup
     * - ng:(*)                 // name of the group you wish to Navgroup too
-    * - hook:*(custom methord) // add custom method to end of arg, must be set up in custom methords
+    * - hook:*(custom method) // add custom method to end of arg, must be set up in custom methods
     */
     Navgroup.prototype.analyse_instructions = function( instruction, c_index )
     {
@@ -713,7 +713,7 @@
             i_elm : this.nav_elms[ g_name ].navitems[ index ]
         });
 
-        /* -- Check to see if item has overids : before moving -- */
+        /* -- Check to see if item has instructions : before moving -- */
         if( item_instructions != null )
         {
             /* -- Check for entrance hook -- */

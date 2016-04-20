@@ -6,7 +6,7 @@
  ------------------------------------------------------
  * What to talk about
  ------------------------------------------------------
- • Différent directions
+ • Different directions
  • About return types (angle, dir, coords, CD)
  • Talk about design
  ------------------------------------------------------
@@ -64,7 +64,7 @@
         {
             var controller = controllers[ c_id ];
 
-            /* -- Find all btns associated with controller -- */
+            /* -- Find all buttons associated with controller -- */
             var actions = this.controller_buttons_lookup(
                 controllers[ c_id ], c_id
             );
@@ -81,7 +81,7 @@
 
     /*------------------------------------------------------
     * @function - Controller buttons lookup
-    * @info - Find all btns associated with controller
+    * @info - Find all button associated with controller
     */
     DPadController.prototype.controller_buttons_lookup = function( group, c_id )
     {
@@ -120,7 +120,7 @@
 
     /*------------------------------------------------------
     * @function - Button invoked
-    * @info - Users is intracting with controller
+    * @info - Users is interacting with controller
     */
     DPadController.prototype.button_invoked = function( c_id, a_id )
     {

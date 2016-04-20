@@ -61,7 +61,7 @@
 
     /*------------------------------------------------------
     * @object - Request id
-    * @info   - reuest animation frame id
+    * @info   - request animation frame id
     */
     PullbarController.prototype.request_id = 0;
 
@@ -73,7 +73,7 @@
 
     /*------------------------------------------------------
     * @function - Lookup
-    * @info     - Finds all pullbars within the dom
+    * @info     - Finds all pullbars within the DOM
     */
     PullbarController.prototype.lookup = function( )
     {
@@ -127,7 +127,7 @@
         var trigger         = this.all_pullbars[ g_id ].trigger;
         var instructions    = this.all_pullbars[ g_id ].instructions;
 
-        /* -- Get the style infromation about the componants -- */
+        /* -- Get the style information about the components -- */
         var style = {
             pbh : pullbar.clientHeight,
             pbw : pullbar.clientWidth,
@@ -274,7 +274,7 @@
         /* -- Start the tick process -- */
         else
         {
-            /* -- get the insrtuctions for the current analog -- */
+            /* -- get the instructions for the current analog -- */
             var instructions = cwc.PullbarController.prototype.all_pullbars[
                 cwc.PullbarController.prototype.tracking
             ].instructions;

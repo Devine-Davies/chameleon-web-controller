@@ -6,7 +6,7 @@
  • Talk about on tick and pan moments
  • About return types (angle, dir, coords, CD)
  • The two direct type of collusion
- • Involvement when moving and how circal reacts to colloshion
+ • Involvement when moving collision
  • Talk about design
  ------------------------------------------------------
  * Testing
@@ -106,7 +106,7 @@
     };
 
     /*------------------------------------------------------
-    * @function - On analog pan
+    * @function - On analogue pan
     * @info - Main method this undergoes on controller moment
     */
     AnalogController.prototype.on_analog_pan = function( ev )
@@ -163,7 +163,7 @@
             /* -- add auto class -- */
             analog.classList.add("auto");
 
-            /* -- Move the tigger handle -- */
+            /* -- Move the trigger handle -- */
             this.trigger_translate({
                 trigger : trigger,
                 delta_x : x,
@@ -177,7 +177,7 @@
             /* -- Remove class auto -- */
             analog.classList.remove("auto");
 
-            /* -- Move the tigger handle -- */
+            /* -- Move the trigger handle -- */
             this.trigger_translate({
                 trigger : trigger,
                 delta_x : delta.x,
@@ -228,7 +228,7 @@
     */
     AnalogController.prototype.on_pan_start = function( c_id, instructions, analog, trigger )
     {
-        /* -- Track the onbject being used -- */
+        /* -- Track the object being used -- */
         this.tracking = c_id;
 
         /* -- check if hook has been applied -- */
@@ -284,7 +284,7 @@
     */
     AnalogController.prototype.get_movment_type = function(  )
     {
-        /* -- get the instructions for the current analog -- */
+        /* -- get the instructions for the current analogue -- */
         var instructions = this.all_controllers[ this.tracking ].instructions;
 
         /* -- Check the type of movement -- */

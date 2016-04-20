@@ -37,7 +37,7 @@
     */
     TextCapture.prototype.set_cwc_hooks = function()
     {
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:text-capture-done',
           method    : function( feedback ) {
@@ -50,7 +50,7 @@
 
     /*------------------------------------------------------
     * @function - Text capture done
-    * @info - Call when message has recived by server
+    * @info - Call when message has received by server
     */
     TextCapture.prototype.on_text_capture_done = function( feedback )
     {

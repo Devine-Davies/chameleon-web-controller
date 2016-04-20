@@ -155,10 +155,11 @@ function isFunctionA(object)
 }
 
 /*------------------------------------------------------
-* @object - TODO
-* @OnFail - Would like to pass message down on why it faild
+ Server
+ ------------------------------------------------------
+ * Handles connection process
+ ------------------------------------------------------
 */
-
 !function( cwc ){
   'use strict';
 
@@ -169,7 +170,7 @@ function isFunctionA(object)
     */
     function Server( options )
     {
-        /* -- register the plugin -- */
+        /* -- register the plug-in -- */
         cwc.registerPlugin(this, 'Server');
 
         /* -- connect to the host via web sockets -- */
@@ -178,10 +179,10 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @object - Clinet key
-    * @info   - Key given to clinet by server
+    * @object - Client key
+    * @info   - Key given to client by server
     */
-    Server.prototype.clinet_key = '';
+    Server.prototype.client_key = '';
 
     /*------------------------------------------------------
     * @object - Cluster code
@@ -242,17 +243,17 @@ function isFunctionA(object)
             break;
         }
 
-        /* -- Allow our cwc object to be reatch at the _global scope -- */
+        /* -- If connected -- */
         if( socket )
         {
-            /* -- Creat callback for class -- */
+            /* -- Create callback for class -- */
             this.create_reserved_connection_status_hooks();
 
             /* -- Set global connection  -- */
             cwc._server_connection = socket;
         }
 
-        /* -- Set appropiat socket evetn's -- */
+        /* -- Set appropriate socket events -- */
         if( socket && type == 'ws' )
         {
             this.set_connection_events();
@@ -262,18 +263,18 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Create hooks
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.create_reserved_connection_status_hooks = function( length )
     {
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:connection-success',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_success( feedback );
         } } );
 
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:connection-failed',
           method    : function( feedback ) {
@@ -284,7 +285,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Connect
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.gen_cluster_code = function( length  )
     {
@@ -295,22 +296,22 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Connect
-    * @info - Connect to the server
+    * @info     - Connect to the server
     */
     Server.prototype.build_ws_connection = function( host, port )
     {
         var cluster_code  = this.cluster_code;
-        var clinet_type   = cwc._cwc_type;
+        var client_type   = cwc._cwc_type;
 
         return 'ws:' + host + ':'+ port +
         '?cluster_code=' + cluster_code +
-        '&clinet_type='  + clinet_type;
+        '&client_type='  + client_type;
 
     };
 
     /*------------------------------------------------------
     * @function - On connection success
-    * @info     - how to react when connection successfull
+    * @info     - how to react when connection successful
     */
     Server.prototype.on_connection_success = function( server_feedback )
     {
@@ -334,7 +335,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On greeting message
-    * @info     - how to react when connection successfull
+    * @info     - how to react when connection successful
     */
     Server.prototype.on_connection_faild = function()
     {
@@ -348,7 +349,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Set connection events
-    * @info - onerror, onclose, onopen,onmessage
+    * @info     - onerror, onclose, onopen, onmessage
     */
     Server.prototype.set_connection_events = function()
     {
@@ -379,7 +380,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On open
-    * @info - on connect open
+    * @info     - on connect open
     */
     Server.prototype.onopen = function( con )
     {
@@ -388,17 +389,17 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On error
-    * @info - on connect error
+    * @info     - on connect error
     */
     Server.prototype.onerror = function()
     {
-        console.log('Error connectiong');
+        console.log('Error connecting');
 
     };
 
     /*------------------------------------------------------
     * @function - On close
-    * @info - Server has sent a message
+    * @info     - Server has sent a message
     */
     Server.prototype.onclose = function()
     {
@@ -407,12 +408,12 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - On message
-    * @info - Server has sent a message
+    * @info     - Server has sent a message
     */
-    Server.prototype.onmessage = function( recived_package )
+    Server.prototype.onmessage = function( revived_package )
     {
         /* -- Message data -- */
-        var hook_info = JSON.parse( recived_package.data );
+        var hook_info = JSON.parse( revived_package.data );
 
         /* -- Look for users -- */
         cwc.Hooks.prototype.invoke({
@@ -430,7 +431,7 @@ function isFunctionA(object)
     */
     Server.prototype.send_message = function( data )
     {
-        /* -- Is this a valid mesage : return true not valid -- */
+        /* -- Is this a valid message : return true not valid -- */
         if( ! this.validate_onmessage( data ) )
         {
             if( cwc._server_connection )
@@ -447,7 +448,7 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Validate onmessage
+    * @function - Validate on-message
     * @info - Validate the message from the server
     */
     Server.prototype.validate_onmessage = function( data )
@@ -481,6 +482,14 @@ function isFunctionA(object)
 
 }( window.cwc );
 
+/*------------------------------------------------------
+ Hooks
+ ------------------------------------------------------
+ * Used for client communication and CWC call back function
+ * Developer can also set hooks for complainants callback function
+ ------------------------------------------------------
+*/
+
 !function( cwc ){
   'use strict';
 
@@ -491,13 +500,13 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @array
-    * Place to store all custom methord
+    * Place to store all custom method
     */
     Hooks.prototype.all_reserved_hooks = {};
 
     /*------------------------------------------------------
     * @array
-    * Place to store all custom methord
+    * Place to store all custom method
     */
     Hooks.prototype.all_hooks = {};
 
@@ -509,7 +518,7 @@ function isFunctionA(object)
     {
         if( prams.hasOwnProperty('hook_name') && prams.hasOwnProperty('method') )
         {
-            /* -- Check to see if is ment for display -- */
+            /* -- Check to see if for display -- */
             if ( prams.hook_name.includes('cwc:') )
             {
                 this.all_reserved_hooks[ prams.hook_name ] = {
@@ -527,7 +536,7 @@ function isFunctionA(object)
         }
         else
         {
-            console.log('Hook name and methord is required: check cwc git repo for more info on Hooks');
+            console.log('Hook name and method is required: check cwc git repo for more info on Hooks');
         }
 
     };
@@ -549,7 +558,7 @@ function isFunctionA(object)
             /* -- If property was not found : return true -- */
             if ( ! data.hasOwnProperty( checks[ i ] ) )
             {
-                console.log('Server message is not properly fromatted.');
+                console.log('Server message is not properly formatted.');
                 return false;
             }
 
@@ -565,7 +574,7 @@ function isFunctionA(object)
     */
     Hooks.prototype.invoke_client_hook = function( hook_info )
     {
-        /* -- Is this a valid mesage : return true not valid -- */
+        /* -- Is this a valid msg : return true not valid -- */
         if( this.validate_hook( hook_info ) )
         {
             if( cwc._server_connection )
@@ -582,8 +591,12 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function
-    * where we invoke custom methods
+    * @function - invoke
+    * @info - where we invoke custom methods
+    * @d-hook: - will send the hook across server to display
+    * @c-hook: - will send the hook across server to controller
+    * @cwc:    - reserved hook by cwc can also be used with d-hook && c-hook
+    * @hook:   - user created hook
     */
     Hooks.prototype.invoke = function( hook_info )
     {
@@ -607,7 +620,7 @@ function isFunctionA(object)
 
         }
 
-        /* -- Check to see if is ment for display -- */
+        /* -- Check to see is for controller -- */
         else if ( hook_name.includes('c-hook:') )
         {
             this.invoke_client_hook( {
@@ -618,24 +631,28 @@ function isFunctionA(object)
 
         }
 
+        /* -- Call the hook on this client -- */
         else if ( hook_name.includes('cwc:') )
         {
-            /* -- Call the hook on this clinet -- */
             this.execute( this.all_reserved_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
         }
 
-        /* -- Check to see if is ment for display -- */
+        /* -- is user hook -- */
         else
         {
-            /* -- Can be called using hook:*(name) usfull on data attr -- */
+            /* -- Can be called using hook:*(name) useful on data attr -- */
             var hook_name = hook_info.hook_name.replace('hook:','')
 
-            /* -- Call the hook on this clinet -- */
+            /* -- Call the hook on this client -- */
             this.execute( this.all_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
         }
 
     };
 
+    /*------------------------------------------------------
+    * @function - execute
+    * @info - call the hook
+    */
     Hooks.prototype.execute = function( hooks, hook_name, args, cwc_metadata  )
     {
         if( hooks.hasOwnProperty( hook_name ) )
@@ -654,7 +671,7 @@ function isFunctionA(object)
 }( window.cwc );
 
 /*------------------------------------------------------
- Navigagtion
+ Navgroups
  ------------------------------------------------------
  To-Do •
  ------------------------------------------------------
@@ -679,7 +696,7 @@ function isFunctionA(object)
 
         }
 
-        /* -- Start the navgroup process -- */
+        /* -- Start the Navgroup process -- */
         this.reflow();
 
         if ( this.navgroups_count() > 0 )
@@ -735,7 +752,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @object - Tracking
-    * @info - away of tracking last and previous nav items
+    * @info - away of tracking last and previous Navitem
     */
     Navgroup.prototype.tracking = {
         previous : {},
@@ -752,7 +769,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @info - Keep and record of all found Navitems elms
     */
     Navgroup.prototype.nav_elms = {
 
@@ -760,7 +777,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @array
-    * Place to store all custom methord
+    * Place to store all custom method
     */
     Navgroup.prototype.keys = {
             /* -- ESC -- */
@@ -829,8 +846,8 @@ function isFunctionA(object)
     */
     Navgroup.prototype.navitems_lookup = function( group, g_id, g_name )
     {
-        var descendents     = group.getElementsByTagName('*');
-        var descendents_len = descendents.length;
+        var descendants     = group.getElementsByTagName('*');
+        var descendants_len = descendants.length;
 
         var g_name = group.dataset.cwcNavgroup;
 
@@ -839,15 +856,15 @@ function isFunctionA(object)
 
         var tracking = null;
 
-        for( var i_id = 0; i_id < descendents_len; i_id++ )
+        for( var i_id = 0; i_id < descendants_len; i_id++ )
         {
-            var item = descendents[ i_id ];
+            var item = descendants[ i_id ];
 
             var check = {
                 /* -- is elm       -- */
                 one : item.nodeType == 1,
 
-                /* -- has nav item -- */
+                /* -- has Navitem -- */
                 two : item.hasAttribute( this.taxonomy.data.item )
             };
 
@@ -859,7 +876,7 @@ function isFunctionA(object)
                     instructions : this.retrive_instructions( item )
                 };
 
-                /* -- Add tje ite, -- */
+                /* -- Add the item -- */
                 items.push( item_obj );
 
                 /* -- Up date the current group and index -- */
@@ -885,7 +902,7 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Update nav tracking
+    * @function - Ng append item
     * @info     - Will update the tracking system for next items and groups
     */
     Navgroup.prototype.ng_append_item = function( item, g_name )
@@ -903,7 +920,7 @@ function isFunctionA(object)
     };
 
     /*------------------------------------------------------
-    * @function - Update nav tracking
+    * @function - Ng remove item
     * @info     - Will update the tracking system for next items and groups
     */
     Navgroup.prototype.ng_remove_item = function( index, g_name )
@@ -926,7 +943,7 @@ function isFunctionA(object)
     {
         var tax = 'data-cwc-instructions'
 
-        /* -- Search for nav end inftructions -- */
+        /* -- Search for nav end instructions -- */
         if( item.hasAttribute( tax )  )
         {
             return JSON.parse(
@@ -953,7 +970,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Total items in group
-    * @return - count items in grop : defult current group
+    * @return - count items in group : default current group
     */
     Navgroup.prototype.total_items_in_group = function( group_name )
     {
@@ -970,8 +987,8 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Add window key events
-    * @info - Add window keybinds for Navgroup
-    * @condishion set - Only if Navitems found
+    * @info - Add window key-binds for Navgroup
+    * @conditions set - Only if Navitems found
     */
     Navgroup.prototype.add_cwc_hooks = function()
     {
@@ -986,8 +1003,8 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Add window key events
-    * @info - Add window keybinds for Navgroup
-    * @condishion set - Only if Navitems found
+    * @info - Add window key-binds for Navgroup
+    * @conditions set - Only if Navitems found
     */
     Navgroup.prototype.add_window_key_events = function()
     {
@@ -1009,8 +1026,8 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Invoke key
-    * @info     - page initialization code here the DOM will be available here
-    * Only start the process when the dom is ready
+    * @info     - page initialisation code here the DOM will be available here
+    * Only start the process when the DOM is ready
     */
     Navgroup.prototype.call_action = function( dir, cb )
     {
@@ -1050,7 +1067,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Key function
-    * @info     - Wehn key has been pressed : action sent here
+    * @info     : When key has been pressed : action sent here
     * - up      // pass one of the following n* items as an argument
     * - right   // pass one of the following n* items as an argument
     * - down    // pass one of the following n* items as an argument
@@ -1075,7 +1092,7 @@ function isFunctionA(object)
         var group_instructions = this.nav_elms[ group_name ].instructions;
         var item_instructions  = this.nav_elms[ group_name ].navitems[ current_item ].instructions;
 
-        /* -- Check to see if item has overids : before moving -- */
+        /* -- Check to see if item has instructions : before moving -- */
         if( item_instructions != null )
         {
             if( item_instructions.hasOwnProperty( dir ) )
@@ -1109,12 +1126,12 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Analyse instructions
-    * - ni:next                // next nav item
-    * - ni:prev                // previous nav item
-    * - ng:next                // next nav group
-    * - ng:prev                // previous nav group
+    * - ni:next                // next Navitem
+    * - ni:prev                // previous Navitem
+    * - ng:next                // next Navgroup
+    * - ng:prev                // previous Navgroup
     * - ng:(*)                 // name of the group you wish to Navgroup too
-    * - hook:*(custom methord) // add custom methord to end of arg, must be set up in custom methords
+    * - hook:*(custom method) // add custom method to end of arg, must be set up in custom methods
     */
     Navgroup.prototype.analyse_instructions = function( instruction, c_index )
     {
@@ -1155,7 +1172,7 @@ function isFunctionA(object)
         {
             var action = instruction.replace( navgroup ,'');
 
-            /* -- We know the name of the guoup -- */
+            /* -- We know the name of the group -- */
             if( this.nav_elms.hasOwnProperty( action ) )
             {
                 this.move_to_nav_name( action );
@@ -1368,7 +1385,7 @@ function isFunctionA(object)
             i_elm : this.nav_elms[ g_name ].navitems[ index ]
         });
 
-        /* -- Check to see if item has overids : before moving -- */
+        /* -- Check to see if item has instructions : before moving -- */
         if( item_instructions != null )
         {
             /* -- Check for entrance hook -- */
@@ -1467,8 +1484,6 @@ function isFunctionA(object)
  * Viewport Scroll Display
  *------------------------------------------------------
  * To-Do
- -------------------------------------------------------
- • Fix support for scroll animation on tap.
  ------------------------------------------------------
 */
 
@@ -1495,7 +1510,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @array - Save the ids
-    * @info - Used to store the id's of each of the elments
+    * @info - Used to store the id's of each of the elements
     */
     ViewportScroll.prototype.scroll_target_ids = [
         'scroll-target'
@@ -1503,14 +1518,14 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Cached scroll target
-    * @info - Save sned elemets here
+    * @info - Save send elements here
     */
     ViewportScroll.prototype.cached_scroll_target = [
     ];
 
     /*------------------------------------------------------
     * @function - Cached scroll target
-    * @info - Save all of the elements to optimise and seed up perforamce
+    * @info - Save all of the elements to optimise and seed up performance
     */
     ViewportScroll.prototype.cache_targets = function( scrollTargets )
     {
@@ -1553,14 +1568,14 @@ function isFunctionA(object)
         var sti = this.scroll_target_ids;
 
 
-        /* -- Try and find posistion -- */
+        /* -- Try and find position -- */
         var pos =  sti.indexOf(
             args.viewport_target
         );
 
         console.log( args.viewport_target );
 
-        /* -- Check posistion -- */
+        /* -- Check position -- */
         if( pos != -1 )
         {
             /* -- Get all ids sent to class -- */
@@ -1581,8 +1596,6 @@ function isFunctionA(object)
     */
     ViewportScroll.prototype.check_action = function( elm, direction )
     {
-        var ammount = 15;
-
         switch( direction.toUpperCase() )
         {
             case 'DOWN' :
@@ -1595,8 +1608,6 @@ function isFunctionA(object)
             elm.scrollTop = elm.scrollTop - 15;
             break;
         }
-
-        return;
 
     };
 
@@ -1636,7 +1647,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @object - Groups & Items
-    * @info - Keep and drecord of all found nav elms
+    * @info - Keep and record of all found nav elms
     */
     TextCapture.prototype.all_text_capture = [
     ];
@@ -1647,7 +1658,7 @@ function isFunctionA(object)
     */
     TextCapture.prototype.set_cwc_hooks = function()
     {
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:text-capture-done',
           method    : function( feedback ) {
@@ -1660,7 +1671,7 @@ function isFunctionA(object)
 
     /*------------------------------------------------------
     * @function - Text capture done
-    * @info - Call when message has recived by server
+    * @info - Call when message has received by server
     */
     TextCapture.prototype.on_text_capture_done = function( feedback )
     {
@@ -1707,7 +1718,7 @@ function isFunctionA(object)
     {
         var tax = 'data-cwc-instructions'
 
-        /* -- Search for nav end inftructions-- */
+        /* -- Search for nav end instructions -- */
         if( item.hasAttribute( tax )  )
         {
             return JSON.parse(
@@ -1735,7 +1746,7 @@ function isFunctionA(object)
             }
         }
 
-        Hooks.invoke_clinet_hook({
+        Hooks.invoke_client_hook({
             recipient : 'controller',
             hook_name : 'text-capture-invoked',
             arguments : {

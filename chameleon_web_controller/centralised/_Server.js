@@ -4,7 +4,6 @@
  * Handles connection process
  ------------------------------------------------------
 */
-
 !function( cwc ){
   'use strict';
 
@@ -15,7 +14,7 @@
     */
     function Server( options )
     {
-        /* -- register the plugin -- */
+        /* -- register the plug-in -- */
         cwc.registerPlugin(this, 'Server');
 
         /* -- connect to the host via web sockets -- */
@@ -25,9 +24,9 @@
 
     /*------------------------------------------------------
     * @object - Client key
-    * @info   - Key given to clinet by server
+    * @info   - Key given to client by server
     */
-    Server.prototype.clinet_key = '';
+    Server.prototype.client_key = '';
 
     /*------------------------------------------------------
     * @object - Cluster code
@@ -88,10 +87,10 @@
             break;
         }
 
-        /* -- Allow our cwc object to be reatch at the _global scope -- */
+        /* -- If connected -- */
         if( socket )
         {
-            /* -- Creat callback for class -- */
+            /* -- Create callback for class -- */
             this.create_reserved_connection_status_hooks();
 
             /* -- Set global connection  -- */
@@ -112,14 +111,14 @@
     */
     Server.prototype.create_reserved_connection_status_hooks = function( length )
     {
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:connection-success',
           method    : function( feedback ) {
             cwc.Server.prototype.on_connection_success( feedback );
         } } );
 
-        /* -- Crete connection fil | Hook -- */
+        /* -- Crete connection fill | Hook -- */
         cwc.Hooks.prototype.set_hook( {
           hook_name : 'cwc:connection-failed',
           method    : function( feedback ) {
@@ -146,11 +145,11 @@
     Server.prototype.build_ws_connection = function( host, port )
     {
         var cluster_code  = this.cluster_code;
-        var clinet_type   = cwc._cwc_type;
+        var client_type   = cwc._cwc_type;
 
         return 'ws:' + host + ':'+ port +
         '?cluster_code=' + cluster_code +
-        '&clinet_type='  + clinet_type;
+        '&client_type='  + client_type;
 
     };
 
@@ -238,7 +237,7 @@
     */
     Server.prototype.onerror = function()
     {
-        console.log('Error connectiong');
+        console.log('Error connecting');
 
     };
 
@@ -258,7 +257,7 @@
     Server.prototype.onmessage = function( revived_package )
     {
         /* -- Message data -- */
-        var hook_info = JSON.parse( revived_package );
+        var hook_info = JSON.parse( revived_package.data );
 
         /* -- Look for users -- */
         cwc.Hooks.prototype.invoke({
@@ -293,7 +292,7 @@
     };
 
     /*------------------------------------------------------
-    * @function - Validate onmessage
+    * @function - Validate on-message
     * @info - Validate the message from the server
     */
     Server.prototype.validate_onmessage = function( data )

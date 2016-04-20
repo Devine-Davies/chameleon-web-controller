@@ -6,7 +6,7 @@
  ------------------------------------------------------
  * What to talk about
  ------------------------------------------------------
- • Différent directions
+ • Different directions
  • About return types (angle, dir, coords, CD)
  • Talk about design
  • Input filters
@@ -56,7 +56,7 @@
 
     /*------------------------------------------------------
     * @function - Lookup
-    * @info     - Finds all pullbars within the dom
+    * @info     - Finds all pullbars within the DOM
     */
     GesturePadController.prototype.lookup = function()
     {
