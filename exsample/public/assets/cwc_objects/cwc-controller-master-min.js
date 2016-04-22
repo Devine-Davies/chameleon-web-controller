@@ -191,12 +191,6 @@ function isFunctionA(object)
     Server.prototype.client_key = '';
 
     /*------------------------------------------------------
-    * @object - Cluster code
-    * @info   - Code used to connect displays
-    */
-    Server.prototype.cluster_code = '';
-
-    /*------------------------------------------------------
     * @object - Connection options
     * @info   - Options passed by the client
     */

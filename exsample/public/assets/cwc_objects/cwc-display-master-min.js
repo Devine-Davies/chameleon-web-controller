@@ -185,12 +185,6 @@ function isFunctionA(object)
     Server.prototype.client_key = '';
 
     /*------------------------------------------------------
-    * @object - Cluster code
-    * @info   - Code used to connect displays
-    */
-    Server.prototype.cluster_code = '';
-
-    /*------------------------------------------------------
     * @object - Connection options
     * @info   - Options passed by the client
     */
@@ -705,7 +699,7 @@ function isFunctionA(object)
             this.add_window_key_events();
 
             /* -- Add CWC hooks -- */
-            this.add_cwc_hooks();
+            this.cwc_hooks();
 
         }
 
@@ -820,7 +814,7 @@ function isFunctionA(object)
             var g_name = nav_groups[ g_id ].dataset.cwcNavgroup;
 
             /* -- Find all item in group -- */
-            var navitems = this.navitems_lookup(
+            var navitems = this.items_lookup(
                 nav_groups[ g_id ], g_id, g_name
             );
 
@@ -844,7 +838,7 @@ function isFunctionA(object)
     * @info - Find elms with data-(navitem) add the this to object
     * @return - true : false
     */
-    Navgroup.prototype.navitems_lookup = function( group, g_id, g_name )
+    Navgroup.prototype.items_lookup = function( group, g_id, g_name )
     {
         var descendants     = group.getElementsByTagName('*');
         var descendants_len = descendants.length;
@@ -990,7 +984,7 @@ function isFunctionA(object)
     * @info - Add window key-binds for Navgroup
     * @conditions set - Only if Navitems found
     */
-    Navgroup.prototype.add_cwc_hooks = function()
+    Navgroup.prototype.cwc_hooks = function()
     {
         /* -- Crete connection fil | Hook -- */
         cwc.Hooks.prototype.set_hook( {
