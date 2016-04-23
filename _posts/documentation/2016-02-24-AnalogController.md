@@ -10,8 +10,7 @@ f_image      : "/images/a-pad@2x.png"
 categories   : components
 tax          : controller
 ---
-
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+As well as being the ideal controller for gaming, it designed and customization allows it to work along side many design requirements.
 <!--more-->
 
 

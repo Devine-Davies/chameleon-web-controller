@@ -601,7 +601,8 @@ body {
         font-weight: normal;
         background: #FFE8E8; }
       #feature-doc .post-content .post-body .highlight table {
-        margin-top: 0; }
+        margin-top: 0;
+        display: block; }
       #feature-doc .post-content .post-body code {
         font-weight: normal;
         border: 1px solid #BFBFBF;

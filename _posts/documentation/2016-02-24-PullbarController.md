@@ -10,7 +10,7 @@ f_image    : "/images/p-par@2x.png"
 categories : components
 tax        : controller
 ---
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+The Pullbar component is a great took if you wish to allow the user to move in only one given direction. Pullbar support both horizontal and vertical axis.
 <!--more-->
 
 ![alt text]( ../images/p-par@2x.png "Logo Title Text 1")
@@ -31,8 +31,7 @@ Add a the cwc style to your {{ page.title }} with the `.cwc-style` class.
 
 {% highlight javascript linenos %}
 /*------------------------------------------------------
-* @object - CWC Main ControllerMaster Object
-* @info   - initiate CWC ControllerMaster Object
+* @object - CWC Main Controller Master Object
 */
 var ControllerMaster = new cwc.ControllerMaster({
 });
@@ -40,21 +39,18 @@ var ControllerMaster = new cwc.ControllerMaster({
 window.onload = function() {
     /*------------------------------------------------------
     * @object - CWC Main PullbarController Object
-    * @info   - initiate CWC PullbarController Object
     */
     var PullbarController = new cwc.PullbarController({
     });
 };
 {% endhighlight %}
 
-
-
 [comment]: <> (--------------------------------------------------------------------------------------------------------)
 
 ## {{ page.title }} instructions
 Additional settings can be added to each Pullbar controller through the use of the `data-cwc-instructions` data attribute. Here is a list of all the instructions associated with the Pullbar component.
 
-| instructions  | Type    | Vales                                                   |
+| Instructions  | Type    | Vales                                                   |
 | ------------- | ------- | --------------                                          |
 | direction     | String  | Horizontal or Vertical.                                 |
 | on-pull       | Hook    | The hook name you wish to invoke when Pullbar is pulled |
@@ -63,10 +59,9 @@ Additional settings can be added to each Pullbar controller through the use of t
 data-cwc-instructions='{ "direction" : "vertical", "on-pull " : "hook:cunstom-hook" }'
 {% endhighlight %}
 
-
 [comment]: <> (--------------------------------------------------------------------------------------------------------)
 
-## On pull hook
+## On pull
 The on pull method is fired when the user is interacting with a Pullbar.
 
 | instructions  | Type    | Vales                                                |

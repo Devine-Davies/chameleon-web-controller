@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   <title>Connecting</title>
-  <meta name="description" content="When you have installed the cwc node server, connecting client so that they can shear bidrectinal data can be accomplished is just a few steps.">
+  <meta name="description" content="There connection process is simple and easy with minimal mark-up required in order to get the display and controller clients connected on the same channel vi...">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
@@ -85,7 +85,7 @@
                   
                 </a>
                 <p>
-                  <p>When you have installed the <strong>cwc</strong> node server, connecting client so that they can shear bidrectinal data can be accomplished is just a few steps.</p>
+                  <p>There connection process is simple and easy with minimal mark-up required in order to get the display and controller clients connected on the same channel via Cluster groups.</p>
 
 
                 </p>
@@ -102,7 +102,7 @@
                   
                 </a>
                 <p>
-                  <p>Hooks are the building blocks of the <strong>cwc</strong> object allowing everything to connect by providing a way of defining callback functionality for series of events. Hooks can also be used to invoke hooks created on clients within the same cluster group.</p>
+                  <p>The foundation of <strong>cwc</strong> is build around Hooks. Hooks provided a mechanism for allowing display and controller clients to invoke functions created on that client. They also provide a way of defining callback functionality for <strong>cwc</strong> components.</p>
 
 
                 </p>
@@ -147,7 +147,7 @@
                   
                 </a>
                 <p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s</p>
+                  <p>The Pullbar component is a great took if you wish to allow the user to move in only one given direction. Pullbar support both horizontal and vertical axis.</p>
 
 
                 </p>
@@ -166,7 +166,7 @@
                   
                 </a>
                 <p>
-                  <p>The Navgroup is a flexible, powerful component for navigation around big screen experience. You can quickly build simply to complex navigation structure to your application, allowing your users move around freely using keyboard events.</p>
+                  <p>The Navgroup is a flexible, powerful component for creating navigation base around the big screen experience. You can quickly build simply to complex navigations that have been design to work with the <strong>cwc</strong> controller components.</p>
 
 
                 </p>
@@ -185,7 +185,7 @@
                   
                 </a>
                 <p>
-                  <p>4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.</p>
+                  <p>4 or 8-way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.</p>
 
 
                 </p>
@@ -204,7 +204,7 @@
                   
                 </a>
                 <p>
-                  <p>A 1-way or 5-way Directional pad is perfect for games movement, user interfaces or if you want to have 4 buttons on a controller.</p>
+                  <p>1-way or 5-way Directional pad is perfect for games movements, user interfaces or if you need well designed controller component.</p>
 
 
                 </p>
@@ -223,7 +223,7 @@
                   
                 </a>
                 <p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s</p>
+                  <p>As well as being the ideal controller for gaming, it designed and customization allows it to work along side many design requirements.</p>
 
 
                 </p>
@@ -261,11 +261,12 @@
               </header>
 
               <section class="post-body" >
-                <p>When you have installed the <strong>cwc</strong> node server, connecting client so that they can shear bidrectinal data can be accomplished is just a few steps.
+                <p>There connection process is simple and easy with minimal mark-up required in order to get the display and controller clients connected on the same channel via Cluster groups.
 <!--more--></p>
 
-<h2 id="introduction">Introduction</h2>
-<p>Both the <code class="highlighter-rouge">cwc-display-master.js</code> and <code class="highlighter-rouge">cwc-controller-master.js</code> have a built in server object, allowing each client to connect to the server. The following parameters have to set when initiating the <strong>cwc.Server</strong> object.</p>
+<p>Whence the you have installed the <strong>cwc</strong> node server, connecting client can be accomplished with minimal mark-up required. The the <code class="highlighter-rouge">cwc-display-master.js</code> and <code class="highlighter-rouge">cwc-controller-master.js</code> have built in actions for handling cline to server connection.</p>
+
+<p>Both the <code class="highlighter-rouge">cwc-display-master.js</code> and <code class="highlighter-rouge">cwc-controller-master.js</code> have a built in server object this allows each client to connect to the cwc node server. The following parameters have to set when initiating the <strong>cwc.Server</strong> object on a client.</p>
 
 <table>
   <thead>
@@ -363,11 +364,11 @@
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <blockquote>
-  <p>Only the cluster-code is required when trying to connect a controller. Otherwise the <code class="highlighter-rouge">cluster-code</code> is auto generated by the display.</p>
+  <p>Only the cluster-code is required when trying to connect a controller as the <code class="highlighter-rouge">cluster-code</code> is auto generated by the <code class="highlighter-rouge">cwc-display-master.js</code>.</p>
 </blockquote>
 
 <h2 id="connection-hooks">Connection Hooks</h2>
-<p>Predefined hooks can be set up on both the display and controller client’s to capture connection methord sent from the server.</p>
+<p>Predefined hooks can be set up on both the display and controller allowing for callback functions to be invoke on the following requests.</p>
 
 <table>
   <thead>
@@ -402,7 +403,7 @@
 </table>
 
 <h2 id="on-connection-success-hook">On connection success hook</h2>
-<p>A predefined hook can be set up on both the display and controller client’s to capture a <code class="highlighter-rouge">connection-success</code> event from the server. Hook will need to be defined before calling the <code class="highlighter-rouge">connect</code> method.</p>
+<p>The <code class="highlighter-rouge">connection-success</code> hook is called when a client has successfully completed the WebSockets upgrade request with the server.</p>
 
 <table>
   <thead>
@@ -425,7 +426,7 @@
 2
 3
 4
-5</pre></td><td class="code"><pre><span class="cm">/* -- Crete connection success | Hook -- */</span>
+5</pre></td><td class="code"><pre><span class="cm">/* -- Create connection success | Hook -- */</span>
 <span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'cwc:connection-success'</span><span class="p">,</span>
   <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">on_connect</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span> <span class="p">}</span>
@@ -433,7 +434,7 @@
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="on-connection-failed-hook">On connection failed hook</h2>
-<p>A predefined hook can be set up on both the display and controller client’s to capture a <code class="highlighter-rouge">connection-failed</code> event from the server. Hook will need to be defined before calling the <code class="highlighter-rouge">connect</code> method.</p>
+<p>The <code class="highlighter-rouge">connection-success</code> hook is called when a client has successfully completed the WebSockets upgrade request with the server.</p>
 
 <table>
   <thead>
@@ -456,7 +457,7 @@
 2
 3
 4
-5</pre></td><td class="code"><pre><span class="cm">/* -- Crete connection failed | Hook -- */</span>
+5</pre></td><td class="code"><pre><span class="cm">/* -- Create connection failed | Hook -- */</span>
 <span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'cwc:connection-failed'</span><span class="p">,</span>
   <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">feedback</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">data</span> <span class="p">);</span> <span class="p">}</span>
@@ -464,7 +465,7 @@
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="controller-connected-hook">Controller connected hook</h2>
-<p>Hooks can also created to capture a <code class="highlighter-rouge">controller-connected</code> messaged from the server. This hook can only be set on clients using the <strong>cwc-controller-master.js</strong> file.</p>
+<p>Hooks can also be set to run a function for when a controller has connected to the display client. In order to activate the hook, set a <code class="highlighter-rouge">controller-connected</code> hook. This hook can only be set on clients using the <strong>cwc-controller-master.js</strong> file.</p>
 
 <table>
   <thead>
@@ -487,7 +488,7 @@
 2
 3
 4
-5</pre></td><td class="code"><pre><span class="cm">/* -- Crete controller connected | Hook -- */</span>
+5</pre></td><td class="code"><pre><span class="cm">/* -- Create controller connected | Hook -- */</span>
 <span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'controller-connected'</span><span class="p">,</span>
   <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">controller</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">controller_connected</span><span class="p">(</span> <span class="nx">controller</span> <span class="p">)</span> <span class="p">}</span>
@@ -495,7 +496,7 @@
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="controller-disconnected-hook">Controller disconnected hook</h2>
-<p>Created a hook to capture the <code class="highlighter-rouge">controller-disconnected</code> message. This to can only be set on clients using the <strong>cwc-controller-master.js</strong> file.</p>
+<p>Just like the <code class="highlighter-rouge">controller-connected</code> hook, a hook can be set so that you can capture when a controller client disconnects from the display. In order to set this, use the <code class="highlighter-rouge">controller-disconnected</code> hook with a specified callback method. Also like the the <code class="highlighter-rouge">controller-connected</code> hook, this too can only be set using the <strong>cwc-controller-master.js</strong>.</p>
 
 <table>
   <thead>
@@ -518,7 +519,7 @@
 2
 3
 4
-5</pre></td><td class="code"><pre><span class="cm">/* -- Crete controller disconnected | Hook -- */</span>
+5</pre></td><td class="code"><pre><span class="cm">/* -- Create  controller disconnected | Hook -- */</span>
 <span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'controller-disconnected'</span><span class="p">,</span>
   <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">controller</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">controller_disconnected</span><span class="p">(</span> <span class="nx">controller</span> <span class="p">)</span> <span class="p">}</span>
@@ -526,14 +527,14 @@
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="feedback-information">Feedback information</h2>
-<p><code class="highlighter-rouge">connection-success</code> , <code class="highlighter-rouge">connection-failed</code> , <code class="highlighter-rouge">controller-connected</code> , <code class="highlighter-rouge">controller-disconnected</code> when invoked by the server all receive feedback information from the server. The table below outlines the information sent by the server.</p>
+<p><code class="highlighter-rouge">connection-success</code>, <code class="highlighter-rouge">connection-failed</code>, <code class="highlighter-rouge">controller-connected</code> and <code class="highlighter-rouge">controller-disconnected</code> all receive feedback information when called by the server. The table below outlines the information sent by the server. On <code class="highlighter-rouge">controller-connected</code> and <code class="highlighter-rouge">controller-disconnected</code> passes the information about the controllers connected to the display.</p>
 
 <table>
   <thead>
     <tr>
       <th>Keys</th>
       <th>Type</th>
-      <th>Descripction</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -561,14 +562,13 @@
 </table>
 
 <blockquote>
-  <p>When trying to access this infromatrion from the <code class="highlighter-rouge">controller-connected</code> and <code class="highlighter-rouge">controller-disconnected</code> events, information is presented in an <code class="highlighter-rouge">array</code> formatt.</p>
+  <p>When trying to access this information from the <code class="highlighter-rouge">controller-connected</code> and <code class="highlighter-rouge">controller-disconnected</code> events, information is presented in an <code class="highlighter-rouge">array</code> format.</p>
 </blockquote>
 
-<h2 id="usfull-snippets">Usfull snippets</h2>
-<p>Examples you may find useful to used within your application.</p>
+<h2 id="demos">Demos</h2>
 
 <h3 id="looping-through-connected-controllers">Looping through connected controllers</h3>
-<p>The snippit below can be used with both the <code class="highlighter-rouge">controller-connected</code> and <code class="highlighter-rouge">controller-disconnected</code> events to retrieve all controllers information whom are connected to the display.</p>
+<p>The snippet below can be used with both the <code class="highlighter-rouge">controller-connected</code> and <code class="highlighter-rouge">controller-disconnected</code> events to retrieve all controller’s information whom are connected to the display.</p>
 
 <h4 id="display-client">Display client</h4>
 
@@ -637,13 +637,13 @@
 <span class="kd">var</span> <span class="nx">Hooks</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">Hooks</span><span class="p">({</span>
 <span class="p">});</span>
 
-<span class="cm">/* -- Crete controller connected | Hook -- */</span>
+<span class="cm">/* -- Create controller connected | Hook -- */</span>
 <span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'controller-connected'</span><span class="p">,</span>
   <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">controllers</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">controllers_loop</span><span class="p">(</span> <span class="nx">controllers</span> <span class="p">)</span> <span class="p">}</span>
 <span class="p">}</span> <span class="p">);</span>
 
-<span class="cm">/* -- Crete controller disconnected | Hook -- */</span>
+<span class="cm">/* -- Create controller disconnected | Hook -- */</span>
 <span class="nx">Hooks</span><span class="p">.</span><span class="nx">set_hook</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'controller-disconnected'</span><span class="p">,</span>
   <span class="na">method</span>    <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">controllers</span> <span class="p">)</span> <span class="p">{</span> <span class="nx">controllers_loop</span><span class="p">(</span> <span class="nx">controllers</span> <span class="p">)</span> <span class="p">}</span>

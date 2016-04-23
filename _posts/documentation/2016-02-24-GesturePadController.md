@@ -10,44 +10,40 @@ f_image     : "/images/swipe-pad@2x.png"
 categories  : components
 tax         : controller
 ---
-4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
+4 or 8-way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
 <!--more-->
 
 ![alt text]( ..{{ page.f_image }} "{{ page.title }}")
 
-### HTML markup
+## Building a {{ page.title }}
 Elements with an attribute of `data-cwc-controller=“gesture-pad"` applied to them will be treated as a {{ page.title }} component by the **cwc** object.
 
-Add a the **cwc** style to your {{ page.title }} with the `.cwc-style` class.
+To include the **cwc** style to your {{ page.title }}, giving it the class of `.cwc-style`. Just like the other Controllers the **cwc.ControllerMaster** must be declard with the JavaScript and the {{ page.this_obj }} has to be initiated after the DOM has finished loading.
 
+#### HTML
 {% highlight html linenos %}
-<section class="cwc-style"  data-cwc-controller="gesture-pad" >
+<section class="cwc-style" data-cwc-controller="gesture-pad" >
   <span></span>
 </section>
 {% endhighlight %}
 
-### JavaScript Declaration
-`cwc.ControllerMaster({})` must be included and the {{ page.this_obj }} has to be initiated after the DOM has finished loading.
+#### JavaScript
 
 {% highlight javascript linenos %}
 /*------------------------------------------------------
-* @object - CWC Main ControllerMaster Object
-* @info   - initiate CWC ControllerMaster Object
+* @object - CWC Main Controller Master Object
 */
 ControllerMaster = new cwc.ControllerMaster({
 })
 
 window.onload = function() {
     /*------------------------------------------------------I
-    * @Object GesturePadController
-    * Main GesturePadController object
+    * @object - Gesture Pad ControllerObject
     */
     GesturePad = new cwc.GesturePadController({
     });
 };
 {% endhighlight %}
-
-
 
 [comment]: <> (--------------------------------------------------------------------------------------------------------)
 
@@ -56,14 +52,12 @@ Additional settings can be added to each {{ page.title }} through the use of the
 
 | Instructions  | Types   | Descriptions                                                   |
 | ------------- | ------- | --------------                                                 |
-| movement-type | Sting   | How you want your users to intract with the {{ page.title }}.  |
-| on-movement   | Hook    | Prvideo the name of the hook you wish to run when moving.      |
+| movement-type | Sting   | How you want your users to interact with the {{ page.title }}. |
+| on-movement   | Hook    | The name of the hook you wish to run when moving.              |
 
 {% highlight html linenos %}
 <div data-cwc-controller="gesture-pad" data-cwc-instructions='{ "movement-type" : "pan", "on-movement " : "hook-cunstom-hook" }' ></div>
 {% endhighlight %}
-
-
 
 [comment]: <> (--------------------------------------------------------------------------------------------------------)
 
@@ -93,12 +87,10 @@ Recognised when the pointer is down and moved has finded.
 </div>
 {% endhighlight %}
 
-
-
 [comment]: <> (--------------------------------------------------------------------------------------------------------)
 
 ## On move
-You can spesify a callback function to be called for when the component is moving. By providing a Hook for the on `on-move` parameter.
+You can specify a callback function to be called for when the component is moving. By providing a Hook for the on `on-move` parameter.
 
 | Instruction | Type    | Value                                            |
 | ----------- | ------- | --------------                                   |

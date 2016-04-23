@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   <title>Gesture Pad</title>
-  <meta name="description" content="4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.">
+  <meta name="description" content="4 or 8-way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
@@ -85,7 +85,7 @@
                   
                 </a>
                 <p>
-                  <p>When you have installed the <strong>cwc</strong> node server, connecting client so that they can shear bidrectinal data can be accomplished is just a few steps.</p>
+                  <p>There connection process is simple and easy with minimal mark-up required in order to get the display and controller clients connected on the same channel via Cluster groups.</p>
 
 
                 </p>
@@ -102,7 +102,7 @@
                   
                 </a>
                 <p>
-                  <p>Hooks are the building blocks of the <strong>cwc</strong> object allowing everything to connect by providing a way of defining callback functionality for series of events. Hooks can also be used to invoke hooks created on clients within the same cluster group.</p>
+                  <p>The foundation of <strong>cwc</strong> is build around Hooks. Hooks provided a mechanism for allowing display and controller clients to invoke functions created on that client. They also provide a way of defining callback functionality for <strong>cwc</strong> components.</p>
 
 
                 </p>
@@ -147,7 +147,7 @@
                   
                 </a>
                 <p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s</p>
+                  <p>The Pullbar component is a great took if you wish to allow the user to move in only one given direction. Pullbar support both horizontal and vertical axis.</p>
 
 
                 </p>
@@ -166,7 +166,7 @@
                   
                 </a>
                 <p>
-                  <p>The Navgroup is a flexible, powerful component for navigation around big screen experience. You can quickly build simply to complex navigation structure to your application, allowing your users move around freely using keyboard events.</p>
+                  <p>The Navgroup is a flexible, powerful component for creating navigation base around the big screen experience. You can quickly build simply to complex navigations that have been design to work with the <strong>cwc</strong> controller components.</p>
 
 
                 </p>
@@ -185,7 +185,7 @@
                   
                 </a>
                 <p>
-                  <p>4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.</p>
+                  <p>4 or 8-way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.</p>
 
 
                 </p>
@@ -204,7 +204,7 @@
                   
                 </a>
                 <p>
-                  <p>A 1-way or 5-way Directional pad is perfect for games movement, user interfaces or if you want to have 4 buttons on a controller.</p>
+                  <p>1-way or 5-way Directional pad is perfect for games movements, user interfaces or if you need well designed controller component.</p>
 
 
                 </p>
@@ -223,7 +223,7 @@
                   
                 </a>
                 <p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s</p>
+                  <p>As well as being the ideal controller for gaming, it designed and customization allows it to work along side many design requirements.</p>
 
 
                 </p>
@@ -261,25 +261,26 @@
               </header>
 
               <section class="post-body" >
-                <p>4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
+                <p>4 or 8-way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
 <!--more--></p>
 
 <p><img src="../images/swipe-pad@2x.png" alt="alt text" title="Gesture Pad" /></p>
 
-<h3 id="html-markup">HTML markup</h3>
+<h2 id="building-a-gesture-pad">Building a Gesture Pad</h2>
 <p>Elements with an attribute of <code class="highlighter-rouge">data-cwc-controller=“gesture-pad"</code> applied to them will be treated as a Gesture Pad component by the <strong>cwc</strong> object.</p>
 
-<p>Add a the <strong>cwc</strong> style to your Gesture Pad with the <code class="highlighter-rouge">.cwc-style</code> class.</p>
+<p>To include the <strong>cwc</strong> style to your Gesture Pad, giving it the class of <code class="highlighter-rouge">.cwc-style</code>. Just like the other Controllers the <strong>cwc.ControllerMaster</strong> must be declard with the JavaScript and the <code class="highlighter-rouge">GesturePadController({})</code> has to be initiated after the DOM has finished loading.</p>
+
+<h4 id="html">HTML</h4>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
-3</pre></td><td class="code"><pre><span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"cwc-style"</span>  <span class="na">data-cwc-controller=</span><span class="s">"gesture-pad"</span> <span class="nt">&gt;</span>
+3</pre></td><td class="code"><pre><span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"cwc-style"</span> <span class="na">data-cwc-controller=</span><span class="s">"gesture-pad"</span> <span class="nt">&gt;</span>
   <span class="nt">&lt;span&gt;&lt;/span&gt;</span>
 <span class="nt">&lt;/section&gt;</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h3 id="javascript-declaration">JavaScript Declaration</h3>
-<p><code class="highlighter-rouge">cwc.ControllerMaster({})</code> must be included and the <code class="highlighter-rouge">GesturePadController({})</code> has to be initiated after the DOM has finished loading.</p>
+<h4 id="javascript">JavaScript</h4>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -293,19 +294,15 @@
 10
 11
 12
-13
-14
-15</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
-* @object - CWC Main ControllerMaster Object
-* @info   - initiate CWC ControllerMaster Object
+13</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
+* @object - CWC Main Controller Master Object
 */</span>
 <span class="nx">ControllerMaster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">ControllerMaster</span><span class="p">({</span>
 <span class="p">})</span>
 
 <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/*------------------------------------------------------I
-    * @Object GesturePadController
-    * Main GesturePadController object
+    * @object - Gesture Pad ControllerObject
     */</span>
     <span class="nx">GesturePad</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cwc</span><span class="p">.</span><span class="nx">GesturePadController</span><span class="p">({</span>
     <span class="p">});</span>
@@ -327,12 +324,12 @@
     <tr>
       <td>movement-type</td>
       <td>Sting</td>
-      <td>How you want your users to intract with the Gesture Pad.</td>
+      <td>How you want your users to interact with the Gesture Pad.</td>
     </tr>
     <tr>
       <td>on-movement</td>
       <td>Hook</td>
-      <td>Prvideo the name of the hook you wish to run when moving.</td>
+      <td>The name of the hook you wish to run when moving.</td>
     </tr>
   </tbody>
 </table>
@@ -366,7 +363,7 @@
 <h4 id="swipe"><strong>Swipe</strong></h4>
 <p>Recognised when the pointer is down and moved has finded.</p>
 
-<h4 id="html">HTML</h4>
+<h4 id="html-1">HTML</h4>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -388,7 +385,7 @@
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="on-move">On move</h2>
-<p>You can spesify a callback function to be called for when the component is moving. By providing a Hook for the on <code class="highlighter-rouge">on-move</code> parameter.</p>
+<p>You can specify a callback function to be called for when the component is moving. By providing a Hook for the on <code class="highlighter-rouge">on-move</code> parameter.</p>
 
 <table>
   <thead>
@@ -407,7 +404,7 @@
   </tbody>
 </table>
 
-<h4 id="html-1">HTML</h4>
+<h4 id="html-2">HTML</h4>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -438,7 +435,7 @@
 <h3 id="creating-a-gesture-pad">Creating a Gesture Pad</h3>
 <p>The following code snippet shows a how to use the Gesture Pad with the Navgroup component.</p>
 
-<h4 id="javascript">JavaScript</h4>
+<h4 id="javascript-1">JavaScript</h4>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -495,7 +492,7 @@
 <span class="p">};</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h4 id="html-2">HTML</h4>
+<h4 id="html-3">HTML</h4>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
