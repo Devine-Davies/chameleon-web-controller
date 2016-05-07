@@ -299,7 +299,7 @@
                 this.send_message_to_display( sent_package );
             break;
 
-            case 'controller' :
+            case 'controllers' :
                 this.send_message_controllers( sent_package );
             break;
         }

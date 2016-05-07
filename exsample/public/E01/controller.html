@@ -148,7 +148,7 @@
     <script type="text/javascript" src="../assets/E01/controller.js"></script>
     <link   rel='stylesheet'      href='../assets/E01/controller.css'  type='text/css'>
   </head>
-  <body class="controller-body-wrapper"  >
+  <body class="controller-body-wrapper dpad-swap"  >
 
     <div class="connect-code-process open">
       <div class="wrapper" >
@@ -159,9 +159,24 @@
       </div>
     </div>
 
+    <div class="traille-buttons">
+      <div class="body">
+        <h2>Traller name</h2>
+        <button class="play">Play</button>
+        <button class="pause">Pause</button>
+        <button class="exit">Exit</button>
+      </div>
+    </div>
+
+    <div class="controler-swap">
+      <button class="dpad-swap">Directional pad</button>
+      <button class="swip-pad-swap">Swipe pad</button>
+      <button class="analog-pad-swap">Analog pad</button>
+    </div>
+
     <!--  CWC Assets  -->
     <section class="dpad cwc-style" data-cwc-controller="dpad"
-        data-cwc-instructions='{ "on-tap" : "d-hook:cwc:navgroup-action"  }' >
+        data-cwc-instructions='{ "on-tap" : "d-hook:cwc:navgroup-action", "restricted" : "compass_rose"  }' >
         <span data-cwc-cbtn="up" ></span>
         <span data-cwc-cbtn="right" ></span>
         <span data-cwc-cbtn="down" ></span>
@@ -170,13 +185,13 @@
     </section>
 
     <section class="gesturepad cwc-style"  data-cwc-controller="gesture-pad"
-      data-cwc-instructions='{ "movement-type" : "swipe", "on-move" : "d-hook:cwc:navgroup-action", "input-r" : "compass_rose|direction" }' >
+      data-cwc-instructions='{ "movement-type" : "swipe", "on-move" : "d-hook:cwc:navgroup-action", "restricted" : "compass_rose" }' >
       <span></span>
     </section>
 
     <section class="analog-pad-con">
       <div class="analog-pad cwc-style" data-cwc-controller="analog"
-        data-cwc-instructions='{ "movement-type" : "pan", "pan" : "d-hook:cwc:navgroup-action", "input-r" : "compass_rose"  }' >
+        data-cwc-instructions='{ "movement-type" : "pan", "pan" : "d-hook:cwc:navgroup-action", "restricted" : "compass_rose"  }' >
         <span></span>
       </div>
     </section>

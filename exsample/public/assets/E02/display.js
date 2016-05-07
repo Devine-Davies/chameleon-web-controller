@@ -42,6 +42,7 @@ var cwc_object_declaration = function() {
     Hooks.set_hook( {
         hook_name : 'rand-color',
         method    : function( feedback, mdata ) {
+          console.log('here');
           rand_color_got( feedback,  mdata );
         }
     });
@@ -94,13 +95,13 @@ function connect_to_server()
 
     /* -- Crete connection sucsess | Hook -- */
     Hooks.set_hook( {
-      hook_name : 'controller-connected',
+      hook_name : 'cwc:controller-connected',
       method    : function( controller ) { controller_connected( controller ) }
     } );
 
     /* -- Crete connection sucsess | Hook -- */
     Hooks.set_hook( {
-      hook_name : 'controller-disconnected',
+      hook_name : 'cwc:controller-disconnected',
       method    : function( controller ) { controller_disconnected( controller ) }
     } );
 
@@ -120,20 +121,17 @@ function on_connect( data )
     $('.top-bar .connection-code p span').text(
         data.cluster_code
     );
-
 }
 
 function controller_connected( controllers )
 {
     var speed = 1000;
-    $( '#controller-connection-alert h2' ).text('Welcome controller');
-    $( '#controller-connection-alert' ).fadeIn( speed , function(){
-       $(this).fadeOut( ( speed / 2 ),  function(){ });
-    });
 
     for( var i = 0; i < controllers.length; i++ )
     {
         var hero_key = controllers[ i ].key;
+
+        console.log( controllers );
 
         if( ! ( hero_key in heros ) )
         {
@@ -151,13 +149,9 @@ function controller_connected( controllers )
 function controller_disconnected( controllers )
 {
     var speed = 1000;
-    $( '#controller-connection-alert h2' ).text('Controler disconnected');
-    $( '#controller-connection-alert' ).fadeIn( speed , function(){
-       $(this).fadeOut( ( speed / 2 ),  function(){ });
-    });
 
-    if( controllers.length == 0 )
-    {
+
+    if( controllers.length == 0 ) {
         heros = {};
     }
 
@@ -167,7 +161,6 @@ function controller_disconnected( controllers )
 
         if( _controllers.indexOf( hero_key ) == -1 )
         {
-            console.log('here');
             delete heros[ hero_key ]
         }
     }
@@ -178,17 +171,9 @@ function controller_disconnected( controllers )
 
 function show_controller_tally( controllers )
 {
-    var count = 0;
-
-    for( var i = 0; i < controllers.length; i++ )
-    {
-        count++;
-    }
-
     $('.top-bar .controller-tally p span').text(
-        count
+        controllers.length
     );
-
 }
 
 // Find the right method, call on correct element

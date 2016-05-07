@@ -80,9 +80,8 @@
         document.body.removeChild( elm );
 
         /* -- Send the recorded data -- */
-        cwc.Hooks.prototype.invoke_clinet_hook({
-            hook_name : 'text-capture-done',
-            recipient : 'display',
+        cwc.Hooks.prototype.invoke({
+            hook_name : 'd-hook:cwc:text-capture-done',
             arguments : {
                 name  : elm.id,
                 value : elm.value

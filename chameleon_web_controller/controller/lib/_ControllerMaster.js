@@ -161,28 +161,28 @@
         var input_data  = {};
 
         /* -- Check to see if user has restricted retired input data -- */
-        var input_r = ( instructions && instructions.hasOwnProperty('input-r') )? instructions['input-r'].split("|") : 'all-input-data';
+        var restricted = ( instructions && instructions.hasOwnProperty('restricted') )? instructions['restricted'].split("|") : 'all-input-data';
 
         /* -- Direction -- */
-        if( (input_r === 'all-input-data') || (input_r.indexOf("direction") != -1) )
+        if( (restricted === 'all-input-data') || (restricted.indexOf("direction") != -1) )
         {
             input_data.direction = cwc.ControllerMaster.prototype.hammer_dirs[ ev.direction ];
         }
 
         /* -- Delta -- */
-        if( (input_r === 'all-input-data') || (input_r.indexOf("delta") != -1) )
+        if( (restricted === 'all-input-data') || (restricted.indexOf("delta") != -1) )
         {
             input_data.delta = ev.delta;
         }
 
         /* -- Angle -- */
-        if( (input_r === 'all-input-data') || (input_r.indexOf("angle") != -1) )
+        if( (restricted === 'all-input-data') || (restricted.indexOf("angle") != -1) )
         {
             input_data.angle = ev.angle;
         }
 
         /* -- Compass Rose -- */
-        if( (input_r === 'all-input-data') || (input_r.indexOf("compass_rose") != -1) )
+        if( (restricted === 'all-input-data') || (restricted.indexOf("compass_rose") != -1) )
         {
             input_data.compass_rose = cwc.ControllerMaster.prototype.calculate_compass_rose(
                 ev.angle
@@ -190,7 +190,7 @@
         }
 
         /* -- Cartesian Coordinates -- */
-        if( (input_r === 'all-input-data') || (input_r.indexOf("cartesian_coordinates") != -1) )
+        if( (restricted === 'all-input-data') || (restricted.indexOf("cartesian_coordinates") != -1) )
         {
             input_data.cartesian_coordinates = {
                 x : cwc.ControllerMaster.prototype.calculate_cartesian_coordinates( ev.deltaX ),
@@ -199,7 +199,7 @@
         }
 
         /* -- Axis Direction -- */
-        if( (input_r === 'all-input-data') || (input_r.indexOf("axis_direction") != -1) )
+        if( (restricted === 'all-input-data') || (restricted.indexOf("axis_direction") != -1) )
         {
             input_data.axis_direction = cwc.ControllerMaster.prototype.calculate_axis_direction( {
                 x : ev.deltaX,

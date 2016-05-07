@@ -17,7 +17,6 @@ document.ontouchmove = function(event){
 window.onload = function()
 {
     cwc_object_declaration();
-    cwc_Hooks();
     start_conection_process();
 
 };
@@ -71,11 +70,6 @@ function cwc_object_declaration()
 
 var is_sending = null;
 
-function cwc_Hooks()
-{
-
-}
-
 
 function start_conection_process()
 {
@@ -122,9 +116,8 @@ function on_connection_sucsess()
     $('.connect-code-process').removeClass('open');
 
     /* -- Send the random color -- */
-    Hooks.invoke_clinet_hook({
-        recipient : 'display',
-        hook_name : 'rand-color',
+    Hooks.invoke({
+        hook_name : 'd-hook:rand-color',
         arguments : getRandomColor()
     });
 
@@ -138,8 +131,6 @@ function getRandomColor()
         color += letters[Math.floor(Math.random() * 16)];
     }
 
-    $('[data-cwc-controller="analog"].cwc-style').css({ 'border-color' : color })
-
     update_controller_style( color );
 
     return color;
@@ -147,6 +138,8 @@ function getRandomColor()
 
 function update_controller_style( color )
 {
+    $('[data-cwc-controller="analog"].cwc-style').css({ 'border-color' : color })
+
     // Create a new style tag
     var style = document.createElement("style");
     // Append the style tag to head

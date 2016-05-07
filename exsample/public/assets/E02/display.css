@@ -16,8 +16,6 @@ body {
   z-index: 999;
   height: 10vh;
   width: 100vw;
-
-  outline: 1px solid red;
   bottom: 0;
 
   text-align: right;

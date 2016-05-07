@@ -359,37 +359,36 @@
     */
     Navgroup.prototype.call_action = function( dir, cb )
     {
-        var a_enter  = ['enter', 'select'];
-        var a_up     = ['up',    'N', 'NE', 'NW'];
-        var a_right  = ['right', 'E', 'NE', 'SE'];
-        var a_down   = ['down',  'S', 'SE', 'SW'];
-        var a_left   = ['left',  'W', 'NW', 'SW'];
+        var a_enter  = ['enter', 'select', 'x'];
+        var a_up     = ['up',    'n', 'ne', 'nw'];
+        var a_right  = ['right', 'e', 'ne', 'se'];
+        var a_down   = ['down',  's', 'se', 'sw'];
+        var a_left   = ['left',  'w', 'nw', 'sw'];
+
+        var action   = dir.toLowerCase( dir );
 
         /* -- Select -- */
-        if( a_enter.indexOf( dir ) != -1 )
+        if( a_enter.indexOf( action ) != -1 )
             this.key_function( 'enter' );
 
         /* -- up -- */
-        if( a_up.indexOf( dir ) != -1 )
+        if( a_up.indexOf( action ) != -1 )
             this.key_function( 'up' );
 
         /* -- right -- */
-        if( a_right.indexOf( dir ) != -1 )
+        if( a_right.indexOf( action ) != -1 )
             this.key_function( 'right' );
 
         /* -- down -- */
-        if( a_down.indexOf( dir ) != -1 )
+        if( a_down.indexOf( action ) != -1 )
             this.key_function( 'down' );
 
         /* -- left -- */
-        if( a_left.indexOf( dir ) != -1 )
+        if( a_left.indexOf( action ) != -1 )
             this.key_function( 'left' );
 
         /* -- If cb has been set then call the function -- */
-        if( cb )
-        {
-            cb( this.tracking.current );
-        }
+        ( isFunctionA( cb ) )? cb( this.tracking.current ) : null ;
 
     };
 

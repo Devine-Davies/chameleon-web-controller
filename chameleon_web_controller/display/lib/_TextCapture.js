@@ -125,9 +125,10 @@
             }
         }
 
-        Hooks.invoke_client_hook({
-            recipient : 'controller',
-            hook_name : 'text-capture-invoked',
+        console.log('here');
+
+        cwc.Hooks.prototype.invoke({
+            hook_name : 'c-hook:cwc:text-capture-invoked',
             arguments : {
                 name        : name,
                 placeholder : placeholder
