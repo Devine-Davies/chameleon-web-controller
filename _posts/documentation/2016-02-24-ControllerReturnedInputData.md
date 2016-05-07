@@ -8,7 +8,6 @@ f_image     : "/images/swipe-pad@2x.png"
 categories  : other
 tax         : controller
 ---
-
 4 or 8 way directional touch or swipe pad, perfect if you need more dynamic movement around around your application.
 <!--more-->
 
@@ -23,12 +22,9 @@ tax         : controller
 | 06. | angle                | in, out, static                                 | &#x2714; | &#x2718;   | &#x2718; | &#x2718;   |
 | 05. | delta                | Cartesian coordinates of x and y                | &#x2714; | &#x2714;   |          | &#x2714;   |
 
-## 01. Compass rose
-compass_rose is the movment given as
+>When creating a controller component you can supply a `restricted` argument on the instruction attributed, to filter which input methods should be returned. `data-cwc-instructions='{ "restricted" : "compass_rose" }`.
 
-![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
-![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
-![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
+## 01. Compass rose
 
 | No. | Movment type    | Compass rose |
 |---- | -------------   | ------------ |
@@ -41,12 +37,12 @@ compass_rose is the movment given as
 | 07. | Move left       | W            |
 | 08. | Move up left    | NW           |
 
-## 02. Cartesian coordinate
-Table below outlines Cartesian coordinate that will be return by a support controller.
+![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-cardinal-direction@2x.png "Logo Title Text 1")
 
-![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
-![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
-![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
+
+## 02. Cartesian coordinate
 
 | No. | Movment type  | Cartesian coordinate               |
 |---- | ------------- | ---------------------------------- |
@@ -55,6 +51,9 @@ Table below outlines Cartesian coordinate that will be return by a support contr
 | 03. | Move left     | Values 0 to -1.0 on x axis.        |
 | 04. | Move right    | Values 0 to 1.0 on x axis.         |
 
+![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
+![alt text]( ../images/a-pad-coordinates-diagram@2x.png "Logo Title Text 1")
 
 ## 03. Axis direction
 Table below otulines the axis direction that will be return by a support controler.
@@ -66,17 +65,14 @@ Table below otulines the axis direction that will be return by a support control
 | 03. | Static        | Moving in the same direction.                                   |
 
 
-
 ## 04. Direction
 — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
-
-
 
 ## 05. Delta (Hammer.js)
 — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 
-
-
 ## 06. Angle (Hammer.js)
-![alt text]( ../images/a-pad-angle-diagram@2x.png "Logo Title Text 1")
+Angle moved.
+
+![alt text]( ../images/a-pad-angle-diagram@2x.png "image")
 — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —

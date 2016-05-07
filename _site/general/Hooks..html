@@ -381,7 +381,7 @@
 <span class="p">});</span>
 
 <span class="cm">/* -- Invoke Hook -- */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_hook</span><span class="p">({</span>
+<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke</span><span class="p">({</span>
     <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'d-hook:my-custom-hook'</span><span class="p">,</span>
     <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 <span class="p">});</span><span class="w">
@@ -416,9 +416,9 @@
 5
 6
 7</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
-* @info - Invoked by on display client
+* @info - Invoked by display client
 */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_hook</span><span class="p">({</span>
+<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke</span><span class="p">({</span>
     <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'d-hook:called-by-controller'</span><span class="p">,</span>
     <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 <span class="p">});</span><span class="w">
@@ -455,7 +455,7 @@
 7</pre></td><td class="code"><pre><span class="cm">/*------------------------------------------------------
 * @info - Invoked by on display client
 */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_hook</span><span class="p">({</span>
+<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke</span><span class="p">({</span>
     <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'c-hook:called-by-display'</span><span class="p">,</span>
     <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 <span class="p">});</span><span class="w">
@@ -483,7 +483,7 @@
 <span class="p">});</span>
 
 <span class="cm">/* -- Create connection success | Hook -- */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_clinet_hook</span><span class="p">({</span>
+<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke</span><span class="p">({</span>
     <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'d-hook:cwc:called-by-controller'</span><span class="p">,</span>
     <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 <span class="p">});</span><span class="w">
@@ -537,19 +537,19 @@
 15
 16
 17</pre></td><td class="code"><pre><span class="cm">/* -- 01. Call a local hook --  */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_hook</span><span class="p">(</span> <span class="p">{</span>
+<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'my-custom-hook'</span><span class="p">,</span>
   <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 <span class="p">}</span> <span class="p">);</span>
 
 <span class="cm">/* -- 02. Call a custom hook from controller to display --  */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_hook</span><span class="p">(</span> <span class="p">{</span>
+<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'d-hook:my-custom-hook'</span><span class="p">,</span>
   <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 <span class="p">}</span> <span class="p">);</span>
 
 <span class="cm">/* -- 03. Call a reserved hook by the cwc object --  */</span>
-<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke_hook</span><span class="p">(</span> <span class="p">{</span>
+<span class="nx">Hooks</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span> <span class="p">{</span>
   <span class="na">hook_name</span> <span class="p">:</span> <span class="s1">'cwc:my-custom-hook'</span><span class="p">,</span>
   <span class="na">arguments</span> <span class="p">:</span> <span class="p">{</span> <span class="na">one</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">three</span> <span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 <span class="p">});</span><span class="w">

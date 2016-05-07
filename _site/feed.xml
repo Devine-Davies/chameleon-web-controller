@@ -5,8 +5,8 @@
     <description></description>
     <link>http://devine-davies.github.io/chameleon-web-controller/</link>
     <atom:link href="http://devine-davies.github.io/chameleon-web-controller/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 Apr 2016 19:44:46 +0100</pubDate>
-    <lastBuildDate>Sat, 23 Apr 2016 19:44:46 +0100</lastBuildDate>
+    <pubDate>Sat, 07 May 2016 16:49:19 +0100</pubDate>
+    <lastBuildDate>Sat, 07 May 2016 16:49:19 +0100</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -1663,12 +1663,11 @@ Navitem instructions take priority over Navgroup instructions allowing from more
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&quot;compass-rose&quot;&gt;01. Compass rose&lt;/h2&gt;
-&lt;p&gt;compass_rose is the movment given as&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;When creating a controller component you can supply a &lt;code class=&quot;highlighter-rouge&quot;&gt;restricted&lt;/code&gt; argument on the instruction attributed, to filter which input methods should be returned. &lt;code class=&quot;highlighter-rouge&quot;&gt;data-cwc-instructions=&#39;{ &quot;restricted&quot; : &quot;compass_rose&quot; }&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;../images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-&lt;img src=&quot;../images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-&lt;img src=&quot;../images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;compass-rose&quot;&gt;01. Compass rose&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -1722,12 +1721,11 @@ Navitem instructions take priority over Navgroup instructions allowing from more
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&quot;cartesian-coordinate&quot;&gt;02. Cartesian coordinate&lt;/h2&gt;
-&lt;p&gt;Table below outlines Cartesian coordinate that will be return by a support controller.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
+&lt;img src=&quot;../images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
+&lt;img src=&quot;../images/a-pad-cardinal-direction@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-&lt;img src=&quot;../images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
-&lt;img src=&quot;../images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;cartesian-coordinate&quot;&gt;02. Cartesian coordinate&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -1760,6 +1758,10 @@ Navitem instructions take priority over Navgroup instructions allowing from more
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
+&lt;img src=&quot;../images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
+&lt;img src=&quot;../images/a-pad-coordinates-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;axis-direction&quot;&gt;03. Axis direction&lt;/h2&gt;
 &lt;p&gt;Table below otulines the axis direction that will be return by a support controler.&lt;/p&gt;
@@ -1798,7 +1800,9 @@ Navitem instructions take priority over Navgroup instructions allowing from more
 &lt;p&gt;— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 
 &lt;h2 id=&quot;angle-hammerjs&quot;&gt;06. Angle (Hammer.js)&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;../images/a-pad-angle-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;
+&lt;p&gt;Angle moved.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/a-pad-angle-diagram@2x.png&quot; alt=&quot;alt text&quot; title=&quot;image&quot; /&gt;
 — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Feb 2016 00:31:01 +0000</pubDate>
