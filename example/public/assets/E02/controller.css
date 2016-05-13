@@ -1,0 +1,76 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: fixed;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+.connect-code-process {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+}
+.connect-code-process.open {
+  display: block;
+}
+.connect-code-process .wrapper {
+  position: absolute;
+  width: 80%;
+  height: 65%;
+  min-height: 180px;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ff7156;
+  display: block;
+  padding: 1rem;
+  left: 50%;
+  top: 50%;
+}
+.connect-code-process .wrapper h2 {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.connect-code-process .wrapper input {
+  width: 100%;
+  background: none;
+  border: 1px solid #ff7156;
+  padding: 1rem;
+  font-size: 1em;
+
+  border-radius: none;
+
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+.connect-code-process .wrapper ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.connect-code-process .wrapper ul li {
+  display: inline-block;
+  background: none;
+  border: 1px solid #ff7156;
+  padding: 1rem 2rem;
+  font-size: 1em;
+}
+
+.analog-pad-con {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+
+}

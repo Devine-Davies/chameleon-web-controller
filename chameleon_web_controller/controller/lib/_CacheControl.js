@@ -105,14 +105,31 @@
     };
 
     /*------------------------------------------------------
+    * @function - Check for existence
+    * @info     - Check to see if the code has been set
+    */
+    CacheControl.prototype.check_for_existence = function( client_data )
+    {
+        for ( var key in this.storage_data )
+        {
+            if( this.storage_data[ key ].cluster_code == client_data.cluster_code )
+            {
+                return true;
+            }
+        }
+
+        return false;
+
+    };
+
+    /*------------------------------------------------------
     * @function - Delete old codes
     * @info      - removes the old codes from the local storage
     */
     CacheControl.prototype.delete_old_codes = function()
     {
         var object     = this.storage_data;
-        var new_object = {
-        };
+        var new_object = { };
 
         for (var key in object )
         {
@@ -120,7 +137,7 @@
             var diff = ( ( Date.now() - data.timestamp ) / 1000 / 60 ) << 0;
 
             /* -- Add if under : Time Threshold option -- */
-            if( diff < this.time_threshold )
+            if( this.get_time_differ( diff )  )
             {
                 new_object[ key ] = object[ key ];
             }
@@ -131,24 +148,15 @@
     };
 
     /*------------------------------------------------------
-    * @function - Check for existence
-    * @info      - Check to see if the code has been set
+    * @function  - Get difference
+    * @info      - Check to if code has expired
     */
-    CacheControl.prototype.check_for_existence = function( client_data )
+    CacheControl.prototype.get_time_differ = function( differ )
     {
-        var object = this.storage_data;
+        /* -- Add if under : Time Threshold option -- */
+        return ( differ < this.time_threshold );
 
-        for ( var key in object )
-        {
-            if( object[ key ].cluster_code == cluster_code )
-            {
-                return true;
-            }
-        }
-
-        return false;
-
-    };
+    }
 
     /*------------------------------------------------------
     * @function

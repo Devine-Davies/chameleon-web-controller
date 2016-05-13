@@ -288,6 +288,11 @@
         /* -- Add the clients meta-data to the code -- */
         sent_package['cwc_metadata'] = metadata;
 
+        // if( sent_package.recipient == "" )
+        // {
+
+        // }
+
         /* -- Whom the message shall be sent to -- */
         switch( sent_package.recipient )
         {
@@ -300,6 +305,10 @@
             break;
 
             case 'controllers' :
+                this.send_message_controllers( sent_package );
+            break;
+
+            case 'controller' :
                 this.send_message_controllers( sent_package );
             break;
         }

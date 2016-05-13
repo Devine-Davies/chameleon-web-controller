@@ -35,12 +35,12 @@
 * -- Controller Assets --
 */
 //@codekit-append "_CacheControl.js";
-
 //@codekit-append "_ControllerMaster.js";
-//@codekit-append "_DpadController.js";
-//@codekit-append "_GesturePadController.js";
-//@codekit-append "_AnalogController.js";
-//@codekit-append "_PullbarController.js";
+//@codekit-append "_QuickButtons.js";
+//@codekit-append "_Dpad.js";
+//@codekit-append "_GesturePad.js";
+//@codekit-append "_AnalogStick.js";
+//@codekit-append "_Pullbar.js";
 //@codekit-append "_TextCapture.js";
 
 !function() {

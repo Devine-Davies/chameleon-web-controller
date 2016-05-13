@@ -63,7 +63,22 @@
             var child_elm = child_elms[ i ];
                 child_elm.dataset.cid = c_id;
         }
-    }
+
+    };
+
+    /*------------------------------------------------------
+    * @function - invoke hook
+    * @info - used to invoke call back hook functions
+    */
+    ControllerMaster.is_elm = function( elm, data_tage )
+    {
+        while ( ! elm.hasAttribute( data_tage ) ) {
+            elm = elm.parentElement;
+        }
+
+        return elm;
+
+    };
 
     /*------------------------------------------------------
     * @function - Update nav tracking

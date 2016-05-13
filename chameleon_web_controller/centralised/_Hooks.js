@@ -5,7 +5,6 @@
  * Developer can also set hooks for complainants callback function
  ------------------------------------------------------
 */
-
 !function( cwc ){
   'use strict';
 
@@ -30,32 +29,55 @@
     * @function
     * Create custom methods
     */
-    Hooks.prototype.set_hook = function( prams )
+    Hooks.prototype.set_hook = function( hook_info )
     {
-        if( prams.hasOwnProperty('hook_name') && prams.hasOwnProperty('method') )
+        /* -- Has to be object -- */
+        if( typeof hook_info == 'object' )
         {
-            /* -- Check to see if for display -- */
-            if ( prams.hook_name.includes('cwc:') )
+            /* -- need a hook name and methord -- */
+            if( hook_info.hasOwnProperty('hook_name') && hook_info.hasOwnProperty('method') )
             {
-                this.all_reserved_hooks[ prams.hook_name ] = {
-                    'hook_name': prams.hook_name,
-                    'method'   : prams.method
-                };
+                /* -- Name not be be empy -- */
+                if( hook_info.hook_name && ( typeof hook_info.method == 'function' ) )
+                {
+                    /* -- Check to see if for display -- */
+                    if ( hook_info.hook_name.includes('cwc:') )
+                    {
+                        this.create_reserved_hook( hook_info );
+                    }
+                    else
+                    {
+                        this.create_clinet_hook( hook_info );
+                    }
+                }
             }
-            else
-            {
-                this.all_hooks[ prams.hook_name ] = {
-                    'hook_name' : prams.hook_name,
-                    'method'    : prams.method
-                };
-            }
-        }
-        else
-        {
-            console.log('Hook name and method is required: check cwc git repo for more info on Hooks');
         }
 
     };
+
+    /*------------------------------------------------------
+    * @function - Create reserved hook
+    * @info     - Creates a reserved CWC hook
+    */
+    Hooks.prototype.create_reserved_hook = function( prams )
+    {
+        this.all_reserved_hooks[ prams.hook_name ] = {
+            'hook_name': prams.hook_name,
+            'method'   : prams.method
+        };
+    }
+
+    /*------------------------------------------------------
+    * @function - Create clinte hook
+    * @info     - Creates a client hook
+    */
+    Hooks.prototype.create_clinet_hook = function( prams )
+    {
+        this.all_hooks[ prams.hook_name ] = {
+            'hook_name' : prams.hook_name,
+            'method'    : prams.method
+        };
+    }
 
     /*------------------------------------------------------
     * @function - Validate hook
@@ -116,8 +138,6 @@
     */
     Hooks.prototype.invoke = function( hook_info )
     {
-        console.log( hook_info );
-
         /* -- Validate the call -- */
         if( this.validate_invoke( hook_info ) )
         {
@@ -146,13 +166,17 @@
 
             }
 
-            /* -- Call the hook on this client -- */
+            /* -- Reserved CWC hook  -- */
             else if ( hook_name.includes('cwc:') )
             {
-                this.execute( this.all_reserved_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
+                this.execute(
+                    this.all_reserved_hooks,
+                    hook_name,
+                    hook_info.arguments,
+                    hook_info.cwc_metadata
+                );
 
             }
-
             /* -- is user hook -- */
             else
             {
@@ -160,7 +184,12 @@
                 var hook_name = hook_info.hook_name.replace('hook:','')
 
                 /* -- Call the hook on this client -- */
-                this.execute( this.all_hooks, hook_name, hook_info.arguments, hook_info.cwc_metadata );
+                this.execute(
+                    this.all_hooks,
+                    hook_name,
+                    hook_info.arguments,
+                    hook_info.cwc_metadata
+                );
 
             }
         }
@@ -203,14 +232,15 @@
     */
     Hooks.prototype.execute = function( hooks, hook_name, args, cwc_metadata  )
     {
-        if( hooks.hasOwnProperty( hook_name ) )
+        if ( args == undefined)
         {
-            try {
-                hooks[ hook_name ].method( args, cwc_metadata )
-            } catch( e ) {
-                console.log( e );
-            }
+            hooks[ hook_name ].method( )
         }
+        else
+        {
+            hooks[ hook_name ].method( args, cwc_metadata )
+        }
+
     }
 
     /* -- Add this new object to the main object -- */

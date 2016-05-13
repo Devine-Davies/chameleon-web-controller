@@ -1,4 +1,18 @@
 
+[data-cwc-quickbutton] {
+  &.cwc-style {
+    display: inline-block;
+    border-radius: 2px;
+    border: 1px solid tomato;
+    color: tomato;
+    margin: 5px;
+
+    p {
+      padding: 0 10px;
+    }
+  }
+}
+
 .cwc-text-capture {
     width: 100vw;
     height: 100vh;

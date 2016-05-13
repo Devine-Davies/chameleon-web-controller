@@ -26,6 +26,12 @@
     * @object - Client key
     * @info   - Key given to client by server
     */
+    Server.prototype.server_message = null;
+
+    /*------------------------------------------------------
+    * @object - Client key
+    * @info   - Key given to client by server
+    */
     Server.prototype.client_key = '';
 
     /*------------------------------------------------------
@@ -50,25 +56,43 @@
     Server.prototype.cluster_code = null;
 
     /*------------------------------------------------------
-    * @function - Connect
-    * @info - Connect to the server
+    * @function - Check connection settings
+    * @info - Check to see if cluster is nneded or not
     */
     Server.prototype.connect = function( cluster_code )
+    {
+        /* -- controller -- */
+        if( ( cwc._cwc_type  == 'controller' ) && ( cluster_code != null ) )
+        {
+            /* -- Copy the cluster -- */
+            this.cluster_code = cluster_code;
+
+            /* -- Try to connect -- */
+            this.start_connection();
+        }
+
+        /* -- Display -- */
+        if( ( cwc._cwc_type  == 'display' ) && ( cluster_code == null ) )
+        {
+            /* -- Creat code for cluster -- */
+            this.cluster_code = this.gen_cluster_code( );
+
+            /* -- Try to connect -- */
+            this.start_connection();
+        }
+
+    };
+
+    /*------------------------------------------------------
+    * @function - Start Connecting
+    * @info - Connect to the server
+    */
+    Server.prototype.start_connection = function()
     {
         /* -- Flush any old connections -- */
         ( cwc._server_connection )? this.onclose() : null;
 
-        /* -- Cluster code setting -- */
-        if( ( cwc._cwc_type  == 'controller' ) && ( cluster_code != null ) )
-        {
-            this.cluster_code = cluster_code;
-        }
-        else
-        {
-            this.cluster_code = this.gen_cluster_code( );
-        }
-
-        var socket = null,
+       var socket = null,
         host = this.connection_options.host,
         port = this.connection_options.port,
         type = this.connection_options.type;
@@ -96,8 +120,7 @@
         {
             this.set_connection_events();
         }
-
-    };
+    }
 
     /*------------------------------------------------------
     * @function - Create hooks
@@ -270,7 +293,7 @@
     Server.prototype.send_message = function( data )
     {
         /* -- Is this a valid message : return true not valid -- */
-        if( ! this.validate_onmessage( data ) )
+        if( this.validate_message( data ) )
         {
             if( cwc._server_connection )
             {
@@ -289,30 +312,37 @@
     * @function - Validate on-message
     * @info - Validate the message from the server
     */
-    Server.prototype.validate_onmessage = function( data )
+    Server.prototype.validate_message = function( data )
     {
-        var checks = [
-            /* -- This is the method we wish to run -- */
-            'action',
-
-            /* -- Whome the message is for -- */
-            'recipient',
-
-            /* -- Arguments to be passed to method -- */
-            'arguments',
-        ];
-
-        for( var i = 0; i < checks.length; i++ )
+        if( typeof data === 'object' )
         {
-            /* -- If property was not found : return true -- */
-            if ( ! data.hasOwnProperty( checks[ i ] ) )
-            {
-                console.log('Server message is not properly fromatted.');
-                return true;
-            }
-        }
+            var checks = [
+                /* -- This is the method we wish to run -- */
+                'action',
 
-        return false;
+                /* -- Whome the message is for -- */
+                'recipient',
+
+                /* -- Arguments to be passed to method -- */
+                'arguments',
+            ];
+
+            for( var i = 0; i < checks.length; i++ )
+            {
+                /* -- If property was not found : return true -- */
+                if ( ! data.hasOwnProperty( checks[ i ] ) )
+                {
+                    return false;
+                }
+            }
+
+            /* -- All good -- */
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
     };
 
